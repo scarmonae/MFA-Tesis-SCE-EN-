@@ -1,0 +1,768 @@
+\chapter{Results \& Discussion}         % o \chapter{Resultados y Discusión}
+
+%===============================================================
+\section{Diseño del sistema multiespectral \textit{KBee}}
+%===============================================================
+
+La ruta de desarrollo del \textit{KBee} partió de una matriz de ocho “sistemas   candidatos’’ (Apendice \ref{ap:sistemas_candidatos}); de ellos se seleccionaron las dos configuraciones VIS + NIR que mejor satisfacen las restricciones de misión impuestas por el consorcio
+EAFIT–KTH: altura de operación $50$–$5\,000\;{\rm m}$, peso $\leq$ $2\;{\rm kg}$,
+envolvente geométrica $100\times100\times150\;{\rm mm}^{3}$ y conectividad USB 3.1.
+A continuación se describe el hilo de razonamiento que condujo al diseño final.
+
+%---------------------------------------------------------------
+\subsection{Requerimientos y criterios ópticos}
+%---------------------------------------------------------------
+
+\begin{table}[h]
+    \centering
+    \caption{Especificaciones de misión y criterios de diseño del \textit{KBee}.}
+    \label{tab:req_vs_obj}
+    \begin{tabular}{|p{4cm}|c|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}\textbf{Parámetro} & \textbf{Requisito} \\ \hline
+        Masa total del cargamento & $\leq 2\;\text{kg}$ \\ \hline
+        Dimensiones & $100 \times 100 \times 150\;\text{mm}^{3}$ \\ \hline
+        Tiempo máximo de misión & $\leq 3\;\text{h}$ \\ \hline
+        MTF (30\,\% de contraste) & $\geq 40\;\text{lp/mm}$ \\ \hline
+        Resolución en tierra @50\,m & $\leq 7.35\;\text{cm}$ \\ \hline
+        Resolución en tierra @1000\,m & $\leq 1.47\;\text{m}$ \\ \hline
+        Resolución en tierra @5000\,m & $\leq 7.35\;\text{m}$ \\ \hline
+    \end{tabular}
+\end{table}
+
+
+Los criterios que guiaron la selección de cada sub‑módulo fueron:
+
+\begin{itemize}
+    \item \textbf{Resolución espacial} – El objetivo debe ofrecer una MTF (30\,\% de contraste) 
+          \textbf{$\geq 40\;\text{lp/mm}$}, lo que garantiza la capacidad de resolver los objetos 
+          de las dimensiones indicadas en la Tabla~\ref{tab:req_vs_obj}.
+          
+    \item \textbf{Campo de visión} – El ángulo AFOV debe cubrir parcelas agrícolas 
+          de al menos 50 m a baja altura sin comprometer la resolución a grandes altitudes; 
+          por ello se seleccionan dos distancias focales representativas: 
+          8 mm (NIR) y 16 mm (VIS).
+          
+    \item \textbf{Masa y volumen} – El conjunto óptico‑electrónico debe cumplir las 
+          restricciones de carga útil de la aeronave del Proyecto C\#, 
+          de modo que se mantenga un tiempo de vuelo de 3 h.  
+          En la práctica esto implica una masa total $\leq 2\;\text{kg}$ 
+          y un volumen aproximado de $100\times100\times150\;\text{mm}^{3}$.
+          
+    \item \textbf{Coste} – Aunque el presupuesto final depende de los fondos del proyecto, 
+          para este trabajo se fija un \emph{límite máximo de \$1500 USD}.  
+          Con un presupuesto mayor podrían integrarse componentes de mayor rendimiento.
+\end{itemize}
+
+
+%---------------------------------------------------------------
+\subsection{Proceso iterativo de diseño}
+\label{sec:cad}
+%---------------------------------------------------------------
+
+La Tabla~\ref{tab:sys_tables} resume los ocho objetivos evaluados de
+forma preliminar.  Cada sistema se identifica por un número consecutivo y se
+caracteriza mediante distancia focal, relación de apertura, MTF al 30\,\% de
+contraste y masa total del objetivo.
+
+\begin{table}[h]
+    \centering
+    \caption{Comparativa de los objetivos candidatos frente a los criterios de diseño.
+             Entre paréntesis se indica el fabricante (EO = Edmund Optics).  El AFOV
+             se expresa en grados y corresponde al semidiámetro angular calculado
+             sobre el sensor empleado.}
+    \label{tab:sys_tables}
+    \begin{tabularx}{\linewidth}{|c|p{3cm}|C|C|C|C|C|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}\textbf{System} & \textbf{Lens} &
+        \textbf{Focal\, [mm]} &
+        \textbf{AFOV\, [°]} &
+        \textbf{Aperture} &
+        \textbf{MTF\,(30 \%)\, [lp/mm]} &
+        \textbf{Weight\, [g]} \\ \hline
+        
+        1 & 16 mm f/16 ― HPr Series (EO)                & 16   & 42.2 & f/16 & 62  & 138 \\ \hline
+        2 & 50 mm f/2.8 ― HPr Series (EO)               & 50   & 10.1 & f/2.8& 180 & --  \\ \hline
+        3 & 25 mm f/1.8 ― HPr Series (EO)               & 25   & 27.8 & f/1.8& 40  & 78  \\ \hline
+        4 & 16 mm f/1.8 ― HPr Series (EO)               & 16   & 42.2 & f/1.8& 128 & 138 \\ \hline
+        5 & 4 mm f/1.8 ― Basler C125‑0418‑5M‑P (Basler) & 4    & 109  & f/1.8& --  & --  \\ \hline
+        6 & 8 mm f/2.5 ― HEO Series (NIR, M12) (EO)     & 8    & 29.9 & f/2.5& 120 & 4   \\ \hline
+        7 & 8.5 mm f/1.3 ― Cr Series (EO)               & 8.5  & 28.2 & f/1.8& 85  & 60  \\ \hline
+        8 & 12.5 mm f/2.5 ― Rugged Blue (M12) (EO)      & 12.5 & 19.4 & f/2.5& 150 & 5   \\ \hline
+    \end{tabularx}
+\end{table}
+
+
+La resolución exigida (MTF $\geq40\,$lp mm\(^{-1}\)) se cumple de forma holgada en
+los sistemas 2, 4, 6, 7 y 8.  El sistema 2, con 50 mm f/2.8, ofrece la mayor
+frecuencia de corte (180 lp mm\(^{-1}\)), lo que se traduce en la más alta
+resolución sobre el terreno; sin embargo, su AFOV es el más estrecho del
+conjunto, limitando el área cubierta por captura.  En el extremo opuesto, el
+objetivo de 4 mm (sistema 5) maximiza el AFOV —casi \(110^{\circ}\) en sensor
+arrectángulo— pero carece de datos MTF publicados y podría no satisfacer la
+resolución mínima.  Las configuraciones de 8 mm f/2.5 (sistema 6) y
+8.5 mm f/1.8 (sistema 7) constituyen un compromiso atractivo: mantienen AFOV
+moderado (\approx\(60^{\circ}\)), cumplen la MTF requerida y añaden la banda NIR
+(NIR–M12) con una masa inferior a 60 g, adecuada para misiones de baja y media
+altitud.\\
+
+En sistemas aéreos que operan a distancias de decenas o miles de metros, el
+plano de enfoque se aproxima al infinito; el sistema trabaja, por tanto, en
+régimen de hiperfoco y la profundidad de campo deja de ser un factor
+limitante.  No obstante, la apertura \((f/\#)\) sigue siendo relevante porque
+regula la cantidad de luz incidente y la eficiencia con la que se reproducen
+las altas frecuencias espaciales.  Los objetivos de gran abertura
+(f/1.8–f/2.5) —sistemas 3, 4, 6, 7 y 8— captan hasta dos pasos más de luz que
+el objetivo f/16 (sistema 1), mejorando la SNR de la imagen y preservando la
+modulación a altas frecuencias del MTF.\\
+
+El límite de carga útil de la plataforma \textit{C3} es 2 kg para lograr un tiempo de vuelo de 3 h. Aunque todos los objetivos de la Tabla \ref{tab:sys_tables} se encuentran muy por debajo de ese umbral, los sistemas 6, 7 y 8 destacan por su masa extraordinariamente baja (entre 4 g y 60 g), lo que los convierte en las opciones más atractivas cuando el peso es el factor decisivo. En la etapa de prototipado se dará prioridad a estas configuraciones ligeras, siempre que satisfagan además el requisito mínimo de resolución.
+
+
+Los sistemas 6 (NIR 8 mm f/2.5) y 7 (VIS 8.5 mm f/1.8) aparecen
+como las mejores combinaciones de AFOV, MTF y peso para vuelos de 50–1000 m,
+mientras que el sistema 2 (50 mm f/2.8) se reserva para misiones de gran
+altitud donde se privilegia la resolución sobre la cobertura espacial.\\
+
+
+
+
+---------------------------------------------------------------
+\subsection{Pre‑selección de sensores de imagen}
+\label{sec:sensor_selection}
+%---------------------------------------------------------------
+Para cada sistema óptico se evaluaron seis configuraciones de cámara
+(Alvium/Basler) representativas de los rangos de resolución y tamaño de píxel
+requeridos.  En la Tabla~\ref{tab:sensor_table} se recogen únicamente los
+parámetros que afectan de forma directa al diseño de la carga y al cálculo de
+resolución: peso, profundidad de bits, tipo de obturación
+(\textit{rolling}/\textit{global}), tamaño del sensor, tamaño de píxel y
+consumo energético típico.
+
+\begin{table}[h]
+    \centering
+    \caption{Sensores propuestos, su asignación a los sistemas ópticos y parámetros clave.}
+    \label{tab:sensor_table}
+    \begin{tabularx}{\linewidth}{|c|p{2.2cm}|C|C|C|C|C|C|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}
+        \textbf{Sistema} &
+        \textbf{Cámara (sensor)} &
+        \textbf{H\,$\times$\,V [px]} &
+        \textbf{Pixel [\(\mu\)m]} &
+        \textbf{Shutter} &
+        \textbf{ADC / Bits} &
+        \textbf{Peso [g]} &
+        \textbf{Potencia [W]} \\ 
+        \hline
+
+        1, 3, 4 & Alvium 1800 U‑2040 (Sony IMX541)            & 4512 × 4512 & 2.74 & Global  & 12 bit & 65 & 3.9 \\ \hline
+        2  & Alvium 1800 U‑2050 (Sony IMX183)            & 5496 × 3672 & 2.40 & Rolling & 10 bit & 65 & 3.2 \\ \hline
+        5 & Basler acA1920‑40gc (Sony IMX249)           & 1920 × 1200 & 5.86 & Global  & 12 bit & 90 & 3.9 \\ \hline
+        6 & Alvium 1800 U‑501m NIR (ON Semi AR0522)     & 2592 × 1944 & 2.20 & Rolling & 10 bit & 65 & 2.2 \\ \hline
+        7, 8 & Alvium 1800 U‑500c (ON Semi AR0521, C, S‑Mount)& 2592 × 1944 & 2.20 & Rolling & 10 bit & 60 & 2.2 \\ \hline
+        
+    \end{tabularx}
+\end{table}
+
+\noindent Todos los sensores considerados pesan menos de 100 g y consumen por debajo de 4 W. En particular, los basados en los CCD ON Semi AR0521 / AR0522 (sistemas 6–8) son los más ligeros (60–65 g) y presentan el consumo más bajo (\approx 2.2 W), lo que resulta clave para maximizar la autonomía de vuelo de la plataforma \textit{C3}.\\
+
+\noindent Para garantizar un buen análisis radiométrico, es necesario contar con al menos 10 bits de conversión A/D. Los sensores Sony IMX541 e IMX249 ofrecen hasta 12 bits y disponen de obturación global, lo que evita distorsiones ante movimientos rápidos o flashes de luz. Por otro lado, los módulos AR0521 / AR0522 con obturación \emph{rolling} son considerablemente más económicos, ayudando a mantener los costos reducidos; sin embargo, en maniobras o al capturar objetos en movimiento pueden aparecer artefactos por el desplazamiento relativo durante la lectura línea a línea.\\
+
+\noindent El tamaño de píxel condiciona directamente la resolución espacial. Los sensores con celdas de 2.2–2.74 µm (IMX541, IMX183, AR05xx) se adaptan a los objetivos de alta resolución (sistemas 1–4, 6–8); el IMX249, con 5.86 µm, es idóneo para configuraciones de campo muy amplio (sistema 5), donde prima la sensibilidad sobre la densidad de píxel.\\
+
+\noindent Teniendo en cuenta masa, consumo, profundidad de bits y tamaño de píxel, junto con los resultados de la Tabla~\ref{tab:sensor_table}, proponemos como configuración óptima la pareja AR0521 (VIS) + AR0522 (NIR) montada en lentes de 8.5 mm f/1.8 y 8 mm f/2.5 (sistemas 7 y 6). Esta combinación ofrece un equilibrio ideal entre resolución, campo de visión y eficiencia energética para las misiones del proyecto \textit{C3}.\\
+
+\noindent Con estas combinaciones se logra un balance adecuado entre resolución, peso y consumo, ajustado al presupuesto y a las exigencias operativas de la plataforma.
+
+%---------------------------------------------------------------
+\subsection{Estimación teórica de resolución y campo de visión}
+\label{sec:cad_sim}
+%---------------------------------------------------------------
+
+Para cuantificar el compromiso entre resolución y cobertura se simularon ocho
+trenes ópticos (lentes de la Tabla \ref{tab:sys_tables}) a tres alturas de
+operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En la Tabla~\ref{tab:grd_fov_clean} se presentan, para cada sistema óptico y a tres alturas de vuelo, el campo de visión efectivo sobre el terreno (FOV), la magnificación primaria, la resolución limitada solo por el paso de píxel (\(\Delta_{\mathrm{pix}}\)) y la resolución real impuesta por la óptica a MTF 30\,\% (\(\Delta_{\mathrm{MTF}}\)).\\
+
+
+\begin{table}[h]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{6pt}
+    \caption{Field‑of‑view (FOV), magnification and ground resolution 
+             (\(\Delta_\text{pix}\), \(\Delta_\text{MTF}\)) for each system
+             at three altitudes.}
+    \label{tab:grd_fov_clean}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}
+        \textbf{System} & \textbf{Alt [m]} & \textbf{FOV [m]} & 
+        \textbf{Magn.} & \(\boldsymbol{\Delta_\text{pix}}\)\,[m] & 
+        \(\boldsymbol{\Delta_\text{MTF}}\)\,[m] \\ 
+        \hline
+        
+        \multirow{3}{*}{1} 
+         & 50   & 38.63  & 0.00032   & 0.00860  & 0.02500   \\ 
+         & 1000 & 772.70 & 0.00002   & 0.17100  & 0.50400   \\ 
+         & 5000 & 3863.00& 0.00000   & 0.85600  & 2.52000   \\ 
+        \hline
+        
+        \multirow{3}{*}{2}
+         & 50   & 8.81   & 0.00150   & 0.00160  & 0.00190  \\ 
+         & 1000 & 176.30 & 0.00008   & 0.03200  & 0.03700   \\ 
+         & 5000 & 881.30 & 0.00002   & 0.16000  & 0.18600   \\ 
+        \hline
+        
+        \multirow{3}{*}{3}
+         & 50   & 24.73  & 0.00050   & 0.00548  & 0.02500   \\ 
+         & 1000 & 494.50 & 0.00003   & 0.11000  & 0.50000   \\ 
+         & 5000 & 2473.00& 0.00001   & 0.54800  & 2.50000   \\ 
+        \hline
+        
+        \multirow{3}{*}{4}
+         & 50   & 38.63  & 0.00032   & 0.00860  & 0.01200   \\ 
+         & 1000 & 772.70 & 0.00002   & 0.17100  & 0.24400   \\ 
+         & 5000 & 3863.00& 0.00000   & 0.85600  & 1.22100   \\ 
+        \hline
+        
+        \multirow{3}{*}{5}
+         & 50   & 140.60 & 0.00005   & 0.11700  & —         \\ 
+         & 1000 & 2812.80& 0.00000   & 2.34400  & —         \\ 
+         & 5000 & 14064.00&0.00000   & 11.72000 & —         \\ 
+        \hline
+        
+        \multirow{3}{*}{6}
+         & 50   & 26.73  & 0.00021   & 0.01030  & 0.01900   \\ 
+         & 1000 & 534.60 & 0.00001   & 0.20600  & 0.39100   \\ 
+         & 5000 & 2673.00& 0.00000   & 1.03100  & 1.95300   \\ 
+        \hline
+        
+        \multirow{3}{*}{7}
+         & 50   & 25.16  & 0.00017   & 0.01290  & 0.03400   \\ 
+         & 1000 & 503.20 & 0.00001   & 0.25900  & 0.69200   \\ 
+         & 5000 & 2516.00& 0.00000   & 1.29400  & 3.46000   \\ 
+        \hline
+        
+        \multirow{3}{*}{8}
+         & 50   & 17.11  & 0.00025   & 0.00880  & 0.01300   \\ 
+         & 1000 & 342.10 & 0.00001   & 0.17600  & 0.26700   \\ 
+         & 5000 & 1711.00& 0.00000   & 0.88000  & 1.33300   \\ 
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+
+\noindent A simple vista, \(\Delta_{\mathrm{MTF}}\) resulta siempre mayor que \(\Delta_{\mathrm{pix}}\), lo cual era de esperar: la óptica atenúa las altas frecuencias y limita un poco el detalle que el sensor podría capturar de forma ideal. Este hallazgo confirma que se ha elegido sensores con tamaño de píxel suficiente para no desaprovechar la capacidad de resolución de las lentes.\\
+
+\noindent En cuanto al equilibrio entre cobertura y nitidez, los sistemas de focal larga concentran cada píxel en un área reducida —mejor nitidez— pero limitan mucho la zona capturada. En el otro extremo, los de focal muy corta expanden enormemente el FOV a costa de degradar la resolución. Los sistemas 6 (8 mm f/2.5, NIR) y 7 (8.5 mm f/1.8, VIS) aparecen como el compromiso ideal: a 50 m cubren unos 26 m de ancho con \(\Delta_{\mathrm{MTF}}<1.5\)\,cm, y a 1000 m mantienen resoluciones de 20 – 26 cm sobre aproximadamente 500 m de cobertura.\\
+
+\noindent Además, al compartir casi la misma geometría óptica, facilitan la fusión multiespectral y minimizan desalineamientos entre canales. Por estas razones, para el prototipo inicial daremos prioridad a los sistemas 6 y 7, que combinan de forma natural cobertura, detalle y compatibilidad espectral.\\
+
+
+\section{Construcción e integración del prototipo}
+  \subsection{Modelo CAD y ensamblaje mecánico}
+    % → FIGURA grande: render CAD explosionado del KBee con leyenda de partes.
+    %   Tabla: materiales y masa de cada componente.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=1\linewidth]{Figures/C4/QBee.pdf}
+        \caption{Vista explosionada del ensamble completo del QBee, mostrando la carcasa impresa en PET‑G y la disposición de los sistemas 6 (NIR, 8 mm f/2.5) y 7 (VIS, 8.5 mm f/1.8). Este diseño y construcción fue concebido con el apoyo del equipo de manufactura del pryecto C3.}
+        \label{fig:exploded_assembly}
+    \end{figure}
+
+    El case del QBee está impreso en PET‑G (tereftalato de polietileno modificado con glicol), un polímero cuya densidad típica ronda 1,317 g/cm³, que combina buena resistencia al impacto (Charpy \approx 4,03 kJ/m²) y alargamiento al rompimiento hasta 15\% en formulaciones estándar. Su módulo de tracción (~4015 MPa) y de flexión (~2987 MPa) aseguran rigidez, mientras que su temperatura de transición vítrea (\approx 76 °C) y rango de fusión (220–260 °C) lo hacen estable en el calor generado por electrónica cercana. Además, presenta excelente durabilidad química y mínima tendencia al \emph{warping}, ideal para piezas de geometría compleja. El peso total del disposito es de 1.810 gramos, cumpliendo así con el requisito de peso impuesto.\\
+
+    \noindent La dimensión externa del case se diseñó para encajar en el bay interno del UAV C3, sin requerir hermeticidad, ya que este estária protegido de las condiciones exteriores. El cierre se logra con tornillos M3 que unen la tapa inferior y el divisor de compartimentos a la carcasa principal. En el interior, cada sistema óptico (6/NIR y 7/VIS) se ancla directamente al sensor mediante cuatro tornillos M3 en sus laterales, asegurando alineación con el eje de vuelo. El sistema 6 (NIR) monta el Alvium 1800 U‑501m (AR0522) + objetivo 8 mm f/2.5 + filtro 850 nm en montura S, todo encapsulado en una montura de resina 3D. El sistema 7 (VIS) agrupa el Alvium 1800 U‑500c (AR0521) + objetivo 8.5 mm f/1.3 ruggedized + filtro VIS UV/IR Cut en rosca M25.5, manteniendo rigidez frente a vibraciones.\\
+    
+    \noindent La unidad de cómputo y almacenamiento es una Raspberry Pi 4, colocada en un bloque intermedio y alimentada por una powerbank de 20.000 mAh. Este sistema tiene acoplado un hat de GPS, que suministra al sistema de metadatos de fecha, hora UTC, latitud, longitud, altitud y ángulo de elevación, esenciales para la georreferenciación y ortorrestitución de imágenes. Finalmente, el módulo in situ de sensado de contaminantes comparte alimentación de 5 V de la misma batería y ocupa el compartimento trasero de la carcasa, completando la funcionalidad del QBee.\\
+    
+    
+
+
+
+    \noindent Los sistemas 6 y 7 integran un sensor, un objetivo y un filtro específicos montados sobre la carcasa impresa (Figura~\ref{fig:exploded_assembly}). Esta configuración facilita la fabricación y el mantenimiento, y permite intercambiar o actualizar componentes de forma independiente.\\
+
+    \noindent El sensor NIR Allied Vision Alvium 1800 U‑501m (ON Semi AR0522) comparte tamaño de sensor (2592×1944 px) y paso de píxel (2.2 µm) con su homólogo VIS, pero presenta una respuesta cuántica optimizada en 700–1000 nm, ideal para la adquisición de imagenes en este rango espectral. El objetivo HEO Series de 8 mm f/2.5 se monta directamente sobre la montura S‑Mount y ofrece un AFOV de 29.9°. Con 4 g de masa, cumple el requisito de carga útil y minimiza la transmisión de vibraciones. La montura impresa en resina aloja un filtro paso banda de 850 \SI{}{nm} (CWL) y 50 \SI{}{nm} de ancho de banda, 12.5 mm de diámetro, Hard Coated OD 4.0, encajando sobre el barril y fijándose con un anillo roscado que garantiza la alineación sin sobresalir del perfil de la carcasa.\\
+    
+    \noindent El sensor VIS Alvium 1800 U‑500c (ON Semi AR0521) mantiene los 2.2 µm de paso de píxel y emplea obturación rolling, reduciendo peso y costo. El objetivo Cr Series de 8.5 mm f/1.3, ruggedized por el fabricante, ofrece gran apertura y resistencia a impactos y vibraciones.. El filtro VIS (UV/IR Cut) M25.5×0.50 bloquea 200–370 nm y 750 – 1100 nm, transmitiendo solo 370–750 nm, e integra directamente una montura compatible para el montaje en el objetivo.\\
+    
+    \noindent La conectividad micro USB‑B facilita la alimentación y transmisión de datos con la Raspberry Pi 4 (Figura~\ref{fig:sistemas_opticos_componentes}). Además, permiten la integración y control de los sensores a partir de un script en python, lo cual da flexibilidad para diseñar el preprocesamiento y captura de las imágenes de ambos sensores de forma simultanea. Esto permite incluso carga confirguracones ya establecidas o actauliza en tiempo real dichas fongiruaciones relacioandas a paramaetros como, por ejemplo, el tiempo de exposiicón o la ganancia.
+    
+        
+    
+    
+    
+    
+
+
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}[b]{0.48\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{Figures/C4/NIR1.pdf}
+            \caption{Sistema 6 (NIR): montaje del objetivo y filtro. El soporte evita desalineamientos y asegura la óptica en su eje.}
+            \label{fig:lens_filter_mount_nir}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.47\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{Figures/C4/VIS1.pdf}
+            \caption{Sistema 7 (VIS): conector micro USB‑B para alimentación y datos.}
+            \label{fig:micro_usb_vis}
+        \end{subfigure}
+        \caption{Componentes destacados de los sistemas ópticos seleccionados para el prototipo: NIR (izquierda) y VIS (derecha).}
+        \label{fig:sistemas_opticos_componentes}
+    \end{figure}
+
+
+    
+    
+
+  % \subsection{Integración con la plataforma UAV}
+  %   % → Describir interfaz mecánica, centro de masas, cableado
+  %   %   y sistema de amortiguación de vibraciones.
+
+  % \subsection{Validaciones funcionales de taller}
+  %   % → Pruebas de alineamiento, sellado de luz parásita y peso final.
+  %   %   Tabla de verificación contra los requisitos de la Sección 1.1.
+
+\section{Pruebas de operación}
+  \subsection{Script de control y adquisición}
+
+    \section{Script de control y adquisición}
+    \label{sec:script_control_adquisicion}
+    
+    Con el propósito de automatizar el proceso de captura, procesamiento y almacenamiento de imágenes multiespectrales durante los vuelos o pruebas en banco, se desarrolló un script en lenguaje Python que permite la adquisición simultánea de imágenes en el espectro visible (VIS) y cercano al infrarrojo (NIR), integrando además datos de posicionamiento global (GPS) en tiempo real.
+    
+    \noindent Este script constituye una adaptación del código de ejemplo provisto por la biblioteca \texttt{vmbpy}, correspondiente al SDK de \textit{Allied Vision}, y fue modificado sustancialmente para incluir manejo multihilo, escritura condicional de video, superposición de información telemétrica, y control por teclado durante la ejecución.
+    
+    \subsection{Estructura general del script}
+    
+    El flujo lógico del código se presenta en la Figura~\ref{fig:diagrama_script}, donde se destacan tres etapas fundamentales: (i) la inicialización del entorno y detección de cámaras, (ii) la adquisición concurrente de tramas mediante hilos productores, y (iii) el procesamiento y visualización de las imágenes mediante un hilo consumidor.
+    
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[trim = 0 0 0 1cm, clip, width=1\textwidth]{Figures/C4/OSU_main.pdf}
+        \caption{Flujo lógico del script de adquisición y visualización de la QBee. Se integran múltiples cámaras, adquisición en paralelo y procesamiento en tiempo real.}
+        \label{fig:diagrama_script}
+    \end{figure}
+    
+    \subsection{Inicialización y adquisición}
+    
+    Durante la fase de inicialización, se establece una conexión con el servidor local de GPS (\texttt{gpsd}) utilizando la librería homónima. Paralelamente, se instancia la clase \texttt{MainThread}, responsable de detectar automáticamente todas las cámaras conectadas a través del sistema \texttt{VmbSystem}.\\
+    
+     Cada cámara detectada es asignada a un hilo independiente de la clase \texttt{FrameProducer}, la cual configura parámetros críticos como la resolución de adquisición, formato de pixel (\texttt{Mono8} o \texttt{Bgr8}), y el modo automático de exposición. Estos hilos se encargan de capturar tramas en tiempo real, estimar la tasa de cuadros por segundo (FPS) y encolar las imágenes en una estructura tipo FIFO (\texttt{queue.Queue}) para su posterior procesamiento.
+    
+    \subsection{Procesamiento, visualización y almacenamiento}
+    
+    La etapa central del sistema está contenida en la clase \texttt{FrameConsumer}, la cual opera como hilo consumidor. Esta clase realiza múltiples tareas en paralelo: (i) extrae tramas de la cola compartida, (ii) redimensiona las imágenes si la resolución de adquisición no coincide con la esperada (\SI[parse-numbers = false]{2592 \times 1944}{px}), (iii) convierte los formatos de imagen a RGB si es necesario, y (iv) concatena las imágenes capturadas por múltiples cámaras en un único mosaico horizontal.\\
+    
+    Sobre esta imagen compuesta se genera una barra de información (\textit{overlay}) que incluye los datos georreferenciados en tiempo real (latitud, longitud, altitud, velocidad, ángulo de rumbo y timestamp), además de la tasa de cuadros por segundo estimada para cada cámara. Esta superposición se construye como una matriz adicional que se apila verticalmente a la imagen original.\\
+    
+    El sistema también permite una interacción directa con el operador mediante teclas específicas:
+    \begin{itemize}
+        \item \textbf{\texttt{s}}: captura la imagen actual y la guarda en formato \texttt{JPEG}.
+        \item \textbf{\texttt{v}}: inicia o detiene la grabación de video en formato \texttt{AVI}, con compresión \texttt{XVID}, a una frecuencia de 20 FPS.
+        \item \textbf{\texttt{Enter}}: finaliza la ejecución del script y cierra todas las ventanas.
+    \end{itemize}
+    
+    \subsection{Ejecución automática como servicio de sistema}
+    
+    Con el fin de garantizar un funcionamiento autónomo y minimizar la intervención del usuario, se diseñó un servicio de sistema en Linux (utilizando \texttt{systemd}) que permite la ejecución automática del script tan pronto como el dispositivo inicia. Este servicio fue instalado y habilitado en el sistema operativo de una Raspberry Pi 4 modelo B equipada con 8 GB de memoria RAM.
+    
+    Gracias a esta configuración, el sistema conocido como \texttt{QBee} se activa automáticamente al conectar la batería externa a la Raspberry Pi, sin requerir intervención adicional ni acceso al entorno gráfico. Inmediatamente después del arranque, el script inicia la captura de imágenes y comienza a almacenarlas en la memoria interna, lo que resulta particularmente útil para operaciones en campo, donde no es viable iniciar el sistema manualmente.
+    
+    \subsection{Robustez y tolerancia a fallos}
+    
+    Durante la ejecución, el sistema cuenta con mecanismos de tolerancia a errores. Por ejemplo, si el buffer de imágenes se encuentra lleno, los hilos productores omiten la encolación de nuevas tramas para evitar bloqueos. Asimismo, si no se detecta ninguna cámara activa, se genera una imagen dummy con un mensaje de advertencia.\\
+    
+    Las tramas obtenidas se almacenan temporalmente en memoria, lo que permite minimizar la latencia entre adquisición y visualización. La sincronización entre hilos se realiza mediante eventos y bloqueos controlados, garantizando la integridad de los datos entre productores y consumidores.
+    
+    \subsection{Dependencias y entorno de ejecución}
+    
+    El script fue ejecutado sobre el sistema operativo Raspberry Pi OS (basado en Debian) en una Raspberry Pi 4 modelo B. Se utilizó Python 3.8 y las siguientes dependencias: \texttt{vmbpy}, \texttt{opencv-python}, \texttt{gpsd-py3}, \texttt{numpy}, \texttt{threading}, \texttt{queue} y \texttt{keyboard}. La visualización se realizó mediante la salida HDMI de la Raspberry, y se requirió establecer la variable de entorno \texttt{DISPLAY=":0"} para habilitar la salida gráfica de OpenCV.
+
+    \subsection{Control remoto del dispositivo \texttt{QBee}}
+
+    Además de su capacidad de operación autónoma en campo, el sistema \texttt{QBee} fue diseñado con funcionalidad de control remoto, permitiendo su supervisión y operación desde dispositivos externos como computadores personales, tabletas o teléfonos móviles. Esta característica extiende significativamente la versatilidad del sistema, facilitando tanto pruebas en laboratorio como operaciones a distancia en entornos de difícil acceso.\\
+    
+    Existen dos métodos principales para acceder de forma remota a la interfaz gráfica del sistema:
+    
+    \paragraph{1. Conexión local mediante VNC}
+    
+    El primer método consiste en conectarse directamente a la Raspberry Pi 4 que ejecuta el sistema \texttt{QBee} mediante el protocolo VNC (\textit{Virtual Network Computing}). Para ello, es necesario que la Raspberry esté conectada a una red Wi-Fi previamente configurada para su conexión automática. Asimismo, el dispositivo de control (computador o móvil) debe encontrarse dentro de la misma red local.\\
+    
+    Una vez cumplida esta condición, el usuario puede acceder a la interfaz gráfica de la Raspberry Pi introduciendo su dirección IP o una dirección local estática configurada mediante el sistema operativo Raspberry Pi OS. Para completar el acceso, se requiere conocer las credenciales de autenticación (nombre de usuario y contraseña) establecidas previamente en el sistema.
+    
+    \paragraph{2. Acceso global mediante Raspberry Pi Connect}
+    
+    El segundo método se basa en el uso de \textit{Raspberry Pi Connect}, un servicio gratuito proporcionado por la fundación Raspberry Pi. Este permite acceder a la interfaz gráfica del sistema desde cualquier lugar con conexión a Internet, sin necesidad de estar dentro de la misma red local.\\
+    
+    Para habilitar esta funcionalidad, la Raspberry Pi debe estar vinculada a una cuenta en el servicio \textit{Raspberry Pi Connect} y tener acceso a Internet mediante una red Wi-Fi registrada previamente. Una vez registrado el dispositivo, el usuario puede iniciar sesión en el portal de Raspberry Pi y conectarse directamente a su interfaz gráfica a través del navegador.  \\
+    
+    
+    En ambos métodos, el usuario obtiene acceso completo al entorno de escritorio de la Raspberry Pi. Como se ha descrito en las secciones anteriores, el script de adquisición de \texttt{QBee} se ejecuta automáticamente al iniciar el sistema, lo que da lugar a la apertura de una ventana de visualización en tiempo real de las imágenes capturadas.\\
+    
+    Desde esta interfaz remota, el usuario puede interactuar directamente con el sistema utilizando un teclado virtual o físico para ejecutar acciones de control. Entre las funcionalidades disponibles se encuentran:
+    \begin{itemize}
+        \item Presionar la tecla \texttt{s} para capturar y guardar una imagen.
+        \item Presionar la tecla \texttt{v} para iniciar o detener la grabación de video.
+        \item Presionar la tecla \texttt{Enter} para finalizar la ejecución del script.
+    \end{itemize}
+    
+    Esta capacidad de control remoto permite verificar el correcto funcionamiento del sistema en tiempo real, supervisar condiciones de operación, y capturar eventos relevantes sin necesidad de intervención física directa sobre el dispositivo.\\
+    
+    
+    Adicionalmente, el sistema \texttt{QBee} fue configurado para permitir actualizaciones remotas del código fuente del script mediante el sistema de control de versiones \texttt{Git}. El script está vinculado a un repositorio privado alojado en la plataforma \texttt{GitHub}, lo que permite a los usuarios autenticados realizar \textit{pull} de actualizaciones desde cualquier ubicación con acceso remoto al dispositivo. Esta funcionalidad permite una mejora continua del sistema, facilitando la depuración, implementación de nuevas funcionalidades y adaptaciones específicas sin necesidad de acceso físico al hardware.
+    
+    
+    
+    
+
+  \subsection{Escenarios de prueba}
+    Los escenarios de prueba definidos para validar el correcto funcionamiento del sistema \textit{QBee} se clasifican en dos grupos principales: (i) pruebas terrestres en condiciones controladas, y (ii) pruebas en vuelo.
+
+    \subsubsection{Pruebas terrestres}
+    
+        Antes de cualquier despliegue aéreo, es indispensable realizar pruebas en tierra que permitan validar el sistema en condiciones controladas, sin desplazamiento y sin exposición a ambientes extremos. En este contexto, se define como ambiente extremo cualquier entorno cuya temperatura supere los valores comunes encontrados en las principales ciudades colombianas (\SI{\leq 40}{\celsius}), o que implique lluvia, alta humedad o condiciones de iluminación nocturna.
+        
+        \noindent Dado que el sistema \textit{QBee} no cuenta con una fuente de iluminación activa, las pruebas se realizan exclusivamente durante el día, aprovechando la luz solar como fuente principal para la adquisición de imágenes multiespectrales.
+        
+        \noindent El objetivo de estas pruebas es verificar el comportamiento general del sistema en condiciones operativas normales. En particular, se evalúa:
+        
+        \begin{itemize}
+        \item La correcta inicialización automática del script de adquisición al encender el dispositivo.
+        \item La funcionalidad de captura de imágenes al presionar la tecla \texttt{s}.
+        \item La grabación de video y su detención mediante la tecla \texttt{v}.
+        \item La estabilidad del dispositivo al operar durante largos periodos de tiempo.
+        \end{itemize}
+        
+        \noindent Las pruebas se realizaron utilizando dos formas de alimentación:
+        \begin{itemize}
+        \item \textbf{Fuente directa:} mediante un adaptador USB-C conectado a una toma de corriente convencional.
+        \item \textbf{Fuente interna:} a partir de la bater'ia recargable integrada en la carcasa del \textit{QBee}.
+        \end{itemize}
+        
+        \noindent Una de las pruebas más relevantes consisti'o en la captura de una imagen utilizando la tecla \texttt{s}, ya fuera desde un teclado conectado directamente a la Raspberry Pi 4 o mediante acceso remoto. En la Figura~\ref{fig:captura_prueba_remota} se presenta un ejemplo de imagen capturada en estas condiciones, utilizando un tel'efono inteligente para el control remoto del sistema. La prueba confirma el correcto funcionamiento de ambos canales (VIS y NIR), evidenciando que la captura simult'anea se realiza de manera sincronizada, y que el sistema responde adecuadamente a la orden de captura en tiempo real.
+        
+        \begin{figure}[h]
+        \centering
+        \includegraphics[width=1\textwidth]{Figures/C4/captured_image_20240201_174102.jpg}
+        \caption{Captura de imagen realizada durante prueba terrestre mediante control remoto desde un tel'efono inteligente. La imagen muestra la composici'on de ambos canales VIS y NIR, confirmando la funcionalidad del sistema \textit{QBee} en condiciones operativas reales.}
+        \label{fig:captura_prueba_remota}
+        \end{figure}
+        
+        \noindent En complemento, en la Figura~\ref{fig:gps_overlay_visual} se presenta un ejemplo de visualización del sistema de coordenadas geográficas en tiempo real. En la parte superior de la imagen se observa la superposición del texto con la latitud, longitud, altitud, velocidad y rumbo extraídos del módulo GPS integrado en la \textit{QBee}. Esta funcionalidad es crítica para asegurar la trazabilidad espacial de las imágenes adquiridas y para su posterior georreferenciación.
+
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.9\textwidth]{Figures/C4/captured_image_20250217_113221.jpg}
+            \caption{Visualización del sistema de coordenadas geográficas (GPS) en tiempo real sobre la imagen capturada. Se muestran latitud, longitud, altitud, velocidad y rumbo, extraídos automáticamente del módulo GPS durante las pruebas.}
+            \label{fig:gps_overlay_visual}
+        \end{figure}
+
+
+
+    \subsubsection{Pruebas en superficie en condiciones extremas}
+
+    Durante la VII Campa~na A'erea y XI Expedici'on Cient'ifica a la Ant'artida organizada por la Fuerza A'erea Colombiana, el sistema \textit{QBee} fue sometido a una prueba de funcionamiento en condiciones clim'aticas extremas. En este escenario, se enfrent'o a temperaturas diurnas promedio cercanas a los \SI{0}{\celsius}, significativamente inferiores a las condiciones habituales en las cuales opera el sistema.
+    
+    \noindent El objetivo principal de esta prueba fue evaluar la capacidad del dispositivo para operar de manera confiable en ambientes fr'ios. Se identific'o que, bajo estas condiciones, el sistema present'o fallas intermitentes en su funcionamiento: en algunas ocasiones la \textit{QBee} no inici'o correctamente, o no fue capaz de realizar la grabaci'on de video como lo hace regularmente. Estas fallas pueden estar asociadas a una inicializaci'on deficiente del sistema de procesamiento (Raspberry Pi 4), o a alteraciones en el comportamiento de los sensores VIS y NIR debido a la baja temperatura.
+    
+    \noindent No obstante, tambi'en se registraron casos exitosos de captura de video, lo cual demuestra que el sistema \textit{QBee} puede llegar a operar de forma funcional en condiciones de fr'io extremo. Estos resultados parciales abren la posibilidad de implementar ajustes de hardware y software para robustecer el funcionamiento del sistema en ambientes m'as hostiles. Queda como trabajo futuro el estudio detallado de las causas espec'ificas de las fallas observadas, as'i como la exploraci'on de soluciones que permitan una operaci'on m'as confiable en entornos como la Ant'artida.
+    
+    \noindent A pesar de los resultados mixtos, se concluye que el sistema actual no est'a dise~nado para misiones operativas regulares en la Ant'artida u otras regiones con condiciones ambientales similares, sin modificaciones adicionales en aislamiento t'ermico, tolerancia de componentes y procedimientos de inicializaci'on.
+    
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Figures/C4/pinguinos.png}
+    \caption{Captura de video realizada exitosamente durante la expedición científica en la Antártida. La imagen confirma que, a pesar de las condiciones extremas, el sistema \textit{QBee} En la imagen se aprecia que la cámara visible no se encuentra correctamente enfocada, lo que puede deberse a un mal ajuste de la distancia entre el objetivo y el sensor. Sin embargo, este tipo de desajuste es corregible mediante ajuste mecánico y no afecta el funcionamiento general del sistema \textit{QBee}. fue capaz de operar y registrar datos multiespectrales de forma puntual.}
+    \label{fig:prueba_antartida}
+    \end{figure}
+
+    \subsubsection{Pruebas en vuelo}
+
+    Las pruebas en vuelo del sistema \textit{QBee} fueron posibles gracias a la colaboraci'on con la Fuerza A'erea Colombiana, la cual facilit'o el montaje del dispositivo en distintas aeronaves de su flota. En una primera prueba, la unidad \textit{QBee} fue instalada a bordo de una aeronave Cessna 208 Caravan, realizando un vuelo a una altitud aproximada de 5000 pies.
+    
+    \noindent El vuelo se desarroll'o en condiciones ideales, con un rumbo y comportamiento t'ipico de una ruta comercial y sin presencia de perturbaciones atmosf'ericas significativas. Durante toda la duraci'on del trayecto, el sistema oper'o de forma estable y sin presentar inconvenientes.
+    
+    \noindent Como parte de esta prueba, se verific'o la capacidad de monitoreo remoto del sistema utilizando una red Wi-Fi habilitada dentro de la aeronave, mediante la cual se accedi'o al entorno gr'afico de la Raspberry Pi utilizando el protocolo VNC. Esta conexi'on permiti'o observar en tiempo real la adquisici'on de datos por parte del sistema, confirmando la funcionalidad completa del script y la respuesta de los sensores.
+    
+    \begin{figure}[!h]
+    \centering
+    \includegraphics[width=1\textwidth]{Figures/C4/vuelo_caravan.png}
+    \caption{Captura tomada durante el vuelo de prueba en la aeronave Cessna 208 Caravan. Se observ'o un comportamiento estable del sistema y transmisi'on remota exitosa mediante protocolo VNC.}
+    \label{fig:prueba_vuelo}
+    \end{figure}
+
+    \noindent En una segunda prueba, la unidad \textit{QBee} fue montada a bordo de una aeronave de combate Tucano T-27, con el fin de validar su desempeño bajo condiciones de vuelo más exigentes. En este caso, no se contó con un sistema de monitoreo en tiempo real debido a las restricciones propias de la aeronave. Sin embargo, el sistema operó de forma autónoma durante la misión, registrando exitosamente la captura de video.
+
+    \noindent A diferencia del vuelo en la Cessna Caravan, esta prueba presentó una complejidad adicional, ya que durante la operación se ejecutaron maniobras que alcanzaron aceleraciones de hasta 4g. A pesar de estas condiciones dinámicas, la \textit{QBee} logró completar su función de adquisición sin incidentes, lo cual representa un resultado relevante sobre la robustez mecánica y operativa del sistema.
+    
+    \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Figures/C4/t2.png}
+    \caption{Captura de video realizada durante prueba a bordo del avión de combate T-27 Tucano. A pesar de las maniobras con aceleraciones de hasta 4g, el sistema \textit{QBee} logró registrar imágenes de forma autónoma y estable. Las condiciones de iluminación ambiental no erán las más adecuadas debido a la hora del día (proximadamente las 6 pm).}
+    \label{fig:prueba_tucano}
+    \end{figure}
+    
+
+\section{Caracterización de las cámaras}
+%---------------------------------------------------------------
+    %===============================================================
+    \subsection{Resultados de la caracterización del campo de visión (FOV)}
+    \label{sec:fov_resultados}
+    %===============================================================
+    
+    Para validar el campo de visión de los sistemas ópticos seleccionados (Sistema 7 VIS y Sistema 6 NIR), se realizaron mediciones de FOV horizontal (H) y vertical (V) a tres distancias de trabajo (\(\mathrm{WD}\)) empleando la carta de prueba ISO 12233. A continuación se presentan los resultados obtenidos.\\
+    
+    La Figura \ref{fig:fov_montage} muestra las 12 capturas originales (3 filas × 4 columnas) utilizadas para determinar experimentalmente el FOV. Cada fila corresponde a una distancia de trabajo distinta; las dos primeras columnas son las mediciones H y V de VIS (Sistema 7) y las dos últimas, las de NIR (Sistema 6).
+    
+    \begin{figure}[H]
+      \centering
+      \setlength{\tabcolsep}{2pt}
+      \renewcommand{\arraystretch}{0}
+      \begin{tabular}{cccc}
+        \multicolumn{2}{c}{\small NIR – Sistema 6} &
+        \multicolumn{2}{c}{\small VIS – Sistema 7} \\
+        H & V & H & V \\ 
+
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/7_1.png} &
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/V/8_7.png} &
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/9_2.png} &
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/10_7.png} \\
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/33_1.png} &
+        \includegraphics[trim= 6cm 6cm 6cm 6cm, clip, width=.22\linewidth]{Figures/C4/FOV/NIR/V/65.png} & % TOCLIP
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/37_8.png} &
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/30_3.png} \\
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/63.png} &
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/V/65.png} &
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/69_4.png} &
+        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/70.png} \\
+      \end{tabular}
+      \caption{Imágenes originales para la medición del FOV horizontal (H)
+               y vertical (V) en tres distancias de trabajo.}
+      \label{fig:fov_montage}
+    \end{figure}
+    
+    Las mediciones, convertidas a metros, se resumen en la Tabla \ref{tab:fov_raw_wd}, donde cada FOV se acompaña de una incertidumbre instrumental \(\sigma=1\) mm.
+    
+    \begin{table}[H]
+      \centering
+      \caption{WD y FOV medidos para cada sistema óptico y orientación}
+      \label{tab:fov_raw_wd}
+      \small
+      \setlength{\tabcolsep}{4pt} % Espaciado más compacto entre columnas
+      \renewcommand{\arraystretch}{1.2} % Espaciado entre filas
+      \begin{tabularx}{\textwidth}{|c|>{\centering\arraybackslash}X
+                                        >{\centering\arraybackslash}X
+                                        >{\centering\arraybackslash}X
+                                        >{\centering\arraybackslash}X|
+                                        >{\centering\arraybackslash}X
+                                        >{\centering\arraybackslash}X
+                                        >{\centering\arraybackslash}X
+                                        >{\centering\arraybackslash}X|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}
+        & \multicolumn{4}{c|}{\textbf{NIR (Sis.~6)}} 
+        & \multicolumn{4}{c|}{\textbf{VIS (Sis.~7)}} \\ \cline{2-9}
+        \rowcolor[HTML]{EFEFEF}
+        \textbf{Prueba} 
+          & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] 
+          & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] \\ 
+        \hline
+        1 & 0.071 & 0.0350 & 0.087 & 0.0350 & 0.092 & 0.0350 & 0.107 & 0.0350 \\
+        2 & 0.331 & 0.231  & 0.350 & 0.180  & 0.379 & 0.239  & 0.303 & 0.138  \\
+        3 & 0.650 & 0.468  & 0.650 & 0.349  & 0.694 & 0.458  & 0.700 & 0.342  \\ 
+        \hline
+      \end{tabularx}
+    \end{table}
+
+    
+    
+    Aplicando regresión lineal ponderada (Deming) con pesos \(w=1/\sigma\), los ajustes óptimos fueron:
+    
+    \[
+    \begin{aligned}
+    \text{VIS:}\;&\mathrm{FOV_H}=(0.7025\pm0.0045)\,\mathrm{WD}-(0.0288\pm0.0021),\\
+    \text{VIS:}\;&\mathrm{FOV_V}=(0.5171\pm0.0029)\,\mathrm{WD}-(0.0197\pm0.0013),\\
+    \text{NIR:}\;&\mathrm{FOV_H}=(0.7477\pm0.0031)\,\mathrm{WD}-(0.0175\pm0.0013),\\
+    \text{NIR:}\;&\mathrm{FOV_V}=(0.5579\pm0.0034)\,\mathrm{WD}-(0.0141\pm0.0015).
+    \end{aligned}
+    \]
+    
+    La Figura \ref{fig:fov_reg_combined} ilustra los ajustes con sus bandas de confianza \(1\sigma\).
+    
+    \begin{figure}[H]
+    \centering
+      \includegraphics[width=1\linewidth]{Figures/C4/FOV.png}
+      \caption{Ajuste lineal ponderado de FOV vs.\ WD para los cuatro casos: VIS–H, VIS–V, NIR–H y NIR–V .}
+      \label{fig:fov_reg_combined}
+    \end{figure}
+    
+
+    
+    La Tabla \ref{tab:fov_pred_vs_theory_HV} compara el FOV horizontal predicho
+    por los ajustes empíricos con los valores teóricos calculados en
+    la Sección \ref{sec:cad_sim} para alturas de 50 m, 1000 m y 5000 m.
+    
+
+    
+    \begin{table}[H]
+      \centering
+      \caption{Comparativa empírico vs.\ teórico para FOV horizontal (H) y vertical (V).}
+      \label{tab:fov_pred_vs_theory_HV}
+      \small
+      \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}|
+          c|
+          rrrr|
+          rrrr|
+        }
+        \toprule
+         & \multicolumn{4}{c|}{\shortstack{\textbf{VIS}\\(Sis.~7)}} 
+           & \multicolumn{4}{c|}{\shortstack{\textbf{NIR}\\(Sis.~6)}} \\
+        \midrule
+        \textbf{Altura}
+          & \shortstack{Pred H\\[m]} 
+          & \shortstack{Teo H\\[m]} 
+          & \shortstack{Pred V\\[m]} 
+          & \shortstack{Teo V\\[m]} 
+          & \shortstack{Pred H\\[m]} 
+          & \shortstack{Teo H\\[m]} 
+          & \shortstack{Pred V\\[m]} 
+          & \shortstack{Teo V\\[m]} \\
+        \midrule
+        50\,m   
+          &  35.10  &  25.16   &  25.84  &  18.87  
+          &  37.37  &  26.73   &  27.88  &  20.05  \\
+        1000\,m 
+          & 702.50  & 503.20   & 517.08  & 377.40  
+          & 747.70  & 534.60   & 557.90  & 400.95  \\
+        5000\,m 
+          & 3512.00 & 2516.00  & 2585.48 & 1887.00 
+          & 3737.00 & 2673.00  & 2788.89 & 2004.75 \\
+        \bottomrule
+      \end{tabular*}
+    \end{table}
+
+    
+
+    Con estos resultados, se puedes definir las discrepancias como:
+    \[
+      \Delta_{\mathrm{abs}} = FOV_{\mathrm{pred}} - FOV_{\mathrm{teo}},
+      \qquad
+      \Delta_{\mathrm{rel}} = \frac{\Delta_{\mathrm{abs}}}{FOV_{\mathrm{teo}}}\times100\%.
+    \]
+    A continuación se presentan los resultados para cada altura y sistema:
+    
+    \begin{align*}
+    50\,\mathrm{m}:&\quad
+    \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 35.10 - 33.54 = 1.56\,\mathrm{m}, 
+    \quad
+    \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{1.56}{33.54}\times100\%\approx4.65\%,\\
+    &\quad
+    \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 37.37 - 35.64 = 1.73\,\mathrm{m}, 
+    \quad
+    \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{1.73}{35.64}\times100\%\approx4.85\%.\\[6pt]
+    1000\,\mathrm{m}:&\quad
+    \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 702.5 - 670.9 = 31.6\,\mathrm{m}, 
+    \quad
+    \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{31.6}{670.9}\times100\%\approx4.71\%,\\
+    &\quad
+    \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 747.7 - 712.8 = 34.9\,\mathrm{m}, 
+    \quad
+    \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{34.9}{712.8}\times100\%\approx4.90\%.\\[6pt]
+    5000\,\mathrm{m}:&\quad
+    \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 3512 - 3354 = 158\,\mathrm{m}, 
+    \quad
+    \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{158}{3354}\times100\%\approx4.71\%,\\
+    &\quad
+    \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 3737 - 3564 = 173\,\mathrm{m}, 
+    \quad
+    \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{173}{3564}\times100\%\approx4.86\%.
+    \end{align*}
+
+    
+    Los resultados confirman que, en ambos sistemas, la discrepancia relativa se mantiene alrededor de un 39–40 \% independientemente de la altura de operación. Este sesgo prácticamente constante refuerza la hipótesis de un error geométrico sistemático (distorsión radial y paralaje en la medida de WD) que debe corregirse antes de la generación de ortomosaicos o del cálculo de índices de vegetación. A nivel práctico, es necesario aplicar un factor de escala inverso \(\approx0.71\) para compensar la sobre‑estimación del FOV en el procesamiento geométrico.
+    
+    
+    \subsubsection*{4. Ángulo de campo (AFOV)}
+    El AFOV se calculó como
+    \(\mathrm{AFOV}=2\arctan(\mathrm{FOV}/(2\,\mathrm{WD}))\).  
+    La Figura \ref{fig:afov} muestra su evolución frente a la distancia,
+    y las líneas punteadas marcan el valor teórico al infinito:
+    \(\approx37.1^{\circ}\) (VIS) y \(\approx39.3^{\circ}\) (NIR).
+    
+    \begin{figure}[H]
+      \centering
+      \begin{subfigure}[b]{.49\linewidth}
+        \includegraphics[width=\linewidth]{Figures/FOV/AFOV_VIS.pdf}
+        \caption{VIS – Sistema 7}
+      \end{subfigure}
+      \hfill
+      \begin{subfigure}[b]{.49\linewidth}
+        \includegraphics[width=\linewidth]{Figures/FOV/AFOV_NIR.pdf}
+        \caption{NIR – Sistema 6}
+      \end{subfigure}
+      \caption{AFOV experimental vs.\ WD (flecha punteada: valor teórico).}
+      \label{fig:afov}
+    \end{figure}
+
+    
+    \begin{itemize}
+      \item \textbf{Linealidad \(\mathrm{FOV}\!-\!\mathrm{WD}\).}  
+            Los ajustes presentan \(R^{2}>0.999\) y errores de coeficiente
+            muy bajos (\(<0.7\%\)), confirmando la validez de la regresión
+            ponderada en el rango estudiado.
+      \item \textbf{Sesgo geométrico.}  
+            La sobre‐estimación de \approx 40 \% revela la necesidad de
+            calibración intrínseca (distorsión radial y decentrado) antes de
+            producir ortomosaicos precisos.
+      \item \textbf{Convergencia del AFOV.}  
+            — VIS: el AFOV crece hacia el teórico sin sobrepasarlo.  
+            — NIR: supera el valor teórico, sugiriendo 
+            \emph{focus breathing} o aberraciones cromáticas más
+            pronunciadas en 850 nm.
+      \item \textbf{Impacto en aplicaciones UAV.}  
+            A baja altitud, la corrección geométrica debe incluir un
+            factor de escala de \approx 0.71; a grandes alturas, la MTF óptica
+            domina la resolución (véase Sección \ref{sec:cad_sim}).
+      \item \textbf{Recomendaciones.}  
+            Calibración intrínseca completa con patrones de
+            tablero, medición láser de WD, y validación de foco a
+            \(\mathrm{WD}\geq5\) m para garantizar convergencia asintótica.
+    \end{itemize}
+    
+    En síntesis, la metodología combinada de medición directa, regresión
+    ponderada, propagación de incertidumbre y análisis de AFOV proporciona
+    un diagnóstico completo del desempeño geométrico, establece las
+    correcciones necesarias y fundamenta la fiabilidad de los
+    sistemas VIS y NIR para monitoreo multiespectral desde UAV.  
+    
+    
+  \subsection{Modulation Transfer Function (MTF)}
+    \subsubsection{Metodología ISO 12233}
+    \subsubsection{Curvas y métricas}
+      % → FIGURA: MTF VIS y NIR sobrepuestas.
+      %   Tabla: frecuencia de corte (10 % MTF) y MTFA.
+
+  \subsection{Respuesta espectral}
+    \subsubsection{Curvas de sensibilidad}
+      % → FIGURA: sensibilidad R, G, B y NIR normalizadas.
+    \subsubsection{Linealidad y repetibilidad}
+      % → Tabla: coeficiente $r$ entre repeticiones, desviación estadística.
+
+\section{Síntesis y comparación con los requisitos}
+  % → Resumen cruzado: requisito ↔ resultado ↔ % de cumplimiento.
+  %   Discute los márgenes de mejora identificados.
+
+\section{Lecciones aprendidas y trabajo futuro}
+  % → Reflexiones sobre diseño, montaje, guiones de adquisición
+  %   y posibles optimizaciones (p.ej. filtros más estrechos,
+  %   firmware de cámara, compensación de vibraciones, IA en bordo).
+
+% Opcional: anexos con listados de código, tablas de datos completos,
+%           hojas de especificaciones de componentes ópticos, etc.
