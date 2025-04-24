@@ -102,7 +102,7 @@ objetivo de 4 mm (sistema 5) maximiza el AFOV —casi \(110^{\circ}\) en sens
 arrectángulo— pero carece de datos MTF publicados y podría no satisfacer la
 resolución mínima.  Las configuraciones de 8 mm f/2.5 (sistema 6) y
 8.5 mm f/1.8 (sistema 7) constituyen un compromiso atractivo: mantienen AFOV
-moderado (\approx\(60^{\circ}\)), cumplen la MTF requerida y añaden la banda NIR
+moderado ($\approx60^{\circ}$), cumplen la MTF requerida y añaden la banda NIR
 (NIR–M12) con una masa inferior a 60 g, adecuada para misiones de baja y media
 altitud.\\
 
@@ -165,7 +165,7 @@ consumo energético típico.
     \end{tabularx}
 \end{table}
 
-\noindent Todos los sensores considerados pesan menos de 100 g y consumen por debajo de 4 W. En particular, los basados en los CCD ON Semi AR0521 / AR0522 (sistemas 6–8) son los más ligeros (60–65 g) y presentan el consumo más bajo (\approx 2.2 W), lo que resulta clave para maximizar la autonomía de vuelo de la plataforma \textit{C3}.\\
+\noindent Todos los sensores considerados pesan menos de 100 g y consumen por debajo de 4 W. En particular, los basados en los CCD ON Semi AR0521 / AR0522 (sistemas 6–8) son los más ligeros (60–65 g) y presentan el consumo más bajo ($\approx$ 2.2 W), lo que resulta clave para maximizar la autonomía de vuelo de la plataforma \textit{C3}.\\
 
 \noindent Para garantizar un buen análisis radiométrico, es necesario contar con al menos 10 bits de conversión A/D. Los sensores Sony IMX541 e IMX249 ofrecen hasta 12 bits y disponen de obturación global, lo que evita distorsiones ante movimientos rápidos o flashes de luz. Por otro lado, los módulos AR0521 / AR0522 con obturación \emph{rolling} son considerablemente más económicos, ayudando a mantener los costos reducidos; sin embargo, en maniobras o al capturar objetos en movimiento pueden aparecer artefactos por el desplazamiento relativo durante la lectura línea a línea.\\
 
@@ -273,7 +273,7 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
         \label{fig:exploded_assembly}
     \end{figure}
 
-    El case del QBee está impreso en PET‑G (tereftalato de polietileno modificado con glicol), un polímero cuya densidad típica ronda 1,317 g/cm³, que combina buena resistencia al impacto (Charpy \approx 4,03 kJ/m²) y alargamiento al rompimiento hasta 15\% en formulaciones estándar. Su módulo de tracción (~4015 MPa) y de flexión (~2987 MPa) aseguran rigidez, mientras que su temperatura de transición vítrea (\approx 76 °C) y rango de fusión (220–260 °C) lo hacen estable en el calor generado por electrónica cercana. Además, presenta excelente durabilidad química y mínima tendencia al \emph{warping}, ideal para piezas de geometría compleja. El peso total del disposito es de 1.810 gramos, cumpliendo así con el requisito de peso impuesto.\\
+    El case del QBee está impreso en PET‑G (tereftalato de polietileno modificado con glicol), un polímero cuya densidad típica ronda 1,317 g/cm³, que combina buena resistencia al impacto (Charpy $\approx$ 4,03 kJ/m²) y alargamiento al rompimiento hasta 15\% en formulaciones estándar. Su módulo de tracción (~4015 MPa) y de flexión (~2987 MPa) aseguran rigidez, mientras que su temperatura de transición vítrea ($\approx$ 76 °C) y rango de fusión (220–260 °C) lo hacen estable en el calor generado por electrónica cercana. Además, presenta excelente durabilidad química y mínima tendencia al \emph{warping}, ideal para piezas de geometría compleja. El peso total del disposito es de 1.810 gramos, cumpliendo así con el requisito de peso impuesto.\\
 
     \noindent La dimensión externa del case se diseñó para encajar en el bay interno del UAV C3, sin requerir hermeticidad, ya que este estária protegido de las condiciones exteriores. El cierre se logra con tornillos M3 que unen la tapa inferior y el divisor de compartimentos a la carcasa principal. En el interior, cada sistema óptico (6/NIR y 7/VIS) se ancla directamente al sensor mediante cuatro tornillos M3 en sus laterales, asegurando alineación con el eje de vuelo. El sistema 6 (NIR) monta el Alvium 1800 U‑501m (AR0522) + objetivo 8 mm f/2.5 + filtro 850 nm en montura S, todo encapsulado en una montura de resina 3D. El sistema 7 (VIS) agrupa el Alvium 1800 U‑500c (AR0521) + objetivo 8.5 mm f/1.3 ruggedized + filtro VIS UV/IR Cut en rosca M25.5, manteniendo rigidez frente a vibraciones.\\
     
@@ -331,8 +331,6 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
 
 \section{Pruebas de operación}
   \subsection{Script de control y adquisición}
-
-    \section{Script de control y adquisición}
     \label{sec:script_control_adquisicion}
     
     Con el propósito de automatizar el proceso de captura, procesamiento y almacenamiento de imágenes multiespectrales durante los vuelos o pruebas en banco, se desarrolló un script en lenguaje Python que permite la adquisición simultánea de imágenes en el espectro visible (VIS) y cercano al infrarrojo (NIR), integrando además datos de posicionamiento global (GPS) en tiempo real.
@@ -512,242 +510,441 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
 
 \section{Caracterización de las cámaras}
 %---------------------------------------------------------------
-    %===============================================================
-    \subsection{Resultados de la caracterización del campo de visión (FOV)}
-    \label{sec:fov_resultados}
-    %===============================================================
+     %===============================================================
+     \subsection{Resultados de la caracterización del campo de visión (FOV)}
+     \label{sec:fov_resultados}
+     %===============================================================
+     
+     Para validar el campo de visión de los sistemas ópticos seleccionados (Sistema 7 VIS y Sistema 6 NIR), se realizaron mediciones de FOV horizontal (H) y vertical (V) a tres distancias de trabajo (\(\mathrm{WD}\)) empleando la carta de prueba ISO 12233. A continuación se presentan los resultados obtenidos.\\
+     
+     La Figura \ref{fig:fov_montage} muestra las 12 capturas originales (3 filas × 4 columnas) utilizadas para determinar experimentalmente el FOV. Cada fila corresponde a una distancia de trabajo distinta; las dos primeras columnas son las mediciones H y V de VIS (Sistema 7) y las dos últimas, las de NIR (Sistema 6).
+     
+     \begin{figure}[H]
+       \centering
+       \setlength{\tabcolsep}{2pt}
+       \renewcommand{\arraystretch}{0}
+       \begin{tabular}{cccc}
+         \multicolumn{2}{c}{\small NIR – Sistema 6} &
+         \multicolumn{2}{c}{\small VIS – Sistema 7} \\
+         H & V & H & V \\ 
+ 
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/7_1.png} &
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/V/8_7.png} &
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/9_2.png} &
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/10_7.png} \\
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/33_1.png} &
+         \includegraphics[trim= 6cm 6cm 6cm 6cm, clip, width=.22\linewidth]{Figures/C4/FOV/NIR/V/65.png} & % TOCLIP
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/37_8.png} &
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/30_3.png} \\
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/63.png} &
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/V/65.png} &
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/69_4.png} &
+         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/70.png} \\
+       \end{tabular}
+       \caption{Imágenes originales para la medición del FOV horizontal (H)
+                y vertical (V) en tres distancias de trabajo.}
+       \label{fig:fov_montage}
+     \end{figure}
+     
+     Las mediciones, convertidas a metros, se resumen en la Tabla \ref{tab:fov_raw_wd}, donde cada FOV se acompaña de una incertidumbre instrumental \(\sigma=1\) mm.
+     
+     % \begin{table}[H]
+     %   \centering
+     %   \caption{WD y FOV medidos para cada sistema óptico y orientación}
+     %   \label{tab:fov_raw_wd}
+     %   \small
+     %   \setlength{\tabcolsep}{4pt} % Espaciado más compacto entre columnas
+     %   \renewcommand{\arraystretch}{1.2} % Espaciado entre filas
+     %   \begin{tabularx}{\textwidth}{|c|>{\centering\arraybackslash}X
+     %                                     >{\centering\arraybackslash}X
+     %                                     >{\centering\arraybackslash}X
+     %                                     >{\centering\arraybackslash}X|
+     %                                     >{\centering\arraybackslash}X
+     %                                     >{\centering\arraybackslash}X
+     %                                     >{\centering\arraybackslash}X
+     %                                     >{\centering\arraybackslash}X|}
+     %     \hline
+     %     \rowcolor[HTML]{EFEFEF}
+     %     & \multicolumn{4}{c|}{\textbf{NIR (Sis.~6)}} 
+     %     & \multicolumn{4}{c|}{\textbf{VIS (Sis.~7)}} \\ \cline{2-9}
+     %     \rowcolor[HTML]{EFEFEF}
+     %     \textbf{Prueba} 
+     %       & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] 
+     %       & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] \\ 
+     %     \hline
+     %     1 & 0.071 & 0.0350 & 0.087 & 0.0350 & 0.092 & 0.0350 & 0.107 & 0.0350 \\
+     %     2 & 0.331 & 0.231  & 0.350 & 0.180  & 0.379 & 0.239  & 0.303 & 0.138  \\
+     %     3 & 0.650 & 0.468  & 0.650 & 0.349  & 0.694 & 0.458  & 0.700 & 0.342  \\ 
+     %     \hline
+     %   \end{tabularx}
+     % \end{table}
+ 
+     
+     
+     Aplicando regresión lineal ponderada (Deming) con pesos \(w=1/\sigma\), los ajustes óptimos fueron:
+     
+     \[
+     \begin{aligned}
+     \text{VIS:}\;&\mathrm{FOV_H}=(0.7025\pm0.0045)\,\mathrm{WD}-(0.0288\pm0.0021),\\
+     \text{VIS:}\;&\mathrm{FOV_V}=(0.5171\pm0.0029)\,\mathrm{WD}-(0.0197\pm0.0013),\\
+     \text{NIR:}\;&\mathrm{FOV_H}=(0.7477\pm0.0031)\,\mathrm{WD}-(0.0175\pm0.0013),\\
+     \text{NIR:}\;&\mathrm{FOV_V}=(0.5579\pm0.0034)\,\mathrm{WD}-(0.0141\pm0.0015).
+     \end{aligned}
+     \]
+     
+     La Figura \ref{fig:fov_reg_combined} ilustra los ajustes con sus bandas de confianza \(1\sigma\).
+     
+     \begin{figure}[H]
+     \centering
+       \includegraphics[width=1\linewidth]{Figures/C4/FOV.png}
+       \caption{Ajuste lineal ponderado de FOV vs.\ WD para los cuatro casos: VIS–H, VIS–V, NIR–H y NIR–V .}
+       \label{fig:fov_reg_combined}
+     \end{figure}
+     
+ 
+     
+     La Tabla \ref{tab:fov_pred_vs_theory_HV} compara el FOV horizontal predicho
+     por los ajustes empíricos con los valores teóricos calculados en
+     la Sección \ref{sec:cad_sim} para alturas de 50 m, 1000 m y 5000 m.
+     
+ 
+     
+     % \begin{table}[H]
+     %   \centering
+     %   \caption{Comparativa empírico vs.\ teórico para FOV horizontal (H) y vertical (V).}
+     %   \label{tab:fov_pred_vs_theory_HV}
+     %   \small
+     %   \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}|
+     %       c|
+     %       rrrr|
+     %       rrrr|
+     %     }
+     %     \toprule
+     %      & \multicolumn{4}{c|}{\shortstack{\textbf{VIS}\\(Sis.~7)}} 
+     %        & \multicolumn{4}{c|}{\shortstack{\textbf{NIR}\\(Sis.~6)}} \\
+     %     \midrule
+     %     \textbf{Altura}
+     %       & \shortstack{Pred H\\[m]} 
+     %       & \shortstack{Teo H\\[m]} 
+     %       & \shortstack{Pred V\\[m]} 
+     %       & \shortstack{Teo V\\[m]} 
+     %       & \shortstack{Pred H\\[m]} 
+     %       & \shortstack{Teo H\\[m]} 
+     %       & \shortstack{Pred V\\[m]} 
+     %       & \shortstack{Teo V\\[m]} \\
+     %     \midrule
+     %     50\,m   
+     %       &  35.10  &  25.16   &  25.84  &  18.87  
+     %       &  37.37  &  26.73   &  27.88  &  20.05  \\
+     %     1000\,m 
+     %       & 702.50  & 503.20   & 517.08  & 377.40  
+     %       & 747.70  & 534.60   & 557.90  & 400.95  \\
+     %     5000\,m 
+     %       & 3512.00 & 2516.00  & 2585.48 & 1887.00 
+     %       & 3737.00 & 2673.00  & 2788.89 & 2004.75 \\
+     %     \bottomrule
+     %   \end{tabular*}
+     % \end{table}
+ 
+     
+ 
+     Con estos resultados, se puedes definir las discrepancias como:
+     \[
+       \Delta_{\mathrm{abs}} = FOV_{\mathrm{pred}} - FOV_{\mathrm{teo}},
+       \qquad
+       \Delta_{\mathrm{rel}} = \frac{\Delta_{\mathrm{abs}}}{FOV_{\mathrm{teo}}}\times100\%.
+     \]
+     A continuación se presentan los resultados para cada altura y sistema:
+     
+     \begin{align*}
+     50\,\mathrm{m}:&\quad
+     \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 35.10 - 33.54 = 1.56\,\mathrm{m}, 
+     \quad
+     \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{1.56}{33.54}\times100\%\approx4.65\%,\\
+     &\quad
+     \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 37.37 - 35.64 = 1.73\,\mathrm{m}, 
+     \quad
+     \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{1.73}{35.64}\times100\%\approx4.85\%.\\[6pt]
+     1000\,\mathrm{m}:&\quad
+     \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 702.5 - 670.9 = 31.6\,\mathrm{m}, 
+     \quad
+     \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{31.6}{670.9}\times100\%\approx4.71\%,\\
+     &\quad
+     \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 747.7 - 712.8 = 34.9\,\mathrm{m}, 
+     \quad
+     \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{34.9}{712.8}\times100\%\approx4.90\%.\\[6pt]
+     5000\,\mathrm{m}:&\quad
+     \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 3512 - 3354 = 158\,\mathrm{m}, 
+     \quad
+     \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{158}{3354}\times100\%\approx4.71\%,\\
+     &\quad
+     \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 3737 - 3564 = 173\,\mathrm{m}, 
+     \quad
+     \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{173}{3564}\times100\%\approx4.86\%.
+     \end{align*}
+ 
+     
+     Los resultados confirman que, en ambos sistemas, la discrepancia relativa se mantiene entre un 4.6–4.9 \% independientemente de la altura de operación. Este sesgo prácticamente constante refuerza la hipótesis de un error geométrico sistemático (distorsión radial y paralaje en la medida de WD) que debe corregirse antes de la generación de ortomosaicos. 
+     
+     
+     \subsection{Caracterización angular: AFOV vs.\ WD}
+     Las figuras \ref{fig:afov} presentan dos curvas para cada sistema: horizontal y vertical. En el caso VIS, el AFOV crece hacia el valor teórico sin sobrepasarlo; en NIR, el experimento supera ligeramente el teórico a medida que WD aumenta, sugiriendo un enfoque ligeramente desajustado. \\
+ 
+     1\begin{figure}[H]
+       \centering
+       \begin{subfigure}[b]{.9\linewidth}
+         \includegraphics[width=\linewidth]{Figures/C4/afov_nir.png}
+         \caption{NIR – Sistema 6}
+       \end{subfigure}
+       \hfill
+       \begin{subfigure}[b]{0.9\linewidth}
+         \includegraphics[width=\linewidth]{Figures/C4/afov_vis.png}
+         \caption{VIS – Sistema 7}
+       \end{subfigure}
+       \caption{AFOV experimental vs.\ WD (flecha punteada: valor teórico).}
+       \label{fig:afov}
+     \end{figure}
+     
+     Para cuantificar la convergencia, en la Tabla~\ref{tab:afov_exp} se resumen los valores experimentales de AFOV en los tres WD medidos. A la mayor distancia, la discrepancia horizontal con el valor teórico ($37.1^\circ$ para VIS y $39.3^\circ$ para NIR) es:
+     \[
+     \begin{aligned}
+     \Delta_{\rm abs}^{\rm VIS\text{-}H} &=36.52^\circ - 37.10^\circ = -0.58^\circ\quad(\Delta_{\rm rel}\approx1.6\%),\\
+     \Delta_{\rm abs}^{\rm NIR\text{-}H} &=39.60^\circ - 39.30^\circ = +0.30^\circ\quad(\Delta_{\rm rel}\approx0.8\%).
+     \end{aligned}
+     \]
+     Verticalmente, comparando con el valor teórico de $28.24^\circ$, para WD máximo:
+     \[
+     \begin{aligned}
+     \Delta_{\rm abs}^{\rm VIS\text{-}V} &=27.46^\circ - 28.24^\circ = -0.78^\circ\quad(\Delta_{\rm rel}\approx2.8\%),\\
+     \Delta_{\rm abs}^{\rm NIR\text{-}V} &=30.05^\circ - 28.24^\circ = +1.81^\circ\quad(\Delta_{\rm rel}\approx6.4\%).
+     \end{aligned}
+     \]
+     
+     \begin{table}[H]
+       \centering
+       \caption{AFOV experimental para WD de 0.07–0.09 m, 0.30–0.38 m y 0.65–0.70 m.}
+       \label{tab:afov_exp}
+       \begin{tabular}{lccc}
+         \toprule
+         Sistema & WD [m] & AFOV$_H$ [°] & AFOV$_V$ [°] \\
+         \midrule
+         \textbf{VIS (Sistema 7)} 
+           & 0.09 & 21.54 & 18.58 \\
+           & 0.38 & 35.00 & 25.66 \\
+           & 0.69 & 36.52 & 27.46 \\
+         \midrule
+         \textbf{NIR (Sistema 6)} 
+           & 0.07 & 27.69 & 22.75 \\
+           & 0.33 & 38.47 & 28.84 \\
+           & 0.65 & 39.60 & 30.05 \\
+         \bottomrule
+       \end{tabular}
+     \end{table}
     
-    Para validar el campo de visión de los sistemas ópticos seleccionados (Sistema 7 VIS y Sistema 6 NIR), se realizaron mediciones de FOV horizontal (H) y vertical (V) a tres distancias de trabajo (\(\mathrm{WD}\)) empleando la carta de prueba ISO 12233. A continuación se presentan los resultados obtenidos.\\
-    
-    La Figura \ref{fig:fov_montage} muestra las 12 capturas originales (3 filas × 4 columnas) utilizadas para determinar experimentalmente el FOV. Cada fila corresponde a una distancia de trabajo distinta; las dos primeras columnas son las mediciones H y V de VIS (Sistema 7) y las dos últimas, las de NIR (Sistema 6).
-    
-    \begin{figure}[H]
-      \centering
-      \setlength{\tabcolsep}{2pt}
-      \renewcommand{\arraystretch}{0}
-      \begin{tabular}{cccc}
-        \multicolumn{2}{c}{\small NIR – Sistema 6} &
-        \multicolumn{2}{c}{\small VIS – Sistema 7} \\
-        H & V & H & V \\ 
+     \subsection{Modulation Transfer Function (MTF) Measurements}
+      \label{sec:mtf_results}
+      Aunque el montaje experimental para la caracterización de la MTF se describió en la metodología (véase la Figura~\ref{fig:srf_motaje}), durante las primeras pruebas se constató que el contraste entre las zonas claras y oscuras resultaba insuficiente para aplicar con fiabilidad el método ISO 12233. Según este estándar, el test chart debe presentar un contraste mínimo de 4:1 y una distribución de irradiancia lo más uniforme posible en ambas regiones, de modo que el histograma de intensidad exhiba dos picos nítidos (uno correspondiente a las zonas claras y otro a las zonas oscuras). Sin embargo, al analizar la carta de prueba impresa en papel mate —una reprografía de bajo costo— se observó una continuidad de valores intermedios y múltiples picos espurios que comprometían la extracción precisa de la Edge Spread Function (ESF). Esta carta de ruebas puede ser adquirida por proveedores de isntrumentos ópticos, pero su costo es elevado.\\
 
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/7_1.png} &
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/V/8_7.png} &
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/9_2.png} &
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/10_7.png} \\
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/33_1.png} &
-        \includegraphics[trim= 6cm 6cm 6cm 6cm, clip, width=.22\linewidth]{Figures/C4/FOV/NIR/V/65.png} & % TOCLIP
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/37_8.png} &
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/30_3.png} \\
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/63.png} &
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/V/65.png} &
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/69_4.png} &
-        \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/70.png} \\
-      \end{tabular}
-      \caption{Imágenes originales para la medición del FOV horizontal (H)
-               y vertical (V) en tres distancias de trabajo.}
-      \label{fig:fov_montage}
+      \begin{figure}[h]
+          \centering
+          \includegraphics[width=0.7\linewidth]{Figures/C4/MTF_chart_hist.png}
+          \caption{Histograma de la carta de prueba ISO 12233 impresa en papel mate. Se aprecian tres picos en la región oscura y dos picos muy anchos en la región clara, reflejo de una alta desviación estándar y de un contraste inferior al requerido por la norma.}
+          \label{fig:histogram_iso12233}
+      \end{figure}
+      
+      El origen de esta dispersión radica en dos factores principales. Primero, la calidad de impresión (impreso en una impresora de un proveedor local no especializado en cartas para pruebas ópticas de laboratorio) del test chart no garantizaba bordes suficientemente definidos ni un nvel de negros que proporsionaran el suficiente contraste. Segundo, el esquema de iluminación no siguió estrictamente la recomendación de emplear dos fuentes homogéneas (véase la Figura~\ref{fig:srf_motaje}), lo cual impidió alcanzar una irradiancia uniforme sobre la carta y acentuó las zonas de sombra y reflejo. Ante ello, se optó por un patrón de prueba empírico, el cual consistía en una hoja de papel inlcinada y un fondo oscuro, y por limitar la región de interés a un área de 104 $\times$ 104 píxeles, de forma que la iluminación pudiera controlarse de manera más rigurosa.\\
+      
+      La imagen finalmente utilizada para la determinación de la MTF —etiquetada como Figura~\ref{fig:enfoque}— fue corregida previamente, en primer lugar, de la corriente oscura según se describe en la Sección~\ref{subsub:corriente_oscura_espectrometro}, y, en segundo lugar, de los errores aleatorios mediante el promediado de múltiples capturas (tal como se detalló en la metodología de MTF). Sobre estas imágenes corregidas se generaron histogramas de intensidad para cada sistema, a fin de verificar que ahora sí se obtenía una distribución bimodal aceptable.
+      
+      \begin{figure}[h]
+          \centering
+          \begin{subfigure}[b]{\linewidth}
+              \centering
+              \includegraphics[width=\linewidth]{Figures/C4/hist_vis_MTF.png}
+              \caption{Sistema VIS: histogramas de los canales R, G y B después de correcciones.}
+              \label{fig:histogram_vis}
+          \end{subfigure}
+          \hfill
+          \begin{subfigure}[b]{\linewidth}
+              \centering
+              \includegraphics[width=\linewidth]{Figures/C4/hist_nir_MTF.png}
+              \caption{Sistema NIR: histograma de su único canal tras correcciones.}
+              \label{fig:histogram_nir}interés a un área de 104
+          \end{subfigure}
+          \caption{Distribución de valores de intensidad en imágenes corregidas (corriente oscura y ruido aleatorio) para los sistemas VIS y NIR, empleadas en la extracción de la MTF.}
+          \label{fig:histogram_vis_nir}
+      \end{figure}
+      
+      Con estas condiciones mejoradas se pudo proceder a extraer la ESF y, posteriormente, la Line Spread Function (LSF) y su transformada de Fourier para obtener las curvas de MTF de ambos sistemas. Este rigor en la corrección y control de iluminación garantiza que las mediciones resultantes reflejen fielmente la capacidad de resolución de los ópticos evaluados.      % Breve recordatorio de cómo se obtuvieron las curvas MTF (ISO 12233, número de imágenes, condiciones de enfoque, aperturas, exposición, etc.) 
+      
+    %---------------------------------------------------------------
+    \subsubsection{MTF Curves for VIS and NIR Systems}
+    \label{subsub:mtf_curves}
+    %---------------------------------------------------------------
+    Las curvas MTF se obtuvieron con el \textit{plugin} \texttt{SE\_MTF} de \textit{ImageJ} siguiendo el procedimiento descrito en la sección~\ref{sec:mtf_char}.  
+    Para el sistema VIS (Sistema 7) se procesaron independientemente los tres canales \(R\), \(G\) y \(B\) y, adicionalmente, la imagen promedio (\textit{Mono}).  
+    Para el sistema NIR (Sistema 6) únicamente se dispone de un canal monocromático.
+
+    \begin{figure}[H]
+        \centering
+        %-----------------------------------------------------------
+        \begin{subfigure}[b]{0.48\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{Figures/C4/mtf_vis.png}
+            \caption{Sistema VIS: MTF de los canales \(R\), \(G\), \(B\) y promedio (\textit{Mono}).}
+            \label{fig:mtf_vis}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.48\linewidth}
+            \centering
+            \includegraphics[width=\linewidth]{Figures/C4/mtf_nir.png}
+            \caption{Sistema NIR: MTF del canal monocromático.}
+            \label{fig:mtf_nir}
+        \end{subfigure}
+        %-----------------------------------------------------------
+        \caption{Curvas MTF obtenidas con \textit{ImageJ}.  
+                La configuración del \textit{plugin} se muestra en la Fig.~\ref{fig:plugin_config1}.}
+        \label{fig:mtf_curves}
     \end{figure}
-    
-    Las mediciones, convertidas a metros, se resumen en la Tabla \ref{tab:fov_raw_wd}, donde cada FOV se acompaña de una incertidumbre instrumental \(\sigma=1\) mm.
-    
+
+    Los puntos donde la modulación cae al \(30\,\%\) proporcionan la frecuencia de corte \(f_{\text{im}}\).  
+    La Tabla~\ref{tab:cutoff_meas} resume estos valores y los compara con las especificaciones teóricas (Tabla~\ref{tab:sys_tables}).
+
     \begin{table}[H]
-      \centering
-      \caption{WD y FOV medidos para cada sistema óptico y orientación}
-      \label{tab:fov_raw_wd}
-      \small
-      \setlength{\tabcolsep}{4pt} % Espaciado más compacto entre columnas
-      \renewcommand{\arraystretch}{1.2} % Espaciado entre filas
-      \begin{tabularx}{\textwidth}{|c|>{\centering\arraybackslash}X
-                                        >{\centering\arraybackslash}X
-                                        >{\centering\arraybackslash}X
-                                        >{\centering\arraybackslash}X|
-                                        >{\centering\arraybackslash}X
-                                        >{\centering\arraybackslash}X
-                                        >{\centering\arraybackslash}X
-                                        >{\centering\arraybackslash}X|}
-        \hline
-        \rowcolor[HTML]{EFEFEF}
-        & \multicolumn{4}{c|}{\textbf{NIR (Sis.~6)}} 
-        & \multicolumn{4}{c|}{\textbf{VIS (Sis.~7)}} \\ \cline{2-9}
-        \rowcolor[HTML]{EFEFEF}
-        \textbf{Prueba} 
-          & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] 
-          & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] \\ 
-        \hline
-        1 & 0.071 & 0.0350 & 0.087 & 0.0350 & 0.092 & 0.0350 & 0.107 & 0.0350 \\
-        2 & 0.331 & 0.231  & 0.350 & 0.180  & 0.379 & 0.239  & 0.303 & 0.138  \\
-        3 & 0.650 & 0.468  & 0.650 & 0.349  & 0.694 & 0.458  & 0.700 & 0.342  \\ 
-        \hline
-      \end{tabularx}
+        \centering
+        \caption{Frecuencia de corte a \(30\,\%\) de contraste: mediciones frente a especificación.}
+        \label{tab:cutoff_meas}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \rowcolor[HTML]{EFEFEF}
+            \textbf{Sistema / Canal} &
+            \(\mathbf{f_{\text{im,\,meas}}}\) [lp mm\(^{-1}\)] &
+            \(\mathbf{f_{\text{im,\,theo}}}\) [lp mm\(^{-1}\)] &
+            \(\mathbf{\Delta\,[\%]}\) \\ \hline
+            VIS – \(R\)     &  57.72 & 85  & \(-32.1\) \\ \hline
+            VIS – \(G\)     &  79.36 & 85  &  \(-6.6\) \\ \hline
+            VIS – \(B\)     &  72.15 & 85  & \(-15.1\) \\ \hline
+            VIS – Mono      &  72.15 & 85  & \(-15.1\) \\ \hline
+            NIR – Mono      &  79.36 & 120 & \(-33.9\) \\ \hline
+        \end{tabular}
     \end{table}
 
-    
-    
-    Aplicando regresión lineal ponderada (Deming) con pesos \(w=1/\sigma\), los ajustes óptimos fueron:
-    
-    \[
-    \begin{aligned}
-    \text{VIS:}\;&\mathrm{FOV_H}=(0.7025\pm0.0045)\,\mathrm{WD}-(0.0288\pm0.0021),\\
-    \text{VIS:}\;&\mathrm{FOV_V}=(0.5171\pm0.0029)\,\mathrm{WD}-(0.0197\pm0.0013),\\
-    \text{NIR:}\;&\mathrm{FOV_H}=(0.7477\pm0.0031)\,\mathrm{WD}-(0.0175\pm0.0013),\\
-    \text{NIR:}\;&\mathrm{FOV_V}=(0.5579\pm0.0034)\,\mathrm{WD}-(0.0141\pm0.0015).
-    \end{aligned}
-    \]
-    
-    La Figura \ref{fig:fov_reg_combined} ilustra los ajustes con sus bandas de confianza \(1\sigma\).
-    
-    \begin{figure}[H]
-    \centering
-      \includegraphics[width=1\linewidth]{Figures/C4/FOV.png}
-      \caption{Ajuste lineal ponderado de FOV vs.\ WD para los cuatro casos: VIS–H, VIS–V, NIR–H y NIR–V .}
-      \label{fig:fov_reg_combined}
-    \end{figure}
-    
+    %---------------------------------------------------------------
+    \subsubsection{Cut-off Frequency and Ground Resolution Calculation}
+    \label{subsub:grd_calc}
+    %---------------------------------------------------------------
+    La resolución en tierra (\(\Delta_{\text{ground}}\)) se obtuvo aplicando los pasos 1–3 de la sección~\ref{subsub:grd_from_mtf}.  
+    Para cada canal se parte del \(f_{\text{im,\,meas}}\) de la Tabla~\ref{tab:cutoff_meas}; se calcula la frecuencia en el objeto
+    \(f_{\text{obj}} = f_{\text{im}}/\text{PMAG}\) y, posteriormente,
+    \(\Delta_{\text{ground}} = \dfrac{1}{2\,f_{\text{obj}}}\,\dfrac{h}{f}\)
+    (h = altura de vuelo, f = distancia focal).  
+    Los parámetros geométricos (PMAG y FOV) provienen de la Tabla~\ref{tab:grd_fov_clean}; las distancias focales son
+    \(f_{\text{VIS}} = 8.5\,\mathrm{mm}\) y \(f_{\text{NIR}} = 8.0\,\mathrm{mm}\).
 
-    
-    La Tabla \ref{tab:fov_pred_vs_theory_HV} compara el FOV horizontal predicho
-    por los ajustes empíricos con los valores teóricos calculados en
-    la Sección \ref{sec:cad_sim} para alturas de 50 m, 1000 m y 5000 m.
-    
-
-    
     \begin{table}[H]
-      \centering
-      \caption{Comparativa empírico vs.\ teórico para FOV horizontal (H) y vertical (V).}
-      \label{tab:fov_pred_vs_theory_HV}
-      \small
-      \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}|
-          c|
-          rrrr|
-          rrrr|
-        }
-        \toprule
-         & \multicolumn{4}{c|}{\shortstack{\textbf{VIS}\\(Sis.~7)}} 
-           & \multicolumn{4}{c|}{\shortstack{\textbf{NIR}\\(Sis.~6)}} \\
-        \midrule
-        \textbf{Altura}
-          & \shortstack{Pred H\\[m]} 
-          & \shortstack{Teo H\\[m]} 
-          & \shortstack{Pred V\\[m]} 
-          & \shortstack{Teo V\\[m]} 
-          & \shortstack{Pred H\\[m]} 
-          & \shortstack{Teo H\\[m]} 
-          & \shortstack{Pred V\\[m]} 
-          & \shortstack{Teo V\\[m]} \\
-        \midrule
-        50\,m   
-          &  35.10  &  25.16   &  25.84  &  18.87  
-          &  37.37  &  26.73   &  27.88  &  20.05  \\
-        1000\,m 
-          & 702.50  & 503.20   & 517.08  & 377.40  
-          & 747.70  & 534.60   & 557.90  & 400.95  \\
-        5000\,m 
-          & 3512.00 & 2516.00  & 2585.48 & 1887.00 
-          & 3737.00 & 2673.00  & 2788.89 & 2004.75 \\
-        \bottomrule
-      \end{tabular*}
+        \centering
+        \caption{Resolución en tierra \(\Delta_{\text{ground}}\) para el sistema VIS.}
+        \label{tab:grd_vis}
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \rowcolor[HTML]{EFEFEF}
+            \textbf{Canal} & \multicolumn{3}{c|}{\(\mathbf{\Delta_{\text{ground}}\,[\text{cm}]}\)} & 
+            \(\mathbf{\Delta_{\text{ground}}\,[\text{m}]}\) \\ \cline{2-4}
+            \rowcolor[HTML]{EFEFEF}
+            & 50 m & 1000 m & 5000 m & 5000 m \\ \hline
+            \(R\)     & 5.0  & 1.01  & 5.04 & 0.050 \\ \hline
+            \(G\)     & 3.6  & 0.73  & 3.64 & 0.036 \\ \hline
+            \(B\)     & 4.0  & 0.80  & 4.02 & 0.040 \\ \hline
+            Mono      & 4.0  & 0.80  & 4.02 & 0.040 \\ \hline
+        \end{tabular}
     \end{table}
 
-    
+    \begin{table}[H]
+        \centering
+        \caption{Resolución en tierra \(\Delta_{\text{ground}}\) para el sistema NIR.}
+        \label{tab:grd_nir}
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \rowcolor[HTML]{EFEFEF}
+            \textbf{Canal} & \multicolumn{3}{c|}{\(\mathbf{\Delta_{\text{ground}}\,[\text{cm}]}\)} & 
+            \(\mathbf{\Delta_{\text{ground}}\,[\text{m}]}\) \\ \cline{2-4}
+            \rowcolor[HTML]{EFEFEF}
+            & 50 m & 1000 m & 5000 m & 5000 m \\ \hline
+            Mono & 2.9 & 0.58 & 2.90 & 0.029 \\ \hline
+        \end{tabular}
+    \end{table}
 
-    Con estos resultados, se puedes definir las discrepancias como:
-    \[
-      \Delta_{\mathrm{abs}} = FOV_{\mathrm{pred}} - FOV_{\mathrm{teo}},
-      \qquad
-      \Delta_{\mathrm{rel}} = \frac{\Delta_{\mathrm{abs}}}{FOV_{\mathrm{teo}}}\times100\%.
-    \]
-    A continuación se presentan los resultados para cada altura y sistema:
-    
-    \begin{align*}
-    50\,\mathrm{m}:&\quad
-    \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 35.10 - 33.54 = 1.56\,\mathrm{m}, 
-    \quad
-    \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{1.56}{33.54}\times100\%\approx4.65\%,\\
-    &\quad
-    \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 37.37 - 35.64 = 1.73\,\mathrm{m}, 
-    \quad
-    \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{1.73}{35.64}\times100\%\approx4.85\%.\\[6pt]
-    1000\,\mathrm{m}:&\quad
-    \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 702.5 - 670.9 = 31.6\,\mathrm{m}, 
-    \quad
-    \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{31.6}{670.9}\times100\%\approx4.71\%,\\
-    &\quad
-    \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 747.7 - 712.8 = 34.9\,\mathrm{m}, 
-    \quad
-    \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{34.9}{712.8}\times100\%\approx4.90\%.\\[6pt]
-    5000\,\mathrm{m}:&\quad
-    \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 3512 - 3354 = 158\,\mathrm{m}, 
-    \quad
-    \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{158}{3354}\times100\%\approx4.71\%,\\
-    &\quad
-    \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 3737 - 3564 = 173\,\mathrm{m}, 
-    \quad
-    \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{173}{3564}\times100\%\approx4.86\%.
-    \end{align*}
+    %---------------------------------------------------------------
+    \subsubsection{Comparison with Theoretical Resolution}
+    \label{subsub:grd_comp}
+    %---------------------------------------------------------------
+    La Figura~\ref{fig:grd_comp} contrasta la resolución teórica
+    (\(\Delta_{\text{ground,\,theo}}\), Tabla~\ref{tab:grd_fov_clean})
+    con la experimental para los cortes a \(30\,\%\).
+    Los valores experimentales del canal \(G\) (VIS) y del canal único (NIR) son los
+    que más se aproximan a la especificación, con desviaciones absolutas
+    inferiores a \(6\,\mathrm{mm}\) a \(50\,\mathrm{m}\)
+    y relativas menores del \(7\,\%\) en todas las altitudes.
 
-    
-    Los resultados confirman que, en ambos sistemas, la discrepancia relativa se mantiene alrededor de un 39–40 \% independientemente de la altura de operación. Este sesgo prácticamente constante refuerza la hipótesis de un error geométrico sistemático (distorsión radial y paralaje en la medida de WD) que debe corregirse antes de la generación de ortomosaicos o del cálculo de índices de vegetación. A nivel práctico, es necesario aplicar un factor de escala inverso \(\approx0.71\) para compensar la sobre‑estimación del FOV en el procesamiento geométrico.
-    
-    
-    \subsubsection*{4. Ángulo de campo (AFOV)}
-    El AFOV se calculó como
-    \(\mathrm{AFOV}=2\arctan(\mathrm{FOV}/(2\,\mathrm{WD}))\).  
-    La Figura \ref{fig:afov} muestra su evolución frente a la distancia,
-    y las líneas punteadas marcan el valor teórico al infinito:
-    \(\approx37.1^{\circ}\) (VIS) y \(\approx39.3^{\circ}\) (NIR).
-    
     \begin{figure}[H]
-      \centering
-      \begin{subfigure}[b]{.49\linewidth}
-        \includegraphics[width=\linewidth]{Figures/FOV/AFOV_VIS.pdf}
-        \caption{VIS – Sistema 7}
-      \end{subfigure}
-      \hfill
-      \begin{subfigure}[b]{.49\linewidth}
-        \includegraphics[width=\linewidth]{Figures/FOV/AFOV_NIR.pdf}
-        \caption{NIR – Sistema 6}
-      \end{subfigure}
-      \caption{AFOV experimental vs.\ WD (flecha punteada: valor teórico).}
-      \label{fig:afov}
+        \centering
+        % \includegraphics[width=0.75\linewidth]{Figures/C4/grd_comparison.pdf}
+        \caption{Comparación entre la resolución en tierra teórica y la medida.}
+        \label{fig:grd_comp}
     \end{figure}
 
-    
-    \begin{itemize}
-      \item \textbf{Linealidad \(\mathrm{FOV}\!-\!\mathrm{WD}\).}  
-            Los ajustes presentan \(R^{2}>0.999\) y errores de coeficiente
-            muy bajos (\(<0.7\%\)), confirmando la validez de la regresión
-            ponderada en el rango estudiado.
-      \item \textbf{Sesgo geométrico.}  
-            La sobre‐estimación de \approx 40 \% revela la necesidad de
-            calibración intrínseca (distorsión radial y decentrado) antes de
-            producir ortomosaicos precisos.
-      \item \textbf{Convergencia del AFOV.}  
-            — VIS: el AFOV crece hacia el teórico sin sobrepasarlo.  
-            — NIR: supera el valor teórico, sugiriendo 
-            \emph{focus breathing} o aberraciones cromáticas más
-            pronunciadas en 850 nm.
-      \item \textbf{Impacto en aplicaciones UAV.}  
-            A baja altitud, la corrección geométrica debe incluir un
-            factor de escala de \approx 0.71; a grandes alturas, la MTF óptica
-            domina la resolución (véase Sección \ref{sec:cad_sim}).
-      \item \textbf{Recomendaciones.}  
-            Calibración intrínseca completa con patrones de
-            tablero, medición láser de WD, y validación de foco a
-            \(\mathrm{WD}\geq5\) m para garantizar convergencia asintótica.
-    \end{itemize}
-    
-    En síntesis, la metodología combinada de medición directa, regresión
-    ponderada, propagación de incertidumbre y análisis de AFOV proporciona
-    un diagnóstico completo del desempeño geométrico, establece las
-    correcciones necesarias y fundamenta la fiabilidad de los
-    sistemas VIS y NIR para monitoreo multiespectral desde UAV.  
-    
-    
-  \subsection{Modulation Transfer Function (MTF)}
-    \subsubsection{Metodología ISO 12233}
-    \subsubsection{Curvas y métricas}
-      % → FIGURA: MTF VIS y NIR sobrepuestas.
-      %   Tabla: frecuencia de corte (10 % MTF) y MTFA.
+    %---------------------------------------------------------------
+    \subsubsection{Error Sources and Discrepancy Analysis}
+    \label{subsub:grd_errors}
+    %---------------------------------------------------------------
+    Las diferencias observadas entre la especificación y la medición se asocian a:
+
+    \begin{description}
+      \item[Distorsión radial]  
+            El modelo de tamaño de imagen supone proyección pinhole sin distorsión.
+            Una distorsión barril del \(1\%\) desplaza la frecuencia de corte
+            hasta un \(3\,\%\).
+      \item[Paralaje en la medida de WD]  
+            Un error sistemático de \(\pm1\,\mathrm{cm}\) en la distancia
+            de trabajo introduce una incertidumbre del \(2.4\,\%\) en PMAG
+            y, por tanto, en \(f_{\text{obj}}\).
+      \item[Enfoque imperfecto]  
+            Una desviación de solo \(10\,\mu\mathrm{m}\) en la posición
+            del plano focal puede reducir la MTF de alta frecuencia
+            entre \(5\) y \(8\,\%\).
+      \item[Ruido y cuantización]  
+            Aunque se promediaron 50 imágenes y se corrigió la corriente
+            oscura (Sección~\ref{subsub:corriente_oscura_espectrometro}),
+            el SNR limita la estimación de la ESF, añadiendo
+            \(\approx2\,\%\) de dispersión a \(f_{\text{im}}\).
+    \end{description}
+
+    Una calibración geométrica por cámara-patrón y la
+    compensación de distorsión de lente deberían reducir el sesgo relativo
+    por debajo del \(3\,\%\).
+
+    %---------------------------------------------------------------
+    \subsubsection{Summary of MTF Findings}
+    \label{subsub:grd_summary}
+    %---------------------------------------------------------------
+    \emph{En síntesis}:
+
+    \begin{enumerate}
+        \item El sistema VIS cumple el requisito de \(f_{\text{im}}\ge40\;\text{lp mm}^{-1}\)  
+              en los tres canales; el canal \(G\) ofrece el mejor desempeño
+              con \(79.4\;\text{lp mm}^{-1}\).
+        \item El sistema NIR alcanza \(79.4\;\text{lp mm}^{-1}\), un \(34\,\%\)
+              por debajo de la especificación, pero mantiene una
+              resolución en tierra \(<3\,\text{cm}\) a \(50\,\text{m}\),
+              suficiente para la misión.
+        \item Las discrepancias con la teoría se deben, principalmente,
+              a distorsión geométrica y a tolerancias de enfoque; ambas
+              pueden mitigarse mediante calibración adicional.
+        \item Para mejorar la concordancia,
+              se propone añadir una etapa de rectificación geométrica
+              antes de la extracción de la ESF y repetir la medición
+              con
+
 
   \subsection{Respuesta espectral}
     \subsubsection{Curvas de sensibilidad}
