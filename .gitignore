@@ -16,4 +16,8 @@ main.pdf
 *.toc
 **/*.toc
 main-blx.bib
+*.toc  
+**/*.toc
+*.gz
+**/*.gz
 
