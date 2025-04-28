@@ -1,514 +1,713 @@
-\chapter{Results \& Discussion}         % o \chapter{Resultados y Discusión}
+\chapter{Characterization and main contributions}
 
-%===============================================================
-\section{Diseño del sistema multiespectral \textit{KBee}}
-%===============================================================
+This chapter details the materials and methods used for the development of this work. Initially, the materials employed are described, including specific equipment, light sources, calibration patterns, and software used for data acquisition, processing, and analysis.
 
-La ruta de desarrollo del \textit{KBee} partió de una matriz de ocho “sistemas   candidatos’’ (Apendice \ref{ap:sistemas_candidatos}); de ellos se seleccionaron las dos configuraciones VIS + NIR que mejor satisfacen las restricciones de misión impuestas por el consorcio
-EAFIT–KTH: altura de operación $50$–$5\,000\;{\rm m}$, peso $\leq$ $2\;{\rm kg}$,
-envolvente geométrica $100\times100\times150\;{\rm mm}^{3}$ y conectividad USB 3.1.
-A continuación se describe el hilo de razonamiento que condujo al diseño final.
+Subsequently, the experimental methods are presented, organized according to the type of measurement performed: geometric and spectral measurements. For each method, the experimental procedure is clearly described, justifying the choice of technique and specifying the conditions under which the experiments were conducted, including details of instrument configuration and protocols followed.
 
-%---------------------------------------------------------------
-\subsection{Requerimientos y criterios ópticos}
-%---------------------------------------------------------------
+
+% Finalmente, se incluye una breve descripción de los resultados esperados tras la ejecución de los métodos mencionados, acompañada del cronograma previsto para las actividades y el presupuesto estimado requerido para la implementación del estudio. Esta información busca proporcionar claridad y facilitar la replicabilidad del estudio, así como sustentar la factibilidad y pertinencia metodológica del proyecto.
+
+
+% \section{Parámetros Espectrales para la Determinación de Índices de Vegetación}
+
+% Para una caracterización efectiva y la calibración de cámaras multiespectrales destinadas a la medición de índices de vegetación, es crucial considerar los siguientes parámetros espectrales:
+
+% \subsection{Sensibilidad Espectral del Sensor}
+% \begin{itemize}
+%     \item \textbf{Rango Espectral}: Define las longitudes de onda a las que el sensor es sensible. Para la mayoría de las aplicaciones en vegetación, es esencial cubrir desde el espectro visible (400-700 nm) hasta el infrarrojo cercano (700-1100 nm). Esta sensibilidad permite la detección precisa de la reflectancia de la vegetación, lo cual es crítico para índices como el NDVI \cite{Huang2021ASensing}.
+%     \item \textbf{Sensibilidad Relativa}: Mide la respuesta del sensor a diferentes longitudes de onda dentro del rango espectral. La sensibilidad relativa determina qué tan bien el sensor puede diferenciar entre diversas características de la vegetación basándose en sus firmas espectrales \cite{Dale2013HyperspectralReview, Klein2011MethodsCameras}.
+% \end{itemize}
+
+% \subsection{Transmisión Espectral del Objetivo (Lente)}
+% \begin{itemize}
+%     \item \textbf{Coeficiente de Transmisión Espectral}: Este parámetro describe la proporción de luz transmitida a través del objetivo en función de la longitud de onda. Es fundamental evaluar cómo los objetivos afectan la intensidad y calidad de la luz que llega al sensor para evitar distorsiones espectrales que puedan afectar la precisión de los índices de vegetación \cite{Xue2017SignificantApplications}.
+%     \item \textbf{Rango de Transmisión Espectral}: El objetivo debe permitir la transmisión efectiva de las longitudes de onda relevantes (por ejemplo, bandas roja e infrarroja cercana) utilizadas para el cálculo de índices de vegetación. El rango de transmisión afecta directamente la calidad de la señal recibida por el sensor \cite{Dale2013HyperspectralReview}.
+% \end{itemize}
+
+% \subsection{Características Espectrales del Filtro}
+% \begin{itemize}
+%     \item \textbf{Curva de Transmitancia Espectral}: Define cómo el filtro permite o bloquea diferentes longitudes de onda. Es esencial para asegurar que sólo las longitudes de onda deseadas alcancen el sensor, eliminando posibles interferencias de otras bandas espectrales \cite{Huang2021ASensing}.
+%     \item \textbf{Longitud de Onda de Corte y Ancho de Banda de Transmisión}: La longitud de onda de corte indica el punto donde el filtro comienza a bloquear la luz, mientras que el ancho de banda de transmisión especifica el rango de longitudes de onda que el filtro permite pasar. Estos parámetros son clave para seleccionar y diferenciar bandas espectrales específicas necesarias para índices de vegetación \cite{Dale2013HyperspectralReview}.
+% \end{itemize}
+
+% \subsection{Respuesta Espectral Combinada del Sistema}
+% \begin{itemize}
+%     \item \textbf{Eficiencia Espectral Total}: Considera la eficiencia combinada de sensor, objetivo y filtro para captar la luz en las longitudes de onda relevantes. Esto incluye la integración de todas las respuestas espectrales de los componentes individuales para determinar la capacidad del sistema completo en la detección y medición de índices de vegetación \cite{Xue2017SignificantApplications}.
+%     \item \textbf{Linealidad y Estabilidad Espectral}: Evalúa cómo se mantiene la respuesta espectral del sistema bajo diferentes condiciones de iluminación y ambientales. La estabilidad espectral es crítica para aplicaciones en campo donde las condiciones pueden variar significativamente \cite{Dale2013HyperspectralReview}.
+% \end{itemize}
+
+% Estos parámetros deben ser cuidadosamente caracterizados y calibrados para asegurar que la cámara multiespectral proporcione datos precisos y fiables para la medición de índices de vegetación, facilitando así aplicaciones como el monitoreo de la salud de los cultivos, la evaluación del estrés vegetal y el análisis de cambios en la cobertura vegetal.
+
+
+\section{Geometric Characterization}
+
+\subsubsection{Determination of Field of View (FOV) and Angular Field of View (AFOV)}
+\label{sec:fov}
+
+The Field of View (FOV) of the optical system is determined in order to assess the maximum angle of the scene that the camera can capture. First, a test film is placed on a stable base located on the optical bench, preferably using a clamp that allows proper orientation with respect to the optical axis of the system. It is essential that the film is properly positioned to minimize errors caused by tilts or misalignments.
+
+Next, the optical system is positioned on its corresponding base on the optical bench, ensuring it is centered and properly aligned with the test film (see Figure~\ref{fig:MTF_FOV_montage}). Once the initial setup is established, images of the film are captured at different working distances. During image acquisition, an effort is made to precisely align the visible edges of the image with a known edge on the test film. Measurements are taken strictly in the vertical or horizontal direction, explicitly measuring the distance between objects located at opposite edges of the image. This procedure is carried out for both the horizontal and vertical FOV, as they may differ depending on the format of the optical sensor.
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{Figures/C3/MTF_montaje.pdf}
+        \caption{Optical setup developed. In this case, the use of barriers to prevent capture of unwanted light directly from the illumination source was not necessary, as the source is located behind the optical system under test. The illumination source is a tungsten halogen lamp coupled with a fiber optic cable and a diffuser.}
+        \label{fig:MTF_FOV_montage}
+\end{figure}
+
+Since FOV measurements have inherent uncertainties due to the measuring instrument and other experimental sources, a statistical analysis using weighted linear regression is implemented to properly model the functional relationship between the measured FOV and the working distance. This method explicitly considers errors in both the dependent and independent variables, allowing for consistent and less biased estimates of the model parameters. The weighted linear regression is fitted using total least squares (Deming regression), which simultaneously minimizes deviations in both variables:
+
+\begin{equation}
+\text{FOV} = \beta_1 \cdot \text{Working distance} + \beta_0,
+\label{eq:regresion_lineal}
+\end{equation}
+
+where \( \beta_1 \) is the slope and \( \beta_0 \) is the intercept, both calculated along with their associated uncertainties, thus ensuring a statistically reliable model to describe the behavior of the FOV as a function of working distance.
+
+To minimize errors introduced by optical aberrations, such as spherical aberration, the measurements are preferably taken along the central vertical axis of the image. Specialized Python software is then used to analyze the images and calculate the angular FOV using the geometric relation:
+
+\begin{equation}
+\text{AFOV} = 2 \cdot \arctan\left(\frac{\text{FOV}}{2 \cdot d}\right),
+\label{eq:fov_angular}
+\end{equation}
+
+where \( d \) is the working distance.\\
+
+Regarding the system's focusing, it is recommended to use an autofocus mechanism for proper image acquisition of the test chart. Since the optical systems used in this study have a fixed focal length, the focus must be manually adjusted to obtain a high-quality image. To optimize this adjustment, a method is used based on capturing an image of a well-defined edge, from which the corresponding intensity profile is extracted and displayed in real-time, in this case along the central horizontal line. The derivative of this profile is then calculated and plotted to represent the intensity variation across the edge transition. Focus optimization is achieved by maximizing the prominence of the peak in the derivative, indicating a higher definition in the signal variation. This point of maximum variation is considered indicative of correct focus. Figure~\ref{fig:enfoque_conjunta} shows a representative example of optimal edge focusing.
+
+\begin{figure}[H]
+    \centering
+    % First subfigure
+    \begin{subfigure}[b]{0.7\linewidth}
+        \centering
+        \includegraphics[trim=0mm 0mm 0mm 10mm, clip, width=\linewidth]{Figures/C3/SE_1.png}
+        \caption{Image of an edge, used to properly adjust the optical system focus.}
+        \label{fig:enfoque}
+    \end{subfigure}
+    
+    \vspace{1em} % Vertical space between subfigures
+
+    % Second subfigure
+    \begin{subfigure}[b]{0.95\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/C3/SE_signal.png}
+        \caption{Central profile of the edge image.}
+        \label{fig:se_signal}
+    \end{subfigure}
+    
+    \vspace{1em} % Vertical space between subfigures
+
+    % Third subfigure
+    \begin{subfigure}[b]{0.95\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/C3/SE_diff.png}
+        \caption{Derivative of the central profile.}
+        \label{fig:se_diff}
+    \end{subfigure}
+    
+    \caption{Set of images with their corresponding profile and derivative.}
+    \label{fig:enfoque_conjunta}
+\end{figure}
+
+\subsection{Modulation Transfer Function (MTF) Characterization}
+\label{sec:mtf_char}
+The Modulation Transfer Function (MTF) enables an objective evaluation of the optical system’s ability to reproduce detail and contrast at different spatial frequencies. In this work, the slanted-edge method is used, as established by the international standard ISO 12233, which offers high precision, repeatability, and reliability.
+
+The procedure begins by placing the ISO 12233 standard spatial resolution chart (see Figure~\ref{fig:iso12233_test_chart}) on a stable base. Uniform illumination over the chart’s surface is ensured, guaranteeing that the light intensity at any point does not vary more than $\pm 10\%$ from the center value. To prevent direct light from hitting the optical system, barriers are installed to block any undesired light.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Figures/C3/ISO_12233-reschart.pdf}
+    \caption{Standard chart used to measure the spatial frequency response of the optical system, as established in the ISO 12233 standard.}
+    \label{fig:iso12233_test_chart}
+\end{figure}
+
+Since the optical system under analysis does not have autofocus and instead requires manual adjustment, a Python script was implemented to display the camera or sensor image in real time, along with a window showing the central horizontal intensity profile and another window showing its derivative. To determine optimal focus, the method seeks to maximize the magnitude of the extreme values—peaks and valleys—of the derivative of the central profile, since a higher derivative corresponds to better edge resolution. This indicates that the focus point has been reached where high spatial frequency details are best reproduced. This method is the same as described in Section~\ref{sec:fov}.\\
+
+The aperture and exposure time of the optical system are carefully adjusted to obtain a maximum signal without saturation in the bright areas of the target. Signal clipping must be avoided in both bright and dark regions, including the transition zones of the slanted edge. As image compression can significantly affect resolution measurements, all system settings must be recorded and reported, including focal length, aperture, sensor resolution, and compression modes used. When using color cameras, proper white balance must be applied according to the light source, as specified in ISO 14525. White balance may be performed automatically if the software and optical system support it, or manually using the RGB channel histogram. The goal is to overlap the histogram peaks of the three channels as much as possible. For this work, white balance was performed manually, ensuring that the peaks corresponding to the bright zone overlap across the three RGB channels. This signal distribution can be seen in Figure~\ref{fig:illumination_distribution}.\\
+
+The MTF measurement is carried out following the steps outlined below:
+
+\begin{enumerate}
+    \item The illumination is configured as shown in Figure~\ref{fig:srf_motaje}. Ambient lighting must be reduced to a minimum. If necessary, a diffuser should be used to ensure the illumination is as homogeneous as possible and to avoid unwanted intensity patterns from the light source.
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[trim=20mm 50mm 20mm 0mm, clip, width=0.7\linewidth]{Figures/C3/iso 12233 montaje.png}
+        \caption{Optical setup recommended by ISO 12233:2024 for accurate MTF measurement. (1) matte black background, (2) test chart, (3) white illumination, (4) optical system under test, (5) barriers to prevent direct illumination of the optical system, (6) adjustable working distance.}
+        \label{fig:srf_motaje}
+    \end{figure}
+
+    \item The illumination is arranged such that the signal distribution delivered by the optical system is as homogeneous as possible. This implies that the captured image should show two well-defined peaks: one for the dark areas and another for the bright areas of the test pattern. Ideally, these peaks would be delta functions, indicating sharp transitions between intensity regions. In practice, secondary peaks should be minimized and the main peaks should be as narrow as possible. A homogeneous distribution ensures the optical system’s response is measured under controlled conditions and the MTF analysis is not affected by unwanted illumination variations. Figure~\ref{fig:illumination_distribution} shows the distribution achieved for the region of interest shown in Figure~\ref{fig:enfoque}. Additionally, this distribution confirms that signal saturation is minimal in the region of interest.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{Figures/C3/Histogram_MTF.pdf}
+        \caption{Signal distribution delivered by the optical system under the configured experimental illumination. Two main peaks are observed: one in the dark zone and another in the bright zone, with attenuated secondary peaks.}
+        \label{fig:illumination_distribution}
+    \end{figure}
+
+    \item The optical system is positioned to properly frame the test chart. Vertical arrows help adjust magnification, while horizontal arrows assist in centering the image. The tips of the central black arrows should be fully visible, while the white arrows should be completely hidden. The horizontal edge of the chart should be aligned approximately parallel to the sensor’s horizontal lines. The approximate distance between the camera and the test chart is recorded for later analysis. Figure~\ref{fig:iso12233_test_chart_encuadre} shows the arrows used for alignment.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{Figures/C3/ISO_12233-reschart_arrows.png}
+        \caption{Standard chart used to measure the spatial frequency response of the optical system. The arrows used for framing and camera alignment are highlighted.}
+        \label{fig:iso12233_test_chart_encuadre}
+    \end{figure}
+
+    \item The chart is carefully rotated at an angle between $2^\circ$ and $10^\circ$ relative to the sensor’s pixel rows or columns to ensure accuracy in the MTF determination. The chart shown in Figure~\ref{fig:iso12233_test_chart} includes slanted edge patterns that meet this angular requirement.
+
+    \item 50 images of the slanted edge are captured and averaged to reduce temporal noise and improve statistical quality.
+
+    \item 50 dark images are also captured and averaged for sensor non-uniformity correction. This correction is detailed in Section~\ref{subsub:corriente_oscura_espectrometro}.
+
+    \item The slanted edge image is corrected using the previously obtained average dark image.
+
+    \item A specific analysis region is selected within the corrected image, where the slanted edge is clearly distinguishable.
+
+    \item The exact angle of the slanted edge with respect to the sensor rows or columns is determined in order to properly normalize spatial frequency for MTF analysis.
+
+    \item The Edge Spread Function (ESF) is obtained by analyzing pixel intensity values across multiple rows or columns crossing the slanted edge.
+
+    \item To enhance method precision, oversampling is performed by combining multiple rows or columns (at least four) to generate a single, more accurate spatial function.
+
+    \item The ESF is numerically differentiated to generate the Line Spread Function (LSF).
+
+    \item Finally, the Fast Fourier Transform (FFT) is applied to the LSF to obtain the MTF:
+
+    \begin{equation}
+        \text{MTF}(f) = \left|\mathcal{F}\{\text{LSF}(x)\}(f)\right|,
+    \end{equation}
+
+    where $\mathcal{F}$ denotes the Fourier transform operation and $f$ is the spatial frequency.
+
+    \item The resulting MTF curve is normalized to its maximum value at low frequencies and plotted against spatial frequency for analysis.
+\end{enumerate}
+
+MTF processing is performed using the \href{https://imagej.net/ij/plugins/se-mtf/index.html}{SE\_MTF} plugin from \href{https://imagej.net/ij/index.html}{ImageJ}. In this procedure, the image scale is configured in physical units (e.g., lp/mm) based on the actual sensor size and number of photodetectors. Once parameters are configured, the plugin extracts the Edge Spread Function (ESF) from the image edge and, through numerical differentiation, generates the Line Spread Function (LSF). Then, a Fast Fourier Transform (FFT) is applied to the LSF to obtain the Modulation Transfer Function (MTF).
+
+Figure~\ref{fig:plugin_config1} shows the interface for configuring parameters. Based on the Region of Interest (ROI) and pixel size, it is possible to compute the required parameters for plugin configuration.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Figures/C3/imagej_conf.png}
+    \caption{Configuration screen of the SE\_MTF plugin in ImageJ. Setup for a Region of Interest of 104 $\times$ 104 pixels and a pixel size of 2.2 $\mu \text{m}$.}
+    \label{fig:plugin_config1}
+\end{figure}
+
+\subsubsection{Ground–Resolved Distance (GRD) Derived from the MTF}
+\label{subsub:grd_from_mtf}
+
+The Modulation Transfer Function provides a frequency–domain representation of the
+optical system’s ability to reproduce scene detail.  To translate the laboratory MTF into a
+practical “ground” resolution (often called the \emph{ground‑resolved distance}, GRD), the
+following procedure is applied\footnote{The workflow follows the recommendations of
+ISO~12233 and common practice in remote‑sensing optics
+\cite{Boreman2001MTF, Holst2008Electro‑Optical}.}.
+
+\paragraph{1. Identify the cut–off spatial frequency in the image plane.}
+From the measured MTF curve, the spatial frequency
+$f_{\text{im}}$ (in line‑pairs per millimetre, lp/mm) at which the modulation falls to
+30\,\% is chosen as the \emph{cut‑off} frequency:
+%
+\begin{equation}
+    \text{MTF}\bigl(f_{\text{im}}\bigr)=0.30.
+    \label{eq:mtf_cutoff}
+\end{equation}
+
+\paragraph{2. Convert to object‑space frequency.}
+The primary lateral magnification\footnote{For object distances
+much larger than the focal length, the primary magnification
+$\text{PMAG}$ is well approximated by
+$\text{PMAG}= \dfrac{\text{Horizontal Sensor Size}}{\text{FOV}}$;
+see Eq.~(\ref{eq:res_0}).} of the lens is
+%
+\begin{equation}
+    \label{eq:pmag}
+    \text{PMAG}= \frac{\text{Horizontal Sensor Size}}{\text{FOV}}.
+\end{equation}
+%
+The corresponding frequency in object space is therefore
+%
+\begin{equation}
+    f_{\text{obj}} = f_{\text{im}} \times \text{PMAG}
+    \quad\left[\frac{\text{lp}}{\text{mm}}\right].
+    \label{eq:f_obj}
+\end{equation}
+
+\paragraph{3. Compute the linear ground‑resolved distance.}
+A line pair consists of one dark and one bright line; hence the minimum
+distinguishable physical period on the ground, expressed in micrometres, is
+%
+\begin{equation}
+    \Delta_{\text{ground}} =
+    \frac{1}{2\,f_{\text{obj}}}\;\times\;
+    \frac{1000\;\mu\text{m}}{1\;\text{mm}}.
+    \label{eq:delta_ground}
+\end{equation}
+%
+If a specific flight altitude (working distance) $\text{WD}$ is assumed, the
+same result can be expressed directly in metres by multiplying
+Eq.~(\ref{eq:delta_ground}) by the scale factor
+$\dfrac{\text{WD}}{\text{focal length}}$, yielding the \emph{ground sample
+distance} (GSD).
+
+\paragraph{4. Reporting.}
+For every lens/sensor pair characterised in
+Section~\ref{sec:fov}--\ref{subsub:grd_from_mtf},
+Table~\ref{tab:grd_results} lists
+$f_{\text{im}}$ at 30\,\% contrast, the computed $f_{\text{obj}}$, and the resulting
+$\Delta_{\text{ground}}$ for the three mission altitudes analysed
+(50\,m, 1000\,m, and 5000\,m).
 
 \begin{table}[h]
     \centering
-    \caption{Especificaciones de misión y criterios de diseño del \textit{KBee}.}
-    \label{tab:req_vs_obj}
-    \begin{tabular}{|p{4cm}|c|}
+    \caption{Ground‑resolved distance (GRD) derived from the 30 \%‑contrast MTF cut‑off. 
+             Placeholder numbers are shown; replace them with the values measured for
+             each optical system.}
+    \label{tab:grd_results}
+    \begin{tabularx}{\linewidth}{|l|C|C|C|C|C|}
         \hline
-        \rowcolor[HTML]{EFEFEF}\textbf{Parámetro} & \textbf{Requisito} \\ \hline
-        Masa total del cargamento & $\leq 2\;\text{kg}$ \\ \hline
-        Dimensiones & $100 \times 100 \times 150\;\text{mm}^{3}$ \\ \hline
-        Tiempo máximo de misión & $\leq 3\;\text{h}$ \\ \hline
-        MTF (30\,\% de contraste) & $\geq 40\;\text{lp/mm}$ \\ \hline
-        Resolución en tierra @50\,m & $\leq 7.35\;\text{cm}$ \\ \hline
-        Resolución en tierra @1000\,m & $\leq 1.47\;\text{m}$ \\ \hline
-        Resolución en tierra @5000\,m & $\leq 7.35\;\text{m}$ \\ \hline
-    \end{tabular}
+        \rowcolor[HTML]{EFEFEF}
+        \textbf{System} & 
+        $f_{\text{im}}$ [lp/mm] & 
+        $f_{\text{obj}}$ [lp/mm] & 
+        GRD @50\,m [cm] & 
+        GRD @1000\,m [m] &
+        GRD @5000\,m [m] \\
+        \hline
+        VIS & - & - & - & - & - \\
+        NIR & - & - & - & - & - \\
+        \hline
+    \end{tabularx}
 \end{table}
 
 
-Los criterios que guiaron la selección de cada sub‑módulo fueron:
+\subsection{Acquisition Settings for VIS and NIR Systems}
+
+The accuracy of resolution and MTF measurements largely depends on the optical system configuration during image capture. In this study, all configurations used for each system were recorded and reported. The following tables summarize the parameters used for the VIS system (visible spectrum camera) and for the NIR system (near-infrared camera):
+
+\begin{longtable}[c]{c|cc|cc}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\cellcolor[HTML]{EFEFEF} &
+  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}\textbf{FOV}} &
+  \multicolumn{2}{c}{\cellcolor[HTML]{EFEFEF}\textbf{MTF}} \\
+\rowcolor[HTML]{EFEFEF} 
+\multirow{-2}{*}{\cellcolor[HTML]{EFEFEF}\textbf{Parameter}} &
+  \textbf{VIS} &
+  \textbf{NIR} &
+  \textbf{VIS} &
+  \textbf{NIR} \\ \hline
+\endfirsthead
+%
+\endhead
+%
+\hline
+\endfoot
+%
+\endlastfoot
+%
+\textbf{ExposureTime (ms)}  & 18264.15 & 498463.3 & 2636.135 & 47487.15 \\
+\rowcolor[HTML]{EFEFEF} 
+\textbf{Gain}               & 0.0      & 24.1     & 0.0      & 0.0      \\
+\textbf{Height (pixels)}    & 1944     & 1944     & 104      & 104      \\
+\rowcolor[HTML]{EFEFEF} 
+\textbf{Width (pixels)}     & 2592     & 2592     & 104      & 104      \\
+\textbf{OffsetX}            & 0        & 0        & 1230     & 1200     \\
+\rowcolor[HTML]{EFEFEF} 
+\textbf{OffsetY}            & 0        & 0        & 920      & 900      \\
+\textbf{Gamma}              & 1.0      & 1.0      & 1.0      & 1.0      \\
+\rowcolor[HTML]{EFEFEF} 
+\textbf{Hue}                & 0.0      & --       & 0.0      & --       \\
+\textbf{BalanceRatio\_Red}  & 1.307617 & --       & 1.289063 & --       \\
+\rowcolor[HTML]{EFEFEF} 
+\textbf{BalanceRatio\_Blue} & 1.957031 & --       & 1.979004 & --       \\ \hline
+\caption{Acquisition Configuration for MTF and FOV Experiments (VIS and NIR)}
+\label{tab:tab:fov_mtf}\\
+\end{longtable}
+
+Below is a brief description of each parameter used in the configuration:
 
 \begin{itemize}
-    \item \textbf{Resolución espacial} – El objetivo debe ofrecer una MTF (30\,\% de contraste) 
-          \textbf{$\geq 40\;\text{lp/mm}$}, lo que garantiza la capacidad de resolver los objetos 
-          de las dimensiones indicadas en la Tabla~\ref{tab:req_vs_obj}.
-          
-    \item \textbf{Campo de visión} – El ángulo AFOV debe cubrir parcelas agrícolas 
-          de al menos 50 m a baja altura sin comprometer la resolución a grandes altitudes; 
-          por ello se seleccionan dos distancias focales representativas: 
-          8 mm (NIR) y 16 mm (VIS).
-          
-    \item \textbf{Masa y volumen} – El conjunto óptico‑electrónico debe cumplir las 
-          restricciones de carga útil de la aeronave del Proyecto C\#, 
-          de modo que se mantenga un tiempo de vuelo de 3 h.  
-          En la práctica esto implica una masa total $\leq 2\;\text{kg}$ 
-          y un volumen aproximado de $100\times100\times150\;\text{mm}^{3}$.
-          
-    \item \textbf{Coste} – Aunque el presupuesto final depende de los fondos del proyecto, 
-          para este trabajo se fija un \emph{límite máximo de \$1500 USD}.  
-          Con un presupuesto mayor podrían integrarse componentes de mayor rendimiento.
+    \item \textbf{ExposureTime:} Exposure time in milliseconds, determining how long the sensor collects light. Longer exposures increase the captured light but may cause saturation if not properly adjusted.
+
+    \item \textbf{Gain:} Sensor gain factor, amplifying the generated electrical signal. A high gain may increase noise; hence, it is set to 0.0 to avoid unwanted amplification.
+
+    \item \textbf{Gamma:} Gamma correction applied to the image, adjusting the linearity of the light response. A value of 1.0 ensures a linear response.
+
+    \item \textbf{Height (pixels):} Image height in pixels. This parameter defines the vertical resolution and the area of interest.
+
+    \item \textbf{Width (pixels):} Image width in pixels. Together with height, it defines the spatial resolution of the sensor.
+
+    \item \textbf{OffsetX and OffsetY:} Horizontal (OffsetX) and vertical (OffsetY) displacements of the capture area over the sensor. These values help center or adjust the region of interest according to the position of the object or test chart.
+
+    \item \textbf{Hue:} Hue adjustment in the image, used only in color cameras (VIS system). A value of 0.0 means no tonal adjustment is applied.
+
+    \item \textbf{BalanceRatio\_Red and BalanceRatio\_Blue:} White balance ratios for the red and blue channels in color cameras. These coefficients are used to match the responses of each channel and ensure proper white balance. In this study, they were manually adjusted to overlap the peaks of the bright zone in the RGB histograms.
 \end{itemize}
 
+These settings are defined to ensure maximum signal without saturation and to avoid clipping in bright and dark areas, guaranteeing that the slanted-edge image is captured under controlled conditions. These parameters are recorded to allow for study replication and for detailed analysis of the optical system response under both low- and high-intensity conditions.
 
-%---------------------------------------------------------------
-\subsection{Proceso iterativo de diseño}
-\label{sec:cad}
-%---------------------------------------------------------------
+\section{Spectral Characterization of Multispectral Cameras}
 
-La Tabla~\ref{tab:sys_tables} resume los ocho objetivos evaluados de
-forma preliminar.  Cada sistema se identifica por un número consecutivo y se
-caracteriza mediante distancia focal, relación de apertura, MTF al 30\,\% de
-contraste y masa total del objetivo.
+Spectral characterization is a fundamental process for color calibration and accurate spectral estimation in multispectral cameras. This process is particularly relevant in applications such as remote sensing, precision agriculture, and environmental analysis, where precision in detecting different wavelengths determines the quality of the obtained data. For this characterization, two main calibration methods using a monochromator were employed: joint calibration of the entire system and separate calibration of its components.
 
-\begin{table}[h]
+\subsection{Experimental Procedure in the Laboratory}
+\label{sec:procedimiento_experimental_laboratorio}
+
+This section details the laboratory procedure used for the spectral response characterization of various optical systems. The methodology includes the selection of the illumination source, validation of its spectrum, beam collimation, dark current correction of the minispectrometer, use of a set of filters and acrylic sheets, selection and combination of said filters, determination of the central wavelength, and measurement of optical power, followed by image capture with the optical system under test.
+
+\subsubsection{Selection and Validation of the Illumination Source}
+\label{subsub:fuente_validacion}
+
+A tungsten lamp from ThorLabs, model OSL-2~\cite{OSL2-Manual}, was selected as the main illumination source. This type of lamp emits radiation over a broad range, approximately from 400 nm to 1600 nm, which is suitable for covering both the visible and part of the near-infrared spectrum.
+
+To ensure the spectral distribution of the lamp matched expectations, a minispectrometer from Newport (reference pending) was used to measure its output spectrum. Figure~\ref{fig:lampara_tungsteno_espectro} shows an example of the measured spectral signal, expressed in \textit{counts}, which is the standard output format of such spectrometers. These counts represent the relative intensity recorded by the spectrometer's sensor, but do not constitute an absolute radiometric quantity. Therefore, to obtain a fully calibrated measurement, these counts must be related to the optical power measured by an independent power meter.
+
+\begin{figure}[h!]
     \centering
-    \caption{Comparativa de los objetivos candidatos frente a los criterios de diseño.
-             Entre paréntesis se indica el fabricante (EO = Edmund Optics).  El AFOV
-             se expresa en grados y corresponde al semidiámetro angular calculado
-             sobre el sensor empleado.}
-    \label{tab:sys_tables}
-    \begin{tabularx}{\linewidth}{|c|p{3cm}|C|C|C|C|C|}
-        \hline
-        \rowcolor[HTML]{EFEFEF}\textbf{System} & \textbf{Lens} &
-        \textbf{Focal\, [mm]} &
-        \textbf{AFOV\, [°]} &
-        \textbf{Aperture} &
-        \textbf{MTF\,(30 \%)\, [lp/mm]} &
-        \textbf{Weight\, [g]} \\ \hline
-        
-        1 & 16 mm f/16 ― HPr Series (EO)                & 16   & 42.2 & f/16 & 62  & 138 \\ \hline
-        2 & 50 mm f/2.8 ― HPr Series (EO)               & 50   & 10.1 & f/2.8& 180 & --  \\ \hline
-        3 & 25 mm f/1.8 ― HPr Series (EO)               & 25   & 27.8 & f/1.8& 40  & 78  \\ \hline
-        4 & 16 mm f/1.8 ― HPr Series (EO)               & 16   & 42.2 & f/1.8& 128 & 138 \\ \hline
-        5 & 4 mm f/1.8 ― Basler C125‑0418‑5M‑P (Basler) & 4    & 109  & f/1.8& --  & --  \\ \hline
-        6 & 8 mm f/2.5 ― HEO Series (NIR, M12) (EO)     & 8    & 29.9 & f/2.5& 120 & 4   \\ \hline
-        7 & 8.5 mm f/1.3 ― Cr Series (EO)               & 8.5  & 28.2 & f/1.8& 85  & 60  \\ \hline
-        8 & 12.5 mm f/2.5 ― Rugged Blue (M12) (EO)      & 12.5 & 19.4 & f/2.5& 150 & 5   \\ \hline
-    \end{tabularx}
-\end{table}
+    \includegraphics[width=1\textwidth]{Figures/C3/tunsteno.png}
+    \caption{Example of the measured spectrum of the tungsten lamp (OSL-2) using the minispectrometer. The vertical axis is expressed in counts, which depend on the intrinsic response of the spectrometer.}
+    \label{fig:lampara_tungsteno_espectro}
+\end{figure}
 
+\subsubsection{Setup and Collimation of the Illumination Beam}
+\label{subsub:montaje_colimacion}
 
-La resolución exigida (MTF $\geq40\,$lp mm\(^{-1}\)) se cumple de forma holgada en
-los sistemas 2, 4, 6, 7 y 8.  El sistema 2, con 50 mm f/2.8, ofrece la mayor
-frecuencia de corte (180 lp mm\(^{-1}\)), lo que se traduce en la más alta
-resolución sobre el terreno; sin embargo, su AFOV es el más estrecho del
-conjunto, limitando el área cubierta por captura.  En el extremo opuesto, el
-objetivo de 4 mm (sistema 5) maximiza el AFOV —casi \(110^{\circ}\) en sensor
-arrectángulo— pero carece de datos MTF publicados y podría no satisfacer la
-resolución mínima.  Las configuraciones de 8 mm f/2.5 (sistema 6) y
-8.5 mm f/1.8 (sistema 7) constituyen un compromiso atractivo: mantienen AFOV
-moderado ($\approx60^{\circ}$), cumplen la MTF requerida y añaden la banda NIR
-(NIR–M12) con una masa inferior a 60 g, adecuada para misiones de baja y media
-altitud.\\
+The tungsten lamp mentioned includes a fiber optic coupling that allows directing the light toward various optical elements. The wavefront emerging from the fiber optic is \emph{divergent}, so the optical power decreases significantly as the distance between the fiber output and the measurement plane increases. To work under controlled conditions and optimize power utilization, the light beam was \textbf{collimated} by mounting the fiber in a one-inch diameter lens tube.
 
-En sistemas aéreos que operan a distancias de decenas o miles de metros, el
-plano de enfoque se aproxima al infinito; el sistema trabaja, por tanto, en
-régimen de hiperfoco y la profundidad de campo deja de ser un factor
-limitante.  No obstante, la apertura \((f/\#)\) sigue siendo relevante porque
-regula la cantidad de luz incidente y la eficiencia con la que se reproducen
-las altas frecuencias espaciales.  Los objetivos de gran abertura
-(f/1.8–f/2.5) —sistemas 3, 4, 6, 7 y 8— captan hasta dos pasos más de luz que
-el objetivo f/16 (sistema 1), mejorando la SNR de la imagen y preservando la
-modulación a altas frecuencias del MTF.\\
-
-El límite de carga útil de la plataforma \textit{C3} es 2 kg para lograr un tiempo de vuelo de 3 h. Aunque todos los objetivos de la Tabla \ref{tab:sys_tables} se encuentran muy por debajo de ese umbral, los sistemas 6, 7 y 8 destacan por su masa extraordinariamente baja (entre 4 g y 60 g), lo que los convierte en las opciones más atractivas cuando el peso es el factor decisivo. En la etapa de prototipado se dará prioridad a estas configuraciones ligeras, siempre que satisfagan además el requisito mínimo de resolución.
-
-
-Los sistemas 6 (NIR 8 mm f/2.5) y 7 (VIS 8.5 mm f/1.8) aparecen
-como las mejores combinaciones de AFOV, MTF y peso para vuelos de 50–1000 m,
-mientras que el sistema 2 (50 mm f/2.8) se reserva para misiones de gran
-altitud donde se privilegia la resolución sobre la cobertura espacial.\\
-
-
-
-
----------------------------------------------------------------
-\subsection{Pre‑selección de sensores de imagen}
-\label{sec:sensor_selection}
-%---------------------------------------------------------------
-Para cada sistema óptico se evaluaron seis configuraciones de cámara
-(Alvium/Basler) representativas de los rangos de resolución y tamaño de píxel
-requeridos.  En la Tabla~\ref{tab:sensor_table} se recogen únicamente los
-parámetros que afectan de forma directa al diseño de la carga y al cálculo de
-resolución: peso, profundidad de bits, tipo de obturación
-(\textit{rolling}/\textit{global}), tamaño del sensor, tamaño de píxel y
-consumo energético típico.
-
-\begin{table}[h]
-    \centering
-    \caption{Sensores propuestos, su asignación a los sistemas ópticos y parámetros clave.}
-    \label{tab:sensor_table}
-    \begin{tabularx}{\linewidth}{|c|p{2.2cm}|C|C|C|C|C|C|}
-        \hline
-        \rowcolor[HTML]{EFEFEF}
-        \textbf{Sistema} &
-        \textbf{Cámara (sensor)} &
-        \textbf{H\,$\times$\,V [px]} &
-        \textbf{Pixel [\(\mu\)m]} &
-        \textbf{Shutter} &
-        \textbf{ADC / Bits} &
-        \textbf{Peso [g]} &
-        \textbf{Potencia [W]} \\ 
-        \hline
-
-        1, 3, 4 & Alvium 1800 U‑2040 (Sony IMX541)            & 4512 × 4512 & 2.74 & Global  & 12 bit & 65 & 3.9 \\ \hline
-        2  & Alvium 1800 U‑2050 (Sony IMX183)            & 5496 × 3672 & 2.40 & Rolling & 10 bit & 65 & 3.2 \\ \hline
-        5 & Basler acA1920‑40gc (Sony IMX249)           & 1920 × 1200 & 5.86 & Global  & 12 bit & 90 & 3.9 \\ \hline
-        6 & Alvium 1800 U‑501m NIR (ON Semi AR0522)     & 2592 × 1944 & 2.20 & Rolling & 10 bit & 65 & 2.2 \\ \hline
-        7, 8 & Alvium 1800 U‑500c (ON Semi AR0521, C, S‑Mount)& 2592 × 1944 & 2.20 & Rolling & 10 bit & 60 & 2.2 \\ \hline
-        
-    \end{tabularx}
-\end{table}
-
-\noindent Todos los sensores considerados pesan menos de 100 g y consumen por debajo de 4 W. En particular, los basados en los CCD ON Semi AR0521 / AR0522 (sistemas 6–8) son los más ligeros (60–65 g) y presentan el consumo más bajo ($\approx$ 2.2 W), lo que resulta clave para maximizar la autonomía de vuelo de la plataforma \textit{C3}.\\
-
-\noindent Para garantizar un buen análisis radiométrico, es necesario contar con al menos 10 bits de conversión A/D. Los sensores Sony IMX541 e IMX249 ofrecen hasta 12 bits y disponen de obturación global, lo que evita distorsiones ante movimientos rápidos o flashes de luz. Por otro lado, los módulos AR0521 / AR0522 con obturación \emph{rolling} son considerablemente más económicos, ayudando a mantener los costos reducidos; sin embargo, en maniobras o al capturar objetos en movimiento pueden aparecer artefactos por el desplazamiento relativo durante la lectura línea a línea.\\
-
-\noindent El tamaño de píxel condiciona directamente la resolución espacial. Los sensores con celdas de 2.2–2.74 µm (IMX541, IMX183, AR05xx) se adaptan a los objetivos de alta resolución (sistemas 1–4, 6–8); el IMX249, con 5.86 µm, es idóneo para configuraciones de campo muy amplio (sistema 5), donde prima la sensibilidad sobre la densidad de píxel.\\
-
-\noindent Teniendo en cuenta masa, consumo, profundidad de bits y tamaño de píxel, junto con los resultados de la Tabla~\ref{tab:sensor_table}, proponemos como configuración óptima la pareja AR0521 (VIS) + AR0522 (NIR) montada en lentes de 8.5 mm f/1.8 y 8 mm f/2.5 (sistemas 7 y 6). Esta combinación ofrece un equilibrio ideal entre resolución, campo de visión y eficiencia energética para las misiones del proyecto \textit{C3}.\\
-
-\noindent Con estas combinaciones se logra un balance adecuado entre resolución, peso y consumo, ajustado al presupuesto y a las exigencias operativas de la plataforma.
-
-%---------------------------------------------------------------
-\subsection{Estimación teórica de resolución y campo de visión}
-\label{sec:cad_sim}
-%---------------------------------------------------------------
-
-Para cuantificar el compromiso entre resolución y cobertura se simularon ocho
-trenes ópticos (lentes de la Tabla \ref{tab:sys_tables}) a tres alturas de
-operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En la Tabla~\ref{tab:grd_fov_clean} se presentan, para cada sistema óptico y a tres alturas de vuelo, el campo de visión efectivo sobre el terreno (FOV), la magnificación primaria, la resolución limitada solo por el paso de píxel (\(\Delta_{\mathrm{pix}}\)) y la resolución real impuesta por la óptica a MTF 30\,\% (\(\Delta_{\mathrm{MTF}}\)).\\
-
-
-\begin{table}[h]
-    \centering
-    \footnotesize
-    \setlength{\tabcolsep}{6pt}
-    \caption{Field‑of‑view (FOV), magnification and ground resolution 
-             (\(\Delta_\text{pix}\), \(\Delta_\text{MTF}\)) for each system
-             at three altitudes.}
-    \label{tab:grd_fov_clean}
-    \begin{tabular}{|c|c|c|c|c|c|}
-        \hline
-        \rowcolor[HTML]{EFEFEF}
-        \textbf{System} & \textbf{Alt [m]} & \textbf{FOV [m]} & 
-        \textbf{Magn.} & \(\boldsymbol{\Delta_\text{pix}}\)\,[m] & 
-        \(\boldsymbol{\Delta_\text{MTF}}\)\,[m] \\ 
-        \hline
-        
-        \multirow{3}{*}{1} 
-         & 50   & 38.63  & 0.00032   & 0.00860  & 0.02500   \\ 
-         & 1000 & 772.70 & 0.00002   & 0.17100  & 0.50400   \\ 
-         & 5000 & 3863.00& 0.00000   & 0.85600  & 2.52000   \\ 
-        \hline
-        
-        \multirow{3}{*}{2}
-         & 50   & 8.81   & 0.00150   & 0.00160  & 0.00190  \\ 
-         & 1000 & 176.30 & 0.00008   & 0.03200  & 0.03700   \\ 
-         & 5000 & 881.30 & 0.00002   & 0.16000  & 0.18600   \\ 
-        \hline
-        
-        \multirow{3}{*}{3}
-         & 50   & 24.73  & 0.00050   & 0.00548  & 0.02500   \\ 
-         & 1000 & 494.50 & 0.00003   & 0.11000  & 0.50000   \\ 
-         & 5000 & 2473.00& 0.00001   & 0.54800  & 2.50000   \\ 
-        \hline
-        
-        \multirow{3}{*}{4}
-         & 50   & 38.63  & 0.00032   & 0.00860  & 0.01200   \\ 
-         & 1000 & 772.70 & 0.00002   & 0.17100  & 0.24400   \\ 
-         & 5000 & 3863.00& 0.00000   & 0.85600  & 1.22100   \\ 
-        \hline
-        
-        \multirow{3}{*}{5}
-         & 50   & 140.60 & 0.00005   & 0.11700  & —         \\ 
-         & 1000 & 2812.80& 0.00000   & 2.34400  & —         \\ 
-         & 5000 & 14064.00&0.00000   & 11.72000 & —         \\ 
-        \hline
-        
-        \multirow{3}{*}{6}
-         & 50   & 26.73  & 0.00021   & 0.01030  & 0.01900   \\ 
-         & 1000 & 534.60 & 0.00001   & 0.20600  & 0.39100   \\ 
-         & 5000 & 2673.00& 0.00000   & 1.03100  & 1.95300   \\ 
-        \hline
-        
-        \multirow{3}{*}{7}
-         & 50   & 25.16  & 0.00017   & 0.01290  & 0.03400   \\ 
-         & 1000 & 503.20 & 0.00001   & 0.25900  & 0.69200   \\ 
-         & 5000 & 2516.00& 0.00000   & 1.29400  & 3.46000   \\ 
-        \hline
-        
-        \multirow{3}{*}{8}
-         & 50   & 17.11  & 0.00025   & 0.00880  & 0.01300   \\ 
-         & 1000 & 342.10 & 0.00001   & 0.17600  & 0.26700   \\ 
-         & 5000 & 1711.00& 0.00000   & 0.88000  & 1.33300   \\ 
-        \hline
-    \end{tabular}
-\end{table}
-
-
-
-
-\noindent A simple vista, \(\Delta_{\mathrm{MTF}}\) resulta siempre mayor que \(\Delta_{\mathrm{pix}}\), lo cual era de esperar: la óptica atenúa las altas frecuencias y limita un poco el detalle que el sensor podría capturar de forma ideal. Este hallazgo confirma que se ha elegido sensores con tamaño de píxel suficiente para no desaprovechar la capacidad de resolución de las lentes.\\
-
-\noindent En cuanto al equilibrio entre cobertura y nitidez, los sistemas de focal larga concentran cada píxel en un área reducida —mejor nitidez— pero limitan mucho la zona capturada. En el otro extremo, los de focal muy corta expanden enormemente el FOV a costa de degradar la resolución. Los sistemas 6 (8 mm f/2.5, NIR) y 7 (8.5 mm f/1.8, VIS) aparecen como el compromiso ideal: a 50 m cubren unos 26 m de ancho con \(\Delta_{\mathrm{MTF}}<1.5\)\,cm, y a 1000 m mantienen resoluciones de 20 – 26 cm sobre aproximadamente 500 m de cobertura.\\
-
-\noindent Además, al compartir casi la misma geometría óptica, facilitan la fusión multiespectral y minimizan desalineamientos entre canales. Por estas razones, para el prototipo inicial daremos prioridad a los sistemas 6 y 7, que combinan de forma natural cobertura, detalle y compatibilidad espectral.\\
-
-
-\section{Construcción e integración del prototipo}
-  \subsection{Modelo CAD y ensamblaje mecánico}
-    % → FIGURA grande: render CAD explosionado del KBee con leyenda de partes.
-    %   Tabla: materiales y masa de cada componente.
-
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=1\linewidth]{Figures/C4/QBee.pdf}
-        \caption{Vista explosionada del ensamble completo del QBee, mostrando la carcasa impresa en PET‑G y la disposición de los sistemas 6 (NIR, 8 mm f/2.5) y 7 (VIS, 8.5 mm f/1.8). Este diseño y construcción fue concebido con el apoyo del equipo de manufactura del pryecto C3.}
-        \label{fig:exploded_assembly}
-    \end{figure}
-
-    El case del QBee está impreso en PET‑G (tereftalato de polietileno modificado con glicol), un polímero cuya densidad típica ronda 1,317 g/cm³, que combina buena resistencia al impacto (Charpy $\approx$ 4,03 kJ/m²) y alargamiento al rompimiento hasta 15\% en formulaciones estándar. Su módulo de tracción (~4015 MPa) y de flexión (~2987 MPa) aseguran rigidez, mientras que su temperatura de transición vítrea ($\approx$ 76 °C) y rango de fusión (220–260 °C) lo hacen estable en el calor generado por electrónica cercana. Además, presenta excelente durabilidad química y mínima tendencia al \emph{warping}, ideal para piezas de geometría compleja. El peso total del disposito es de 1.810 gramos, cumpliendo así con el requisito de peso impuesto.\\
-
-    \noindent La dimensión externa del case se diseñó para encajar en el bay interno del UAV C3, sin requerir hermeticidad, ya que este estária protegido de las condiciones exteriores. El cierre se logra con tornillos M3 que unen la tapa inferior y el divisor de compartimentos a la carcasa principal. En el interior, cada sistema óptico (6/NIR y 7/VIS) se ancla directamente al sensor mediante cuatro tornillos M3 en sus laterales, asegurando alineación con el eje de vuelo. El sistema 6 (NIR) monta el Alvium 1800 U‑501m (AR0522) + objetivo 8 mm f/2.5 + filtro 850 nm en montura S, todo encapsulado en una montura de resina 3D. El sistema 7 (VIS) agrupa el Alvium 1800 U‑500c (AR0521) + objetivo 8.5 mm f/1.3 ruggedized + filtro VIS UV/IR Cut en rosca M25.5, manteniendo rigidez frente a vibraciones.\\
+\begin{enumerate}
+    \item \textbf{Selection of the collimating lens:} A plano-convex lens with a focal length of $25$\,mm was selected. Although a longer focal length would reduce divergence, in practice, using lenses with longer focal lengths limits the effective light collection area (especially when the source is not a point source), thus decreasing the total power available in the collimated beam. A 25\,mm lens provides greater light collection, albeit at the cost of slightly more divergence.
     
-    \noindent La unidad de cómputo y almacenamiento es una Raspberry Pi 4, colocada en un bloque intermedio y alimentada por una powerbank de 20.000 mAh. Este sistema tiene acoplado un hat de GPS, que suministra al sistema de metadatos de fecha, hora UTC, latitud, longitud, altitud y ángulo de elevación, esenciales para la georreferenciación y ortorrestitución de imágenes. Finalmente, el módulo in situ de sensado de contaminantes comparte alimentación de 5 V de la misma batería y ocupa el compartimento trasero de la carcasa, completando la funcionalidad del QBee.\\
-    
-    
-
-
-
-    \noindent Los sistemas 6 y 7 integran un sensor, un objetivo y un filtro específicos montados sobre la carcasa impresa (Figura~\ref{fig:exploded_assembly}). Esta configuración facilita la fabricación y el mantenimiento, y permite intercambiar o actualizar componentes de forma independiente.\\
-
-    \noindent El sensor NIR Allied Vision Alvium 1800 U‑501m (ON Semi AR0522) comparte tamaño de sensor (2592×1944 px) y paso de píxel (2.2 µm) con su homólogo VIS, pero presenta una respuesta cuántica optimizada en 700–1000 nm, ideal para la adquisición de imagenes en este rango espectral. El objetivo HEO Series de 8 mm f/2.5 se monta directamente sobre la montura S‑Mount y ofrece un AFOV de 29.9°. Con 4 g de masa, cumple el requisito de carga útil y minimiza la transmisión de vibraciones. La montura impresa en resina aloja un filtro paso banda de 850 \SI{}{nm} (CWL) y 50 \SI{}{nm} de ancho de banda, 12.5 mm de diámetro, Hard Coated OD 4.0, encajando sobre el barril y fijándose con un anillo roscado que garantiza la alineación sin sobresalir del perfil de la carcasa.\\
-    
-    \noindent El sensor VIS Alvium 1800 U‑500c (ON Semi AR0521) mantiene los 2.2 µm de paso de píxel y emplea obturación rolling, reduciendo peso y costo. El objetivo Cr Series de 8.5 mm f/1.3, ruggedized por el fabricante, ofrece gran apertura y resistencia a impactos y vibraciones.. El filtro VIS (UV/IR Cut) M25.5×0.50 bloquea 200–370 nm y 750 – 1100 nm, transmitiendo solo 370–750 nm, e integra directamente una montura compatible para el montaje en el objetivo.\\
-    
-    \noindent La conectividad micro USB‑B facilita la alimentación y transmisión de datos con la Raspberry Pi 4 (Figura~\ref{fig:sistemas_opticos_componentes}). Además, permiten la integración y control de los sensores a partir de un script en python, lo cual da flexibilidad para diseñar el preprocesamiento y captura de las imágenes de ambos sensores de forma simultanea. Esto permite incluso carga confirguracones ya establecidas o actauliza en tiempo real dichas fongiruaciones relacioandas a paramaetros como, por ejemplo, el tiempo de exposiicón o la ganancia.
-    
-        
-    
-    
-    
-    
-
-
-    \begin{figure}[h]
-        \centering
-        \begin{subfigure}[b]{0.48\linewidth}
-            \centering
-            \includegraphics[width=\linewidth]{Figures/C4/NIR1.pdf}
-            \caption{Sistema 6 (NIR): montaje del objetivo y filtro. El soporte evita desalineamientos y asegura la óptica en su eje.}
-            \label{fig:lens_filter_mount_nir}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[b]{0.47\linewidth}
-            \centering
-            \includegraphics[width=\linewidth]{Figures/C4/VIS1.pdf}
-            \caption{Sistema 7 (VIS): conector micro USB‑B para alimentación y datos.}
-            \label{fig:micro_usb_vis}
-        \end{subfigure}
-        \caption{Componentes destacados de los sistemas ópticos seleccionados para el prototipo: NIR (izquierda) y VIS (derecha).}
-        \label{fig:sistemas_opticos_componentes}
-    \end{figure}
-
-
-    
-    
-
-  % \subsection{Integración con la plataforma UAV}
-  %   % → Describir interfaz mecánica, centro de masas, cableado
-  %   %   y sistema de amortiguación de vibraciones.
-
-  % \subsection{Validaciones funcionales de taller}
-  %   % → Pruebas de alineamiento, sellado de luz parásita y peso final.
-  %   %   Tabla de verificación contra los requisitos de la Sección 1.1.
-
-\section{Pruebas de operación}
-  \subsection{Script de control y adquisición}
-    \label{sec:script_control_adquisicion}
-    
-    Con el propósito de automatizar el proceso de captura, procesamiento y almacenamiento de imágenes multiespectrales durante los vuelos o pruebas en banco, se desarrolló un script en lenguaje Python que permite la adquisición simultánea de imágenes en el espectro visible (VIS) y cercano al infrarrojo (NIR), integrando además datos de posicionamiento global (GPS) en tiempo real.
-    
-    \noindent Este script constituye una adaptación del código de ejemplo provisto por la biblioteca \texttt{vmbpy}, correspondiente al SDK de \textit{Allied Vision}, y fue modificado sustancialmente para incluir manejo multihilo, escritura condicional de video, superposición de información telemétrica, y control por teclado durante la ejecución.
-    
-    \subsection{Estructura general del script}
-    
-    El flujo lógico del código se presenta en la Figura~\ref{fig:diagrama_script}, donde se destacan tres etapas fundamentales: (i) la inicialización del entorno y detección de cámaras, (ii) la adquisición concurrente de tramas mediante hilos productores, y (iii) el procesamiento y visualización de las imágenes mediante un hilo consumidor.
-    
-    \begin{figure}[!h]
-        \centering
-        \includegraphics[trim = 0 0 0 1cm, clip, width=1\textwidth]{Figures/C4/OSU_main.pdf}
-        \caption{Flujo lógico del script de adquisición y visualización de la QBee. Se integran múltiples cámaras, adquisición en paralelo y procesamiento en tiempo real.}
-        \label{fig:diagrama_script}
-    \end{figure}
-    
-    \subsection{Inicialización y adquisición}
-    
-    Durante la fase de inicialización, se establece una conexión con el servidor local de GPS (\texttt{gpsd}) utilizando la librería homónima. Paralelamente, se instancia la clase \texttt{MainThread}, responsable de detectar automáticamente todas las cámaras conectadas a través del sistema \texttt{VmbSystem}.\\
-    
-     Cada cámara detectada es asignada a un hilo independiente de la clase \texttt{FrameProducer}, la cual configura parámetros críticos como la resolución de adquisición, formato de pixel (\texttt{Mono8} o \texttt{Bgr8}), y el modo automático de exposición. Estos hilos se encargan de capturar tramas en tiempo real, estimar la tasa de cuadros por segundo (FPS) y encolar las imágenes en una estructura tipo FIFO (\texttt{queue.Queue}) para su posterior procesamiento.
-    
-    \subsection{Procesamiento, visualización y almacenamiento}
-    
-    La etapa central del sistema está contenida en la clase \texttt{FrameConsumer}, la cual opera como hilo consumidor. Esta clase realiza múltiples tareas en paralelo: (i) extrae tramas de la cola compartida, (ii) redimensiona las imágenes si la resolución de adquisición no coincide con la esperada (\SI[parse-numbers = false]{2592 \times 1944}{px}), (iii) convierte los formatos de imagen a RGB si es necesario, y (iv) concatena las imágenes capturadas por múltiples cámaras en un único mosaico horizontal.\\
-    
-    Sobre esta imagen compuesta se genera una barra de información (\textit{overlay}) que incluye los datos georreferenciados en tiempo real (latitud, longitud, altitud, velocidad, ángulo de rumbo y timestamp), además de la tasa de cuadros por segundo estimada para cada cámara. Esta superposición se construye como una matriz adicional que se apila verticalmente a la imagen original.\\
-    
-    El sistema también permite una interacción directa con el operador mediante teclas específicas:
+    \item \textbf{Collimation method:}
     \begin{itemize}
-        \item \textbf{\texttt{s}}: captura la imagen actual y la guarda en formato \texttt{JPEG}.
-        \item \textbf{\texttt{v}}: inicia o detiene la grabación de video en formato \texttt{AVI}, con compresión \texttt{XVID}, a una frecuencia de 20 FPS.
-        \item \textbf{\texttt{Enter}}: finaliza la ejecución del script y cierra todas las ventanas.
+        \item Traditionally, collimation is achieved by measuring the spot size at various distances along the optical axis and adjusting the lens position to find the point where the beam shows a more constant diameter (or minimum divergence) along its propagation. However, this method was not used in this work due to:
+        \begin{enumerate}
+            \item The lens used is spherical, and the beam coming from the fiber (an extended source) causes noticeable divergence, making it difficult to pinpoint the collimation position solely by observing the spot.
+            \item The main goal is to ensure maximum usable optical power at the measurement plane, making it inefficient to characterize beam uniformity based only on spot size.
+        \end{enumerate}
+        
+        \item Instead, an optical power meter is placed at a fixed distance from the collimating lens (see Figure~\ref{fig:montaje_colimacion}).
+        \item A 4\,nm bandwidth filter centered at 633\,nm is placed in the optical path to isolate a specific spectral range and reduce dispersive effects.
+        \item The distance between the fiber and the lens is varied around the nominal focal length (25\,mm), \emph{searching for the maximum optical power} measured at the detector. This point indicates minimum beam divergence near the measurement plane and maximum power collection.
     \end{itemize}
     
-    \subsection{Ejecución automática como servicio de sistema}
-    
-    Con el fin de garantizar un funcionamiento autónomo y minimizar la intervención del usuario, se diseñó un servicio de sistema en Linux (utilizando \texttt{systemd}) que permite la ejecución automática del script tan pronto como el dispositivo inicia. Este servicio fue instalado y habilitado en el sistema operativo de una Raspberry Pi 4 modelo B equipada con 8 GB de memoria RAM.
-    
-    Gracias a esta configuración, el sistema conocido como \texttt{QBee} se activa automáticamente al conectar la batería externa a la Raspberry Pi, sin requerir intervención adicional ni acceso al entorno gráfico. Inmediatamente después del arranque, el script inicia la captura de imágenes y comienza a almacenarlas en la memoria interna, lo que resulta particularmente útil para operaciones en campo, donde no es viable iniciar el sistema manualmente.
-    
-    \subsection{Robustez y tolerancia a fallos}
-    
-    Durante la ejecución, el sistema cuenta con mecanismos de tolerancia a errores. Por ejemplo, si el buffer de imágenes se encuentra lleno, los hilos productores omiten la encolación de nuevas tramas para evitar bloqueos. Asimismo, si no se detecta ninguna cámara activa, se genera una imagen dummy con un mensaje de advertencia.\\
-    
-    Las tramas obtenidas se almacenan temporalmente en memoria, lo que permite minimizar la latencia entre adquisición y visualización. La sincronización entre hilos se realiza mediante eventos y bloqueos controlados, garantizando la integridad de los datos entre productores y consumidores.
-    
-    \subsection{Dependencias y entorno de ejecución}
-    
-    El script fue ejecutado sobre el sistema operativo Raspberry Pi OS (basado en Debian) en una Raspberry Pi 4 modelo B. Se utilizó Python 3.8 y las siguientes dependencias: \texttt{vmbpy}, \texttt{opencv-python}, \texttt{gpsd-py3}, \texttt{numpy}, \texttt{threading}, \texttt{queue} y \texttt{keyboard}. La visualización se realizó mediante la salida HDMI de la Raspberry, y se requirió establecer la variable de entorno \texttt{DISPLAY=":0"} para habilitar la salida gráfica de OpenCV.
+    \item \textbf{Final positioning:} Once the position that maximizes the detected power is found, the positions of the fiber and the lens are mechanically fixed. Additionally, the distance between the lens and the power meter is kept constant for subsequent measurements, ensuring consistent illumination conditions.
+\end{enumerate}
 
-    \subsection{Control remoto del dispositivo \texttt{QBee}}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[trim=30mm 0mm 40mm 25mm, clip, width=0.9\textwidth]{Figures/C3/colimacion.pdf}
+    \caption{Setup for collimating the beam of the tungsten lamp with fiber optics. The adjustment of the distance between the fiber and the plano-convex lens aims to maximize the optical power measured by the detector.}
+    \label{fig:montaje_colimacion}
+\end{figure}
 
-    Además de su capacidad de operación autónoma en campo, el sistema \texttt{QBee} fue diseñado con funcionalidad de control remoto, permitiendo su supervisión y operación desde dispositivos externos como computadores personales, tabletas o teléfonos móviles. Esta característica extiende significativamente la versatilidad del sistema, facilitando tanto pruebas en laboratorio como operaciones a distancia en entornos de difícil acceso.\\
+\subsubsection{Dark Current Correction in the Minispectrometer}
+\label{subsub:corriente_oscura_espectrometro}
+
+The minispectrometer used to validate the light source spectrum and measure the transmissions of different filters records a base signal even without illumination, known as \emph{dark current} or \emph{electronic noise}. To improve the accuracy of spectral measurements, the following procedure was applied:
+
+\begin{itemize}
+    \item A reference measurement was taken under \textbf{total absence of light} (fiber and input blocked). This signal is denoted by \(\mathbf{D}\) and corresponds to the electronic noise level.
     
-    Existen dos métodos principales para acceder de forma remota a la interfaz gráfica del sistema:
+    \item For any measured spectrum \(\mathbf{S}\) (e.g., the spectrum of the tungsten lamp or a specific filter), correction is applied by subtracting \(\mathbf{D}\):
+    \[
+        \mathbf{S}_{\text{corr}} \;=\; \mathbf{S} \;-\; \mathbf{D}.
+    \]
+\end{itemize}
+
+This attenuates the offset due to readout noise and provides a more reliable reading of the spectral distribution in \emph{counts}.
+
+\subsubsection{Set of Filters and Acrylic Sheets}
+\label{subsub:filtros_laminas}
+
+To discretize or modify the spectral distribution of the tungsten lamp, the following elements were used:
+
+\begin{itemize}
+    \item \textbf{Nine high-quality optical filters} mountable in one-inch tubes. These filters are numbered from 0 to 6, with two additional filters labeled 532 and 633 (corresponding to their central wavelengths).
     
-    \paragraph{1. Conexión local mediante VNC}
-    
-    El primer método consiste en conectarse directamente a la Raspberry Pi 4 que ejecuta el sistema \texttt{QBee} mediante el protocolo VNC (\textit{Virtual Network Computing}). Para ello, es necesario que la Raspberry esté conectada a una red Wi-Fi previamente configurada para su conexión automática. Asimismo, el dispositivo de control (computador o móvil) debe encontrarse dentro de la misma red local.\\
-    
-    Una vez cumplida esta condición, el usuario puede acceder a la interfaz gráfica de la Raspberry Pi introduciendo su dirección IP o una dirección local estática configurada mediante el sistema operativo Raspberry Pi OS. Para completar el acceso, se requiere conocer las credenciales de autenticación (nombre de usuario y contraseña) establecidas previamente en el sistema.
-    
-    \paragraph{2. Acceso global mediante Raspberry Pi Connect}
-    
-    El segundo método se basa en el uso de \textit{Raspberry Pi Connect}, un servicio gratuito proporcionado por la fundación Raspberry Pi. Este permite acceder a la interfaz gráfica del sistema desde cualquier lugar con conexión a Internet, sin necesidad de estar dentro de la misma red local.\\
-    
-    Para habilitar esta funcionalidad, la Raspberry Pi debe estar vinculada a una cuenta en el servicio \textit{Raspberry Pi Connect} y tener acceso a Internet mediante una red Wi-Fi registrada previamente. Una vez registrado el dispositivo, el usuario puede iniciar sesión en el portal de Raspberry Pi y conectarse directamente a su interfaz gráfica a través del navegador.  \\
-    
-    
-    En ambos métodos, el usuario obtiene acceso completo al entorno de escritorio de la Raspberry Pi. Como se ha descrito en las secciones anteriores, el script de adquisición de \texttt{QBee} se ejecuta automáticamente al iniciar el sistema, lo que da lugar a la apertura de una ventana de visualización en tiempo real de las imágenes capturadas.\\
-    
-    Desde esta interfaz remota, el usuario puede interactuar directamente con el sistema utilizando un teclado virtual o físico para ejecutar acciones de control. Entre las funcionalidades disponibles se encuentran:
+    \item \textbf{Eight acrylic sheets} of different colors, each 2\,x\,2\,inches, mountable in an optical slide holder.
+\end{itemize}
+
+Figure~\ref{fig:laminas_filtros} shows the filters and acrylic sheets with their respective labels. The transmitted spectrum of each element was measured (using the tungsten lamp as the illumination source) with the minispectrometer. These measurements were corrected for dark current as described in Section~\ref{subsub:corriente_oscura_espectrometro}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{Figures/C3/laminas.pdf}
+        \caption{Set of acrylic sheets used. Each is individually labeled based on its apparent color.}
+        \label{fig:laminas}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{Figures/C3/filtros.pdf}
+        \caption{Set of filters used. Filters are numbered 0 to 6, with two additional filters labeled 532 and 633.}
+        \label{fig:filtros}
+    \end{subfigure}
+    \caption{Acrylic sheets and filters used in the experiment.}
+    \label{fig:laminas_filtros}
+\end{figure}
+
+\subsubsection{Measurement of Transmission Spectra}
+\label{subsub:medicion_transmision}
+
+The transmission spectra of each filter and acrylic sheet are measured to determine their effective spectral transmission. Figure~\ref{fig:montaje_spec} shows the optical setup used to measure the transmission spectrum.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[trim=30mm 0mm 40mm 25mm, clip, width=0.9\textwidth]{Figures/C3/montaje_spec.pdf}
+    \caption{Setup for measuring the transmission spectrum of filters and acrylic sheets.}
+    \label{fig:montaje_spec}
+\end{figure}
+
+\begin{itemize}
+    \item For the \textbf{illumination}, the base spectrum \(\mathbf{I}\) is obtained (dark-current corrected).
+    \item For each \textbf{filter} or \textbf{sheet}, the transmitted spectrum \(\mathbf{T}_j\) is measured, also corrected for dark current.
+\end{itemize}
+
+The recorded spectra are shown in Figure~\ref{fig:espectros_combinados}. Then, the dimensionless relative spectral response for each element is calculated by dividing \(\mathbf{T}_j\) by \(\mathbf{I}\). The justification lies in the fact that, in linear systems, the transmission is modeled as a multiplication of the source spectrum by the spectral transfer function of the element (filter or sheet):
+
+\[
+    \mathbf{T}_j \;=\; \mathbf{I} \;\times\; \beta_j(\lambda),
+\]
+\[
+    \frac{\mathbf{T}_j}{\mathbf{I}} \;=\; \beta_j(\lambda).
+\]
+
+Thus, the curve \(\beta_j(\lambda)\) represents the \textbf{effective spectral transmittance} of the filter or sheet (see Figure~\ref{ig:filtros_laminas_espectros_relativos}).
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[trim=0mm 0mm 0mm 25mm, clip, width=0.9\textwidth]{Figures/C3/filtros_spec.png}
+        \caption{Filters.}
+        \label{fig:filtros_espectros}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[trim=0mm 0mm 0mm 25mm, clip, width=0.9\textwidth]{Figures/C3/laminas_spec.png}
+        \caption{Acrylic plates.}
+        \label{fig:laminas_espectros}
+    \end{subfigure}
+    \caption{Measured spectra (in counts) of tungsten light transmitted through various filters (A) and acrylic plates (B). The vertical axis shows the relative intensity recorded by the minispectrometer in counts.}
+    \label{fig:espectros_combinados}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[trim=0mm 0mm 0mm 25mm, clip, width=0.9\textwidth]{Figures/C3/filtros_respuestaspec.png}
+        \caption{Filters.}
+        \label{fig:filtros_espectros}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[trim=0mm 0mm 0mm 25mm, clip, width=0.9\textwidth]{Figures/C3/laminas_respuestaspec.png}
+        \caption{Acrylic plates.}
+        \label{fig:laminas_espectros}
+    \end{subfigure}
+    \caption{Normalized dimensionless spectral response (transmittance) obtained by dividing each filtered spectrum by the tungsten lamp spectrum.}
+    \label{ig:filtros_laminas_espectros_relativos}
+\end{figure}
+
+\subsubsection{Generación y selección de combinaciones de filtros}
+\label{subsub:combinaciones_filtros}
+
+\subsubsection{Generation and Selection of Filter Combinations}
+\label{subsub:combinaciones_filtros}
+
+Given that the filters have relatively wide bandwidths (many exceeding 100 nm), this work evaluates the possibility of combining up to three filters to obtain more selective transmission curves. A \texttt{Python} script is developed that:
+
+\begin{enumerate}
+    \item Lists all possible combinations of:
     \begin{itemize}
-        \item Presionar la tecla \texttt{s} para capturar y guardar una imagen.
-        \item Presionar la tecla \texttt{v} para iniciar o detener la grabación de video.
-        \item Presionar la tecla \texttt{Enter} para finalizar la ejecución del script.
+        \item Individual filters and/or acrylic sheets,
+        \item Pairs of filters/sheets,
+        \item Triplets of filters/sheets.
+    \end{itemize}
+    \item For each combination, calculates the \emph{composite transmission curve} \(\beta_{\text{comp}}(\lambda)\), which is the \textbf{product} of the individual transmissions as a function of wavelength.
+    \item Generates a total of 987 combinations (including single, double, and triple combinations).
+\end{enumerate}
+
+\paragraph{Ideal Transmission Curves.}
+To guide the selection process, 10 target curves are defined, modeled as Gaussian functions with a standard deviation of 3\,nm:
+
+\begin{itemize}
+    \item Seven curves centered in the visible spectrum: 400, 450, 500, 550, 600, 650, and 700\,nm.
+    \item Three curves for the near-infrared (NIR): 825, 850, and 875\,nm.
+\end{itemize}
+
+Each \(\beta_{\text{ideal}}(\lambda)\) adopts the form:
+\[
+\beta_{\text{ideal}}(\lambda) \;=\; \exp\!\Big[-\tfrac{(\lambda - \lambda_0)^2}{2 \,\sigma^2}\Big],
+\]
+where \(\lambda_0\) is the central wavelength and \(\sigma=3\) nm.  
+Figure~\ref{fig:curvas_ideales} illustrates the ideal profiles used.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[trim=0mm 0mm 0mm 25mm, clip, width=1\textwidth]{Figures/C3/ideal_spec.png}
+    \caption{Ideal transmission curves for selecting filter combinations. This example shows 10 Gaussians centered at 400, 450, 500, 550, 600, 650, 700, 825, 850, and 875 nm, respectively.}
+    \label{fig:curvas_ideales}
+\end{figure}
+
+\paragraph{Selection Metric.}
+To determine which filter combination best matches the defined ideal curves, the Pearson correlation coefficient is used. Given an ideal curve \(\beta_{\text{ideal}}(\lambda)\) and a composite curve \(\beta_{\text{comp}}(\lambda)\), both discretized in \(N\) spectral points, the Pearson correlation coefficient \(r\) is defined as:
+
+\begin{equation}
+r(\beta_{\text{ideal}}, \beta_{\text{comp}}) =
+\frac{
+    \displaystyle \sum_{i=1}^{N} 
+    \left[\beta_{\text{ideal}}(\lambda_i) - \bar{\beta}_{\text{ideal}}\right]
+    \left[\beta_{\text{comp}}(\lambda_i) - \bar{\beta}_{\text{comp}}\right]
+}{
+    \sqrt{
+        \left(
+        \displaystyle \sum_{i=1}^{N} 
+        \left[\beta_{\text{ideal}}(\lambda_i) - \bar{\beta}_{\text{ideal}}\right]^2
+        \right)
+        \left(
+        \displaystyle \sum_{i=1}^{N} 
+        \left[\beta_{\text{comp}}(\lambda_i) - \bar{\beta}_{\text{comp}}\right]^2
+        \right)
+    }
+}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \(\beta_{\text{ideal}}(\lambda_i)\) is the ideal transmission at wavelength \(\lambda_i\),
+    \item \(\beta_{\text{comp}}(\lambda_i)\) is the composite transmission of the filter combination at \(\lambda_i\),
+    \item \(\bar{\beta}_{\text{ideal}}\) and \(\bar{\beta}_{\text{comp}}\) are the mean values of each curve across the evaluated range.
+\end{itemize}
+
+The Pearson coefficient ranges from \([-1, 1]\). A value close to 1 indicates high similarity in shape and relative distribution; values near 0 or negative indicate low similarity. Therefore, the combination with the highest \(r\) is selected as the “optimal” match for a given target curve.
+
+\medskip
+
+\noindent
+\textbf{Selection Procedure:}
+\begin{enumerate}
+    \item For each ideal curve \(\beta_{\text{ideal}}(\lambda)\), all composite curves \(\beta_{\text{comp}}(\lambda)\) are evaluated.
+    \item \(r(\beta_{\text{ideal}}, \beta_{\text{comp}})\) is computed over the same wavelength range.
+    \item The combination that maximizes \(r\) is selected.
+\end{enumerate}
+
+This method allows identifying the filter combination that best approximates a desired spectral shape. For each central wavelength (e.g., 400, 450, 500, …, 700, 825, 850, and 875\,nm), an “optimal” combination is thus obtained. Figure~\ref{fig:best_corr_combinations} shows an example of the best-matching filter combinations overlaid on their corresponding ideal curves.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[trim=0mm 0mm 0mm 25mm, clip, width=1\textwidth]{Figures/C3/best_matches.png}
+    \caption{Filter combinations (solid lines) with the highest correlation to their corresponding ideal curves (dashed lines). The shape and peak position of the selected combinations match the target profiles.}
+    \label{fig:best_corr_combinations}
+\end{figure}
+
+\medskip
+
+\noindent
+Additionally, some combinations are selected experimentally, since the correlation-based method does not consider absolute transmittance. It is possible that the combination with the highest correlation \(r\) has very low transmittance, limiting its practical utility. Also, individual filters such as those centered at 532 and 633\,nm show good spectral performance. By combining the maximum correlation criterion with experimental validation, the final set of filters used for spectral characterization is selected.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{Figures/C3/filt_select.png}
+    \caption{Final filter selection used for spectral characterization of the optical systems. Includes both experimentally selected configurations and individual filters (532 and 633 nm) showing good correlation and transmittance.}
+    \label{fig:selected_filters}
+\end{figure}
+
+\subsubsection{Determination of Central Wavelength, Bandwidth, and Optical Power of Selected Combinations}
+\label{subsub:longitud_onda_central_potencia}
+
+After defining the optimal combinations, the actual transmission spectra are measured using the minispectrometer to verify the effective central wavelength, resulting bandwidth, and transmitted optical power. This is essential to:
+
+\begin{enumerate}
+    \item Properly configure the optical power meter (which requires the central wavelength of the incoming radiation).
+    \item Verify that the actual transmission curves are consistent with the numerically determined ones.
+\end{enumerate}
+
+The optical power transmitted by each selected combination is then measured using a power meter. To maintain consistency across measurements:
+
+\begin{itemize}
+    \item The tungsten lamp operates at its \textbf{maximum irradiance capacity}.
+    \item For each combination, the power is measured at the previously determined central wavelength \(\lambda_0\).
+\end{itemize}
+
+The lowest power value among all combinations is used as the reference. This ensures that subsequent optical system measurements are performed under the same irradiance conditions, using neutral density filters to reduce irradiance in cases where power exceeds this reference.
+
+\medskip
+
+The bandwidth of the measured spectra for each selected filter is also calculated. Each spectrum is first normalized to have a maximum value of 1. The bandwidth is defined as the spectral interval where the signal reaches at least 50\% of its maximum value (i.e., the Full Width at Half Maximum, FWHM). For filters with multiple peaks, the main peak of interest is selected, usually corresponding to the expected region (e.g., NIR).
+
+A Python script is developed that:
+
+\begin{enumerate}
+    \item Identifies the maximum peak of each normalized spectrum.
+    \item Determines the wavelengths \(\lambda_{\text{left}}\) and \(\lambda_{\text{right}}\) where the spectral response falls to 50\% of the maximum.
+    \item Calculates the bandwidth as:
+    \[
+    \text{FWHM} = \lambda_{\text{right}} - \lambda_{\text{left}}.
+    \]
+\end{enumerate}
+
+Figure~\ref{fig:bandwidth_central} shows the central wavelength and FWHM of the selected filters, obtained through the described procedure. These parameters are key to assessing the system’s ability to discriminate spectral bands and for configuring the power meter accurately.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[trim=0mm 0mm 50mm 25mm, clip, width=1\textwidth]{Figures/C3/ancho de banda.png}
+    \caption{Example of a normalized spectrum of a selected filter. The central wavelength and bandwidth (FWHM) are indicated, defined as the spectral range where the signal reaches 50\% of its maximum value.}
+    \label{fig:bandwidth_central}
+\end{figure}
+
+\subsubsection{Image Capture with the Optical System Under Test}
+\label{subsub:captura_sistemas_opticos}
+
+Once the filter combinations are defined and the optical power is adjusted, the characterization of the target optical systems (e.g., an RGB system and/or a monochannel NIR system) is performed. The procedure is as follows:
+
+\begin{enumerate}
+    \item \textbf{Camera or sensor configuration:}
+    \begin{itemize}
+        \item \emph{Gain:} Set to $1$ for all measurements to avoid scaling differences between captures.
+        \item \emph{Gamma:} Set to $1$ (linear) to suppress any internal nonlinearity curves.
+        \item \emph{White balance:} In RGB cameras, the red and blue coefficients are set to $1$, and the green channel is also set to $1$ (if allowed by the firmware). This ensures that the camera does not apply color corrections.
     \end{itemize}
     
-    Esta capacidad de control remoto permite verificar el correcto funcionamiento del sistema en tiempo real, supervisar condiciones de operación, y capturar eventos relevantes sin necesidad de intervención física directa sobre el dispositivo.\\
+    \item \textbf{Use of neutral density filters (optional):} If the power exceeds the reference level, a neutral density filter is inserted into the lens tube after collimation. This ensures the same final power for all combinations.
     
+    \item \textbf{Exposure time adjustment:} The exposure time is set to avoid image saturation. This value is recorded, since the system's response is \textbf{linearly proportional} to the integration time (see Equation~\ref{eq:modelo_lineal}).
     
-    Adicionalmente, el sistema \texttt{QBee} fue configurado para permitir actualizaciones remotas del código fuente del script mediante el sistema de control de versiones \texttt{Git}. El script está vinculado a un repositorio privado alojado en la plataforma \texttt{GitHub}, lo que permite a los usuarios autenticados realizar \textit{pull} de actualizaciones desde cualquier ubicación con acceso remoto al dispositivo. Esta funcionalidad permite una mejora continua del sistema, facilitando la depuración, implementación de nuevas funcionalidades y adaptaciones específicas sin necesidad de acceso físico al hardware.
+    \item \textbf{Data capture:}
+    \begin{itemize}
+        \item For each selected filter combination, $50$ consecutive images of the optical system are acquired and saved in an uncompressed or minimally processed format. In this case, the format used is .npy.
+        \item Additionally, $50$ dark current images are taken by completely covering the objective.
+    \end{itemize}
     
+    \item \textbf{Noise correction and averaging:}
+    \begin{itemize}
+        \item The average of the 50 dark current images is calculated, resulting in an image \(\mathbf{D}_{\text{prom}}\) that represents the system’s electronic offset.
+        \item Each of the 50 illuminated captures is corrected by subtracting \(\mathbf{D}_{\text{prom}}\), thereby eliminating the dark current contribution.
+        \item The 50 corrected images are then averaged, generating a single image \(\mathbf{I}_{\text{filt}}\) for each filter combination.
+    \end{itemize}
     
-    
-    
+    \item \textbf{Spectral response calculation:}
+    \begin{itemize}
+        \item For each averaged image (\(\mathbf{I}_{\text{filt}}\)), a \emph{response} metric is defined as the sum of all pixel values within the region of interest. In the case of an RGB camera, this sum can be calculated per channel (R, G, or B), or by converting the image to grayscale.
+        \item In a monochromatic or NIR camera, the single available channel is used.
+        \item The resulting value represents the system’s total response to the corresponding filter combination, associated with the calculated \(\lambda_0\).
+    \end{itemize}
+\end{enumerate}
 
-  \subsection{Escenarios de prueba}
-    Los escenarios de prueba definidos para validar el correcto funcionamiento del sistema \textit{QBee} se clasifican en dos grupos principales: (i) pruebas terrestres en condiciones controladas, y (ii) pruebas en vuelo.
-
-    \subsubsection{Pruebas terrestres}
-    
-        Antes de cualquier despliegue aéreo, es indispensable realizar pruebas en tierra que permitan validar el sistema en condiciones controladas, sin desplazamiento y sin exposición a ambientes extremos. En este contexto, se define como ambiente extremo cualquier entorno cuya temperatura supere los valores comunes encontrados en las principales ciudades colombianas (\SI{\leq 40}{\celsius}), o que implique lluvia, alta humedad o condiciones de iluminación nocturna.
-        
-        \noindent Dado que el sistema \textit{QBee} no cuenta con una fuente de iluminación activa, las pruebas se realizan exclusivamente durante el día, aprovechando la luz solar como fuente principal para la adquisición de imágenes multiespectrales.
-        
-        \noindent El objetivo de estas pruebas es verificar el comportamiento general del sistema en condiciones operativas normales. En particular, se evalúa:
-        
-        \begin{itemize}
-        \item La correcta inicialización automática del script de adquisición al encender el dispositivo.
-        \item La funcionalidad de captura de imágenes al presionar la tecla \texttt{s}.
-        \item La grabación de video y su detención mediante la tecla \texttt{v}.
-        \item La estabilidad del dispositivo al operar durante largos periodos de tiempo.
-        \end{itemize}
-        
-        \noindent Las pruebas se realizaron utilizando dos formas de alimentación:
-        \begin{itemize}
-        \item \textbf{Fuente directa:} mediante un adaptador USB-C conectado a una toma de corriente convencional.
-        \item \textbf{Fuente interna:} a partir de la bater'ia recargable integrada en la carcasa del \textit{QBee}.
-        \end{itemize}
-        
-        \noindent Una de las pruebas más relevantes consisti'o en la captura de una imagen utilizando la tecla \texttt{s}, ya fuera desde un teclado conectado directamente a la Raspberry Pi 4 o mediante acceso remoto. En la Figura~\ref{fig:captura_prueba_remota} se presenta un ejemplo de imagen capturada en estas condiciones, utilizando un tel'efono inteligente para el control remoto del sistema. La prueba confirma el correcto funcionamiento de ambos canales (VIS y NIR), evidenciando que la captura simult'anea se realiza de manera sincronizada, y que el sistema responde adecuadamente a la orden de captura en tiempo real.
-        
-        \begin{figure}[h]
-        \centering
-        \includegraphics[width=1\textwidth]{Figures/C4/captured_image_20240201_174102.jpg}
-        \caption{Captura de imagen realizada durante prueba terrestre mediante control remoto desde un tel'efono inteligente. La imagen muestra la composici'on de ambos canales VIS y NIR, confirmando la funcionalidad del sistema \textit{QBee} en condiciones operativas reales.}
-        \label{fig:captura_prueba_remota}
-        \end{figure}
-        
-        \noindent En complemento, en la Figura~\ref{fig:gps_overlay_visual} se presenta un ejemplo de visualización del sistema de coordenadas geográficas en tiempo real. En la parte superior de la imagen se observa la superposición del texto con la latitud, longitud, altitud, velocidad y rumbo extraídos del módulo GPS integrado en la \textit{QBee}. Esta funcionalidad es crítica para asegurar la trazabilidad espacial de las imágenes adquiridas y para su posterior georreferenciación.
-
-        \begin{figure}[h]
-            \centering
-            \includegraphics[width=0.9\textwidth]{Figures/C4/captured_image_20250217_113221.jpg}
-            \caption{Visualización del sistema de coordenadas geográficas (GPS) en tiempo real sobre la imagen capturada. Se muestran latitud, longitud, altitud, velocidad y rumbo, extraídos automáticamente del módulo GPS durante las pruebas.}
-            \label{fig:gps_overlay_visual}
-        \end{figure}
+\noindent
+This process is repeated for each selected filter/sheet combination, generating a discrete spectral response map of the optical system, which relates the central wavelength to the response (as grayscale level sum or per channel).
 
 
-
-    \subsubsection{Pruebas en superficie en condiciones extremas}
-
-    Durante la VII Campa~na A'erea y XI Expedici'on Cient'ifica a la Ant'artida organizada por la Fuerza A'erea Colombiana, el sistema \textit{QBee} fue sometido a una prueba de funcionamiento en condiciones clim'aticas extremas. En este escenario, se enfrent'o a temperaturas diurnas promedio cercanas a los \SI{0}{\celsius}, significativamente inferiores a las condiciones habituales en las cuales opera el sistema.
-    
-    \noindent El objetivo principal de esta prueba fue evaluar la capacidad del dispositivo para operar de manera confiable en ambientes fr'ios. Se identific'o que, bajo estas condiciones, el sistema present'o fallas intermitentes en su funcionamiento: en algunas ocasiones la \textit{QBee} no inici'o correctamente, o no fue capaz de realizar la grabaci'on de video como lo hace regularmente. Estas fallas pueden estar asociadas a una inicializaci'on deficiente del sistema de procesamiento (Raspberry Pi 4), o a alteraciones en el comportamiento de los sensores VIS y NIR debido a la baja temperatura.
-    
-    \noindent No obstante, tambi'en se registraron casos exitosos de captura de video, lo cual demuestra que el sistema \textit{QBee} puede llegar a operar de forma funcional en condiciones de fr'io extremo. Estos resultados parciales abren la posibilidad de implementar ajustes de hardware y software para robustecer el funcionamiento del sistema en ambientes m'as hostiles. Queda como trabajo futuro el estudio detallado de las causas espec'ificas de las fallas observadas, as'i como la exploraci'on de soluciones que permitan una operaci'on m'as confiable en entornos como la Ant'artida.
-    
-    \noindent A pesar de los resultados mixtos, se concluye que el sistema actual no est'a dise~nado para misiones operativas regulares en la Ant'artida u otras regiones con condiciones ambientales similares, sin modificaciones adicionales en aislamiento t'ermico, tolerancia de componentes y procedimientos de inicializaci'on.
-    
-    \begin{figure}[h]
-    \centering
-    \includegraphics[width=1\textwidth]{Figures/C4/pinguinos.png}
-    \caption{Captura de video realizada exitosamente durante la expedición científica en la Antártida. La imagen confirma que, a pesar de las condiciones extremas, el sistema \textit{QBee} En la imagen se aprecia que la cámara visible no se encuentra correctamente enfocada, lo que puede deberse a un mal ajuste de la distancia entre el objetivo y el sensor. Sin embargo, este tipo de desajuste es corregible mediante ajuste mecánico y no afecta el funcionamiento general del sistema \textit{QBee}. fue capaz de operar y registrar datos multiespectrales de forma puntual.}
-    \label{fig:prueba_antartida}
-    \end{figure}
-
-    \subsubsection{Pruebas en vuelo}
-
-    Las pruebas en vuelo del sistema \textit{QBee} fueron posibles gracias a la colaboraci'on con la Fuerza A'erea Colombiana, la cual facilit'o el montaje del dispositivo en distintas aeronaves de su flota. En una primera prueba, la unidad \textit{QBee} fue instalada a bordo de una aeronave Cessna 208 Caravan, realizando un vuelo a una altitud aproximada de 5000 pies.
-    
-    \noindent El vuelo se desarroll'o en condiciones ideales, con un rumbo y comportamiento t'ipico de una ruta comercial y sin presencia de perturbaciones atmosf'ericas significativas. Durante toda la duraci'on del trayecto, el sistema oper'o de forma estable y sin presentar inconvenientes.
-    
-    \noindent Como parte de esta prueba, se verific'o la capacidad de monitoreo remoto del sistema utilizando una red Wi-Fi habilitada dentro de la aeronave, mediante la cual se accedi'o al entorno gr'afico de la Raspberry Pi utilizando el protocolo VNC. Esta conexi'on permiti'o observar en tiempo real la adquisici'on de datos por parte del sistema, confirmando la funcionalidad completa del script y la respuesta de los sensores.
-    
-    \begin{figure}[!h]
-    \centering
-    \includegraphics[width=1\textwidth]{Figures/C4/vuelo_caravan.png}
-    \caption{Captura tomada durante el vuelo de prueba en la aeronave Cessna 208 Caravan. Se observ'o un comportamiento estable del sistema y transmisi'on remota exitosa mediante protocolo VNC.}
-    \label{fig:prueba_vuelo}
-    \end{figure}
-
-    \noindent En una segunda prueba, la unidad \textit{QBee} fue montada a bordo de una aeronave de combate Tucano T-27, con el fin de validar su desempeño bajo condiciones de vuelo más exigentes. En este caso, no se contó con un sistema de monitoreo en tiempo real debido a las restricciones propias de la aeronave. Sin embargo, el sistema operó de forma autónoma durante la misión, registrando exitosamente la captura de video.
-
-    \noindent A diferencia del vuelo en la Cessna Caravan, esta prueba presentó una complejidad adicional, ya que durante la operación se ejecutaron maniobras que alcanzaron aceleraciones de hasta 4g. A pesar de estas condiciones dinámicas, la \textit{QBee} logró completar su función de adquisición sin incidentes, lo cual representa un resultado relevante sobre la robustez mecánica y operativa del sistema.
-    
-    \begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.9\textwidth]{Figures/C4/t2.png}
-    \caption{Captura de video realizada durante prueba a bordo del avión de combate T-27 Tucano. A pesar de las maniobras con aceleraciones de hasta 4g, el sistema \textit{QBee} logró registrar imágenes de forma autónoma y estable. Las condiciones de iluminación ambiental no erán las más adecuadas debido a la hora del día (proximadamente las 6 pm).}
-    \label{fig:prueba_tucano}
-    \end{figure}
-    
-
-\section{Caracterización de las cámaras}
+\section{Main contributions}
 %---------------------------------------------------------------
      %===============================================================
      \subsection{Resultados de la caracterización del campo de visión (FOV)}
@@ -548,36 +747,36 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
      
      Las mediciones, convertidas a metros, se resumen en la Tabla \ref{tab:fov_raw_wd}, donde cada FOV se acompaña de una incertidumbre instrumental \(\sigma=1\) mm.
      
-     % \begin{table}[H]
-     %   \centering
-     %   \caption{WD y FOV medidos para cada sistema óptico y orientación}
-     %   \label{tab:fov_raw_wd}
-     %   \small
-     %   \setlength{\tabcolsep}{4pt} % Espaciado más compacto entre columnas
-     %   \renewcommand{\arraystretch}{1.2} % Espaciado entre filas
-     %   \begin{tabularx}{\textwidth}{|c|>{\centering\arraybackslash}X
-     %                                     >{\centering\arraybackslash}X
-     %                                     >{\centering\arraybackslash}X
-     %                                     >{\centering\arraybackslash}X|
-     %                                     >{\centering\arraybackslash}X
-     %                                     >{\centering\arraybackslash}X
-     %                                     >{\centering\arraybackslash}X
-     %                                     >{\centering\arraybackslash}X|}
-     %     \hline
-     %     \rowcolor[HTML]{EFEFEF}
-     %     & \multicolumn{4}{c|}{\textbf{NIR (Sis.~6)}} 
-     %     & \multicolumn{4}{c|}{\textbf{VIS (Sis.~7)}} \\ \cline{2-9}
-     %     \rowcolor[HTML]{EFEFEF}
-     %     \textbf{Prueba} 
-     %       & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] 
-     %       & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] \\ 
-     %     \hline
-     %     1 & 0.071 & 0.0350 & 0.087 & 0.0350 & 0.092 & 0.0350 & 0.107 & 0.0350 \\
-     %     2 & 0.331 & 0.231  & 0.350 & 0.180  & 0.379 & 0.239  & 0.303 & 0.138  \\
-     %     3 & 0.650 & 0.468  & 0.650 & 0.349  & 0.694 & 0.458  & 0.700 & 0.342  \\ 
-     %     \hline
-     %   \end{tabularx}
-     % \end{table}
+     \begin{table}[H]
+       \centering
+       \caption{WD y FOV medidos para cada sistema óptico y orientación}
+       \label{tab:fov_raw_wd}
+       \small
+       \setlength{\tabcolsep}{4pt} % Espaciado más compacto entre columnas
+       \renewcommand{\arraystretch}{1.2} % Espaciado entre filas
+       \begin{tabularx}{\textwidth}{|c|>{\centering\arraybackslash}X
+                                         >{\centering\arraybackslash}X
+                                         >{\centering\arraybackslash}X
+                                         >{\centering\arraybackslash}X|
+                                         >{\centering\arraybackslash}X
+                                         >{\centering\arraybackslash}X
+                                         >{\centering\arraybackslash}X
+                                         >{\centering\arraybackslash}X|}
+         \hline
+         \rowcolor[HTML]{EFEFEF}
+         & \multicolumn{4}{c|}{\textbf{NIR (Sis.~6)}} 
+         & \multicolumn{4}{c|}{\textbf{VIS (Sis.~7)}} \\ \cline{2-9}
+         \rowcolor[HTML]{EFEFEF}
+         \textbf{Prueba} 
+           & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] 
+           & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] \\ 
+         \hline
+         1 & 0.071 & 0.0350 & 0.087 & 0.0350 & 0.092 & 0.0350 & 0.107 & 0.0350 \\
+         2 & 0.331 & 0.231  & 0.350 & 0.180  & 0.379 & 0.239  & 0.303 & 0.138  \\
+         3 & 0.650 & 0.468  & 0.650 & 0.349  & 0.694 & 0.458  & 0.700 & 0.342  \\ 
+         \hline
+       \end{tabularx}
+     \end{table}
  
      
      
@@ -609,42 +808,42 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
      
  
      
-     % \begin{table}[H]
-     %   \centering
-     %   \caption{Comparativa empírico vs.\ teórico para FOV horizontal (H) y vertical (V).}
-     %   \label{tab:fov_pred_vs_theory_HV}
-     %   \small
-     %   \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}|
-     %       c|
-     %       rrrr|
-     %       rrrr|
-     %     }
-     %     \toprule
-     %      & \multicolumn{4}{c|}{\shortstack{\textbf{VIS}\\(Sis.~7)}} 
-     %        & \multicolumn{4}{c|}{\shortstack{\textbf{NIR}\\(Sis.~6)}} \\
-     %     \midrule
-     %     \textbf{Altura}
-     %       & \shortstack{Pred H\\[m]} 
-     %       & \shortstack{Teo H\\[m]} 
-     %       & \shortstack{Pred V\\[m]} 
-     %       & \shortstack{Teo V\\[m]} 
-     %       & \shortstack{Pred H\\[m]} 
-     %       & \shortstack{Teo H\\[m]} 
-     %       & \shortstack{Pred V\\[m]} 
-     %       & \shortstack{Teo V\\[m]} \\
-     %     \midrule
-     %     50\,m   
-     %       &  35.10  &  25.16   &  25.84  &  18.87  
-     %       &  37.37  &  26.73   &  27.88  &  20.05  \\
-     %     1000\,m 
-     %       & 702.50  & 503.20   & 517.08  & 377.40  
-     %       & 747.70  & 534.60   & 557.90  & 400.95  \\
-     %     5000\,m 
-     %       & 3512.00 & 2516.00  & 2585.48 & 1887.00 
-     %       & 3737.00 & 2673.00  & 2788.89 & 2004.75 \\
-     %     \bottomrule
-     %   \end{tabular*}
-     % \end{table}
+     \begin{table}[H]
+      \label{tab:fov_pred_vs_theory_HV}
+       \centering
+       \caption{Comparativa empírico vs. teórico para FOV horizontal (H) y vertical (V).}
+       \small
+       \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}|
+           c|
+           rrrr|
+           rrrr|
+         }
+         \toprule
+          & \multicolumn{4}{c|}{\shortstack{\textbf{VIS}\\(Sis.~7)}} 
+            & \multicolumn{4}{c|}{\shortstack{\textbf{NIR}\\(Sis.~6)}} \\
+         \midrule
+         \textbf{Altura}
+           & \shortstack{Pred H\\(m)} 
+           & \shortstack{Teo H\\(m)} 
+           & \shortstack{Pred V\\(m)} 
+           & \shortstack{Teo V\\(m)} 
+           & \shortstack{Pred H\\(m)} 
+           & \shortstack{Teo H\\(m)} 
+           & \shortstack{Pred V\\(m)} 
+           & \shortstack{Teo V\\(m)} \\
+         \midrule
+         50\,m   
+           &  35.10  &  33.54   &  25.84  &  25.16 
+           &  37.37  &  35.64   &  27.88  &  26.73  \\
+         1000\,m 
+           & 702.50  & 670.87   & 517.08  & 503.15  
+           & 747.70  & 712.8    & 557.90  & 534.6   \\
+         5000\,m 
+           & 3512.00 & 3354.35  & 2585.48 & 2515.76 
+           & 3737.00 & 3564     & 2788.89 & 2673    \\
+         \bottomrule
+       \end{tabular*}
+     \end{table}
  
      
  
@@ -741,6 +940,34 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
        \end{tabular}
      \end{table}
     
+    %---------------------------------------------------------------
+    \subsection{Magnificación primaria (PMAG) de los sistemas 6 (NIR) y 7 (VIS)}
+    \label{sec:pmag}
+    %---------------------------------------------------------------
+
+    Por otro lado, a partir de la ecuación \ref{eq:pmag}, se obtuvó la magnificación primara para ambos sistemas NIR y VIS para cada valor de altitud, como se muestra en la Tabla \ref{tab:pmag_sys67}.
+
+    \begin{table}[h]
+      \centering
+      \caption{Magnificación primaria (\textit{PMAG}) de los sistemas VIS (Sis.~7) y NIR (Sis.~6) a distintas alturas.}
+      \label{tab:pmag}
+      \begin{tabular}{|c|c|c|}
+          \hline
+          \rowcolor[HTML]{EFEFEF}
+          \textbf{Altura [m]} & \textbf{PMAG VIS (Sis.~7)} & \textbf{PMAG NIR (Sis.~6)} \\
+          \hline
+          50   & $1.62\times10^{-4}$ & $1.53\times10^{-4}$ \\
+          1000 & $8.12\times10^{-6}$ & $7.63\times10^{-6}$ \\
+          5000 & $1.62\times10^{-6}$ & $1.53\times10^{-6}$ \\
+          \hline
+      \end{tabular}
+    \end{table}
+  
+    Para el rango operacional propuesto (50–5000 m) las diferencias
+    entre ambos sistemas son $<\,6\,\%$, consecuencia de que comparten el mismo
+    tamaño de sensor y distancias focales muy próximas
+    (8.0 mm – NIR, 8.5 mm – VIS).  
+
      \subsection{Modulation Transfer Function (MTF) Measurements}
       \label{sec:mtf_results}
       Aunque el montaje experimental para la caracterización de la MTF se describió en la metodología (véase la Figura~\ref{fig:srf_motaje}), durante las primeras pruebas se constató que el contraste entre las zonas claras y oscuras resultaba insuficiente para aplicar con fiabilidad el método ISO 12233. Según este estándar, el test chart debe presentar un contraste mínimo de 4:1 y una distribución de irradiancia lo más uniforme posible en ambas regiones, de modo que el histograma de intensidad exhiba dos picos nítidos (uno correspondiente a las zonas claras y otro a las zonas oscuras). Sin embargo, al analizar la carta de prueba impresa en papel mate —una reprografía de bajo costo— se observó una continuidad de valores intermedios y múltiples picos espurios que comprometían la extracción precisa de la Edge Spread Function (ESF). Esta carta de ruebas puede ser adquirida por proveedores de isntrumentos ópticos, pero su costo es elevado.\\
@@ -752,9 +979,9 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
           \label{fig:histogram_iso12233}
       \end{figure}
       
-      El origen de esta dispersión radica en dos factores principales. Primero, la calidad de impresión (impreso en una impresora de un proveedor local no especializado en cartas para pruebas ópticas de laboratorio) del test chart no garantizaba bordes suficientemente definidos ni un nvel de negros que proporsionaran el suficiente contraste. Segundo, el esquema de iluminación no siguió estrictamente la recomendación de emplear dos fuentes homogéneas (véase la Figura~\ref{fig:srf_motaje}), lo cual impidió alcanzar una irradiancia uniforme sobre la carta y acentuó las zonas de sombra y reflejo. Ante ello, se optó por un patrón de prueba empírico, el cual consistía en una hoja de papel inlcinada y un fondo oscuro, y por limitar la región de interés a un área de 104 $\times$ 104 píxeles, de forma que la iluminación pudiera controlarse de manera más rigurosa.\\
+      El origen de esta dispersión radica en dos factores principales. Primero, la calidad de impresión (impreso en una impresora de un proveedor local no especializado en cartas para pruebas ópticas de laboratorio) del test chart no garantizaba bordes suficientemente definidos ni un nvel de negros que proporsionaran el suficiente contraste ni precisión en la impresión de lineas. Segundo, el esquema de iluminación no siguió estrictamente la recomendación de emplear dos fuentes homogéneas (véase la Figura~\ref{fig:srf_motaje}), lo cual impidió alcanzar una irradiancia uniforme sobre la carta y acentuó las zonas de sombra y reflejo. Ante ello, se optó por un patrón de prueba empírico, el cual consistía en una hoja de papel inlcinada y un fondo oscuro, y por limitar la región de interés a un área de 104 $\times$ 104 píxeles, de forma que la iluminación pudiera controlarse de manera más rigurosa.\\
       
-      La imagen finalmente utilizada para la determinación de la MTF —etiquetada como Figura~\ref{fig:enfoque}— fue corregida previamente, en primer lugar, de la corriente oscura según se describe en la Sección~\ref{subsub:corriente_oscura_espectrometro}, y, en segundo lugar, de los errores aleatorios mediante el promediado de múltiples capturas (tal como se detalló en la metodología de MTF). Sobre estas imágenes corregidas se generaron histogramas de intensidad para cada sistema, a fin de verificar que ahora sí se obtenía una distribución bimodal aceptable.
+      La imagen finalmente utilizada para la determinación de la MTF —mostrada en la Figura~\ref{fig:enfoque}— fue corregida previamente, en primer lugar, de la corriente oscura según se describe en la Sección~\ref{subsub:corriente_oscura_espectrometro}, y, en segundo lugar, de los errores aleatorios mediante el promediado de múltiples capturas (tal como se detalló en la metodología de MTF). Sobre estas imágenes corregidas se generaron histogramas de intensidad para cada sistema, a fin de verificar que ahora sí se obtenía una distribución bimodal aceptable.
       
       \begin{figure}[h]
           \centering
@@ -769,7 +996,7 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
               \centering
               \includegraphics[width=\linewidth]{Figures/C4/hist_nir_MTF.png}
               \caption{Sistema NIR: histograma de su único canal tras correcciones.}
-              \label{fig:histogram_nir}interés a un área de 104
+              \label{fig:histogram_nir}
           \end{subfigure}
           \caption{Distribución de valores de intensidad en imágenes corregidas (corriente oscura y ruido aleatorio) para los sistemas VIS y NIR, empleadas en la extracción de la MTF.}
           \label{fig:histogram_vis_nir}
@@ -788,14 +1015,14 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
     \begin{figure}[H]
         \centering
         %-----------------------------------------------------------
-        \begin{subfigure}[b]{0.48\linewidth}
+        \begin{subfigure}[b]{0.95\linewidth}
             \centering
             \includegraphics[width=\linewidth]{Figures/C4/mtf_vis.png}
             \caption{Sistema VIS: MTF de los canales \(R\), \(G\), \(B\) y promedio (\textit{Mono}).}
             \label{fig:mtf_vis}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{0.48\linewidth}
+        \begin{subfigure}[b]{0.95\linewidth}
             \centering
             \includegraphics[width=\linewidth]{Figures/C4/mtf_nir.png}
             \caption{Sistema NIR: MTF del canal monocromático.}
@@ -803,7 +1030,7 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
         \end{subfigure}
         %-----------------------------------------------------------
         \caption{Curvas MTF obtenidas con \textit{ImageJ}.  
-                La configuración del \textit{plugin} se muestra en la Fig.~\ref{fig:plugin_config1}.}
+                La configuración del \textit{plugin} se muestra en la Fig.~\ref{fig:plugin_config1}. Esta medida fue tomada con una distancia de trabajo de 925 mm.}
         \label{fig:mtf_curves}
     \end{figure}
 
@@ -835,44 +1062,47 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
     %---------------------------------------------------------------
     La resolución en tierra (\(\Delta_{\text{ground}}\)) se obtuvo aplicando los pasos 1–3 de la sección~\ref{subsub:grd_from_mtf}.  
     Para cada canal se parte del \(f_{\text{im,\,meas}}\) de la Tabla~\ref{tab:cutoff_meas}; se calcula la frecuencia en el objeto
-    \(f_{\text{obj}} = f_{\text{im}}/\text{PMAG}\) y, posteriormente,
-    \(\Delta_{\text{ground}} = \dfrac{1}{2\,f_{\text{obj}}}\,\dfrac{h}{f}\)
-    (h = altura de vuelo, f = distancia focal).  
+    $f_{\text{obj}}$ y, posteriormente,
+    $\Delta_{\text{ground}}$.  
     Los parámetros geométricos (PMAG y FOV) provienen de la Tabla~\ref{tab:grd_fov_clean}; las distancias focales son
     \(f_{\text{VIS}} = 8.5\,\mathrm{mm}\) y \(f_{\text{NIR}} = 8.0\,\mathrm{mm}\).
 
+    %--------------------------------------------------------------
     \begin{table}[H]
         \centering
-        \caption{Resolución en tierra \(\Delta_{\text{ground}}\) para el sistema VIS.}
-        \label{tab:grd_vis}
+        \caption{Resolución en tierra \(\Delta_{\text{ground}}\) – Sistema VIS (Sis.~7)}
+        \label{tab:grd_vis_corrected}
         \begin{tabular}{|c|c|c|c|c|}
             \hline
             \rowcolor[HTML]{EFEFEF}
-            \textbf{Canal} & \multicolumn{3}{c|}{\(\mathbf{\Delta_{\text{ground}}\,[\text{cm}]}\)} & 
+            \textbf{Canal} &
+            \multicolumn{3}{c|}{\(\mathbf{\Delta_{\text{ground}}\,[\text{cm}]}\)} &
             \(\mathbf{\Delta_{\text{ground}}\,[\text{m}]}\) \\ \cline{2-4}
             \rowcolor[HTML]{EFEFEF}
             & 50 m & 1000 m & 5000 m & 5000 m \\ \hline
-            \(R\)     & 5.0  & 1.01  & 5.04 & 0.050 \\ \hline
-            \(G\)     & 3.6  & 0.73  & 3.64 & 0.036 \\ \hline
-            \(B\)     & 4.0  & 0.80  & 4.02 & 0.040 \\ \hline
-            Mono      & 4.0  & 0.80  & 4.02 & 0.040 \\ \hline
+            \(R\)   & 5.35 & 106.68 & 534.72 & 5.35 \\ \hline
+            \(G\)   & 3.89 &  77.59 & 388.91 & 3.89 \\ \hline
+            \(B\)   & 4.28 &  85.34 & 427.78 & 4.28 \\ \hline
+            Mono    & 4.28 &  85.34 & 427.78 & 4.28 \\ \hline
         \end{tabular}
     \end{table}
 
     \begin{table}[H]
         \centering
-        \caption{Resolución en tierra \(\Delta_{\text{ground}}\) para el sistema NIR.}
-        \label{tab:grd_nir}
+        \caption{Resolución en tierra \(\Delta_{\text{ground}}\) – Sistema NIR (Sis.~6)}
+        \label{tab:grd_nir_corrected}
         \begin{tabular}{|c|c|c|c|c|}
             \hline
             \rowcolor[HTML]{EFEFEF}
-            \textbf{Canal} & \multicolumn{3}{c|}{\(\mathbf{\Delta_{\text{ground}}\,[\text{cm}]}\)} & 
+            \textbf{Canal} &
+            \multicolumn{3}{c|}{\(\mathbf{\Delta_{\text{ground}}\,[\text{cm}]}\)} &
             \(\mathbf{\Delta_{\text{ground}}\,[\text{m}]}\) \\ \cline{2-4}
             \rowcolor[HTML]{EFEFEF}
             & 50 m & 1000 m & 5000 m & 5000 m \\ \hline
-            Mono & 2.9 & 0.58 & 2.90 & 0.029 \\ \hline
+            Mono  & 4.12 & 82.57 & 411.79 & 4.12 \\ \hline
         \end{tabular}
     \end{table}
+    %--------------------------------------------------------------
 
     %---------------------------------------------------------------
     \subsubsection{Comparison with Theoretical Resolution}
@@ -886,12 +1116,12 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
     inferiores a \(6\,\mathrm{mm}\) a \(50\,\mathrm{m}\)
     y relativas menores del \(7\,\%\) en todas las altitudes.
 
-    \begin{figure}[H]
-        \centering
-        % \includegraphics[width=0.75\linewidth]{Figures/C4/grd_comparison.pdf}
-        \caption{Comparación entre la resolución en tierra teórica y la medida.}
-        \label{fig:grd_comp}
-    \end{figure}
+    % \begin{figure}[H]
+    %     \centering
+    %     \includegraphics[width=0.75\linewidth]{Figures/C4/grd_comparison.pdf}
+    %     \caption{Comparación entre la resolución en tierra teórica y la medida.}
+    %     \label{fig:grd_comp}
+    % \end{figure}
 
     %---------------------------------------------------------------
     \subsubsection{Error Sources and Discrepancy Analysis}
@@ -943,7 +1173,8 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En
         \item Para mejorar la concordancia,
               se propone añadir una etapa de rectificación geométrica
               antes de la extracción de la ESF y repetir la medición
-              con
+              con iluminación de mayor contraste (4:1 según ISO 12233).
+      \end{enumerate}
 
 
   \subsection{Respuesta espectral}
