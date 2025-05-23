@@ -1,14 +1,13 @@
 \chapter{Diseño de los sistemas ópticos}         % o \chapter{Resultados y Discusión}
 
-En este capitulo se describe el proceso que se lleva a cabo para la determinación de los componentes opticos necesarios para cumplir los requerimientos opticos de la misión C3. En un primer momento se describen los criterios a tener en cuenta para el diseño de la QBee, en los cuales se describen los parámetros mecánicos, ópticos y enegéticos que debe cumplir el dispositvipo QBee para operar en las condisiones estimadas. Luego, se descibe el proceso iterativo de diseño optico, en el cual se describen los candidatos de objetivos y sensores opticos tenidos en cuenta. De estos elementos, se obtienen caraterísticas de resolución y campo de visión teóricos a partir con el fin de tener un criterio de selección y escoger una configuración óptima entre los candidatos.
+En este capítulo se describe el proceso que se lleva a cabo para la determinación de los componentes ópticos necesarios para cumplir los requerimientos ópticos de la misión C3. En un primer momento, se describen los criterios a tener en cuenta para el diseño de la HuMath\textregistered QBee, en los cuales se describen los parámetros mecánicos, ópticos y enegéticos que debe cumplir el dispositivo HuMath \textregistered QBee para operar en las condiciones estimadas. Luego, se describe el proceso iterativo de diseño óptico, en el cual se describen los candidatos de objetivos y sensores ópticos tenidos en cuenta. De estos elementos, se obtienen caraterísticas de resolución y campo de visión teóricos a partir con el fin de tener un criterio de selección y escoger una configuración óptima entre los candidatos.
+
 %===============================================================
-\section{Diseño del sistema multiespectral \textit{KBee}}
+\section{Diseño del sistema multiespectral \textit{HuMath \textregistered QBee}}
 %===============================================================
 
-La ruta de desarrollo del \textit{QBee} y \textit{KBee} partió de una matriz de ocho “sistemas   candidatos’’; de ellos se seleccionaron las dos configuraciones VIS + NIR que mejor satisfacen las restricciones de misión impuestas por el consorcio
-EAFIT–KTH: altura de operación $50$–$5\,000\;{\rm m}$, peso $\leq$ $2\;{\rm kg}$,
-envolvente geométrica $100\times100\times150\;{\rm mm}^{3}$ y conectividad USB 3.1.
-A continuación se describe el hilo de razonamiento que condujo al diseño final.
+La ruta de desarrollo de la HuMath \textregistered QBee partió de una matriz de ocho sistemas   candidatos; de ellos se seleccionaron las dos configuraciones VIS + NIR que mejor satisfacen las restricciones de misión impuestas por el consorcio
+EAFIT–KTH. A continuación se describe el hilo de razonamiento que condujo al diseño final.
 
 %---------------------------------------------------------------
 \subsection{Requerimientos y criterios ópticos}
@@ -18,11 +17,13 @@ Los criterios que guiaron la selección de cada sub‑módulo fueron:
 
 \begin{itemize}
     \item \textbf{Resolución espacial} - El objetivo debe ofrecer una MTF (30\,\% de contraste) 
-          \textbf{$\geq 40\;\text{lp/mm}$}, lo que garantiza la capacidad de resolver los objetos 
+          \textbf{$\geq 40\;lp/mm$}, lo que garantiza la capacidad de resolver los objetos 
           de las dimensiones indicadas en la Tabla~\ref{tab:req_vs_obj}.
           
-    \item \textbf{Campo de visión} - El ángulo AFOV debe cubrir una extensión de suelo suficiente para realizar anáisis extensivos de parcelas, bosques, cultivos, ríos, carreteras, zonas urbanas, entre otras estrucutras terrestres de interés. Por lo anterior, es ideal que el sistema tenga un campo de visión que vaya desde algunas decenas de metros hasta los kilometros, dependiendo de la altura de trabajo.
-          
+    \item \textbf{Campo de visión} - El ángulo AFOV debe cubrir una extensión de suelo suficiente para realizar análisis extensivos de parcelas, bosques, cultivos, ríos, carreteras, zonas urbanas, entre otras estrucutras terrestres de interés. Por lo anterior, es ideal que el sistema tenga un campo de visión que vaya desde algunas decenas de metros hasta los kilometros, dependiendo de la altura de trabajo.
+    
+    \item \textbf{Condiciones de iluminación} - La iluminación de la escena debe corresponder a iluminación ambeinte diurna.
+    
     \item \textbf{Masa y volumen} - El conjunto óptico‑electrónico debe cumplir las 
           restricciones de carga útil de la aeronave del Proyecto C3, 
           de modo que se mantenga un tiempo de vuelo de 3 h.  
@@ -90,7 +91,7 @@ contraste y masa total del objetivo.\\
 \end{table}
 
 
-Los datos de la MTF de los objetivos fue recuperada de la hoja de datos de cada objetivo. La resolución exigida (MTF $\geq40\,$lp mm\(^{-1}\)) se cumple de forma holgada en
+\noindent Los datos de la MTF de los objetivos fue recuperada de la hoja de datos de cada objetivo. La resolución exigida (MTF $\geq40\,$lp mm\(^{-1}\)) se cumple de forma holgada en
 los sistemas 1, 2, 4, 6, 7 y 8.  El sistema 2, con 50 mm f/2.8, ofrece la mayor
 frecuencia de corte (180 lp mm\(^{-1}\)), lo que se traduce en la más alta
 resolución sobre el terreno; sin embargo, su AFOV es el más estrecho del
@@ -102,20 +103,16 @@ moderado ($\approx30^{\circ}$), cumplen la MTF requerida con una masa inferior a
 altitud.\\
 
 
-En sistemas aéreos que operan a distancias de decenas o miles de metros, el plano de enfoque se aproxima al infinito; el sistema trabaja, por tanto, en régimen de hiperfoco y la profundidad de campo deja de ser un factor limitante.  No obstante, la apertura \((f/\#)\) sigue siendo relevante porque regula la cantidad de luz incidente y la eficiencia con la que se reproducen las altas frecuencias espaciales. Por lo anerior, es preferible tener objetivos con gran apertura. Sin embargo, mayor apertura implica un diametro de lente mayor, por lo que el peso y costo de los ojetivos aumenta. \\
+\noindent En sistemas aéreos que operan a distancias de decenas o miles de metros, el plano de enfoque se aproxima al infinito; el sistema trabaja, por tanto, en régimen de hiperfoco y la profundidad de campo deja de ser un factor limitante.  No obstante, la apertura \((f/\#)\) sigue siendo relevante porque regula la cantidad de luz incidente y la eficiencia con la que se reproducen las altas frecuencias espaciales. Por lo anerior, es preferible tener objetivos con gran apertura. Sin embargo, mayor apertura implica un diametro de lente mayor, por lo que el peso y costo de los ojetivos aumenta. \\
 
-El límite de carga útil de la plataforma \textit{C3} es 2 kg para lograr un tiempo de vuelo de 3 h. Aunque todos los objetivos de la Tabla \ref{tab:sys_tables} se encuentran muy por debajo de ese umbral, los sistemas 6, 7 y 8 destacan por su masa extraordinariamente baja (entre 4 g y 60 g), lo que los convierte en las opciones más atractivas cuando el peso es el factor decisivo. En la etapa de prototipado se dará prioridad a estas configuraciones ligeras, siempre que satisfagan además el requisito mínimo de resolución.\\
-
-
-Los sistemas 6 (NIR 8 mm f/2.5) y 7 (VIS 8.5 mm f/1.8) aparecen
-como las mejores combinaciones de AFOV, MTF y peso para vuelos de 50-1000 m,
-mientras que el sistema 2 (50 mm f/2.8) se reserva para misiones de gran
-altitud donde se privilegia la resolución sobre la cobertura espacial.\\
-
-Sin embargo, para poder escoger una configuración adecauda, en una sección más adelante, se muestran los cálculos de resolución en tierra teóricos para cada sistemas, con el fin de esoger rigurosamente que configuración utilizar.
+\noindent El límite de carga útil de la plataforma \textit{C3} es 2 kg para lograr un tiempo de vuelo de 3 h. Aunque todos los objetivos de la Tabla \ref{tab:sys_tables} se encuentran muy por debajo de ese umbral, los sistemas 6, 7 y 8 destacan por su reducida masa (entre 4 g y 60 g), lo que los convierte en las opciones más atractivas cuando el peso es el factor decisivo. En la etapa de prototipado se dará prioridad a estas configuraciones ligeras, siempre que satisfagan además el requisito mínimo de resolución.\\
 
 
----------------------------------------------------------------
+\noindent Los sistemas 6 (NIR 8 mm f/2.5) y 7 (VIS 8.5 mm f/1.8) aparecen como las mejores combinaciones de AFOV, MTF y peso para vuelos de 50-1000 m, mientras que el sistema 2 (50 mm f/2.8) se reserva para misiones de gran altitud donde se privilegia la resolución sobre la cobertura espacial. Sin embargo, para poder escoger una configuración adecuada, en una sección más adelante, se muestran los cálculos de resolución en tierra teóricos para cada sistema, con el fin de escoger rigurosamente qué configuración utilizar.
+
+
+
+% ---------------------------------------------------------------
 \subsection{Pre‑selección de sensores de imagen}
 \label{sec:sensor_selection}
 %---------------------------------------------------------------
@@ -215,7 +212,7 @@ El campo de visión angular (AFOV) representa el ángulo máximo observable del 
     \label{eq:delta_ground}
 \end{equation}
 
-Y la distancia mínima lineal resuelta por el sensor:
+\noindent Y la distancia mínima lineal resuelta por el sensor:
 
 \begin{equation}
   \Delta_{\text{pix}}[\text{m}] =
@@ -300,18 +297,24 @@ operación: 50 m (vuelo bajo), 1000 m (vuelo medio) y 5000 m (vuelo alto). En la
 
 
 
-\noindent En un primer momento, \(\Delta_{\mathrm{MTF}}\) resulta siempre mayor que \(\Delta_{\mathrm{pix}}\), lo cual era de esperar: la óptica atenúa las altas frecuencias y limita un poco el detalle que el sensor podría capturar de forma ideal. Este hallazgo confirma que se ha elegido sensores con tamaño de píxel suficiente para no desaprovechar la capacidad de resolución de las lentes, inlclusive, se tiene podría tener un sensor con tamaño de pixel mayor, lo cual podría disminuir el costo del sensor y mejorar la relación señal-ruido SNR para mejorar la calidad de las imágenes sin perder detalle de estas. Esto se deja para futuras mejoras del sistema.\\
+\noindent En un primer momento, \(\Delta_{\mathrm{MTF}}\) resulta siempre mayor que \(\Delta_{\mathrm{pix}}\), lo cual era de esperar: la óptica atenúa las altas frecuencias y limita un poco el detalle que el sensor podría capturar de forma ideal. Este hallazgo confirma que se ha elegido sensores con tamaño de píxel suficiente para no desaprovechar la capacidad de resolución de las lentes, inlclusive, se podría tener un sensor con tamaño de pixel mayor, lo cual podría disminuir el costo del sensor y mejorar la relación señal-ruido SNR para mejorar la calidad de las imágenes sin perder detalle de estas. Esto se deja para futuras mejoras del sistema.\\
 
-\noindent En cuanto al equilibrio entre cobertura y nitidez, los sistemas de focal larga concentran cada píxel en un área reducida —mejor nitidez— pero limitan mucho la zona capturada (Por ejemplo, el sistema 2 tiene un FOV de 881 metros a una altura de 5 km y una resolución en tierra de 20 cm). Estos sistemas de gran distancia focal son ideales cuando se requiere alta resolución y no tanta cobertura en su campo de visión, es decir, cuando se requiere visualizar objetos como estructuras urbanas, individuos de fauna y flora, entre otros. En el otro extremo, los de focal muy corta expanden enormemente el FOV a costa de degradar la resolución (por ejemplo, el sistema 5, el cual tiene una distancia focal de 4 mm y un FOV de 14 km a una distancia de trabajo de 5 km). Estos sistemas pueden ser útiles cuando se requiere una gran cobertura de campo de visión y una distancia de trabajo reducida, por ejemplo, para cámaras de monitoreo instaladas sobre un poste de algunas decenas de metros. 
+\noindent En cuanto al equilibrio entre cobertura y nitidez, los sistemas de focal larga concentran cada píxel en un área reducida —mejor nitidez— pero limitan mucho la zona capturada (Por ejemplo, el sistema 2 tiene un FOV de 881 metros a una altura de 5 km y una resolución en tierra de 20 cm). Estos sistemas de gran distancia focal son ideales cuando se requiere alta resolución y no tanta cobertura en su campo de visión, es decir, cuando se requiere visualizar objetos como estructuras urbanas, individuos de fauna y flora, entre otros. En el otro extremo, los de focal muy corta expanden enormemente el FOV a costa de degradar la resolución (por ejemplo, el sistema 5, el cual tiene una distancia focal de 4 mm y un FOV de 14 km a una distancia de trabajo de 5 km). Estos sistemas pueden ser útiles cuando se requiere una gran cobertura de campo de visión y una distancia de trabajo reducida, por ejemplo, para cámaras de monitoreo instaladas sobre un poste de algunas decenas de metros.\\
 
-\noindent Así, los sistemas 3 y 4 presentan ser candidatos llamativos debido a sus características: a 5000 m de altura, el sistema 3 tiene un campo de visión vertical de 2473 m, y el sistema 4 3863 m. A pesar de lo anterior, dadas sus características del sensor y apertura del objetivo, se tiene una resolución en tierra de 2.5 m y 1.2 m para los sistemas 3 y 4, respectivamente, a la misma altura de 5000 m. Sin embargo, estos sistemas presentan altos costos para su sensor; para el sistema 3 tiene un tamaño del sensor  de 12.36 $\times$ 12.36 mm y una resolución de 20 mega-pixeles, lo cual hace que tenga una resolución en tierra de 0.54 m a 5000 m de altura. Adicionalmente, este tiene un objetivo con focal de 25 mm y una apertura de f/1.8, lo cual lo hace un objetivo con grandes capacidades para resolver altas frecuencias con una resolución en tierra de 2.5 m; el sistema 4 posee el mismo sensor que el sistema 3, pero se diferencia de este por su objetivo, el cual tiene una distancia focal de 16 mm y una apertura de f/1.8, lo cual corresponde a un FOV y resolución de 3863 m y 1.22 m, respectivamente. El principal inconveniente con estos sistemas es el peso de los objetivos, ya que para el sistema 3 se tiene un peso de 78 g, y para el sistema 4 un peso de 128 g, lo cual los hacen los objetivos más pesados, solo superados por el objetivo del sistema 2. Adicionalmente, estos sistemas tiene un costo elevado; solo el sensor cuenta 2500 \$USD. Los objetivos de los sistemas 3 y 4 tienen un costo de 870 y 1050 \$USD, respectivamente, esto es, un costo de 3379 y 3550 \$USD, respectivamente, para los sistemas 3 y 4, lo cual los hace más costoso del requerimiento de costos establecido.
+\noindent Así, los sistemas 3 y 4 se perfilan como candidatos atractivos por sus características técnicas a 5000 m de altura. El sistema 3 ofrece un campo de visión vertical (FOV) de 2473 m y una resolución en tierra de 2.5 m, mientras que el sistema 4 proporciona un FOV de 3863 m con una resolución de 1.2 m. No obstante, ambos sistemas implican costos elevados, principalmente por su sensor de 12.36 $\times$ 12.36 mm y 20 megapíxeles, cuyo precio asciende a 2500 USD. Este sensor permite una resolución en tierra de hasta 0.54 m a la misma altura, lo cual indica que está sobre estimado para los objetivos seleccionados.\\
 
-Por lo anterior, dada los requerimientos del sistema, es pertinente escoger un sistema adecuado: los sistemas 6 (8 mm f/2.5, NIR) y 7 (8.5 mm f/1.8, VIS) aparecen como un buen compromiso; a 50 m cubren unos 26 m de ancho con \(\Delta_{\mathrm{MTF}}<1.5\)\,cm, y a 1000 m mantienen resoluciones de 20 – 26 cm sobre aproximadamente 500 m de cobertura. A los 5 km de altura, estos sistemas tienen un campo de visión de 2500 m aproximadamente y una resolución en tierra de 2 - 3 metros. Además, al compartir casi la misma geometría óptica, facilitan la fusión multiespectral y minimizan desalineamientos entre canales. Lo anterior va acorde a las recomendaciones generales dadas por fabricantes de sistemas óptico, los cuales recomiendan tener una relación entre la distancia de trabajo y el campo de visión FOV entre 2 y 4. Por estas razones, para el prototipo inicial de la QBee y la KBee, se da prioridad a los sistemas 6 y 7. Adicionalmente, el costo de estos sistemas es más reducido; para el sensor de los sistemas 6 y 7, poseen un costo de 351 y 309 \$USD, respectivamente. Para sus objetivos, poseen un costo de 190 y 468 \$USD, respectivamente. Esto corresponde a un costo de aproximadamente 541 y 777 \$USD, respectivamente, lo cual los deja dentro del rango de costos de 1500 \$USD esptablecido. \\
+\noindent El sistema 3 está equipado con un objetivo de 25 mm de distancia focal y apertura f/1.8, lo cual le confiere una buena capacidad para captar altas frecuencias espaciales. Por su parte, el sistema 4 usa el mismo sensor, pero con un objetivo de 16 mm y apertura f/1.8, logrando un FOV de 3863 m y una resolución en tierra de 1.22 m. Sin embargo, estos objetivos son relativamente pesados: 78 g para el sistema 3 y 128 g para el sistema 4, siendo superados solo por el objetivo del sistema 2.\\
+
+\noindent En cuanto al costo total, el sistema 3 asciende a 3379 USD (sensor + objetivo de 870 USD), mientras que el sistema 4 alcanza los 3550 USD (objetivo de 1050 USD), excediendo ambos el límite de presupuesto establecido. En síntesis, aunque estos sistemas presentan buenas capacidades ópticas y de resolución, su peso y alto costo representan los principales inconvenientes.\\
+
+% Por lo anterior, dada los requerimientos del sistema, es pertinente escoger un sistema adecuado: los sistemas 6 (8 mm f/2.5, NIR) y 7 (8.5 mm f/1.8, VIS) aparecen como un buen compromiso; a 50 m cubren unos 26 m de ancho con \(\Delta_{\mathrm{MTF}}<1.5\)\,cm, y a 1000 m mantienen resoluciones de 20 - 26 cm sobre aproximadamente 500 m de cobertura. A los 5 km de altura, estos sistemas tienen un campo de visión de 2500 m aproximadamente y una resolución en tierra de 2 - 3 metros. Además, al compartir casi la misma geometría óptica, facilitan la fusión multiespectral y minimizan desalineamientos entre canales. Lo anterior va acorde a las recomendaciones generales dadas por fabricantes de sistemas óptico, los cuales recomiendan tener una relación entre la distancia de trabajo y el campo de visión FOV entre 2 y 4. Por estas razones, para el prototipo inicial de la QBee y la KBee, se da prioridad a los sistemas 6 y 7. Adicionalmente, el costo de estos sistemas es más reducido; para el sensor de los sistemas 6 y 7, poseen un costo de 351 y 309 \$USD, respectivamente. Para sus objetivos, poseen un costo de 190 y 468 \$USD, respectivamente. Esto corresponde a un costo de aproximadamente 541 y 777 \$USD, respectivamente, lo cual los deja dentro del rango de costos de 1500 \$USD esptablecido. \\ %% Aquí voy
+
+\noindent Por lo anterior, dada los requerimientos del sistema, es pertinente escoger un sistema adecuado: los sistemas 6 y 7 aparecen como un buen compromiso; en función de sus características ópticas —distancias focales muy próximas (8 mm f/2.5 y 8.5 mm f/1.8, respectivamente)— ambos dispositivos ofrecen un compromiso balanceado entre cobertura y detalle espacial. A 50 m de altura, el sistema 6 proporciona un campo de visión de aproximadamente 26.73 m horizontalmente con una resolución en tierra de $\Delta_{\mathrm{MTF}}=1.9$ cm, mientras que el sistema 7 cubre un campo de visión similar (25.16 m) y una resolución de $\Delta_{\mathrm{MTF}}=3.4$ cm. A 1000 m, el sistema 6 tiene una resolución de 39 cm sobre un FOV de 534 m, y el sistema 7 entrega unos 69 cm de resolución sobre la misma cobertura, lo que permite generar mosaicos espectrales con un alineamiento fino entre canales. Finalmente, a 5000 m de altura, el sistema 6 alcanza un campo de visión en tierra de unos 2673 m con una resolución de 2 m, mientras que el sistema 7 ofrece un FOV de 2516 m con resolución de 3.5 m. Estas propiedades ópticas similares facilitan el posprocesamiento conjunto de las adquisiciones, minimizando desalineamientos y mejorando la calidad de la fusión multiespectral.  
 
 
 \subsection{Conclusiones del proceso de diseño}
 
-\noindent Teniendo en cuenta masa, consumo, profundidad de bits y tamaño de píxel, junto con los resultados de la Tabla~\ref{tab:sensor_table}, se propone como configuración óptima la pareja AR0521 (VIS) + AR0522 (NIR) montada en lentes de 8.5 mm f/1.8 y 8 mm f/2.5 (sistemas 7 y 6). Esta combinación ofrece un equilibrio ideal entre resolución, campo de visión y eficiencia energética para las misiones del proyecto \textit{C3}. Cabe mencionar, que el financiamiento de la compra de los sistemas 6 y 7 fue proporsionado por el proyecto 4DAir de la Universidad EAFIT y liderado por la Dra. Elena Montilla Rosero, a lo cual hacemos mención en los agradecimientos de este trabajo.\\
+\noindent Teniendo en cuenta masa, consumo, profundidad de bits y tamaño de píxel, junto con los resultados de la Tabla~\ref{tab:sensor_table}, se propone como configuración óptima la pareja AR0521 (VIS) + AR0522 (NIR) montada en lentes de 8 mm f/2.5 y 8.5 mm f/1.8 (sistemas 6 y 7). Esta combinación ofrece un equilibrio ideal entre resolución, campo de visión y eficiencia energética para las misiones del proyecto \textit{C3}. Cabe mencionar, que el financiamiento de la compra de los sistemas 6 y 7 fue proporsionado por el proyecto 4DAir de la Universidad EAFIT y liderado por la Dra. Elena Montilla Rosero, a lo cual hacemos mención en los agradecimientos de este trabajo.\\
 
 \subsection{Sistemas ópticos candidatos}% Main appendix title
 \label{ap:sistemas_candidatos} 

@@ -1,7 +1,19 @@
-\chapter{Procura y construccion de los sisteams k bee y q bee de humaths space systems}   
-Introduccion al 4dair y al c3 y condiciones de diseño mecanico del dispositivo k bee y q bee
+\chapter{Procura y construccion del sistema HuMath\textregistered QBee de HuMath Space Systems}   
 
-\section{Sistema optico seleccionado para cosntruccion}
+\noindent En el marco del Proyecto C3, una colaboración interdisciplinaria entre la Universidad EAFIT (Colombia) y la Real Universidad de Tecnología de Estocolmo (KTH, Suecia), se planteó la necesidad de desarrollar un sistema de carga inteligente para un vehículo aéreo no tripulado (UAV) orientado al monitoreo ambiental de la biodiversidad y la salud de los ecosistemas en Colombia. Mientras KTH lideró el diseño estructural y aerodinámico de la plataforma UAV, el equipo de EAFIT asumió la responsabilidad de la procura y construcción de la carga, posteriormente denominada HuMath\textregistered QBee.\\
+
+\noindent El proceso de procura comenzó con la identificación de proveedores de sensores ópticos y electrónica de adquisición de datos con características adecuadas para capturar imágenes multiespectrales en rangos visible y cercano al infrarrojo. El financiamiento para la adquisición de estos componentes fue gestionado a través del proyecto 4DAir, una iniciativa de Minciencias dirigida por la Profesora Elena Montilla Rosero, que permitió asegurar recursos para la compra de cámaras, objetivos, filtros y hardware de control. Asimismo, Saab AB, proporcionó fondos para la fabricación de la estructura de la aeronave y supervisó la gestión administrativa y logística del proyecto.\\
+
+\noindent Inicialmente, se había previsto subcontratar la manufactura de la plataforma a una empresa colombiana especializada; sin embargo, limitaciones tecnológicas y de capacidad obligaron a que el equipo de ingeniería de EAFIT, junto con voluntarios de los programas de Ingeniería Aeronáutica de la Universidad Pontificia Bolivariana y de Ingeniería de la Universidad EAFIT, asumiera la fabricación de la estructura del UAV. Este esfuerzo colaborativo garantizó la integración eficiente entre la plataforma aérea y el sistema de carga HuMath\textregistered QBee.\\
+
+% \noindent La construcción del HuMath\textregistered QBee involucró etapas iterativas de ensamblaje mecánico, integración de sensores y desarrollo de software de control. Primero se diseñaron y fabricaron alojamientos impresos en resina para los sistemas ópticos NIR y VIS, asegurando alineación y modularidad. Posteriormente, se integraron los sensores Alvium 1800 U-501m y U-500c de Allied Vision, junto con sus objetivos y filtros, sobre un chasis impreso en PET-G. Paralelamente, se implementó un script en Python para la adquisición sincronizada de datos multiespectrales y georreferenciación en tiempo real.\\
+
+\noindent Este capítulo describe de forma detallada cada una de las fases de procura y construcción del HuMath\textregistered QBee, destacando las decisiones técnicas, los criterios de selección de componentes y las estrategias de colaboración que hicieron posible la materialización de esta innovadora plataforma de monitoreo ambiental.\\
+
+
+
+\section{Construcción de los sistemas ópticos seleccionados para la HuMath\textregistered Bee}
+
 \noindent Los sistemas 6 y 7 integran un sensor, un objetivo y un filtro específicos montados sobre la carcasa impresa (Figura~\ref{fig:exploded_assembly}). Esta configuración facilita la fabricación y el mantenimiento, y permite intercambiar o actualizar componentes de forma independiente.\\
 
 \noindent El sensor NIR Allied Vision Alvium 1800 U‑501m (ON Semi AR0522) comparte tamaño de sensor (2592×1944 px) y paso de píxel (2.2 µm) con su homólogo VIS, pero presenta una respuesta cuántica optimizada en 700–1000 nm, ideal para la adquisición de imagenes en este rango espectral. El objetivo HEO Series de 8 mm f/2.5 se monta directamente sobre la montura S‑Mount y ofrece un AFOV de 29.9°. Con 4 g de masa, cumple el requisito de carga útil y minimiza la transmisión de vibraciones. La montura impresa en resina aloja un filtro paso banda de 850 \SI{}{nm} (CWL) y 50 \SI{}{nm} de ancho de banda, 12.5 mm de diámetro, Hard Coated OD 4.0, encajando sobre el barril y fijándose con un anillo roscado que garantiza la alineación sin sobresalir del perfil de la carcasa.\\
