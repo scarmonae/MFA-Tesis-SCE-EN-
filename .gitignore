@@ -19,4 +19,5 @@ main-blx.bib
 **/*.lot
 *.gz
 **/*.gz
-
+*.fdb_latexmk
+**/*.fdb_latexmk
