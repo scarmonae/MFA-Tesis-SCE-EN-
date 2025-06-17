@@ -1,8 +1,8 @@
-\chapter{Procura y construccion del sistema HuMath\textregistered QBee de HuMath Space Systems}   
+\chapter{Procura y construccion del dispositivo HuMath\textregistered  QBee de HuMath Space Systems}   
 
 \noindent En el marco del Proyecto C3, una colaboración interdisciplinaria entre la Universidad EAFIT (Colombia) y la Real Universidad de Tecnología de Estocolmo (KTH, Suecia), se planteó la necesidad de desarrollar un sistema de carga inteligente para un vehículo aéreo no tripulado (UAV) orientado al monitoreo ambiental de la biodiversidad y la salud de los ecosistemas en Colombia. Mientras KTH lideró el diseño estructural y aerodinámico de la plataforma UAV, el equipo de EAFIT asumió la responsabilidad de la procura y construcción de la carga, posteriormente denominada HuMath\textregistered QBee.\\
 
-\noindent El proceso de procura comenzó con la identificación de proveedores de sensores ópticos y electrónica de adquisición de datos con características adecuadas para capturar imágenes multiespectrales en rangos visible y cercano al infrarrojo. El financiamiento para la adquisición de estos componentes fue gestionado a través del proyecto 4DAir, una iniciativa de Minciencias dirigida por la Profesora Elena Montilla Rosero, que permitió asegurar recursos para la compra de cámaras, objetivos, filtros y hardware de control. Asimismo, Saab AB, proporcionó fondos para la fabricación de la estructura de la aeronave y supervisó la gestión administrativa y logística del proyecto.\\
+\noindent El proceso de procura comenzó con la identificación de proveedores de sensores ópticos y electrónica de adquisición de datos con características adecuadas para capturar imágenes multiespectrales en rangos visible y cercano al infrarrojo. El financiamiento para la adquisición de estos componentes fue gestionado a través del proyecto 4DAir, una iniciativa de Minciencias dirigida por la Profesora Elena Montilla Rosero, que permitió asegurar recursos para la compra de sensores, objetivos, filtros y hardware de control. Asimismo, Saab AB, proporcionó fondos para la fabricación de la estructura de la aeronave y supervisó la gestión administrativa y logística del proyecto.\\
 
 \noindent Inicialmente, se había previsto subcontratar la manufactura de la plataforma a una empresa colombiana especializada; sin embargo, limitaciones tecnológicas y de capacidad obligaron a que el equipo de ingeniería de EAFIT, junto con voluntarios de los programas de Ingeniería Aeronáutica de la Universidad Pontificia Bolivariana y de Ingeniería de la Universidad EAFIT, asumiera la fabricación de la estructura del UAV. Este esfuerzo colaborativo garantizó la integración eficiente entre la plataforma aérea y el sistema de carga HuMath\textregistered QBee.\\
 
@@ -14,15 +14,15 @@
 
 \section{Construcción de los sistemas ópticos seleccionados para la HuMath\textregistered Bee}
 
-\noindent Los sistemas 6 y 7 integran un sensor, un objetivo y un filtro específicos montados sobre la carcasa impresa (Figura~\ref{fig:exploded_assembly}). Esta configuración facilita la fabricación y el mantenimiento, y permite intercambiar o actualizar componentes de forma independiente.\\
+\noindent Los sistemas~6 (NIR) y~7 (VIS) comparten una arquitectura modular: cada uno integra sensor, objetivo y filtro en una única carcasa que actúa a la vez como soporte mecánico y protección (véase la Figura~\ref{fig:exploded_assembly}). Ambos emplean sensores de la familia \textit{Alvium 1800} con idéntico tamaño de imagen (2592 × 1944 px) y paso de píxel (2.2 µm). \\
 
-\noindent El sensor NIR Allied Vision Alvium 1800 U‑501m (ON Semi AR0522) comparte tamaño de sensor (2592×1944 px) y paso de píxel (2.2 µm) con su homólogo VIS, pero presenta una respuesta cuántica optimizada en 700–1000 nm, ideal para la adquisición de imagenes en este rango espectral. El objetivo HEO Series de 8 mm f/2.5 se monta directamente sobre la montura S‑Mount y ofrece un AFOV de 29.9°. Con 4 g de masa, cumple el requisito de carga útil y minimiza la transmisión de vibraciones. La montura impresa en resina aloja un filtro paso banda de 850 \SI{}{nm} (CWL) y 50 \SI{}{nm} de ancho de banda, 12.5 mm de diámetro, Hard Coated OD 4.0, encajando sobre el barril y fijándose con un anillo roscado que garantiza la alineación sin sobresalir del perfil de la carcasa.\\
+\noindent El modelo NIR, \textit{Alvium 1800 U-501m} (ON Semi AR0522) \cite{alliedvision_alvium1800U_501NIRm}. Se combina con un objetivo HEO Series de 8 mm f/2.5, montado en S-Mount, que ofrece un ángulo de campo de 29.9° y, con tan solo 4 g de masa, cumple el límite de carga útil y limita la transmisión de vibraciones. La montura impresa en resina aloja un filtro paso-banda centrado en 850 nm (FWHM 50 nm, diámetro 12.5 mm, Hard-Coated OD 4.0) que se asegura mediante un anillo roscado, garantizando la alineación sin sobresalir del perfil de la carcasa.\\
 
-\noindent El sensor VIS Alvium 1800 U‑500c (ON Semi AR0521) mantiene los 2.2 µm de paso de píxel y emplea obturación rolling, reduciendo peso y costo. El objetivo Cr Series de 8.5 mm f/1.3, ruggedized por el fabricante, ofrece gran apertura y resistencia a impactos y vibraciones.. El filtro VIS (UV/IR Cut) M25.5×0.50 bloquea 200–370 nm y 750 – 1100 nm, transmitiendo solo 370–750 nm, e integra directamente una montura compatible para el montaje en el objetivo.\\
 
-\noindent La conectividad micro USB‑B facilita la alimentación y transmisión de datos con la Raspberry Pi 4 (Figura~\ref{fig:sistemas_opticos_componentes}). Además, permiten la integración y control de los sensores a partir de un script en python, lo cual da flexibilidad para diseñar el preprocesamiento y captura de las imágenes de ambos sensores de forma simultanea. Esto permite incluso carga confirguracones ya establecidas o actauliza en tiempo real dichas fongiruaciones relacioandas a paramaetros como, por ejemplo, el tiempo de exposiicón o la ganancia.
+\noindent El sistema VIS utiliza el sensor \textit{Alvium 1800 U-500c} (ON Semi AR0521). Su óptica es un objetivo Cr Series de 8.5 mm f/1.3, reforzado por el fabricante (ruggedized) para resistir impactos y vibraciones. El filtrado espectral se confía a un UV/IR-Cut roscado (M25.5 × 0.50) que bloquea 200–370 nm y 750–1100 nm, transmitiendo únicamente el rango visible (370–750 nm) y atornillándose directamente al objetivo.\\
 
-    
+\noindent Ambos módulos se conectan a la \textit{Raspberry Pi 4} mediante cables micro-USB B, lo que simplifica la alimentación y el flujo de datos (Figura~\ref{fig:sistemas_opticos_componentes}).
+
 
 \begin{figure}[h]
     \centering
@@ -51,7 +51,30 @@
   % \subsection{Validaciones funcionales de taller}
   %   % → Pruebas de alineamiento, sellado de luz parásita y peso final.
   %   %   Tabla de verificación contra los requisitos de la Sección 1.1.
-  \section{Sistema de adquisicion y control de datos}
+  
+
+  \section{Construcción e integración del prototipo}
+  \subsection{Modelo CAD y ensamblaje mecánico}
+    % → FIGURA grande: render CAD explosionado del KBee con leyenda de partes.
+    %   Tabla: materiales y masa de cada componente.
+
+    El case del QBee está impreso en PET‑G (tereftalato de polietileno modificado con glicol), un polímero cuya densidad típica ronda 1,317 g/cm³, que combina buena resistencia al impacto (Charpy $\approx$ 4,03 kJ/m²) y alargamiento al rompimiento hasta 15\% en formulaciones estándar. Su módulo de tracción (~4015 MPa) y de flexión (~2987 MPa) aseguran rigidez, mientras que su temperatura de transición vítrea ($\approx$ 76 °C) y rango de fusión (220–260 °C) lo hacen estable en el calor generado por electrónica cercana. Además, presenta excelente durabilidad química y mínima tendencia al \emph{warping}, ideal para piezas de geometría compleja. El peso total del disposito es de 1.810 gramos, cumpliendo así con el requisito de peso impuesto.\\
+
+    \noindent La dimensión externa del case se diseñó para encajar en el bay interno del UAV C3, sin requerir hermeticidad, ya que este estária protegido de las condiciones exteriores. El cierre se logra con tornillos M3 que unen la tapa inferior y el divisor de compartimentos a la carcasa principal. En el interior, cada sistema óptico (6/NIR y 7/VIS) se ancla directamente al sensor mediante cuatro tornillos M3 en sus laterales, asegurando alineación con el eje de vuelo. El sistema 6 (NIR) monta el Alvium 1800 U‑501m (AR0522) + objetivo 8 mm f/2.5 + filtro 850 nm en montura S, todo encapsulado en una montura de resina 3D. El sistema 7 (VIS) agrupa el Alvium 1800 U-500c (AR0521) + objetivo 8.5 mm f/1.3 ruggedized + filtro VIS UV/IR Cut en rosca M25.5, manteniendo rigidez frente a vibraciones.\\
+    
+    \noindent La unidad de cómputo y almacenamiento es una Raspberry Pi 4, colocada en un bloque intermedio y alimentada por una powerbank de 20.000 mAh. Este sistema tiene acoplado un hat de GPS, que suministra al sistema de metadatos de fecha, hora UTC, latitud, longitud, altitud y ángulo de elevación, esenciales para la georreferenciación y ortorrestitución de imágenes. Finalmente, el módulo in situ de sensado de contaminantes comparte alimentación de 5 V de la misma batería y ocupa el compartimento trasero de la carcasa, completando la funcionalidad del QBee.\\
+    
+    
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=1\linewidth]{Figures/C4/QBee.pdf}
+        \caption{Vista explosionada del ensamble completo del QBee, mostrando la carcasa impresa en PET‑G y la disposición de los sistemas 6 (NIR, 8 mm f/2.5) y 7 (VIS, 8.5 mm f/1.8). Este diseño y construcción fue concebido con el apoyo del equipo de manufactura del pryecto C3.}
+        \label{fig:exploded_assembly}
+    \end{figure}
+
+
+\section{Sistema de adquisición y control de datos}
   \label{sec:script_control_adquisicion}
   
   Con el propósito de automatizar el proceso de captura, procesamiento y almacenamiento de imágenes multiespectrales durante los vuelos o pruebas en banco, se desarrolló un script en lenguaje Python que permite la adquisición simultánea de imágenes en el espectro visible (VIS) y cercano al infrarrojo (NIR), integrando además datos de posicionamiento global (GPS) en tiempo real.
@@ -137,28 +160,6 @@
   
   Adicionalmente, el sistema \texttt{QBee} fue configurado para permitir actualizaciones remotas del código fuente del script mediante el sistema de control de versiones \texttt{Git}. El script está vinculado a un repositorio privado alojado en la plataforma \texttt{GitHub}, lo que permite a los usuarios autenticados realizar \textit{pull} de actualizaciones desde cualquier ubicación con acceso remoto al dispositivo. Esta funcionalidad permite una mejora continua del sistema, facilitando la depuración, implementación de nuevas funcionalidades y adaptaciones específicas sin necesidad de acceso físico al hardware.
   
-
-  \section{Construcción e integración del prototipo}
-  \subsection{Modelo CAD y ensamblaje mecánico}
-    % → FIGURA grande: render CAD explosionado del KBee con leyenda de partes.
-    %   Tabla: materiales y masa de cada componente.
-
-    El case del QBee está impreso en PET‑G (tereftalato de polietileno modificado con glicol), un polímero cuya densidad típica ronda 1,317 g/cm³, que combina buena resistencia al impacto (Charpy $\approx$ 4,03 kJ/m²) y alargamiento al rompimiento hasta 15\% en formulaciones estándar. Su módulo de tracción (~4015 MPa) y de flexión (~2987 MPa) aseguran rigidez, mientras que su temperatura de transición vítrea ($\approx$ 76 °C) y rango de fusión (220–260 °C) lo hacen estable en el calor generado por electrónica cercana. Además, presenta excelente durabilidad química y mínima tendencia al \emph{warping}, ideal para piezas de geometría compleja. El peso total del disposito es de 1.810 gramos, cumpliendo así con el requisito de peso impuesto.\\
-
-    \noindent La dimensión externa del case se diseñó para encajar en el bay interno del UAV C3, sin requerir hermeticidad, ya que este estária protegido de las condiciones exteriores. El cierre se logra con tornillos M3 que unen la tapa inferior y el divisor de compartimentos a la carcasa principal. En el interior, cada sistema óptico (6/NIR y 7/VIS) se ancla directamente al sensor mediante cuatro tornillos M3 en sus laterales, asegurando alineación con el eje de vuelo. El sistema 6 (NIR) monta el Alvium 1800 U‑501m (AR0522) + objetivo 8 mm f/2.5 + filtro 850 nm en montura S, todo encapsulado en una montura de resina 3D. El sistema 7 (VIS) agrupa el Alvium 1800 U‑500c (AR0521) + objetivo 8.5 mm f/1.3 ruggedized + filtro VIS UV/IR Cut en rosca M25.5, manteniendo rigidez frente a vibraciones.\\
-    
-    \noindent La unidad de cómputo y almacenamiento es una Raspberry Pi 4, colocada en un bloque intermedio y alimentada por una powerbank de 20.000 mAh. Este sistema tiene acoplado un hat de GPS, que suministra al sistema de metadatos de fecha, hora UTC, latitud, longitud, altitud y ángulo de elevación, esenciales para la georreferenciación y ortorrestitución de imágenes. Finalmente, el módulo in situ de sensado de contaminantes comparte alimentación de 5 V de la misma batería y ocupa el compartimento trasero de la carcasa, completando la funcionalidad del QBee.\\
-    
-    
-
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=1\linewidth]{Figures/C4/QBee.pdf}
-        \caption{Vista explosionada del ensamble completo del QBee, mostrando la carcasa impresa en PET‑G y la disposición de los sistemas 6 (NIR, 8 mm f/2.5) y 7 (VIS, 8.5 mm f/1.8). Este diseño y construcción fue concebido con el apoyo del equipo de manufactura del pryecto C3.}
-        \label{fig:exploded_assembly}
-    \end{figure}
-
- 
 
 \section{Pruebas de operación}
   
@@ -252,4 +253,13 @@
 
     \section{Conclusiones y lecciones aprendidas}
 
-    temperatura, la saturacion, la cita de velocidad, los links a los videos, sobre el codigo, 
+    \noindent El proceso de procura y construcción del HuMath\textregistered~QBee logró materializar una carga multiespectral ligera, robusta y completamente funcional dentro de los márgenes de masa (1,810 g) y volumen impuestos por la plataforma UAV C3, demostrando que la fabricación en PET-G y la integración modular de sensores VIS y NIR pueden satisfacer requisitos aeroespaciales universitarios sin recurrir a proveedores externos. La arquitectura mecánica, eléctrica y de control desarrollada permitió operar el sistema de forma autónoma y remota, garantizando la sincronización de imágenes y metadatos a una tasa de cuadros por segundo de hasta 20 FPS.\\
+
+    \noindent Las campañas experimentales evidenciaron que la temperatura ambiente es el factor operativo más crítico: entre 10~\si{\celsius} y 40~\si{\celsius} el dispositivo funcionó sin incidencias, mientras que a 0~\si{\celsius} en la Antártida aparecieron fallos intermitentes de inicialización, subexpresión del sensor VIS y problemas de saturación electrónica en la Raspberry Pi. Estas anomalías sugieren que deben incorporarse elementos de aislamiento térmico pasivo y estrategias de pre-calentamiento del hardware para misiones en climas fríos. En contraste, bajo radiación solar intensa en tierra se alcanzaron niveles cercanos al 90\,\% de saturación del sensor NIR, por lo que se recomienda añadir control automático de ganancia y filtros ND intercambiables para preservar el rango dinámico.\\
+
+%   \noindent El análisis de velocidad angular y lineal obtenido de los registros GPS y de las grabaciones en los vuelos a bordo del T-27 Tucano confirmó que el montaje mecánico soporta vibraciones y aceleraciones moderadas sin pérdida de alineación ni cortes en la adquisición. El vídeo completo de estas pruebas, junto con las capturas representativas, se encuentra archivado en el repositorio institucional (links permanentes figuran en el Anexo B), lo que asegura la trazabilidad de los resultados y facilita futuras auditorías científicas.\\
+
+    \noindent A nivel de software, el script multihilo basado en la biblioteca \texttt{vmbpy} demostró ser estable durante más de 30 horas continuas de operación, pero las pruebas en ambientes extremos revelaron cuellos de botella cuando el búfer alcanzó la saturación de memoria. Como acciones de mejora se recomienda migrar a una arquitectura productora--consumidora basada en \texttt{asyncio} para reducir la latencia, implementar un \textit{watchdog} que reinicie servicios congelados y habilitar compresión de vídeo por hardware para disminuir la carga en la CPU de la Raspberry Pi~4.\\
+
+    \noindent Finalmente, la colaboración con la Fuerza Aérea Colombiana y la participación de estudiantes voluntarios de varias universidades puso de relieve el valor de los acuerdos interinstitucionales. Las lecciones aprendidas aquí---aislamiento térmico, control de saturación, gestión de velocidad de adquisición y documentación exhaustiva de código y datos---sientan las bases para desarrollar versiones de la HuMath\textregistered~QBee capaces de operar de manera confiable en escenarios climáticos aún más desafiantes y ampliar su alcance en programas de monitoreo ambiental nacional e internacional.\\
+

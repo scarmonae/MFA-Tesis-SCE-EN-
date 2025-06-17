@@ -1,8 +1,8 @@
-\chapter{Characterization and main contributions}
+\chapter{Optical Characterization}
 
-This chapter details the materials and methods used for the development of this work. Initially, the materials employed are described, including specific equipment, light sources, calibration patterns, and software used for data acquisition, processing, and analysis.
+\noindent This chapter details the materials and methods used for the development of this work. Initially, the materials employed are described, including specific equipment, light sources, calibration patterns, and software used for data acquisition, processing, and analysis.\\
 
-Subsequently, the experimental methods are presented, organized according to the type of measurement performed: geometric and spectral measurements. For each method, the experimental procedure is clearly described, justifying the choice of technique and specifying the conditions under which the experiments were conducted, including details of instrument configuration and protocols followed.
+\noindent Subsequently, the experimental methods are presented, organized according to the type of measurement performed: geometric and spectral measurements. For each method, the experimental procedure is clearly described, justifying the choice of technique and specifying the conditions under which the experiments were conducted, including details of instrument configuration and protocols followed.\\
 
 
 % Finalmente, se incluye una breve descripción de los resultados esperados tras la ejecución de los métodos mencionados, acompañada del cronograma previsto para las actividades y el presupuesto estimado requerido para la implementación del estudio. Esta información busca proporcionar claridad y facilitar la replicabilidad del estudio, así como sustentar la factibilidad y pertinencia metodológica del proyecto.
@@ -41,39 +41,95 @@ Subsequently, the experimental methods are presented, organized according to the
 
 \section{Geometric Characterization}
 
-\subsubsection{Determination of Field of View (FOV) and Angular Field of View (AFOV)}
+\subsection{Determination of Field of View (FOV) and Angular Field of View (AFOV)}
 \label{sec:fov}
 
-The Field of View (FOV) of the optical system is determined in order to assess the maximum angle of the scene that the camera can capture. First, a test film is placed on a stable base located on the optical bench, preferably using a clamp that allows proper orientation with respect to the optical axis of the system. It is essential that the film is properly positioned to minimize errors caused by tilts or misalignments.
 
-Next, the optical system is positioned on its corresponding base on the optical bench, ensuring it is centered and properly aligned with the test film (see Figure~\ref{fig:MTF_FOV_montage}). Once the initial setup is established, images of the film are captured at different working distances. During image acquisition, an effort is made to precisely align the visible edges of the image with a known edge on the test film. Measurements are taken strictly in the vertical or horizontal direction, explicitly measuring the distance between objects located at opposite edges of the image. This procedure is carried out for both the horizontal and vertical FOV, as they may differ depending on the format of the optical sensor.
+\noindent The Field of View (FOV) of the optical system is determined in order to assess the maximum ground area that can be observed by the system, depending on the distance between the optical system and the surface. For this, an optical setup is conducted in a laboratory to measure the FOV as the distance varies. The optical setup is shown in Figure~\ref{fig:MTF_FOV_montage}. First, a test chart is placed on a stable base located on an optical bench, preferably using a clamp that allows proper orientation with respect to the optical axis of the system. In this case, the test chart used is an ISO-12233 spatial frequency response test chart that comes with multiple sensor format sizes, including an option for a 4:3 sensor aspect ratio. The reason for selecting this pattern is that it contains multiple elements whose length and distance between them can be measured, which allows and facilitates varying the working distance between the optical system being characterized and the chart, such that the edges of the captured image align with a pair of elements in the pattern. It is essential that the chart is properly positioned, centered, and perpendicular to the system's optical axis to minimize errors caused by tilts or misalignments. Next, the optical system is positioned on its corresponding base on the optical bench, ensuring it is centered and properly aligned with the test film.\\ 
+
+\noindent Once the initial setup is established, images of the film are captured at different working distances. During image acquisition, an effort is made to precisely align the visible edges of the image with a known edge on the test film. Measurements are taken strictly in the vertical or horizontal direction, explicitly measuring the distance between objects located at opposite edges of the image. This procedure is carried out for both the horizontal and vertical FOV, as they may differ depending on the format of the optical sensor. In this case, The sensor used in this setup captures images with a 4:3 aspect ratio, which is typical for many scientific and industrial cameras. 
+
 
 \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\linewidth]{Figures/C3/MTF_montaje.pdf}
-        \caption{Optical setup developed. In this case, the use of barriers to prevent capture of unwanted light directly from the illumination source was not necessary, as the source is located behind the optical system under test. The illumination source is a tungsten halogen lamp coupled with a fiber optic cable and a diffuser.}
+        \includegraphics[width=0.98\linewidth]{Figures/C3/MTF_montaje.pdf}
+        \caption{Optical setup developed. The test chart used is an ISO-12233 spatial frequency response test chart printed in mate paper with a size of 69 $\times$ 42 cm. In this case, the use of barriers to prevent capture of unwanted light directly from the illumination source was not necessary, as the source is located behind the optical system under test. The illumination source is a tungsten halogen lamp coupled with a fiber optic cable and a diffuser.}
         \label{fig:MTF_FOV_montage}
 \end{figure}
 
-Since FOV measurements have inherent uncertainties due to the measuring instrument and other experimental sources, a statistical analysis using weighted linear regression is implemented to properly model the functional relationship between the measured FOV and the working distance. This method explicitly considers errors in both the dependent and independent variables, allowing for consistent and less biased estimates of the model parameters. The weighted linear regression is fitted using total least squares (Deming regression), which simultaneously minimizes deviations in both variables:
+
+\noindent
+Before analysing the experimental data it is useful to establish the theoretical dependence of FOV on distance. In an ideal image-forming optical system, the linear relationship between the field of view (FOV) and the working distance arises from basic geometric optics. Under the pinhole camera model, the scene geometry is projected through a central projection point (the pinhole), forming a similar triangle between the object field and the sensor plane \cite{Hecht2002Optics,StanfordPinhole}. If the sensor has width $H$ and the lens has focal length $f$, the angular field of view (AFOV) is defined as:
+
+\begin{equation}
+\text{AFOV} = 2 \cdot \arctan\left(\frac{H}{2f}\right).
+\end{equation}
+
+\noindent
+At a working distance $d$, the linear field of view on the object side is then given by:
+
+\begin{equation}
+\text{FOV}(d) = 2 \cdot d \cdot \tan\left(\frac{\text{AFOV}}{2}\right),
+\label{eq:fov_linear}
+\end{equation}
+
+\noindent
+This expression implies a direct proportionality between FOV and $d$, since $\tan(\text{AFOV}/2)$ is constant for a fixed sensor and focal length. For small angles ($\leq 30^\circ$), the tangent can be approximated as:
+
+\begin{equation}
+\tan\left(\frac{\text{AFOV}}{2}\right) \approx \frac{H}{2f},
+\end{equation}
+
+\noindent
+yielding the simplified linear relationship:
+
+\begin{equation}
+\text{FOV}(d) \approx \frac{H}{f} \cdot d.
+\end{equation}
+
+\noindent
+Thus, the rate of change of the FOV with respect to the working distance is constant and given by:
+
+\begin{equation}
+\frac{d\,\text{FOV}}{d\,d} = \frac{H}{f},
+\end{equation}
+
+\noindent
+which is the linear magnification per unit distance. This linear approximation remains valid for small to moderate AFOV values, and forms the theoretical basis for modeling the FOV as a linear function of working distance in this study \cite{Hecht2002Optics}.\\
+
+
+\noindent Since FOV measurements have inherent uncertainties due to the measuring instrument and other experimental sources, a statistical analysis using weighted linear regression is implemented to properly model the functional relationship between the measured FOV and the working distance. This method explicitly considers errors in both the dependent and independent variables, allowing for consistent and less biased estimates of the model parameters. The weighted linear regression is fitted using total least squares (Deming regression), which simultaneously minimizes deviations in both variables:
 
 \begin{equation}
 \text{FOV} = \beta_1 \cdot \text{Working distance} + \beta_0,
 \label{eq:regresion_lineal}
 \end{equation}
 
-where \( \beta_1 \) is the slope and \( \beta_0 \) is the intercept, both calculated along with their associated uncertainties, thus ensuring a statistically reliable model to describe the behavior of the FOV as a function of working distance.
+\noindent where $\beta_1$ is the slope and $\beta_0$ is the intercept, both calculated along with their associated uncertainties, thus ensuring a statistically reliable model to describe the behavior of the FOV as a function of working distance.\\
 
-To minimize errors introduced by optical aberrations, such as spherical aberration, the measurements are preferably taken along the central vertical axis of the image. Specialized Python software is then used to analyze the images and calculate the angular FOV using the geometric relation:
+\noindent Unlike ordinary least squares (OLS) regression, which assumes uncertainty only in the dependent variable, Deming regression ---also known as total least squares regression--- accounts for errors in both variables by minimizing the orthogonal deviations from the data points to the fitted line \cite{Deming1943ErrorsInVariables}. In this study, this method was adopted since both the working distance and the field of view (FOV) were measured experimentally using instruments with finite resolution (a tape measure and a millimeter ruler), which introduce measurement uncertainties of approximately \SI{1}{\milli\meter} in both variables. \\
+
+\noindent Deming regression requires specifying a variance ratio $\delta = \sigma_y^2 / \sigma_x^2$ between the errors in the two variables. In this case, since both uncertainties are comparable, we adopt $\delta=1$. Under this assumption, the coefficients of the fitted linear model $y = \beta_1 x + \beta_0$ are calculated as:
 
 \begin{equation}
-\text{AFOV} = 2 \cdot \arctan\left(\frac{\text{FOV}}{2 \cdot d}\right),
-\label{eq:fov_angular}
+\hat{\beta}_1 = \frac{s_{yy} - s_{xx} + \sqrt{(s_{yy} - s_{xx})^2 + 4s_{xy}^2}}{2s_{xy}},
 \end{equation}
 
-where \( d \) is the working distance.\\
+\noindent where $s_{xx}$ and $s_{yy}$ are the sample variances of $x$ (working distance) and $y$ (FOV), and $s_{xy}$ is their covariance. The intercept is then computed as:
 
-Regarding the system's focusing, it is recommended to use an autofocus mechanism for proper image acquisition of the test chart. Since the optical systems used in this study have a fixed focal length, the focus must be manually adjusted to obtain a high-quality image. To optimize this adjustment, a method is used based on capturing an image of a well-defined edge, from which the corresponding intensity profile is extracted and displayed in real-time, in this case along the central horizontal line. The derivative of this profile is then calculated and plotted to represent the intensity variation across the edge transition. Focus optimization is achieved by maximizing the prominence of the peak in the derivative, indicating a higher definition in the signal variation. This point of maximum variation is considered indicative of correct focus. Figure~\ref{fig:enfoque_conjunta} shows a representative example of optimal edge focusing.
+\begin{equation}
+\hat{\beta}_0 = \bar{y} - \hat{\beta}_1\,\bar{x},
+\end{equation}
+
+\noindent ensuring that the fitted line passes through the centroid of the data.\\
+
+
+\noindent This fitting methodology, by explicitly incorporating uncertainties in both axes, offers a statistically robust foundation for modeling experimental variability and strengthens the validity of the linear model used for geometric characterization of the optical system.\\
+
+
+\noindent To minimize errors introduced by optical aberrations, such as spherical aberration, the measurements are preferably taken along the central horizontal and vertical axis of the image.\\
+
+\noindent Regarding the system's focusing, it is recommended to use an autofocus mechanism for proper image acquisition of the test chart. Since the optical systems used in this study have a fixed focal length, the focus must be manually adjusted to obtain a high-quality image for each working distance of each observation. To optimize this adjustment, a method is used based on capturing an image of a well-defined edge, from which the corresponding intensity profile is extracted and displayed in real-time, in this case along the central horizontal line. The derivative of this profile is then calculated and plotted to represent the intensity variation across the edge transition. Focus optimization is achieved by maximizing the prominence of the peak in the derivative, indicating a higher definition in the signal variation. This point of maximum variation is considered indicative of correct focus. Figure~\ref{fig:enfoque_conjunta} shows a representative example of optimal edge focusing.\\
 
 \begin{figure}[H]
     \centering
@@ -81,7 +137,7 @@ Regarding the system's focusing, it is recommended to use an autofocus mechanism
     \begin{subfigure}[b]{0.7\linewidth}
         \centering
         \includegraphics[trim=0mm 0mm 0mm 10mm, clip, width=\linewidth]{Figures/C3/SE_1.png}
-        \caption{Image of an edge, used to properly adjust the optical system focus.}
+        \caption{Edge image used for manual focusing.}
         \label{fig:enfoque}
     \end{subfigure}
     
@@ -91,7 +147,7 @@ Regarding the system's focusing, it is recommended to use an autofocus mechanism
     \begin{subfigure}[b]{0.95\linewidth}
         \centering
         \includegraphics[width=\linewidth]{Figures/C3/SE_signal.png}
-        \caption{Central profile of the edge image.}
+        \caption{Intensity profile extracted along the central horizontal line of the edge image.}
         \label{fig:se_signal}
     \end{subfigure}
     
@@ -101,13 +157,14 @@ Regarding the system's focusing, it is recommended to use an autofocus mechanism
     \begin{subfigure}[b]{0.95\linewidth}
         \centering
         \includegraphics[width=\linewidth]{Figures/C3/SE_diff.png}
-        \caption{Derivative of the central profile.}
+        \caption{Derivative of the intensity profile; the maximum peak height is used as the focus metric.}
         \label{fig:se_diff}
     \end{subfigure}
     
-    \caption{Set of images with their corresponding profile and derivative.}
+    \caption{Set of images used for focus optimisation: (a) raw edge image, (b) corresponding intensity profile, and (c) derivative of that profile. The optimum focus position is identified when the derivative peak in (c) reaches its maximum amplitude, indicating the sharpest edge transition.}
     \label{fig:enfoque_conjunta}
 \end{figure}
+
 
 \subsection{Modulation Transfer Function (MTF) Characterization}
 \label{sec:mtf_char}
