@@ -23,3 +23,5 @@ main-blx.bib
 **/*.fdb_latexmk
 *.pdf
 **/*.pdf
+*.blg
+**/*.blg
