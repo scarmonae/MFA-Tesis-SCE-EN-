@@ -45,7 +45,7 @@
 \label{sec:fov}
 
 
-\noindent The Field of View (FOV) of the optical system is determined in order to assess the maximum ground area that can be observed by the system, depending on the distance between the optical system and the surface. For this, an optical setup is conducted in a laboratory to measure the FOV as the distance varies. The optical setup is shown in Figure~\ref{fig:MTF_FOV_montage}. First, a test chart is placed on a stable base located on an optical bench, preferably using a clamp that allows proper orientation with respect to the optical axis of the system. In this case, the test chart used is an ISO-12233 spatial frequency response test chart that comes with multiple sensor format sizes, including an option for a 4:3 sensor aspect ratio. The reason for selecting this pattern is that it contains multiple elements whose length and distance between them can be measured, which allows and facilitates varying the working distance between the optical system being characterized and the chart, such that the edges of the captured image align with a pair of elements in the pattern. It is essential that the chart is properly positioned, centered, and perpendicular to the system's optical axis to minimize errors caused by tilts or misalignments. Next, the optical system is positioned on its corresponding base on the optical bench, ensuring it is centered and properly aligned with the test film.\\ 
+\noindent The Field of View (FOV) of the optical system is determined in order to assess the maximum ground area that can be observed by the system, depending on the distance between the optical system and the surface. For this, an optical setup is conducted in a laboratory to measure the FOV as the distance varies. The optical setup is shown in Figure~\ref{fig:MTF_FOV_montage}. First, a test chart is placed on a stable base located on an optical bench, preferably using a clamp that allows proper orientation with respect to the optical axis of the system. In this case, the test chart used is an ISO-12233 spatial frequency response test chart (see Figure \ref{fig:iso12233_test_chart}) that comes with multiple sensor format sizes, including an option for a 4:3 sensor aspect ratio. The reason for selecting this pattern is that it contains multiple elements whose length and distance between them can be measured, which allows and facilitates varying the working distance between the optical system being characterized and the chart, such that the edges of the captured image align with a pair of elements in the pattern. It is essential that the chart is properly positioned, centered, and perpendicular to the system's optical axis to minimize errors caused by tilts or misalignments. Next, the optical system is positioned on its corresponding base on the optical bench, ensuring it is centered and properly aligned with the test film.\\ 
 
 \noindent Once the initial setup is established, images of the film are captured at different working distances. During image acquisition, an effort is made to precisely align the visible edges of the image with a known edge on the test film. Measurements are taken strictly in the vertical or horizontal direction, explicitly measuring the distance between objects located at opposite edges of the image. This procedure is carried out for both the horizontal and vertical FOV, as they may differ depending on the format of the optical sensor. In this case, The sensor used in this setup captures images with a 4:3 aspect ratio, which is typical for many scientific and industrial cameras. 
 
@@ -98,7 +98,7 @@ Thus, the rate of change of the FOV with respect to the working distance is cons
 which is the linear magnification per unit distance. This linear approximation remains valid for small to moderate AFOV values, and forms the theoretical basis for modeling the FOV as a linear function of working distance in this study \cite{Hecht2002Optics}.\\
 
 
-\noindent Since FOV measurements have inherent uncertainties due to the measuring instrument and other experimental sources, a statistical analysis using weighted linear regression is implemented to properly model the functional relationship between the measured FOV and the working distance. This method explicitly considers errors in both the dependent and independent variables, allowing for consistent and less biased estimates of the model parameters. The weighted linear regression is fitted using total least squares (Deming regression), which simultaneously minimizes deviations in both variables:
+\noindent Since FOV measurements have inherent uncertainties due to the measuring instrument and other experimental sources, a statistical analysis using weighted linear regression is implemented to properly model the functional relationship between the measured FOV and the working distance. This method explicitly considers errors in both the dependent and independent variables, allowing for consistent and less biased estimates of the model parameters. This statistical analysis is needed in order to extrapolate the FOV at a working distances much greater than the used in the measurements, to account for errors in the model and how these propagate along the working distance. The weighted linear regression is fitted using total least squares (Deming regression), which simultaneously minimizes deviations in both variables:
 
 \begin{equation}
 \text{FOV} = \beta_1 \cdot \text{Working distance} + \beta_0,
@@ -122,10 +122,6 @@ which is the linear magnification per unit distance. This linear approximation r
 \end{equation}
 
 \noindent ensuring that the fitted line passes through the centroid of the data.\\
-
-
-\noindent This fitting methodology, by explicitly incorporating uncertainties in both axes, offers a statistically robust foundation for modeling experimental variability and strengthens the validity of the linear model used for geometric characterization of the optical system.\\
-
 
 \noindent To minimize errors introduced by optical aberrations, such as spherical aberration, the measurements are preferably taken along the central horizontal and vertical axis of the image.\\
 
@@ -168,9 +164,16 @@ which is the linear magnification per unit distance. This linear approximation r
 
 \subsection{Modulation Transfer Function (MTF) Characterization}
 \label{sec:mtf_char}
-The Modulation Transfer Function (MTF) enables an objective evaluation of the optical system’s ability to reproduce detail and contrast at different spatial frequencies. In this work, the slanted-edge method is used, as established by the international standard ISO 12233, which offers high precision, repeatability, and reliability.
+\noindent The Modulation Transfer Function (MTF) enables an objective evaluation of the optical system’s ability to reproduce detail and contrast at different spatial frequencies. In this work, the slanted-edge method is used, as established by the international standard ISO 12233. Because the MTF encodes the ultimate resolving capability of the lens–sensor pair, it naturally leads to the \emph{ground-resolved distance} (GRD), i.e.\ the smallest linear feature that can be distinguished on the ground at a given altitude.  Establishing a transparent link between laboratory MTF and mission-level GRD therefore allows direct verification of the resolution requirement.\\
 
-The procedure begins by placing the ISO 12233 standard spatial resolution chart (see Figure~\ref{fig:iso12233_test_chart}) on a stable base. Uniform illumination over the chart’s surface is ensured, guaranteeing that the light intensity at any point does not vary more than $\pm 10\%$ from the center value. To prevent direct light from hitting the optical system, barriers are installed to block any undesired light.
+%----------------------------------------------------------------\\
+
+% \noindent The procedure begins by placing the ISO 12233 standard spatial resolution chart (see Figure~\ref{fig:iso12233_test_chart}) on a stable base, implementing the same setup as the mentioned in the Figure \ref{fig:MTF_FOV_montage} for the FOV characterization    . Uniform illumination over the chart’s surface is ensured, guaranteeing that the light intensity at any point does not vary more than $\pm 10\%$ from the center value.
+
+
+\subsubsection{Experimental Setup}
+
+\noindent The procedure begins by placing the ISO 12233 standard spatial resolution chart (see Figure~\ref{fig:iso12233_test_chart}) on a stable base, implementing the same setup as the mentioned in the Figure \ref{fig:MTF_FOV_montage} for the FOV characterization    . Uniform illumination over the chart’s surface is ensured, guaranteeing that the light intensity at any point does not vary more than $\pm 10\%$ from the center value.\\
 
 \begin{figure}[H]
     \centering
@@ -179,72 +182,104 @@ The procedure begins by placing the ISO 12233 standard spatial resolution chart 
     \label{fig:iso12233_test_chart}
 \end{figure}
 
-Since the optical system under analysis does not have autofocus and instead requires manual adjustment, a Python script was implemented to display the camera or sensor image in real time, along with a window showing the central horizontal intensity profile and another window showing its derivative. To determine optimal focus, the method seeks to maximize the magnitude of the extreme values—peaks and valleys—of the derivative of the central profile, since a higher derivative corresponds to better edge resolution. This indicates that the focus point has been reached where high spatial frequency details are best reproduced. This method is the same as described in Section~\ref{sec:fov}.\\
+\noindent The illumination is configured as shown in Figure~\ref{fig:srf_motaje}. Ambient lighting must be reduced to a minimum. If necessary, a diffuser should be used to ensure the illumination is as homogeneous as possible and to avoid unwanted intensity patterns from the light source.\\ 
 
-The aperture and exposure time of the optical system are carefully adjusted to obtain a maximum signal without saturation in the bright areas of the target. Signal clipping must be avoided in both bright and dark regions, including the transition zones of the slanted edge. As image compression can significantly affect resolution measurements, all system settings must be recorded and reported, including focal length, aperture, sensor resolution, and compression modes used. When using color cameras, proper white balance must be applied according to the light source, as specified in ISO 14525. White balance may be performed automatically if the software and optical system support it, or manually using the RGB channel histogram. The goal is to overlap the histogram peaks of the three channels as much as possible. For this work, white balance was performed manually, ensuring that the peaks corresponding to the bright zone overlap across the three RGB channels. This signal distribution can be seen in Figure~\ref{fig:illumination_distribution}.\\
 
-The MTF measurement is carried out following the steps outlined below:
 
-\begin{enumerate}
-    \item The illumination is configured as shown in Figure~\ref{fig:srf_motaje}. Ambient lighting must be reduced to a minimum. If necessary, a diffuser should be used to ensure the illumination is as homogeneous as possible and to avoid unwanted intensity patterns from the light source.
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim=20mm 50mm 20mm 0mm, clip, width=0.7\linewidth]{Figures/C3/iso 12233 montaje.png}
+    \caption{Optical setup recommended by ISO 12233:2024 for accurate MTF measurement. (1) matte black background, (2) test chart, (3) white illumination, (4) optical system under test, (5) barriers to prevent direct illumination of the optical system, (6) adjustable working distance.}
+    \label{fig:srf_motaje}
+\end{figure}
+
+\noindent The illumination is arranged such that the signal distribution delivered by the optical system is as homogeneous as possible. This implies that the captured image should show two well-defined peaks: one for the dark areas and another for the bright areas of the test pattern. Ideally, these peaks would be delta functions, indicating sharp transitions between intensity regions. In practice, secondary peaks should be minimized and the main peaks should be as narrow as possible. A homogeneous distribution ensures the optical system’s response is measured under controlled conditions and the MTF analysis is not affected by unwanted illumination variations. Figure~\ref{fig:illumination_distribution} shows the distribution achieved for the region of interest shown in Figure~\ref{fig:enfoque}. Additionally, this distribution confirms that signal saturation is minimal in the region of interest.\\
+
+\noindent The exposure time of the optical system are carefully adjusted to obtain a maximum signal without saturation in the bright areas of the target. Signal clipping must be avoided in both bright and dark regions, including the transition zones of the slanted edge. As image compression can significantly affect resolution measurements, all system settings must be recorded and reported, including focal length, aperture, sensor resolution, and compression modes used. When using color cameras, proper white balance must be applied according to the light source, as specified in ISO 14525. White balance may be performed automatically if the software and optical system support it, or manually using the RGB channel histogram. The goal is to overlap the histogram peaks of the three channels as much as possible. For this work, white balance was performed manually, ensuring that the peaks corresponding to the bright zone overlap across the three RGB channels. This signal distribution can be seen in Figure~\ref{fig:illumination_distribution}.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures/C3/Histogram_MTF.pdf}
+    \caption{Signal distribution delivered by the optical system under the configured experimental illumination. Two main peaks are observed: one in the dark zone and another in the bright zone, with attenuated secondary peaks.}
+    \label{fig:illumination_distribution}
+\end{figure}
+
+\noindent Since the optical system under analysis does not have autofocus and instead requires manual adjustment, a Python script was implemented to display the camera or sensor image in real time, along with a window showing the central horizontal intensity profile and another window showing its derivative. To determine optimal focus, the method seeks to maximize the magnitude of the extreme values—peaks and valleys—of the derivative of the central profile, since a higher derivative corresponds to better edge resolution. This indicates that the focus point has been reached where high spatial frequency details are best reproduced. This method is the same as described in Section~\ref{sec:fov}.\\
+
+
+\noindent The optical system is positioned to properly frame the test chart. Vertical arrows help adjust magnification, while horizontal arrows assist in centering the image. The tips of the central black arrows should be fully visible, while the white arrows should be completely hidden. The horizontal edge of the chart should be aligned approximately parallel to the sensor’s horizontal lines. The approximate distance between the camera and the test chart is recorded for later analysis. Figure~\ref{fig:iso12233_test_chart_encuadre} shows the arrows used for alignment.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/C3/ISO_12233-reschart_arrows.png}
+    \caption{Standard chart used to measure the spatial frequency response of the optical system. The arrows used for framing and camera alignment are highlighted.}
+    \label{fig:iso12233_test_chart_encuadre}
+\end{figure}
+
+
+\noindent For each system (VIS and NIR) we captured 50 illuminated frames of the test and 50 dark frames (illumination turned off), keeping the working distance and exposure settings constant. Averaging the 50 frames mitigates random noise originating from shot-to-shot fluctuations in both the light source and the sensor, producing a single noise-reduced image.  
+The dark frames, which contain only the sensor’s baseline signal (dark current) and fixed-pattern artefacts such as hot or dead pixels, are likewise averaged into a master dark frame.  
+This master dark frame is then subtracted from every illuminated frame prior to further processing, as detailed in Section~\ref{subsub:corriente_oscura_espectrometro}. A specific analysis region is selected within the corrected image, where the slanted edge is clearly distinguishable.\\
+
+
+% \noindent The MTF measurement is carried out following the steps outlined below:
+
+% \begin{enumerate}
+%     \item The illumination is configured as shown in Figure~\ref{fig:srf_motaje}. Ambient lighting must be reduced to a minimum. If necessary, a diffuser should be used to ensure the illumination is as homogeneous as possible and to avoid unwanted intensity patterns from the light source.
     
-    \begin{figure}[H]
-        \centering
-        \includegraphics[trim=20mm 50mm 20mm 0mm, clip, width=0.7\linewidth]{Figures/C3/iso 12233 montaje.png}
-        \caption{Optical setup recommended by ISO 12233:2024 for accurate MTF measurement. (1) matte black background, (2) test chart, (3) white illumination, (4) optical system under test, (5) barriers to prevent direct illumination of the optical system, (6) adjustable working distance.}
-        \label{fig:srf_motaje}
-    \end{figure}
+%     % \begin{figure}[H]
+%     %     \centering
+%     %     \includegraphics[trim=20mm 50mm 20mm 0mm, clip, width=0.7\linewidth]{Figures/C3/iso 12233 montaje.png}
+%     %     \caption{Optical setup recommended by ISO 12233:2024 for accurate MTF measurement. (1) matte black background, (2) test chart, (3) white illumination, (4) optical system under test, (5) barriers to prevent direct illumination of the optical system, (6) adjustable working distance.}
+%     %     \label{fig:srf_motaje}
+%     % \end{figure}
 
-    \item The illumination is arranged such that the signal distribution delivered by the optical system is as homogeneous as possible. This implies that the captured image should show two well-defined peaks: one for the dark areas and another for the bright areas of the test pattern. Ideally, these peaks would be delta functions, indicating sharp transitions between intensity regions. In practice, secondary peaks should be minimized and the main peaks should be as narrow as possible. A homogeneous distribution ensures the optical system’s response is measured under controlled conditions and the MTF analysis is not affected by unwanted illumination variations. Figure~\ref{fig:illumination_distribution} shows the distribution achieved for the region of interest shown in Figure~\ref{fig:enfoque}. Additionally, this distribution confirms that signal saturation is minimal in the region of interest.
+%     \item The illumination is arranged such that the signal distribution delivered by the optical system is as homogeneous as possible. This implies that the captured image should show two well-defined peaks: one for the dark areas and another for the bright areas of the test pattern. Ideally, these peaks would be delta functions, indicating sharp transitions between intensity regions. In practice, secondary peaks should be minimized and the main peaks should be as narrow as possible. A homogeneous distribution ensures the optical system’s response is measured under controlled conditions and the MTF analysis is not affected by unwanted illumination variations. Figure~\ref{fig:illumination_distribution} shows the distribution achieved for the region of interest shown in Figure~\ref{fig:enfoque}. Additionally, this distribution confirms that signal saturation is minimal in the region of interest.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\linewidth]{Figures/C3/Histogram_MTF.pdf}
-        \caption{Signal distribution delivered by the optical system under the configured experimental illumination. Two main peaks are observed: one in the dark zone and another in the bright zone, with attenuated secondary peaks.}
-        \label{fig:illumination_distribution}
-    \end{figure}
+%     % \begin{figure}[H]
+%     %     \centering
+%     %     \includegraphics[width=1\linewidth]{Figures/C3/Histogram_MTF.pdf}
+%     %     \caption{Signal distribution delivered by the optical system under the configured experimental illumination. Two main peaks are observed: one in the dark zone and another in the bright zone, with attenuated secondary peaks.}
+%     %     \label{fig:illumination_distribution}
+%     % \end{figure}
 
-    \item The optical system is positioned to properly frame the test chart. Vertical arrows help adjust magnification, while horizontal arrows assist in centering the image. The tips of the central black arrows should be fully visible, while the white arrows should be completely hidden. The horizontal edge of the chart should be aligned approximately parallel to the sensor’s horizontal lines. The approximate distance between the camera and the test chart is recorded for later analysis. Figure~\ref{fig:iso12233_test_chart_encuadre} shows the arrows used for alignment.
+%     \item The optical system is positioned to properly frame the test chart. Vertical arrows help adjust magnification, while horizontal arrows assist in centering the image. The tips of the central black arrows should be fully visible, while the white arrows should be completely hidden. The horizontal edge of the chart should be aligned approximately parallel to the sensor’s horizontal lines. The approximate distance between the camera and the test chart is recorded for later analysis. Figure~\ref{fig:iso12233_test_chart_encuadre} shows the arrows used for alignment. 
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.8\linewidth]{Figures/C3/ISO_12233-reschart_arrows.png}
-        \caption{Standard chart used to measure the spatial frequency response of the optical system. The arrows used for framing and camera alignment are highlighted.}
-        \label{fig:iso12233_test_chart_encuadre}
-    \end{figure}
+%     \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.8\linewidth]{Figures/C3/ISO_12233-reschart_arrows.png}
+%         \caption{Standard chart used to measure the spatial frequency response of the optical system. The arrows used for framing and camera alignment are highlighted.}
+%         \label{fig:iso12233_test_chart_encuadre}
+%     \end{figure}
 
-    \item The chart is carefully rotated at an angle between $2^\circ$ and $10^\circ$ relative to the sensor’s pixel rows or columns to ensure accuracy in the MTF determination. The chart shown in Figure~\ref{fig:iso12233_test_chart} includes slanted edge patterns that meet this angular requirement.
+%     \item The chart is carefully rotated at an angle between $2^\circ$ and $10^\circ$ relative to the sensor’s pixel rows or columns to ensure accuracy in the MTF determination. The chart shown in Figure~\ref{fig:iso12233_test_chart} includes slanted edge patterns that meet this angular requirement, so it is not required to be rotated.
 
-    \item 50 images of the slanted edge are captured and averaged to reduce temporal noise and improve statistical quality.
+%     \item 50 images of the slanted edge are captured and averaged to reduce temporal noise and improve statistical quality.
 
-    \item 50 dark images are also captured and averaged for sensor non-uniformity correction. This correction is detailed in Section~\ref{subsub:corriente_oscura_espectrometro}.
+%     \item 50 dark images are also captured and averaged for sensor non-uniformity correction. This correction is detailed in Section~\ref{subsub:corriente_oscura_espectrometro}.
 
-    \item The slanted edge image is corrected using the previously obtained average dark image.
+%     \item The slanted edge image is corrected using the previously obtained average dark image.
 
-    \item A specific analysis region is selected within the corrected image, where the slanted edge is clearly distinguishable.
+%     \item A specific analysis region is selected within the corrected image, where the slanted edge is clearly distinguishable.
 
-    \item The exact angle of the slanted edge with respect to the sensor rows or columns is determined in order to properly normalize spatial frequency for MTF analysis.
+%     \item The Edge Spread Function (ESF) is obtained by analyzing pixel intensity values across multiple rows or columns crossing the slanted edge.
 
-    \item The Edge Spread Function (ESF) is obtained by analyzing pixel intensity values across multiple rows or columns crossing the slanted edge.
+%     \item To enhance method precision, oversampling is performed by combining multiple rows or columns (at least four) to generate a single, more accurate spatial function.
 
-    \item To enhance method precision, oversampling is performed by combining multiple rows or columns (at least four) to generate a single, more accurate spatial function.
+%     \item The ESF is numerically differentiated to generate the Line Spread Function (LSF).
 
-    \item The ESF is numerically differentiated to generate the Line Spread Function (LSF).
+%     \item Finally, the Fast Fourier Transform (FFT) is applied to the LSF to obtain the MTF:
 
-    \item Finally, the Fast Fourier Transform (FFT) is applied to the LSF to obtain the MTF:
+%     \begin{equation}
+%         \text{MTF}(f) = \left|\mathcal{F}\{\text{LSF}(x)\}(f)\right|,
+%     \end{equation}
 
-    \begin{equation}
-        \text{MTF}(f) = \left|\mathcal{F}\{\text{LSF}(x)\}(f)\right|,
-    \end{equation}
+%     where $\mathcal{F}$ denotes the Fourier transform operation and $f$ is the spatial frequency.
 
-    where $\mathcal{F}$ denotes the Fourier transform operation and $f$ is the spatial frequency.
+%     \item The resulting MTF curve is normalized to its maximum value at low frequencies and plotted against spatial frequency for analysis.
+% \end{enumerate}
 
-    \item The resulting MTF curve is normalized to its maximum value at low frequencies and plotted against spatial frequency for analysis.
-\end{enumerate}
-
-MTF processing is performed using the \href{https://imagej.net/ij/plugins/se-mtf/index.html}{SE\_MTF} plugin from \href{https://imagej.net/ij/index.html}{ImageJ}. In this procedure, the image scale is configured in physical units (e.g., lp/mm) based on the actual sensor size and number of photodetectors. Once parameters are configured, the plugin extracts the Edge Spread Function (ESF) from the image edge and, through numerical differentiation, generates the Line Spread Function (LSF). Then, a Fast Fourier Transform (FFT) is applied to the LSF to obtain the Modulation Transfer Function (MTF).
-
-Figure~\ref{fig:plugin_config1} shows the interface for configuring parameters. Based on the Region of Interest (ROI) and pixel size, it is possible to compute the required parameters for plugin configuration.
+\noindent MTF processing is performed using the \href{https://imagej.net/ij/plugins/se-mtf/index.html}{SE\_MTF} plugin from \href{https://imagej.net/ij/index.html}{ImageJ}. In this procedure, the image scale is configured in physical units (e.g., lp/mm) based on the actual sensor size and number of photodetectors. Once parameters are configured, the plugin extracts the Edge Spread Function (ESF) from the image edge and, through numerical differentiation, generates the Line Spread Function (LSF). Then, a Fast Fourier Transform (FFT) is applied to the LSF to obtain the Modulation Transfer Function (MTF). Figure~\ref{fig:plugin_config1} shows the interface for configuring parameters. Based on the Region of Interest (ROI) and pixel size, it is possible to compute the required parameters for plugin configuration.\\
 
 \begin{figure}[H]
     \centering
@@ -253,7 +288,7 @@ Figure~\ref{fig:plugin_config1} shows the interface for configuring parameters. 
     \label{fig:plugin_config1}
 \end{figure}
 
-\subsubsection{Ground–Resolved Distance (GRD) Derived from the MTF}
+\subsubsection{Ground–Resolved distance (GRD) derived from the MTF}
 \label{subsub:grd_from_mtf}
 
 The Modulation Transfer Function provides a frequency–domain representation of the
@@ -263,22 +298,34 @@ following procedure is applied\footnote{The workflow follows the recommendations
 ISO~12233 and common practice in remote‑sensing optics
 \cite{Boreman2001MTF, Holst2008Electro‑Optical}.}.
 
-\paragraph{1. Identify the cut–off spatial frequency in the image plane.}
+\paragraph{1. Identify the cut-off spatial frequency in the image plane.}
 From the measured MTF curve, the spatial frequency
-$f_{\text{im}}$ (in line‑pairs per millimetre, lp/mm) at which the modulation falls to
-30\,\% is chosen as the \emph{cut‑off} frequency:
+$f_{\text{im}}$ (in line-pairs per millimetre, lp/mm) at which the modulation falls to
+30\,\% is chosen as the \emph{cut-off} frequency:
 %
 \begin{equation}
-    \text{MTF}\bigl(f_{\text{im}}\bigr)=0.30.
+    \text{MTF}\!\left(f_{\text{im}}\right)=0.30.
     \label{eq:mtf_cutoff}
 \end{equation}
 
+\noindent
+The 30\,\% level is a widely accepted engineering compromise.  
+At this point an object retains roughly one-third of its original contrast after passing
+through the optical chain, which is still sufficient for reliable visual or algorithmic
+detection.  
+Lower thresholds (e.g.\ 10\,\%) would push the measurement into a region where the
+residual contrast approaches the image‐noise floor—dominated by shot noise,
+read-out noise and illumination fluctuations—making it difficult to distinguish true
+detail from artefacts.  
+Conversely, higher thresholds (50\,\% or 70\,\%) would under-estimate the usable
+resolution by ignoring spatial frequencies that remain perceptible above the noise.
+Choosing 30\,\% therefore provides a practical margin: features with modulation
+greater than this value stand clearly above the contrast variations introduced by the
+sensor, exposure time and lighting instabilities, while frequencies beyond
+$f_{\text{im}}$ are considered effectively lost in noise.
+
 \paragraph{2. Convert to object‑space frequency.}
-The primary lateral magnification\footnote{For object distances
-much larger than the focal length, the primary magnification
-$\text{PMAG}$ is well approximated by
-$\text{PMAG}= \dfrac{\text{Horizontal Sensor Size}}{\text{FOV}}$;
-see Eq.~(\ref{eq:res_0}).} of the lens is
+The primary lateral magnification of the lens is
 %
 \begin{equation}
     \label{eq:pmag}
@@ -293,9 +340,9 @@ The corresponding frequency in object space is therefore
     \label{eq:f_obj}
 \end{equation}
 
-\paragraph{3. Compute the linear ground‑resolved distance.}
+\paragraph{3. Compute the linear ground-resolved distance.}
 A line pair consists of one dark and one bright line; hence the minimum
-distinguishable physical period on the ground, expressed in micrometres, is
+distinguishable physical period on the ground \cite{HollowsJames_Resolution_EO}, expressed in micrometres, is
 %
 \begin{equation}
     \Delta_{\text{ground}} =
@@ -304,11 +351,6 @@ distinguishable physical period on the ground, expressed in micrometres, is
     \label{eq:delta_ground}
 \end{equation}
 %
-If a specific flight altitude (working distance) $\text{WD}$ is assumed, the
-same result can be expressed directly in metres by multiplying
-Eq.~(\ref{eq:delta_ground}) by the scale factor
-$\dfrac{\text{WD}}{\text{focal length}}$, yielding the \emph{ground sample
-distance} (GSD).
 
 \paragraph{4. Reporting.}
 For every lens/sensor pair characterised in
@@ -339,6 +381,8 @@ $\Delta_{\text{ground}}$ for the three mission altitudes analysed
         \hline
     \end{tabularx}
 \end{table}
+
+%===================================================================
 
 
 \subsection{Acquisition Settings for VIS and NIR Systems}
@@ -385,14 +429,14 @@ The accuracy of resolution and MTF measurements largely depends on the optical s
 \label{tab:tab:fov_mtf}\\
 \end{longtable}
 
-Below is a brief description of each parameter used in the configuration:
+\noindent Below is a brief description of each parameter used in the configuration:
 
 \begin{itemize}
     \item \textbf{ExposureTime:} Exposure time in milliseconds, determining how long the sensor collects light. Longer exposures increase the captured light but may cause saturation if not properly adjusted.
 
     \item \textbf{Gain:} Sensor gain factor, amplifying the generated electrical signal. A high gain may increase noise; hence, it is set to 0.0 to avoid unwanted amplification.
 
-    \item \textbf{Gamma:} Gamma correction applied to the image, adjusting the linearity of the light response. A value of 1.0 ensures a linear response.
+    \item \textbf{Gamma:} Gamma correction applied to the image, adjusting the linearity of the light response. A value of 1.0 ensures a linear response model.
 
     \item \textbf{Height (pixels):} Image height in pixels. This parameter defines the vertical resolution and the area of interest.
 
@@ -405,50 +449,66 @@ Below is a brief description of each parameter used in the configuration:
     \item \textbf{BalanceRatio\_Red and BalanceRatio\_Blue:} White balance ratios for the red and blue channels in color cameras. These coefficients are used to match the responses of each channel and ensure proper white balance. In this study, they were manually adjusted to overlap the peaks of the bright zone in the RGB histograms.
 \end{itemize}
 
-These settings are defined to ensure maximum signal without saturation and to avoid clipping in bright and dark areas, guaranteeing that the slanted-edge image is captured under controlled conditions. These parameters are recorded to allow for study replication and for detailed analysis of the optical system response under both low- and high-intensity conditions.
+\noindent These settings are defined to ensure maximum signal without saturation and to avoid clipping in bright and dark areas, guaranteeing that the slanted-edge image is captured under controlled conditions. These parameters are recorded to allow for study replication and for detailed analysis of the optical system response under both low- and high-intensity conditions.
 
-\section{Spectral Characterization of Multispectral Cameras}
+\section{Spectral characterization of multispectral cameras}
 
-Spectral characterization is a fundamental process for color calibration and accurate spectral estimation in multispectral cameras. This process is particularly relevant in applications such as remote sensing, precision agriculture, and environmental analysis, where precision in detecting different wavelengths determines the quality of the obtained data. For this characterization, two main calibration methods using a monochromator were employed: joint calibration of the entire system and separate calibration of its components.
+% \noindent Spectral characterization is an essential step for calibrating the colour response and determining the effective spectral sensitivity of a multispectral camera. In this work, the characterization was performed end-to-end: lens, filters, and sensor were evaluated together to obtain the combined spectral response of the complete imaging chain. Although individual component tests are possible, they were not required here because the mission demands depend on the net response of the integrated system. The resulting system-level curves provide the accuracy needed for applications in remote sensing, precision agriculture, and environmental monitoring, where reliable discrimination between wavelength bands is critical to data quality.
 
-\subsection{Experimental Procedure in the Laboratory}
+% \noindent
+% Spectral calibration quantifies the optical system’s impulse response as a function of wavelength, yielding the end-to-end sensitivity curve $S(\lambda)$.  By exciting the complete imaging chain—lens, filter stack, and detector—with narrowband reference signals and recording the resulting digital output, one obtains a precise transfer function that links scene radiance at each $\lambda$ to sensor counts.  Knowledge of $S(\lambda)$ is indispensable for radiometric correction, band-to-band registration, and the retrieval of biophysical variables in remote sensing, precision agriculture, and environmental monitoring.  Calibrating the integrated system rather than its isolated components ensures that cumulative effects such as lens transmission, filter leakage, stray light, and detector quantum efficiency are captured, providing the spectral ground truth required to convert raw data into physically meaningful reflectance values.
+
+% \noindent
+% Spectral characterization establishes the end-to-end impulse response of the imaging chain, $S(\lambda)$, by illuminating the lens–filter–sensor assembly with narrow-band reference beams and mapping the resulting sensor counts to wavelength. The derived transfer function supports radiometric correction, band co-registration, and the retrieval of biophysical variables in remote-sensing, precision-agriculture, and environmental-monitoring applications, where accurate inter-band discrimination is essential. In this study $S(\lambda)$ is expressed in arbitrary units—conveying only \emph{relative} reflectance—because assigning an absolute scale would require an independently calibrated spectroradiometer and optical power meter traceable to radiometric standards, which lies beyond the scope of the present campaign.
+
+
+\noindent Spectral characterization of a multispectral imaging system consists in determining its relative spectral response, $S(\lambda)$, which encapsulates the combined effects of lenses, filter stack and detector in a single transfer function. Experimentally, $S(\lambda)$ is retrieved by measuring the digital output $C$ produced by the system when illuminated with a source of known spectral radiance $L(\lambda)$ and fitting the continuous model
+
+\begin{equation}
+    C \;\propto\;\int S(\lambda)\,L(\lambda)\,\mathrm{d}\lambda
+\label{eq:spectral_transfer}
+\end{equation}
+
+\noindent using suitable regression techniques \cite{Uttner2006SpectralCameras}. By condensing all optical losses and spectral crosstalk into $S(\lambda)$, this function becomes essential for performing accurate radiometric corrections, ensuring precise inter-band registration, and enabling the quantitative retrieval of biophysical variables, all of which depend on sub-percent differences between spectral channels. In this thesis, the resulting $S(\lambda)$ curves are presented in arbitrary units (relative reflectance), since assigning an absolute scale would require a spectroradiometer and optical power meter calibrated against nationally traceable standards, which is beyond the scope of the present work.  
+
+
+\subsection{Laboratory Procedure}
 \label{sec:procedimiento_experimental_laboratorio}
 
-This section details the laboratory procedure used for the spectral response characterization of various optical systems. The methodology includes the selection of the illumination source, validation of its spectrum, beam collimation, dark current correction of the minispectrometer, use of a set of filters and acrylic sheets, selection and combination of said filters, determination of the central wavelength, and measurement of optical power, followed by image capture with the optical system under test.
+\noindent This section details the laboratory procedure used for the spectral response characterization of various optical systems. The methodology includes the selection of the illumination source, validation of its spectrum, beam collimation, dark current correction of the minispectrometer, use of a set of filters and acrylic sheets, selection and combination of said filters, determination of the central wavelength and bandwidth, and measurement of optical power, followed by image capture with the optical system under test.
 
-\subsubsection{Selection and Validation of the Illumination Source}
+\subsubsection{Selection and validation of the illumination source}
 \label{subsub:fuente_validacion}
 
-A tungsten lamp from ThorLabs, model OSL-2~\cite{OSL2-Manual}, was selected as the main illumination source. This type of lamp emits radiation over a broad range, approximately from 400 nm to 1600 nm, which is suitable for covering both the visible and part of the near-infrared spectrum.
-
-To ensure the spectral distribution of the lamp matched expectations, a minispectrometer from Newport (reference pending) was used to measure its output spectrum. Figure~\ref{fig:lampara_tungsteno_espectro} shows an example of the measured spectral signal, expressed in \textit{counts}, which is the standard output format of such spectrometers. These counts represent the relative intensity recorded by the spectrometer's sensor, but do not constitute an absolute radiometric quantity. Therefore, to obtain a fully calibrated measurement, these counts must be related to the optical power measured by an independent power meter.
+\noindent A tungsten lamp from ThorLabs, model OSL-2~\cite{OSL2-Manual}, was selected as the main illumination source. This type of lamp emits radiation over a broad range, approximately from 400 nm to 1600 nm, which is suitable for covering both the visible and part of the near-infrared spectrum. To ensure the spectral distribution of the lamp matched expectations, a minispectrometer from Newport (Newport Miniespectrometer Oriel IS Series Model 78356) was used to measure its output spectrum. Figure~\ref{fig:lampara_tungsteno_espectro} shows a sample of the measured spectral signal, expressed in counts, which is the standard output format of such spectrometers. These counts represent the relative intensity recorded by the spectrometer's sensor, but do not constitute an absolute radiometric quantity. Therefore, to obtain a fully calibrated measurement, these counts must be related to the optical power measured by an independent power meter (Thorlabs Compact Power and Energy Meter Console PM100D).
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\textwidth]{Figures/C3/tunsteno.png}
-    \caption{Example of the measured spectrum of the tungsten lamp (OSL-2) using the minispectrometer. The vertical axis is expressed in counts, which depend on the intrinsic response of the spectrometer.}
+    \caption{A sample of the measured spectrum of the tungsten lamp (OSL-2) using the minispectrometer. The vertical axis is expressed in counts, which depend on the intrinsic response of the spectrometer.}
     \label{fig:lampara_tungsteno_espectro}
 \end{figure}
 
 \subsubsection{Setup and Collimation of the Illumination Beam}
 \label{subsub:montaje_colimacion}
 
-The tungsten lamp mentioned includes a fiber optic coupling that allows directing the light toward various optical elements. The wavefront emerging from the fiber optic is \emph{divergent}, so the optical power decreases significantly as the distance between the fiber output and the measurement plane increases. To work under controlled conditions and optimize power utilization, the light beam was \textbf{collimated} by mounting the fiber in a one-inch diameter lens tube.
+The tungsten lamp includes a fiber optic coupling that allows directing the light toward various optical elements. The wavefront emerging from the fiber optic is divergent and non-punctual, so the optical power decreases significantly as the distance between the fiber output and the measurement plane increases. To work under controlled conditions and optimize power utilization, the light beam was collimated by mounting the fiber in a one-inch diameter lens tube. However, it is important to clarify that, due to the non-punctual nature of the source, a perfectly collimated wavefront cannot be obtained; residual divergence is always present.
 
 \begin{enumerate}
-    \item \textbf{Selection of the collimating lens:} A plano-convex lens with a focal length of $25$\,mm was selected. Although a longer focal length would reduce divergence, in practice, using lenses with longer focal lengths limits the effective light collection area (especially when the source is not a point source), thus decreasing the total power available in the collimated beam. A 25\,mm lens provides greater light collection, albeit at the cost of slightly more divergence.
+    \item \textbf{Selection of the collimating lens:} A plano-convex lens with a focal length of $25$\,mm was selected. This lens was chosen because it was the shortest focal length option available in the laboratory with a 1-inch tube lens diameter, compatible with the optical setup. Although a longer focal length would reduce divergence, in practice, using lenses with longer focal lengths limits the effective light collection, thus decreasing the total power available in the collimated beam. A 25 mm lens provides greater optical field collection, even though at the cost of slightly more divergence.
+        
     
     \item \textbf{Collimation method:}
     \begin{itemize}
-        \item Traditionally, collimation is achieved by measuring the spot size at various distances along the optical axis and adjusting the lens position to find the point where the beam shows a more constant diameter (or minimum divergence) along its propagation. However, this method was not used in this work due to:
-        \begin{enumerate}
-            \item The lens used is spherical, and the beam coming from the fiber (an extended source) causes noticeable divergence, making it difficult to pinpoint the collimation position solely by observing the spot.
-            \item The main goal is to ensure maximum usable optical power at the measurement plane, making it inefficient to characterize beam uniformity based only on spot size.
-        \end{enumerate}
-        
-        \item Instead, an optical power meter is placed at a fixed distance from the collimating lens (see Figure~\ref{fig:montaje_colimacion}).
-        \item A 4\,nm bandwidth filter centered at 633\,nm is placed in the optical path to isolate a specific spectral range and reduce dispersive effects.
-        \item The distance between the fiber and the lens is varied around the nominal focal length (25\,mm), \emph{searching for the maximum optical power} measured at the detector. This point indicates minimum beam divergence near the measurement plane and maximum power collection.
+        \item Traditionally, collimation is achieved by adjusting the lens position to minimize the angular divergence of the beam, which occurs when the lens is placed at a distance equal to its focal length $f$ from the illumination source. At this point, the emerging rays are approximately parallel and the beam diameter varies minimally along the propagation. However, in this work, this method was not used due to:
+            \begin{enumerate}
+            \item The lens used is spherical and the source (optical fiber) is not point-like, resulting in residual divergence and making it difficult to visually identify the optimal collimation position.
+            \item The main objective is to maximize the usable optical power at the measurement plane, so characterizing beam uniformity solely by observing the diameter is not efficient.
+            \end{enumerate}
+
+            \item Instead, an optical power meter is positioned at a fixed distance from the collimating lens (see Figure~\ref{fig:montaje_colimacion}).
+            \item A bandpass filter with the narrowest possible bandwidth is placed to approximate the output to a quasi-monochromatic source. In this experiment, a filter centered at 633 nm with a bandwidth of 4 nm was used. This allows the optical powermeter to be configured with a well-defined central wavelength, a necessary condition for obtaining an accurate measurement of the transmitted power.
+            \item The distance between the fiber and the lens is varied around the nominal focal length (25\,mm), seeking the maximum optical power measured at the detector. This point corresponds to the configuration with minimal beam divergence near the measurement plane and maximum power collection. Additionally, care is taken to ensure that the entire area of the detector is fully illuminated by the beam, as this is a necessary condition for obtaining an accurate irradiance measurement based on the illuminated area of the detector, which, in the case of complete illumination, corresponds to the total detector area.
     \end{itemize}
     
     \item \textbf{Final positioning:} Once the position that maximizes the detected power is found, the positions of the fiber and the lens are mechanically fixed. Additionally, the distance between the lens and the power meter is kept constant for subsequent measurements, ensuring consistent illumination conditions.
@@ -456,7 +516,7 @@ The tungsten lamp mentioned includes a fiber optic coupling that allows directin
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[trim=30mm 0mm 40mm 25mm, clip, width=0.9\textwidth]{Figures/C3/colimacion.pdf}
+    \includegraphics[trim=30mm 0mm 30mm 25mm, clip, width=0.9\textwidth]{Figures/C3/colimacion.pdf}
     \caption{Setup for collimating the beam of the tungsten lamp with fiber optics. The adjustment of the distance between the fiber and the plano-convex lens aims to maximize the optical power measured by the detector.}
     \label{fig:montaje_colimacion}
 \end{figure}
@@ -464,33 +524,41 @@ The tungsten lamp mentioned includes a fiber optic coupling that allows directin
 \subsubsection{Dark Current Correction in the Minispectrometer}
 \label{subsub:corriente_oscura_espectrometro}
 
-The minispectrometer used to validate the light source spectrum and measure the transmissions of different filters records a base signal even without illumination, known as \emph{dark current} or \emph{electronic noise}. To improve the accuracy of spectral measurements, the following procedure was applied:
+The minispectrometer used to validate the light source spectrum and measure the transmissions of different filters records a base signal even without illumination, known as dark current or electronic noise. This is an offset of the measurement that needs to be quantified for proper corrections. To improve the accuracy of spectral measurements, the following procedure was applied:\\
 
 \begin{itemize}
-    \item A reference measurement was taken under \textbf{total absence of light} (fiber and input blocked). This signal is denoted by \(\mathbf{D}\) and corresponds to the electronic noise level.
+    \item A reference measurement was taken under total absence of light. For this, the detector of the minispectrometer was covered with its cap, and both the illumination source and ambient lighting were turned off to avoid any unwanted light during the measurement. This signal is denoted by \(\mathbf{D}\) and corresponds to the electronic noise level.
     
-    \item For any measured spectrum \(\mathbf{S}\) (e.g., the spectrum of the tungsten lamp or a specific filter), correction is applied by subtracting \(\mathbf{D}\):
-    \[
+    \item For any measured spectrum \(\mathbf{S}\) (e.g., the spectrum of the tungsten lamp and a specific filter), correction is applied by subtracting \(\mathbf{D}\):
+    \begin{equation}    
         \mathbf{S}_{\text{corr}} \;=\; \mathbf{S} \;-\; \mathbf{D}.
-    \]
+    \end{equation}
+    
 \end{itemize}
 
-This attenuates the offset due to readout noise and provides a more reliable reading of the spectral distribution in \emph{counts}.
+\noindent This attenuates the offset due to readout noise and provides a more reliable reading of the spectral distribution in counts. Figure~\ref{fig:dark_current_measurement} shows the measured dark current spectrum of the minispectrometer, acquired under complete absence of light. The mean value of the dark current was found to be 3513.97 counts. This is a significant offset, considering that the maximum possible reading of the spectrometer is 55,000 counts. Consequently, the dark current introduces a minimum error of 6.4 \% in the measurements, calculated as the ratio of the mean dark current to the maximum count value. This value represents the lower bound of the error induced by dark current; in practice, the relative error can be even higher, especially for measurements with lower signal levels. Therefore, proper dark current correction is essential to ensure the accuracy and reliability of all subsequent spectral measurements.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Figures/C3/DC_measured_MS.png}
+    \caption{Measured dark current spectrum of the minispectrometer. The mean value is 3513.97 counts, which represents a significant offset relative to the instrument's dynamic range.}
+    \label{fig:dark_current_measurement}
+\end{figure}
 
 \subsubsection{Set of Filters and Acrylic Sheets}
 \label{subsub:filtros_laminas}
 
-To discretize or modify the spectral distribution of the tungsten lamp, the following elements were used:
-
+In an ideal scenario, the appropriate instrument for spectral characterization is a monochromator, which allows precise filtering of the illumination to produce a quasi-monochromatic beam at any wavelength within the operational range of the device, with a bandwidth as narrow as 1 nm. Such a device enables highly accurate measurement of the system's spectral response by providing tunable, narrowband excitation. However, a monochromator is not available in the optics laboratory; therefore, the characterization must be performed using the available set of optical filters and acrylic sheets. The following section describes the empirical method developed to approximate the spectral response under these constraints.
+\noindent The optical elements used in this experiment consist of two sets:
 \begin{itemize}
-    \item \textbf{Nine high-quality optical filters} mountable in one-inch tubes. These filters are numbered from 0 to 6, with two additional filters labeled 532 and 633 (corresponding to their central wavelengths).
+    \item \textbf{Nine high-quality optical filters} mountable in one-inch tubes. These filters are numbered from 0 to 6, with two additional filters labeled 532 and 633 (corresponding to their central wavelengths). The selection of optical filters was based solely on the availability in the optics laboratory where the experiment was conducted.
     
-    \item \textbf{Eight acrylic sheets} of different colors, each 2\,x\,2\,inches, mountable in an optical slide holder.
+    \item \textbf{Eight acrylic sheets} of different colors, each 2\,x\,2\,inches, mountable in an optical slide holder. The choice of colors was determined by the availability from local acrylic suppliers in Medellín; therefore, the largest possible variety of different colors was selected, based solely on what was accessible in the local market.
 \end{itemize}
 
-Figure~\ref{fig:laminas_filtros} shows the filters and acrylic sheets with their respective labels. The transmitted spectrum of each element was measured (using the tungsten lamp as the illumination source) with the minispectrometer. These measurements were corrected for dark current as described in Section~\ref{subsub:corriente_oscura_espectrometro}.
+\noindent Figure~\ref{fig:laminas_filtros} shows the filters and acrylic sheets with their respective labels. The transmitted spectrum of each element was measured (using the tungsten lamp as the illumination source) with the minispectrometer. These measurements were corrected for dark current as described in Section~\ref{subsub:corriente_oscura_espectrometro}.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{subfigure}{\textwidth}
         \centering
@@ -512,9 +580,9 @@ Figure~\ref{fig:laminas_filtros} shows the filters and acrylic sheets with their
 \subsubsection{Measurement of Transmission Spectra}
 \label{subsub:medicion_transmision}
 
-The transmission spectra of each filter and acrylic sheet are measured to determine their effective spectral transmission. Figure~\ref{fig:montaje_spec} shows the optical setup used to measure the transmission spectrum.
+The transmission spectra of each filter and acrylic sheet are measured with the Miniespectrometer to determine their effective spectral transmission. Figure~\ref{fig:montaje_spec} shows the optical setup used to measure the transmission spectrum.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[trim=30mm 0mm 40mm 25mm, clip, width=0.9\textwidth]{Figures/C3/montaje_spec.pdf}
     \caption{Setup for measuring the transmission spectrum of filters and acrylic sheets.}
@@ -526,18 +594,18 @@ The transmission spectra of each filter and acrylic sheet are measured to determ
     \item For each \textbf{filter} or \textbf{sheet}, the transmitted spectrum \(\mathbf{T}_j\) is measured, also corrected for dark current.
 \end{itemize}
 
-The recorded spectra are shown in Figure~\ref{fig:espectros_combinados}. Then, the dimensionless relative spectral response for each element is calculated by dividing \(\mathbf{T}_j\) by \(\mathbf{I}\). The justification lies in the fact that, in linear systems, the transmission is modeled as a multiplication of the source spectrum by the spectral transfer function of the element (filter or sheet):
+\noindent The measured spectra for each filter and acrylic sheet are presented in Figure~\ref{fig:espectros_combinados}. To obtain the dimensionless relative spectral transmittance of each element, the transmitted spectrum \(\mathbf{T}_j\) is divided by the reference spectrum \(\mathbf{I}\). This approach is justified because, for a linear optical system, the transmission process can be modeled as the product of the source spectrum and the spectral transfer function of the element (filter or sheet):
 
-\[
+\begin{equation}
     \mathbf{T}_j \;=\; \mathbf{I} \;\times\; \beta_j(\lambda),
-\]
-\[
+\end{equation}
+\begin{equation}
     \frac{\mathbf{T}_j}{\mathbf{I}} \;=\; \beta_j(\lambda).
-\]
+\end{equation}
 
-Thus, the curve \(\beta_j(\lambda)\) represents the \textbf{effective spectral transmittance} of the filter or sheet (see Figure~\ref{ig:filtros_laminas_espectros_relativos}).
+\noindent Thus, the curve \(\beta_j(\lambda)\) represents the \textbf{effective spectral transmittance} of the filter or sheet (see Figure~\ref{ig:filtros_laminas_espectros_relativos}).
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{subfigure}{\textwidth}
         \centering
@@ -556,7 +624,7 @@ Thus, the curve \(\beta_j(\lambda)\) represents the \textbf{effective spectral t
     \label{fig:espectros_combinados}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{subfigure}{\textwidth}
         \centering
@@ -574,9 +642,6 @@ Thus, the curve \(\beta_j(\lambda)\) represents the \textbf{effective spectral t
     \caption{Normalized dimensionless spectral response (transmittance) obtained by dividing each filtered spectrum by the tungsten lamp spectrum.}
     \label{ig:filtros_laminas_espectros_relativos}
 \end{figure}
-
-\subsubsection{Generación y selección de combinaciones de filtros}
-\label{subsub:combinaciones_filtros}
 
 \subsubsection{Generation and Selection of Filter Combinations}
 \label{subsub:combinaciones_filtros}
