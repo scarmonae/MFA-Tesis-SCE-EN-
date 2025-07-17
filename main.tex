@@ -51,6 +51,7 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{longtable}
 \usepackage{amsmath}
 \usepackage{siunitx}
+\DeclareSIUnit{\linepair}{lp}  %   ❶ nueva unidad «lp»
 \usepackage{makecell}
 \usepackage{soul}
 \usepackage[
@@ -208,6 +209,7 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 \begin{acknowledgements}
 \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
 % The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
+Quiero agradecer a mi familia por su apoyo y cariño incondicional durante todos estos años, a mis amigos por su compañía y escucha en los momentos difíciles y los grandes momentos de diversión, música y aventura, a mi amiga, socia, compañera y directora académica Olga Lucia por su confianza y apoyo en este proyecto, y por sus lecciones de vida, a la Fuerza Aérea Colombiana por su disposición para probar las Abejas en sus aeronaves, especialmente al Comandante del Comando Aéreo de Combate No.2 Alejandro Vélez Ospina, a mis compañeros de oficina Sara, Neyder y Fernando por su soporte vital diario de cerveza, Mambe y compañía, a Valeria y a Lisseth por sus enseñanzas sobre el trabajo en equipo, a la Dra. Elena por su ejemplo cómo investigadora docente, a mis docentes de la universidad por su inagotable disposición y paciencia para enseñarme la metodología del laboratorio de óptica, y, finalmente, a la Universidad EAFIT por brindarme la oportunidad de formarme cómo magister en física aplicada.  
 \end{acknowledgements}
 
 %----------------------------------------------------------------------------------------
@@ -224,47 +226,134 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 %	ABBREVIATIONS
 %----------------------------------------------------------------------------------------
 
-\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
+% ----------------------------------------------------------------
+% Lista completa de abreviaciones empleadas en la memoria
+% (se fusionan las de “Procura y Construcción” y “Optical Characterization”)
+% ----------------------------------------------------------------
+% ----------------------------------------------------------------
+% Lista completa y actualizada de abreviaciones empleadas en toda la tesis
+% (Procura & Construcción, Optical Characterization, Apéndice A e Introducción)
+% ----------------------------------------------------------------
+% ---------------------------------------------------------------
+% Comprehensive Abbreviation List (English version)
+% ---------------------------------------------------------------
+\begin{abbreviations}{ll}
 
-\textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere\\
-\textbf{WSF} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or\\
+\textbf{4DAir}      & \textbf{4 D}imensional \textbf{Air} project (Colombian Ministry of Science)\\
+\textbf{AFOV}       & \textbf{A}ngular \textbf{F}ield \textbf{O}f \textbf{V}iew\\
+\textbf{AgroTIC}    & \textbf{Agro} \textbf{I}nformation and \textbf{C}ommunication \textbf{T}echnologies project\\
+%\textbf{AMS}        & \textbf{A}merican \textbf{M}athematical \textbf{S}ociety\\
+\textbf{AVI}        & \textbf{A}udio–\textbf{V}ideo \textbf{I}nterleave (video format)\\
+\textbf{CAD}        & \textbf{C}omputer-\textbf{A}ided \textbf{D}esign\\
+\textbf{C3}         & Environmental monitoring project code \textbf{C3}\\
+\textbf{CPU}        & \textbf{C}entral \textbf{P}rocessing \textbf{U}nit\\
+\textbf{DOF}        & \textbf{D}epth \textbf{O}f \textbf{F}ield\\
+\textbf{eSFR}       & \textbf{e}nhanced \textbf{S}patial \textbf{F}requency \textbf{R}esponse (ISO)\\
+\textbf{ESF}        & \textbf{E}dge \textbf{S}pread \textbf{F}unction\\
+\textbf{EVI}        & \textbf{E}nhanced \textbf{V}egetation \textbf{I}ndex\\
+\textbf{FFT}        & \textbf{F}ast \textbf{F}ourier \textbf{T}ransform\\
+\textbf{FIFO}       & \textbf{F}irst \textbf{I}n – \textbf{F}irst \textbf{O}ut\\
+\textbf{FOV}        & \textbf{F}ield \textbf{O}f \textbf{V}iew\\
+\textbf{FWHM}       & \textbf{F}ull \textbf{W}idth at \textbf{H}alf \textbf{M}aximum\\
+\textbf{GRD}        & \textbf{G}round-\textbf{R}esolved \textbf{D}istance\\
+\textbf{GPS}        & \textbf{G}lobal \textbf{P}ositioning \textbf{S}ystem\\
+\textbf{ISO}        & \textbf{I}nternational \textbf{O}rganization for \textbf{S}tandardization\\
+\textbf{IR}         & \textbf{I}nfra\textbf{r}ed\\
+% \textbf{IT8.7}      & \textbf{IT8.7} colour-calibration target\\
+\textbf{JPEG}       & \textbf{J}oint \textbf{P}hotographic Experts \textbf{G}roup\\
+\textbf{KTH}        & Royal Institute of Technology (\textbf{K}ungliga \textbf{T}ekniska \textbf{H}ögskolan, Sweden)\\
+\textbf{lp/mm}      & \textbf{l}ine \textbf{p}airs per \textbf{m}illi\textbf{m}etre\\
+\textbf{LSI}        & \textbf{L}inear and \textbf{S}hift-\textbf{I}nvariant\\
+\textbf{MTFA}       & \textbf{M}odulation \textbf{T}ransfer \textbf{F}unction \textbf{A}rea\\
+\textbf{MTF}        & \textbf{M}odulation \textbf{T}ransfer \textbf{F}unction\\
+\textbf{ND}         & \textbf{N}eutral \textbf{D}ensity (filter)\\
+\textbf{NDVI}       & \textbf{N}ormalised \textbf{D}ifference \textbf{V}egetation \textbf{I}ndex\\
+\textbf{NEM}        & \textbf{N}oise \textbf{E}quivalent \textbf{M}odulation\\
+\textbf{NIR}        & \textbf{N}ear \textbf{I}nfra\textbf{r}ed (700–1100 nm)\\
+\textbf{OD}         & \textbf{O}ptical \textbf{D}ensity\\
+\textbf{OLS}        & \textbf{O}rdinary \textbf{L}east \textbf{S}quares\\
+\textbf{OTF}        & \textbf{O}ptical \textbf{T}ransfer \textbf{F}unction\\
+\textbf{PET-G}      & \textbf{P}oly\textbf{E}thylene \textbf{T}erephthalate – \textbf{G}lycol\\
+\textbf{PMAG}       & \textbf{P}rimary \textbf{MAG}nification\\
+\textbf{PSF}        & \textbf{P}oint \textbf{S}pread \textbf{F}unction\\
+\textbf{PTF}        & \textbf{P}hase \textbf{T}ransfer \textbf{F}unction\\
+\textbf{RGB}        & \textbf{R}ed – \textbf{G}reen – \textbf{B}lue\\
+\textbf{ROI}        & \textbf{R}egion \textbf{O}f \textbf{I}nterest\\
+% \textbf{SAVI}       & \textbf{S}oil \textbf{A}djusted \textbf{V}egetation \textbf{I}ndex\\
+\textbf{SDK}        & \textbf{S}oftware \textbf{D}evelopment \textbf{K}it\\
+\textbf{S-Mount}    & \textbf{S}tandard \(M12\) lens \textbf{Mount}\\
+\textbf{SFR}        & \textbf{S}patial \textbf{F}requency \textbf{R}esponse\\
+\textbf{SFRplus}    & \textbf{SFRplus} test chart (Imatest)\\
+\textbf{SNR}        & \textbf{S}ignal-to-\textbf{N}oise \textbf{R}atio\\
+\textbf{UAV}        & \textbf{U}nmanned \textbf{A}erial \textbf{V}ehicle\\
+\textbf{UTC}        & \textbf{U}niversal \textbf{T}ime, \textbf{C}oordinated\\
+\textbf{UV}         & \textbf{U}ltra\textbf{v}iolet\\
+\textbf{VIS}        & \textbf{V}isible spectrum (400–700 nm)\\
+\textbf{VNC}        & \textbf{V}irtual \textbf{N}etwork \textbf{C}omputing\\
+\textbf{WD}         & \textbf{W}orking \textbf{D}istance\\
+\textbf{XVID}       & \textbf{X}-\textbf{VID}eo codec (MPEG-4)\\
 
 \end{abbreviations}
+
+
 
 %----------------------------------------------------------------------------------------
 %	PHYSICAL CONSTANTS/OTHER DEFINITIONS
 %----------------------------------------------------------------------------------------
 
-\begin{constants}{lr@{${}={}$}l} % The list of physical constants is a three column table
+% \begin{constants}{lr@{${}={}$}l} % The list of physical constants is a three column table
 
-% The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
+% % The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
 
-Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
-%Constant Name & $Symbol$ & $Constant Value$ with units\\
+% Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
+% %Constant Name & $Symbol$ & $Constant Value$ with units\\
 
-\end{constants}
+% \end{constants}
 
 %----------------------------------------------------------------------------------------
 %	SYMBOLS
 %----------------------------------------------------------------------------------------
 
-\begin{symbols}{lll} % Include a list of Symbols (a three column table)
-
-$a$ & distance & \si{\meter} \\
-$P$ & power & \si{\watt} (\si{\joule\per\second}) \\
-%Symbol & Name & Unit \\
-
-\addlinespace % Gap to separate the Roman symbols from the Greek
-
-$\omega$ & angular frequency & \si{\radian} \\
-
+\begin{symbols}{lll} % List of symbols (Roman first, then Greek)
+\textbf{Roman symbols} & & \\[-0.4em]
+$E$                 & Energy & \si{\joule} \\ 
+$m$                 & Mass & \si{\kilogram} \\ 
+$c$                 & Speed of light in vacuum & \si{\meter\per\second} \\ 
+$M$                 & Modulation (image contrast) & -- (dimensionless) \\ 
+$A_{\max}$          & Maximum irradiance/intensity in the image & a.u.\,(digital counts) \\ 
+$A_{\min}$          & Minimum irradiance/intensity in the image & a.u.\,(digital counts) \\ 
+$L$                 & Luminance & \si{\candela\per\square\meter} \\ 
+$f$                 & Spatial frequency & \si{\linepair\per\milli\meter} \\ 
+$f_{\max}$          & Cut‐off spatial frequency & \si{\linepair\per\milli\meter} \\ 
+$f_{\text{NEM}}$    & Noise–equivalent modulation frequency & \si{\linepair\per\milli\meter} \\ 
+$\Delta x$          & Minimum resolvable distance & \si{\meter} \\ 
+$\Delta\theta$      & Minimum resolvable angle & \si{\radian} \\ 
+$t_{\text{integ}}$  & Integration (exposure) time & \si{\second} \\ 
+$r_i$               & Camera response, channel $i$ & a.u.\,(digital counts) \\ 
+$n_i$               & Additive noise, channel $i$  & a.u.\,(digital counts) \\ 
+$\rho_i$            & Linearised signal, channel $i$ & a.u.\,(digital counts) \\ 
+$\gamma_i$          & Gamma-curve exponent, channel $i$ & -- (dimensionless) \\ 
+$R$                 & Measured response matrix & a.u.\,(digital counts) \\ 
+$C$                 & Illumination / filter matrix & -- (dimensionless) \\ 
+$g$                 & Acceleration due to gravity & \si{\meter\per\second\squared} \\ 
+\addlinespace
+\textbf{Greek symbols} & & \\[-0.4em]
+$\lambda$           & Wavelength & \si{\nano\meter} \\ 
+$s_i(\lambda)$      & Spectral sensitivity of channel $i$ & -- (relative units) \\ 
+$I(\lambda)$        & Spectral power density of the scene & \si{\watt\per\square\meter\per\nano\meter} \\ 
+$\omega$            & Angular frequency & \si{\radian\per\second} \\ 
+$\Phi$              & Luminous flux & \si{\lumen} \\ 
+$dA$                & Differential area element & \si{\square\meter} \\ 
+$d\Omega$           & Differential solid angle & \si{\steradian} \\ 
+$\theta$            & Angle between surface normal and ray & \si{\radian} \\ 
 \end{symbols}
+
 
 %----------------------------------------------------------------------------------------
 %	DEDICATION
 %----------------------------------------------------------------------------------------
 
-\dedicatory{For/Dedicated to/To my\ldots} 
+\dedicatory{Dedicated to my sister\ldots} 
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
@@ -277,7 +366,7 @@ $\omega$ & angular frequency & \si{\radian} \\
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
-% \include{Chapters/Chapter1}
+\include{Chapters/Chapter1}
 \include{Chapters/Chapter2} 
 \include{Chapters/Chapter3}
 \include{Chapters/Chapter4} 

@@ -589,12 +589,8 @@ The transmission spectra of each filter and acrylic sheet are measured with the 
     \label{fig:montaje_spec}
 \end{figure}
 
-\begin{itemize}
-    \item For the \textbf{illumination}, the base spectrum \(\mathbf{I}\) is obtained (dark-current corrected).
-    \item For each \textbf{filter} or \textbf{sheet}, the transmitted spectrum \(\mathbf{T}_j\) is measured, also corrected for dark current.
-\end{itemize}
 
-\noindent The measured spectra for each filter and acrylic sheet are presented in Figure~\ref{fig:espectros_combinados}. To obtain the dimensionless relative spectral transmittance of each element, the transmitted spectrum \(\mathbf{T}_j\) is divided by the reference spectrum \(\mathbf{I}\). This approach is justified because, for a linear optical system, the transmission process can be modeled as the product of the source spectrum and the spectral transfer function of the element (filter or sheet):
+\noindent For the illumination, the base spectrum \(\mathbf{I}\) is obtained (dark-current corrected). For each filter or sheet, the transmitted spectrum \(\mathbf{T}_j\) is measured, also corrected for dark current. To obtain the dimensionless relative spectral transmittance of each element, the transmitted spectrum \(\mathbf{T}_j\) is divided by the reference spectrum \(\mathbf{I}\). This approach is justified because, for a linear optical system, the transmission process can be modeled as the product of the source spectrum and the spectral transfer function of the element (filter or sheet):
 
 \begin{equation}
     \mathbf{T}_j \;=\; \mathbf{I} \;\times\; \beta_j(\lambda),
@@ -603,7 +599,7 @@ The transmission spectra of each filter and acrylic sheet are measured with the 
     \frac{\mathbf{T}_j}{\mathbf{I}} \;=\; \beta_j(\lambda).
 \end{equation}
 
-\noindent Thus, the curve \(\beta_j(\lambda)\) represents the \textbf{effective spectral transmittance} of the filter or sheet (see Figure~\ref{ig:filtros_laminas_espectros_relativos}).
+\noindent The measured spectra for each filter and acrylic sheet are presented in Figure~\ref{fig:espectros_combinados}. Thus, the curve \(\beta_j(\lambda)\) represents the effective spectral transmittance of the filter or sheet (see Figure~\ref{ig:filtros_laminas_espectros_relativos}).
 
 \begin{figure}[H]
     \centering
@@ -620,7 +616,7 @@ The transmission spectra of each filter and acrylic sheet are measured with the 
         \caption{Acrylic plates.}
         \label{fig:laminas_espectros}
     \end{subfigure}
-    \caption{Measured spectra (in counts) of tungsten light transmitted through various filters (A) and acrylic plates (B). The vertical axis shows the relative intensity recorded by the minispectrometer in counts.}
+    \caption{Measured spectra (in counts) of tungsten light transmitted through various filters (A) and acrylic plates (B). The vertical axis shows the relative intensity recorded by the minispectrometer in counts. The spectrum of filter 532 and 633 are scaled to match the maximum of the tungsten lamp spectrum.}
     \label{fig:espectros_combinados}
 \end{figure}
 
@@ -646,7 +642,7 @@ The transmission spectra of each filter and acrylic sheet are measured with the 
 \subsubsection{Generation and Selection of Filter Combinations}
 \label{subsub:combinaciones_filtros}
 
-Given that the filters have relatively wide bandwidths (many exceeding 100 nm), this work evaluates the possibility of combining up to three filters to obtain more selective transmission curves. A \texttt{Python} script is developed that:
+\noindent Given that the filters have relatively wide bandwidths (many exceeding 100 nm), this work evaluates the possibility of combining up to three filters or acrylic plates to obtain more selective transmission curves. Given that the method used is computational, a Python script was developed to perform the following tasks: 
 
 \begin{enumerate}
     \item Lists all possible combinations of:
@@ -655,7 +651,7 @@ Given that the filters have relatively wide bandwidths (many exceeding 100 nm), 
         \item Pairs of filters/sheets,
         \item Triplets of filters/sheets.
     \end{itemize}
-    \item For each combination, calculates the \emph{composite transmission curve} \(\beta_{\text{comp}}(\lambda)\), which is the \textbf{product} of the individual transmissions as a function of wavelength.
+    \item For each combination, computes the \emph{composite transmission curve} \(\beta_{\text{comp}}(\lambda)\) by multiplying the individual transmission curves of each filter or acrylic plate as a function of wavelength. This models the sequential attenuation of light as it passes through each optical element as a convolution of the optic field with the optics elements.
     \item Generates a total of 987 combinations (including single, double, and triple combinations).
 \end{enumerate}
 
@@ -674,7 +670,7 @@ Each \(\beta_{\text{ideal}}(\lambda)\) adopts the form:
 where \(\lambda_0\) is the central wavelength and \(\sigma=3\) nm.  
 Figure~\ref{fig:curvas_ideales} illustrates the ideal profiles used.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[trim=0mm 0mm 0mm 25mm, clip, width=1\textwidth]{Figures/C3/ideal_spec.png}
     \caption{Ideal transmission curves for selecting filter combinations. This example shows 10 Gaussians centered at 400, 450, 500, 550, 600, 650, 700, 825, 850, and 875 nm, respectively.}
@@ -708,10 +704,10 @@ where:
 \begin{itemize}
     \item \(\beta_{\text{ideal}}(\lambda_i)\) is the ideal transmission at wavelength \(\lambda_i\),
     \item \(\beta_{\text{comp}}(\lambda_i)\) is the composite transmission of the filter combination at \(\lambda_i\),
-    \item \(\bar{\beta}_{\text{ideal}}\) and \(\bar{\beta}_{\text{comp}}\) are the mean values of each curve across the evaluated range.
+    \item \(\bar{\beta}_{\text{ideal}}\) and \(\bar{\beta}_{\text{comp}}\) are the mean values of each curve across the evaluated range. Since the curves ara Gaussians, this is the central wavelength of the ideal curve and the mean of the composite curve, respectively.
 \end{itemize}
 
-The Pearson coefficient ranges from \([-1, 1]\). A value close to 1 indicates high similarity in shape and relative distribution; values near 0 or negative indicate low similarity. Therefore, the combination with the highest \(r\) is selected as the “optimal” match for a given target curve.
+\noindent The Pearson coefficient ranges from \([-1, 1]\). A value close to 1 indicates high similarity in shape and relative distribution; values near 0 or negative indicate low similarity. Therefore, the combination with the highest \(r\) is selected as the “optimal” match for a given target curve.\\
 
 \medskip
 
@@ -723,9 +719,9 @@ The Pearson coefficient ranges from \([-1, 1]\). A value close to 1 indicates hi
     \item The combination that maximizes \(r\) is selected.
 \end{enumerate}
 
-This method allows identifying the filter combination that best approximates a desired spectral shape. For each central wavelength (e.g., 400, 450, 500, …, 700, 825, 850, and 875\,nm), an “optimal” combination is thus obtained. Figure~\ref{fig:best_corr_combinations} shows an example of the best-matching filter combinations overlaid on their corresponding ideal curves.
+\noindent This method allows identifying the filter combination that best approximates a desired spectral shape. For each central wavelength (e.g., 400, 450, 500, …, 700, 825, 850, and 875\,nm), an “optimal” combination is thus obtained. Figure~\ref{fig:best_corr_combinations} shows the best-matching filter combinations overlaid on their corresponding ideal curves.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[trim=0mm 0mm 0mm 25mm, clip, width=1\textwidth]{Figures/C3/best_matches.png}
     \caption{Filter combinations (solid lines) with the highest correlation to their corresponding ideal curves (dashed lines). The shape and peak position of the selected combinations match the target profiles.}
@@ -734,17 +730,16 @@ This method allows identifying the filter combination that best approximates a d
 
 \medskip
 
-\noindent
-Additionally, some combinations are selected experimentally, since the correlation-based method does not consider absolute transmittance. It is possible that the combination with the highest correlation \(r\) has very low transmittance, limiting its practical utility. Also, individual filters such as those centered at 532 and 633\,nm show good spectral performance. By combining the maximum correlation criterion with experimental validation, the final set of filters used for spectral characterization is selected.
+\noindent Additionally, some combinations are selected experimentally, since the correlation-based method does not consider absolute transmittance. It is possible that the combination with the highest correlation \(r\) has very low transmittance, limiting its practical utility. Also, individual filters such as those centered at 532 and 633\,nm show good spectral performance. By combining the maximum correlation criterion with experimental validation, the final set of filters used for spectral characterization is selected.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{Figures/C3/filt_select.png}
+    \includegraphics[trim= 0mm 0mm 0mm 20mm, clip, width=1\textwidth]{Figures/C3/filt_select.png}
     \caption{Final filter selection used for spectral characterization of the optical systems. Includes both experimentally selected configurations and individual filters (532 and 633 nm) showing good correlation and transmittance.}
     \label{fig:selected_filters}
 \end{figure}
 
-\subsubsection{Determination of Central Wavelength, Bandwidth, and Optical Power of Selected Combinations}
+\subsubsection{Determination of experimental central wavelength, bandwidth, and optical power of selected combinations}
 \label{subsub:longitud_onda_central_potencia}
 
 After defining the optimal combinations, the actual transmission spectra are measured using the minispectrometer to verify the effective central wavelength, resulting bandwidth, and transmitted optical power. This is essential to:
@@ -754,20 +749,11 @@ After defining the optimal combinations, the actual transmission spectra are mea
     \item Verify that the actual transmission curves are consistent with the numerically determined ones.
 \end{enumerate}
 
-The optical power transmitted by each selected combination is then measured using a power meter. To maintain consistency across measurements:
-
-\begin{itemize}
-    \item The tungsten lamp operates at its \textbf{maximum irradiance capacity}.
-    \item For each combination, the power is measured at the previously determined central wavelength \(\lambda_0\).
-\end{itemize}
-
-The lowest power value among all combinations is used as the reference. This ensures that subsequent optical system measurements are performed under the same irradiance conditions, using neutral density filters to reduce irradiance in cases where power exceeds this reference.
+\noindent The optical power transmitted by each selected combination is then measured using a power meter. To maintain consistency across measurements, the tungsten lamp operates at its maximum irradiance capacity. For each combination, the power is measured at the previously determined central wavelength. The lowest power value among all combinations is used as the reference. This ensures that subsequent optical system measurements are performed under the same irradiance conditions, adjusting the power of the lamp or using neutral density filters to reduce irradiance in cases where power exceeds this reference.\\
 
 \medskip
 
-The bandwidth of the measured spectra for each selected filter is also calculated. Each spectrum is first normalized to have a maximum value of 1. The bandwidth is defined as the spectral interval where the signal reaches at least 50\% of its maximum value (i.e., the Full Width at Half Maximum, FWHM). For filters with multiple peaks, the main peak of interest is selected, usually corresponding to the expected region (e.g., NIR).
-
-A Python script is developed that:
+\noindent The bandwidth of the measured spectra for each selected filter is also calculated. Each spectrum is first normalized to have a maximum value of 1. The bandwidth is defined as the spectral interval where the signal reaches at least 50\% of its maximum value (i.e., the Full Width at Half Maximum, FWHM). For filters with multiple peaks, the main peak of interest is selected, usually corresponding to the expected region (e.g., NIR). A Python script is developed that:
 
 \begin{enumerate}
     \item Identifies the maximum peak of each normalized spectrum.
@@ -778,55 +764,147 @@ A Python script is developed that:
     \]
 \end{enumerate}
 
-Figure~\ref{fig:bandwidth_central} shows the central wavelength and FWHM of the selected filters, obtained through the described procedure. These parameters are key to assessing the system’s ability to discriminate spectral bands and for configuring the power meter accurately.
+\noindent Figure~\ref{fig:bandwidth_central} shows the central wavelength and FWHM of the selected filters, obtained through the described procedure. These parameters are key to assessing the system’s ability to discriminate spectral bands and for configuring the power meter accurately.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[trim=0mm 0mm 50mm 25mm, clip, width=1\textwidth]{Figures/C3/ancho de banda.png}
     \caption{Example of a normalized spectrum of a selected filter. The central wavelength and bandwidth (FWHM) are indicated, defined as the spectral range where the signal reaches 50\% of its maximum value.}
     \label{fig:bandwidth_central}
 \end{figure}
 
-\subsubsection{Image Capture with the Optical System Under Test}
-\label{subsub:captura_sistemas_opticos}
+\noindent
+Table~\ref{tab:cwl_fwhm_sorted} lists the experimental centre wavelength (\(\lambda_{\mathrm{c}}\)) and full width at half-maximum (FWHM) obtained for every filter combination.  
+The set spans the entire visible region and a portion of the NIR: the blue edge is defined by the \textit{5 × Purple} stack at \(\lambda_{\mathrm{c}} = 427\;\mathrm{nm}\), while the longest wavelength appears in the \textit{2 × 5} pair (\(\lambda_{\mathrm{c}} = 839\;\mathrm{nm}\)).  
+Two single-element interferential filters, 532 nm and 633 nm, deliver the narrowest pass-bands (4.59 nm and 5.05 nm, respectively), providing quasi-monochromatic illumination that is particularly useful for validating the wavelength calibration of the camera.  
+Conversely, the widest profile corresponds to the \textit{1 × Purple × Red} combination, whose 77 nm FWHM sacrifices spectral selectivity in favour of higher photon flux—an advantageous trade-off when signal-to-noise is critical.  
+Most composite stacks in the 800–830 nm range (\textit{2 × 5}, \textit{3 × 4 × Purple} and \textit{4 × Red}) cluster around 820–840 nm with FWHM near 18–20 nm, offering complementary NIR bands that retain adequate power while limiting overlap.  
+Taken together, the ensemble of filters therefore supplies a graded palette of bandwidths—from sub-5 nm to ~80 nm—allowing the experimental protocol to tailor spectral resolution and radiant power to the requirements of each calibration step.\\
 
-Once the filter combinations are defined and the optical power is adjusted, the characterization of the target optical systems (e.g., an RGB system and/or a monochannel NIR system) is performed. The procedure is as follows:
 
-\begin{enumerate}
-    \item \textbf{Camera or sensor configuration:}
-    \begin{itemize}
-        \item \emph{Gain:} Set to $1$ for all measurements to avoid scaling differences between captures.
-        \item \emph{Gamma:} Set to $1$ (linear) to suppress any internal nonlinearity curves.
-        \item \emph{White balance:} In RGB cameras, the red and blue coefficients are set to $1$, and the green channel is also set to $1$ (if allowed by the firmware). This ensures that the camera does not apply color corrections.
-    \end{itemize}
-    
-    \item \textbf{Use of neutral density filters (optional):} If the power exceeds the reference level, a neutral density filter is inserted into the lens tube after collimation. This ensures the same final power for all combinations.
-    
-    \item \textbf{Exposure time adjustment:} The exposure time is set to avoid image saturation. This value is recorded, since the system's response is \textbf{linearly proportional} to the integration time (see Equation~\ref{eq:modelo_lineal}).
-    
-    \item \textbf{Data capture:}
-    \begin{itemize}
-        \item For each selected filter combination, $50$ consecutive images of the optical system are acquired and saved in an uncompressed or minimally processed format. In this case, the format used is .npy.
-        \item Additionally, $50$ dark current images are taken by completely covering the objective.
-    \end{itemize}
-    
-    \item \textbf{Noise correction and averaging:}
-    \begin{itemize}
-        \item The average of the 50 dark current images is calculated, resulting in an image \(\mathbf{D}_{\text{prom}}\) that represents the system’s electronic offset.
-        \item Each of the 50 illuminated captures is corrected by subtracting \(\mathbf{D}_{\text{prom}}\), thereby eliminating the dark current contribution.
-        \item The 50 corrected images are then averaged, generating a single image \(\mathbf{I}_{\text{filt}}\) for each filter combination.
-    \end{itemize}
-    
-    \item \textbf{Spectral response calculation:}
-    \begin{itemize}
-        \item For each averaged image (\(\mathbf{I}_{\text{filt}}\)), a \emph{response} metric is defined as the sum of all pixel values within the region of interest. In the case of an RGB camera, this sum can be calculated per channel (R, G, or B), or by converting the image to grayscale.
-        \item In a monochromatic or NIR camera, the single available channel is used.
-        \item The resulting value represents the system’s total response to the corresponding filter combination, associated with the calculated \(\lambda_0\).
-    \end{itemize}
-\end{enumerate}
+\begin{table}[H]
+    \centering
+    \caption{Filter combinations ordered by centre wavelength.}
+    \label{tab:cwl_fwhm_sorted}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}
+        \textbf{Filter combination} & \(\lambda_{\mathrm{c}}\) [nm] & FWHM [nm] \\ \hline
+        5 × Purple                  & 427.07 & 42.55 \\ \hline
+        5 × Green                   & 501.15 & 30.24 \\ \hline
+        5 × 6 × Dark Green          & 509.78 & 17.57 \\ \hline
+        4 × Dark Blue               & 520.59 & 35.72 \\ \hline
+        532 nm                      & 532.16 & 4.59  \\ \hline
+        4 × Orange                  & 574.43 & 26.73 \\ \hline
+        2 × 3 × Yellow              & 605.39 & 20.21 \\ \hline
+        633 nm                      & 632.19 & 5.05  \\ \hline
+        1 × Purple × Red            & 701.89 & 77.16 \\ \hline
+        4 × Red                     & 822.38 & 20.19 \\ \hline
+        3 × 4 × Purple              & 826.43 & 18.98 \\ \hline
+        2 × 5                       & 839.43 & 17.14 \\ \hline
+    \end{tabular}
+\end{table}
 
 \noindent
-This process is repeated for each selected filter/sheet combination, generating a discrete spectral response map of the optical system, which relates the central wavelength to the response (as grayscale level sum or per channel).
+Table~\ref{tab:optical_power} summarises the optical power delivered by each filter combination when the tungsten lamp operates at full intensity.  
+The highest throughput corresponds to the \textit{5~$\times$~Purple} stack, which transmits \(70.4\;\mathrm{mW}\), whereas the narrowband 532\,nm filter allows only \(0.42\;\mathrm{mW}\) to reach the detector, making it the most attenuating element in the set. To ensure a homogeneous spectral response during camera characterization, the experiment adopts the lowest recorded value—\(0.42\;\mathrm{mW}\)—as the reference irradiance. For every other combination, the lamp output is reduced and, when necessary, neutral-density filters are inserted until the incident power equals this reference. This strategy removes irradiance as a confounding variable, so that the measured sensor counts depend solely on the relative spectral response of the imaging chain.\\
+
+\begin{table}[H]
+    \centering
+    \caption{Optical power measured for each filter combination (tungsten lamp at maximum setting).}
+    \label{tab:optical_power}
+    \begin{tabular}{|l|c|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}
+        \textbf{Filter combination} & \textbf{Power [mW]} \\ \hline
+        5 $\times$ Purple               & 70.4 \\ \hline
+        1 $\times$ Purple $\times$ Red  & 68.1 \\ \hline
+        5 $\times$ Green                & 53.3 \\ \hline
+        4 $\times$ Orange               & 43.1 \\ \hline
+        2 $\times$ 3 $\times$ Yellow    & 36.8 \\ \hline
+        4 $\times$ Red                  & 26.5 \\ \hline
+        2 $\times$ 5                    & 26.2 \\ \hline
+        4 $\times$ Dark Blue            & 23.7 \\ \hline
+        5 $\times$ 6 $\times$ Dark Green& 17.9 \\ \hline
+        3 $\times$ 4 $\times$ Purple    & 9.7  \\ \hline
+        633\,nm                         & 1.47 \\ \hline
+        532\,nm                         & 0.42 \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Mesaurement of the optical system response}
+\label{subsub:captura_sistemas_opticos}
+
+% Once the filter combinations are defined and the optical power is adjusted at the reference value, the characterization of the target optical systems (e.g., an RGB system and/or a monochannel NIR system) is performed. The procedure is as follows:
+
+% \begin{enumerate}
+%     \item \textbf{Sensor configuration:}
+%     \begin{itemize}
+%         \item Gain: Set to $1$ for all measurements to avoid scaling differences between captures.
+%         \item Gamma: Set to $1$ (linear) to suppress any internal nonlinearity curves.
+%         \item White balance: In RGB cameras, the red and blue coefficients are set to $1$ (the green channel is set as 1 by default). This ensures that the camera does not apply color corrections.
+%     \end{itemize}
+    
+%     \item \textbf{Use of neutral density filters (optional):} If the power exceeds the reference level, a neutral density filter is inserted into the lens tube after collimation. This ensures the same final power for all combinations.
+    
+%     \item \textbf{Exposure time adjustment:} The exposure time is set to avoid image saturation. This value is recorded, since the system's response is linearly proportional to the integration time (see Equation~\ref{eq:linear_response}).
+    
+%     \item \textbf{Data capture:}
+%     \begin{itemize}
+%         \item For each selected filter combination, $50$ consecutive images are acquired and saved in an uncompressed or minimally processed format. In this case, the format used is .npy.
+%         \item Additionally, $50$ dark current images are taken by completely covering the objective.
+%     \end{itemize}
+    
+%     \item \textbf{Noise correction and averaging:}
+%     \begin{itemize}
+%         \item The average of the 50 dark current images is calculated, resulting in an image \(\mathbf{D}_{\text{prom}}\) that represents the system’s electronic offset.
+%         \item Each of the 50 illuminated captures is corrected by subtracting \(\mathbf{D}_{\text{prom}}\), thereby eliminating the dark current contribution.
+%         \item The 50 corrected images are then averaged, generating a single image \(\mathbf{I}_{\text{filt}}\) for each filter combination (see section \ref{subsub:corriente_oscura_espectrometro}).
+%     \end{itemize}
+    
+%     \item \textbf{Spectral response calculation:}
+%     \begin{itemize}
+%         \item For each averaged image (\(\mathbf{I}_{\text{filt}}\)), a \emph{response} metric is defined as the sum of all pixel values within the region of interest. In the case of an RGB camera, this sum can be calculated per channel (R, G, or B), or by converting the image to grayscale.
+%         \item In a monochromatic or NIR camera, the single available channel is used.
+%         \item The resulting value represents the system’s total response to the corresponding filter combination, associated with the calculated \(\lambda_0\).
+%     \end{itemize}
+% \end{enumerate}
+
+% \noindent
+% This process is repeated for each selected filter/sheet combination, generating a discrete spectral response map of the optical system, which relates the central wavelength to the response (as grayscale level sum or per channel).
+
+
+\noindent
+After selecting the filter combinations and setting the irradiance to the reference value, each camera under test—an RGB unit and a monochannel NIR sensor—was characterised sequentially.  
+The procedure began by configuring the sensor electronics: the analogue gain was fixed at unity to avoid scale factors between captures; the gamma curve was set to one (linear) to suppress any internal non-linearity; and, in the RGB camera, the red and blue white-balance coefficients were also forced to one (the green channel is unity by default), thereby preventing firmware colour corrections. The exposure time was then adjusted so that no pixel reached saturation; its value was recorded because, under the linear-response model established in Equation~\eqref{eq:linear_response}, the total signal is directly proportional to the integration time.\\
+
+
+\noindent
+Whenever the measured optical power at the detector exceeded the \(0.42\;\mathrm{mW}\) reference, a neutral-density filter was inserted in the one-inch lens tube downstream of the collimator.  
+This ensured that every filter stack illuminated the sensor with the same radiant power.\\
+
+\noindent
+For each filter combination the camera acquired fifty successive frames in an uncompressed format (\texttt{.npy}).  
+A second series of fifty dark frames was collected with the objective completely covered, yielding a master dark image \(\mathbf{D}_{\text{prom}}\) that represents the electronic offset.  
+Subtracting \(\mathbf{D}_{\text{prom}}\) from every illuminated frame removed the dark current contribution; the corrected frames were averaged to produce a single, low-noise image \(\mathbf{I}_{\text{filt}}\) corresponding to that particular filter stack (see Section~\ref{subsub:corriente_oscura_espectrometro}). \\
+
+
+\noindent
+The spectral response was finally derived from \(\mathbf{I}_{\text{filt}}\).  
+Within a predefined region of interest the digital counts were summed to obtain a scalar response metric.  
+In the RGB camera this sum was calculated independently for the R, G and B channels, whereas in the NIR system the single channel was used.  
+Each metric was paired with the previously determined centre wavelength \(\lambda_{0}\) of the corresponding filter combination.  
+Repeating this workflow across all filters produced a discrete map of the optical system’s spectral response, suitable for calibrating the relative spectral sensitivity of both cameras.\\
+
+\begin{equation}
+    R(\lambda_{0}) \;=\;
+    \sum_{x=0}^{W-1}\sum_{y=0}^{H-1}
+    I_{\text{filt}}\bigl(x,\,y;\,\lambda_{0}\bigr),
+    \label{eq:spectral_response_metric_full}
+\end{equation}
+
+\noindent
+Here \(R(\lambda_{0})\) is the scalar response associated with the filter’s centre wavelength \(\lambda_{0}\); the summation extends over every pixel \((x,y)\) inside the image, where $W$ and $H$ are the image width and height in pixels, and \(I_{\text{filt}}(x,y;\lambda_{0})\) denotes the dark-corrected, noise-averaged image obtained with that filter. For the RGB camera the same expression is applied independently to each colour plane \(k\in\{R,G,B\}\) by replacing \(I_{\text{filt}}\rightarrow I_{\text{filt},k}\); in the NIR system it is evaluated once on the single monochromatic channel.
 
 
 \section{Main contributions}
