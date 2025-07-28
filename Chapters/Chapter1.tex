@@ -430,214 +430,205 @@
 
 
 
-% %======================================================================
-\chapter{Introducción}\label{ch:intro}
+\chapter{Introduction}\label{ch:intro}
 %======================================================================
 %
-%  Este capítulo desarrolla, en un flujo discursivo continuo, el contexto
-%  de la teledetección multiespectral en Colombia, la brecha
-%  científico–tecnológica existente, el problema de investigación,
-%  la hipótesis y los objetivos que guían la presente tesis.
+%  This chapter develops—within a continuous discursive flow—the context
+%  of multispectral remote sensing in Colombia, the existing
+%  science-and-technology gap, the research problem, the hypothesis and
+%  the objectives that steer the present thesis.
 %
 %======================================================================
 
 
 
 %----------------------------------------------------------------------
-% \section{Contexto y motivación}
+% \section{Context and motivation}
 %----------------------------------------------------------------------
-\noindent La teledetección multiespectral ha demostrado ser una herramienta
-estratégica para la agricultura de precisión, el monitoreo de la
-biodiversidad y la gestión sostenible de los recursos naturales \cite{Chuvieco2010}.  A
-través de índices como el \emph{Normalized Difference Vegetation Index}
-(NDVI) y el \emph{Enhanced Vegetation Index} (EVI) se cuantifican la
-biomasa activa, el estrés hídrico y la tasa fotosintética de cultivos o
-ecosistemas completos con una resolución que, en los últimos años, ha
-pasado de hectáreas a decímetros \cite{Xue2017Significant}.  Organismos internacionales estiman
-que la disponibilidad sistemática de estos productos incrementa la
-eficiencia del riego entre un diez y un veinticinco por ciento y reduce
-las pérdidas ocasionadas por deficiencias nutricionales en torno al
-quince por ciento, con impacto directo sobre la seguridad alimentaria y
-la mitigación de emisiones de \(CO_2\).\\
+\noindent Multispectral remote sensing has proven to be a strategic tool
+for precision agriculture, biodiversity monitoring and the sustainable
+management of natural resources \cite{Chuvieco2010}.  Through indices
+such as the \emph{Normalized Difference Vegetation Index} (NDVI) and the
+\emph{Enhanced Vegetation Index} (EVI) it is possible to quantify active
+biomass, water stress and photosynthetic rate of crops or whole
+ecosystems with a resolution that in recent years has shrunk from
+hectares to decimetres \cite{Xue2017Significant}.  International
+organisations estimate that the systematic availability of these
+products increases irrigation efficiency by ten to twenty-five per cent
+and reduces the losses caused by nutritional deficiencies by around
+fifteen per cent, with direct impact on food security and the mitigation
+of \(CO_2\) emissions.\\
 
-\noindent Colombia, país con más de cinco millones de hectáreas de cultivos y uno
-de los índices de biodiversidad más altos del planeta, obtendría un
-beneficio inmediato de la caracterización subparcelaria de la
-vegetación.  Sin embargo, la realidad nacional evidencia limitaciones
-importantes.  La frecuencia de nubes densas reduce las escenas satelitales libres
-de nubosidad a menos de cinco por mes; las resoluciones de misiones
-gratuitas como Landsat 8 (30 m) o Sentinel-2 (10 m) no capturan la
-variabilidad intra–parcelaria requerida, y los registros históricos se
-centran más en el impacto climático que en el desarrollo local de
-tecnología \cite{Poveda2001SeasonalityColombia}.  El resultado son
-pérdidas de rendimiento superiores al diez por ciento del potencial
-productivo y la imposibilidad de aplicar políticas de conservación
-basadas en evidencia.\\
+\noindent Colombia—home to more than five million hectares of crops and one of
+the highest biodiversity indices on the planet—would obtain immediate
+benefits from sub-parcel vegetation characterisation.  National reality,
+however, reveals important limitations.  Persistent cloud cover reduces
+cloud-free satellite scenes to fewer than five per month; the
+resolutions of free missions such as Landsat 8 (30 m) or Sentinel-2
+(10 m) do not capture the required intra-parcel variability, and
+historical records focus more on climate impact than on local technology
+development \cite{Poveda2001SeasonalityColombia}.  The result is yield
+losses above ten per cent of the productive potential and the
+impossibility of applying evidence-based conservation policies.\\
 
 %----------------------------------------------------------------------
-% \section{Estado del arte}
+% \section{State of the art}
 %----------------------------------------------------------------------
-\noindent La adopción de constelaciones comerciales de nanosatélites ha mejorado la
-frecuencia de revisita, pero sus resoluciones —típicamente de tres a
-cinco metros— y sus costos siguen fuera del alcance del productor
-mediano.  En paralelo, las cámaras multiespectrales para UAV se han
-mantenido por encima de los siete mil dólares y alrededor de medio
-kilogramo de masa, sin protocolos de calibración adaptados al trópico.\\
+\noindent The adoption of commercial nanosatellite constellations has improved
+revisit frequency, but their resolutions—typically three to five
+metres—and their costs remain beyond the reach of the medium-size
+producer.  In parallel, multispectral UAV cameras have remained above
+seven thousand US dollars and around half a kilogram of mass, with no
+calibration protocols adapted to the tropics.\\
 
-\noindent Investigaciones tempranas en Colombia demostraron la viabilidad de
-emplear cámaras NIR a bordo de UAV para evaluar la fertilización en caña
-de azúcar \cite{Navia2016MultispectralUAV}.  A escala global, Al-Hourani
-y colaboradores desarrollaron un marco hiperespectral push-broom
-de bajo costo cuyos resultados, comparados con espectrómetros de
-referencia, evidenciaron precisión espectral equivalente gracias a la
-integración de un espectroscopio simple y un sensor CMOS
-\cite{Al-Hourani2023LinePlatforms}.  Esta tendencia a la reducción de
-costos también se refleja en cámaras snapshot de cinco canales y
-gran campo de visión optimizadas para monitoreo continuo de césped, cuyo
-diseño alcanza una MTF superior a 0.5 a 72 líneas/mm
+\noindent Early research in Colombia demonstrated the feasibility of using
+NIR cameras aboard UAVs to assess fertilisation in sugar cane
+\cite{Navia2016MultispectralUAV}.  At global scale, Al-Hourani and
+colleagues developed a low-cost push-broom hyperspectral framework whose
+results, compared with reference spectrometers, showed equivalent
+spectral precision thanks to the integration of a simple spectroscope
+and a CMOS sensor \cite{Al-Hourani2023LinePlatforms}.  This cost-cutting
+trend is also reflected in five-channel snapshot cameras with wide field
+of view optimised for continuous turf monitoring, whose design reaches
+an MTF greater than 0.5 at 72 lines/mm
 \cite{Smeesters2023Wide-Field-of-ViewMonitoring}.\\
 
-\noindent La literatura reciente converge en dos frentes: por un lado, la
-evaluación agronómica mediante aprendizaje automático y, por otro, la
-caracterización instrumental para mejorar la fiabilidad de los índices
-de vegetación.  Bazrafkan et al. compararon cinco algoritmos para predecir
-la madurez del guisante a partir de alturas de cultivo, bandas estrechas
-y dieciocho índices espectrales, alcanzando un \(F_1\) de 0.99 con
-bosques aleatorios \cite{Bazrafkan2023PredictingUASs}.  De modo análogo,
-Kim et al. demostraron que la adición de las bandas borde rojo y NIR
-supera en precisión a la inclusión explícita del NDVI en modelos de
-clasificación profunda, subrayando el peso de la información espectral
-cruda sobre los índices derivados \cite{Kim2023DeepClassification}.\\
+\noindent Recent literature converges on two fronts: on the one hand,
+agronomic assessment via machine learning and, on the other,
+instrumental characterisation to improve the reliability of vegetation
+indices.  Bazrafkan \emph{et al.} compared five algorithms to predict
+dry-pea maturity from crop heights, narrow bands and eighteen spectral
+indices, achieving an \(F_1\) of 0.99 with random forests
+\cite{Bazrafkan2023PredictingUASs}.  Likewise, Kim \emph{et al.} showed
+that adding red-edge and NIR bands outperforms the explicit inclusion of
+NDVI in deep-learning models, underscoring the weight of raw spectral
+information over derived indices \cite{Kim2023DeepClassification}.\\
 
-\noindent En cuanto a calibración y desempeño radiométrico, Deng et al. observaron
-que la cámara Mini-MCA6 supera a la Parrot Sequoia tras aplicar una línea
-empírica de sub-banda, y que el reNDVI resulta más sensible que el NDVI
-al evaluar el estado nutricional del arroz \cite{Deng2018UAV-basedCameras}.
-Vuletić et al. introdujeron un sistema multiespectral de corto alcance
-registrado con cámara RGB-D capaz de detectar cambios de NDVI y NDRE en
-plantas sometidas a estrés hídrico sin recalibraciones sucesivas
-\cite{Vuletic2023Close-rangeSystem}.  Goebel e Iwaszczuk, trabajando con
-MicaSense RedEdge-MX Dual, confirmaron la utilidad de NDVI y NDRE para
-identificar estrés lumínico y de riego en invernadero, destacando la
-necesidad de mejorar la fusión y el registro multibanda
+\noindent Regarding calibration and radiometric performance,
+Deng \emph{et al.} observed that the Mini-MCA6 camera surpasses the
+Parrot Sequoia after applying an empirical sub-band line, and that
+reNDVI is more sensitive than NDVI when evaluating rice nutritional
+status \cite{Deng2018UAV-basedCameras}.  Vuletić \emph{et al.}
+introduced a short-range multispectral system registered with an RGB-D
+camera capable of detecting NDVI and NDRE changes in plants subjected to
+water stress without successive recalibrations
+\cite{Vuletic2023Close-rangeSystem}.  Working with a MicaSense RedEdge-MX
+Dual, Goebel and Iwaszczuk confirmed the usefulness of NDVI and NDRE to
+identify light and irrigation stress in greenhouse plants, stressing the
+need to improve multi-band fusion and registration
 \cite{Goebel2023SPECTRALCAMERA}.\\
 
-\noindent Aplicaciones en América Latina refuerzan la pertinencia regional de
-estas tecnologías.  Arteaga-López et al. emplearon un UAV con cámara
-MAPIR Survey3 para estimar clorofila en café mediante modelos de máquina
-de soporte vectorial, hallando que los índices CVI, GNDVI y GCI ofrecen
-la mayor correlación \cite{Arteaga2022}.  En arroz, Rojas et al.
-compararon Parrot Sequoia y Tetracam ADC-Lite mostrando que NDVI y GNDVI
-registran la disminución de clorofila al cierre del ciclo
-vegetativo \cite{Rojas2018Drones}.  Estudios de manejo hídrico en café
-\cite{Orlando2023POTENTIALIRRIGATION}, de humedad de suelo en Andes
-colombianos \cite{Casamitjana2020SoilMoisture} y de estimación de
-combustible forestal mediante nubes de puntos multiespectrales
-\cite{Villacres2022ConstructionAreas} ilustran la madurez de los métodos
-basados en UAV para resolver problemas agronómicos y ambientales
-específicos.\\
+\noindent Applications in Latin America reinforce the regional relevance of
+these technologies.  Arteaga-López \emph{et al.} employed a UAV with a
+MAPIR Survey3 camera to estimate chlorophyll in coffee via support-vector
+machines, finding that CVI, GNDVI and GCI offered the highest
+correlation \cite{Arteaga2022}.  In rice, Rojas \emph{et al.} compared
+Parrot Sequoia and Tetracam ADC-Lite, showing that NDVI and GNDVI record
+the chlorophyll decrease at the end of the vegetative cycle
+\cite{Rojas2018Drones}.  Water-management studies in coffee
+\cite{Orlando2023POTENTIALIRRIGATION}, soil-moisture assessment in the
+Colombian Andes \cite{Casamitjana2020SoilMoisture} and fuel-load
+estimation via multispectral point clouds
+\cite{Villacres2022ConstructionAreas} illustrate the maturity of
+UAV-based methods to solve specific agronomic and environmental
+problems.\\
 
-\noindent Pese a estos avances, persisten limitaciones clave: los sensores
-comerciales siguen siendo costosos; la mayoría de los estudios dependen
-de cámaras importadas sin control sobre la óptica ni los filtros; y los
-protocolos de calibración rara vez consideran la atmósfera tropical
-altamente variable.  No se dispone aún de una cámara multiespectral
-diseñada y fabricada localmente que logre resolución submétrica, error
-radiométrico inter-canal inferior al cinco por ciento y un costo de
-materiales por debajo de mil quinientos dólares.\\
-
-%----------------------------------------------------------------------
-% \section{Planteamiento del problema}
-%----------------------------------------------------------------------
-\noindent La ausencia de una herramienta de teledetección multiespectral liviana,
-económicamente asequible y rigurosamente calibrada limita la adopción de
-prácticas de agricultura de precisión y la toma de decisiones en
-conservación ambiental.  La pregunta de investigación queda entonces
-formulada en los siguientes términos: \emph{¿Cómo desarrollar y
-caracterizar una cámara multiespectral visible-infrarrojo cercano, de
-bajo costo y baja masa, montable en plataformas aéreas, capaz de adquirir
-información de la superficie terrestre en las condiciones atmosféricas tropicales de Colombia?}\\
+\noindent Despite these advances, key limitations persist: commercial
+sensors remain expensive; most studies rely on imported cameras with no
+control over optics or filters; and calibration protocols seldom account
+for the highly variable tropical atmosphere.  There is still no locally
+designed and manufactured multispectral camera achieving sub-metric
+resolution, inter-channel radiometric error below five per cent and a
+materials cost under fifteen hundred US dollars.\\
 
 %----------------------------------------------------------------------
-% \section{Hipótesis}
+% \section{Problem statement}
 %----------------------------------------------------------------------
-\noindent Se postula que la integración de dos ópticas de focal corta —una de
-8.5 mm f/1.8 para el visible y otra de 8 mm f/2.5 para el infrarrojo
-cercano— acopladas a sensores CMOS AR0521 (VIS) y AR0522 (NIR), junto
-con una calibración geométrica basada en ISO 12233 y una calibración
-radiométrica que utilice combinaciones de filtros caracterizadas en
-laboratorio, permitirá obtener una distancia de resolución terrestre
-igual o inferior a dos metros a una altitud de cinco kilómetros, un
-error radiométrico entre canales inferior al cinco por ciento y un costo
-de materiales que no superará los mil quinientos dólares, manteniendo la
-masa total de la carga útil por debajo de los dos kilogramos.\\
+\noindent The absence of a lightweight, affordable and rigorously calibrated
+multispectral remote-sensing tool limits the adoption of precision
+agriculture practices and evidence-based environmental conservation.
+The research question is therefore posed as follows: \emph{How can a
+low-cost, low-mass visible–near-infrared multispectral camera be
+developed and characterised for airborne platforms, capable of acquiring
+surface information under Colombia’s tropical atmospheric
+conditions?}\\
 
 %----------------------------------------------------------------------
-% \section{Objetivos}
+% \section{Hypothesis}
 %----------------------------------------------------------------------
-\noindent El objetivo general consiste en diseñar, construir, calibrar y
-caracterizar una cámara multiespectral ligera, compuesta por canales
-VIS y NIR, para su integración en un UAV tipo ala fija, de manera que
-genere datos georreferenciados de índices de vegetación adaptados a las
-condiciones tropicales del país.  Ello implica, de forma específica,
-definir la arquitectura óptica y mecánica, gestionar la adquisición de
-componentes dentro de límites de presupuesto y cronograma, ensamblar los
-módulos de sensado y almacenamiento sin exceder la masa objetivo,
-verificar su desempeño en laboratorio y en vuelos de prueba,
-determinar —mediante protocolos ISO— la respuesta geométrica y
-espectral, y finalmente validar la robustez del sistema en escenarios
-operativos representativos.\\
+\noindent The working hypothesis states that integrating two short-focal-length
+optics—one 8.5 mm f/1.8 for the visible range and another 8 mm f/2.5 for
+the near-infrared—coupled to CMOS sensors AR0521 (VIS) and AR0522 (NIR),
+together with a geometric calibration based on ISO 12233 and a
+radiometric calibration using laboratory-characterised filter
+combinations, will yield a ground-sample distance equal to or less than
+two metres at an altitude of five kilometres, an inter-channel
+radiometric error below five per cent and a materials cost not exceeding
+fifteen hundred US dollars, while keeping total payload mass below two
+kilograms.\\
 
 %----------------------------------------------------------------------
-% \section{Alcance y limitaciones}
+% \section{Objectives}
 %----------------------------------------------------------------------
-\noindent La cámara cubrirá el rango espectral comprendido entre 400 y 900 nm,
-operará en un compartimiento de \(100\times100\times150\;\text{mm}^3\)
-con una carga útil total inferior a dos kilogramos y será evaluada a
-altitudes de trabajo que oscilan entre cincuenta y cinco mil metros
-sobre el nivel del terreno.  El proyecto se centra en la ingeniería y
-calibración de la cámara; el desarrollo de algoritmos de clasificación o
-la estimación de variables biofísicas queda fuera del alcance de este
-documento.\\
+\noindent The general objective is to design, build, calibrate and
+characterise a lightweight multispectral camera composed of VIS and NIR
+channels for integration on a fixed-wing UAV, so that it generates
+georeferenced vegetation-index data tailored to the country’s tropical
+conditions.  Specifically, this involves defining the optical and
+mechanical architecture, acquiring components within budget and
+schedule, assembling sensing and storage modules without exceeding the
+mass target, verifying laboratory and flight performance, determining—by
+ISO protocols—the geometric and spectral response, and finally
+validating system robustness in representative operational scenarios.\\
 
 %----------------------------------------------------------------------
-% \section{Metodología}
+% \section{Scope and limitations}
 %----------------------------------------------------------------------
-\noindent La investigación se desarrolla siguiendo una secuencia lógica que inicia
-con el diseño óptico asistido por simulación para seleccionar
-objetivos y sensores, continúa con la fabricación aditiva de la carcasa
-en PET-G y la integración electrónica, prosigue con la calibración
-geométrica de campo de visión y función de transferencia de modulación
-mediante la carta ISO 12233, incorpora una calibración espectral basada
-en combinaciones de filtros cuya transmitancia se determina con
-espectrómetro y radiómetro, y culmina con pruebas en tierra y vuelos en
-aeronaves de la Fuerza Aérea Colombiana, de cuyo análisis se extrae la
-validez de la hipótesis planteada.\\
+\noindent The camera will cover the spectral range from 400 to 900 nm, operate
+within a \(100\times100\times150\;\text{mm}^3\) bay with a total payload
+below two kilograms and be evaluated at working altitudes ranging
+between fifty and five thousand metres above ground level.  The project
+focuses on camera engineering and calibration; the development of
+classification algorithms or the estimation of biophysical variables
+falls outside the scope of this document.\\
 
 %----------------------------------------------------------------------
-% \section{Contribuciones}
+% \section{Methodology}
 %----------------------------------------------------------------------
-\noindent El trabajo aporta una cámara VIS + NIR de fabricación local cuyo costo
-de materiales asciende a mil trescientos dieciocho dólares y cuya masa
-termina en un kilogramo con ochocientos diez gramos; ofrece un protocolo
-de calibración geométrica y espectral adaptado a ambientes tropicales,
-publica un conjunto de datos multiespectrales abiertos adquiridos sobre
-cultivos y selva húmeda y presenta evidencia de funcionamiento en
-condiciones extremas de temperatura y aceleración, incluyendo pruebas en
-la Antártida y a bordo de un T-27 Tucano sometido a cargas de cuatro
-\emph{g}.\\
+\noindent The research unfolds through a logical sequence that starts with
+simulation-assisted optical design to select lenses and sensors,
+continues with additive manufacturing of the PET-G housing and
+electronic integration, proceeds with geometric calibration of field of
+view and modulation-transfer function using the ISO 12233 chart,
+incorporates a spectral calibration based on filter combinations whose
+transmittance is measured with spectrometer and radiometer, and ends
+with ground tests and flights on Colombian Air Force aircraft, from
+whose analysis the validity of the stated hypothesis is established.\\
 
 %----------------------------------------------------------------------
-% \section{Estructura del documento}
+% \section{Contributions}
 %----------------------------------------------------------------------
-\noindent Tras la presente introducción, el segundo capítulo detalla el proceso de
-diseño óptico y la selección de componentes; el tercero describe la
-procura y la construcción de la carga útil; el cuarto expone la
-caracterización geométrica; el quinto desarrolla la caracterización
-espectral y radiométrica; el sexto reúne los resultados de campo y la
-discusión; el séptimo, finalmente, sintetiza las conclusiones y señala
-las líneas de trabajo futuro.\\
+\noindent The work delivers a locally fabricated VIS + NIR camera whose
+materials cost amounts to one thousand three hundred and eighteen US
+dollars and whose mass ends at one kilogram and eight hundred and ten
+grams; it offers a geometric and spectral calibration protocol adapted
+to tropical environments, publishes an open multispectral data set
+acquired over crops and rainforest and presents evidence of operation
+under extreme temperature and acceleration conditions, including tests
+in Antarctica and aboard a T-27 Tucano subjected to four-\emph{g}
+loads.\\
+
+%----------------------------------------------------------------------
+% \section{Document structure}
+%----------------------------------------------------------------------
+\noindent Following this introduction, Chapter 2 details the optical design
+process and component selection; Chapter 3 describes the procurement and
+construction of the payload; Chapter 4 presents the geometric
+characterisation; Chapter 5 develops the spectral and radiometric
+characterisation; Chapter 6 gathers field results and discussion; and
+Chapter 7, finally, summarises the conclusions and outlines future
+work.\\
 
 %======================================================================
-%  Fin del capítulo
+%  End of chapter
 %======================================================================
