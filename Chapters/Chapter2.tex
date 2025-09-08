@@ -687,7 +687,10 @@ primary magnification, the pixel-limited resolution
     \centering
     \includegraphics[trim = 0cm 0cm 0cm 2cm, clip, width=0.9\linewidth]{Figures/C2/disenofov.png}
     \caption{Theoretical ground field of view as a function of altitude
-             for the eight optical configurations. Greater is better.}
+             for the eight optical configurations. The continuous curves
+             correspond to ordinary least–squares (OLS) \emph{linear regressions}
+             of FOV versus altitude using the three design altitudes
+             (50, 1000, and 5000\,m).}
     \label{fig:fov_vs_altitude}
 \end{figure}
 
@@ -695,48 +698,64 @@ primary magnification, the pixel-limited resolution
     \centering
     \includegraphics[trim = 0cm 0cm 0cm 2cm, clip, width=0.9\linewidth]{Figures/C2/design_res.png}
     \caption{Ground‐sampled distance determined by the $\approx 30 \%$ MTF
-             cut-off (\(\Delta_{\mathrm{MTF}}\)) versus altitude.  System 5
-             is omitted because manufacturer data do not report an MTF
-             curve for the selected objetive. Less is better.}
+             cut–off (\(\Delta_{\mathrm{MTF}}\)) versus altitude. The continuous
+             curves correspond to ordinary least–squares (OLS) \emph{linear regressions}
+             of \(\Delta_{\mathrm{MTF}}\) versus altitude computed from the values at
+             50, 1000, and 5000\,m. System 5 \(\Delta_{\mathrm{MTF}}\) is omitted because the manufacturer
+             does not report an MTF curve for the selected objective. Less is better.}
     \label{fig:mtf_vs_altitude}
 \end{figure}
 
 \noindent At first glance, \(\Delta_{\mathrm{MTF}}\) is always larger than
 \(\Delta_{\mathrm{pix}}\), as expected: the optics attenuate high
-frequencies and thus slightly limit the detail that the sensor could
-ideally capture. This confirms that the chosen pixel sizes are small
-enough not to waste lens resolution; indeed, a larger pixel—which may
+spatial frequencies and thus slightly limit the detail that the sensor could
+ideally capture. This trend is evident when comparing the
+\emph{linear-regression} curves of \(\Delta_{\mathrm{MTF}}\) in
+Fig.~\ref{fig:mtf_vs_altitude} with the pixel-limited values reported in
+Table~\ref{tab:grd_fov_clean}. It confirms that the chosen pixel sizes are
+small enough not to waste lens resolution; indeed, a larger pixel—which may
 reduce sensor cost and improve SNR—could be used without losing image
-detail, a possibility left for future upgrades.\\
+detail, a possibility left for future upgrades.\\[4pt]
 
 
 \noindent Regarding the balance between FOV and MTF, long-focal lenses
-concentrate each pixel on a reduced area—better sharpness—but restrict
-the FOV (e.g.\ system 2 gives an 881 m FOV and 20 cm ground
-resolution at 5 km).  Figure~\ref{fig:fov_vs_altitude} every system FOV vs working distance. Such lenses are ideal when high resolution, not coverage, is required—for instance, urban structures or individual
-flora /fauna.  Conversely, very short focal lengths greatly expand FOV
-at the expense of resolution (system 5: 14 km FOV at 5 km altitude).
-These systems are useful when large coverage at close range is needed,
-such as surveillance cameras on a mast tens of metres high.\\
+concentrate each pixel on a reduced area—better sharpness—but restrict the
+FOV. This trade-off is clearly shown by the \emph{linear-regression} FOV
+curves in Fig.~\ref{fig:fov_vs_altitude}: for example, system~2 delivers an
+\(\approx 881~\mathrm{m}\) vertical FOV with \(\approx 20~\mathrm{cm}\)
+ground resolution at \(5~\mathrm{km}\) altitude. Such lenses are ideal when
+high resolution, not coverage, is required—for instance, urban structures or
+individual flora/fauna. Conversely, very short focal lengths greatly expand
+FOV at the expense of resolution (system~5: \(\approx 14~\mathrm{km}\) FOV at
+\(5~\mathrm{km}\) altitude), a configuration useful when large coverage at
+close range is needed, such as surveillance cameras on a mast tens of metres
+high.\\[4pt]
 
-\noindent Systems 3 and 4 appear attractive for 5000 m altitude.  System 3 offers
-a vertical FOV of 2473 m with 2.5 m ground resolution, whereas system 4
-provides 3863 m FOV with 1.2 m resolution. Both, however, rely on a
-12.36 × 12.36 mm, 20 MP sensor costing USD 2500—clearly over-specified
-for the selected lenses and pushing total costs to USD 3379 and
-USD 3550, respectively, while adding considerable mass (78 g and
-128 g).\\
+\noindent Systems~3 and~4 appear attractive for \(5{,}000~\mathrm{m}\)
+altitude. In Fig.~\ref{fig:fov_vs_altitude}, system~3 offers a vertical FOV
+of \(2{,}473~\mathrm{m}\) with \(\Delta_{\mathrm{MTF}}\approx 2.5~\mathrm{m}\)
+(cf. Fig.~\ref{fig:mtf_vs_altitude}), whereas system~4 provides
+\(3{,}863~\mathrm{m}\) FOV with \(\approx 1.2~\mathrm{m}\) resolution.
+Both, however, rely on a \(12.36\times 12.36~\mathrm{mm}\), \(20~\mathrm{MP}\)
+sensor costing \(\$2{,}500\)~USD—clearly over-specified for the selected lenses
+and pushing total costs to \(\$3{,}379\) and \(\$3{,}550\), respectively,
+while adding considerable mass (78~g and 128~g).\\[4pt]
 
-\noindent Given the system requirements, systems 6 and 7 offer the best
-compromise: similar optics (8 mm f/2.5 and 8.5 mm f/1.8) yield balanced
-coverage and detail. At 50 m altitude, system 6 provides a 26.73 m FOV
-with \(\Delta_{\mathrm{MTF}}=1.9\) cm, while system 7 offers a comparable
-FOV with \(\Delta_{\mathrm{MTF}}=3.4\) cm. At 1000 m these become 39 cm
-and 69 cm, respectively, over $\approx$ 500 m coverage; at 5000 m, FOVs of
-$\approx$ 2.7 km and $\approx$ 2.5 km with 2–3.5 m resolution. Their nearly identical
-geometry simplifies multispectral fusion and alignment. Moreover, their
-costs—USD 541 and USD 777 (sensor + lens)—fit comfortably under the
-USD 1500 limit.\\
+
+\noindent Given the system requirements, systems~6 and~7 offer the best
+compromise: similar optics (8~mm f/2.5 and 8.5~mm f/1.8) yield balanced
+coverage and detail. At \(50~\mathrm{m}\) altitude, system~6 provides a
+\(26.73~\mathrm{m}\) FOV with \(\Delta_{\mathrm{MTF}}=1.9~\mathrm{cm}\),
+while system~7 offers a comparable FOV with \(\Delta_{\mathrm{MTF}}=3.4~\mathrm{cm}\).
+At \(1{,}000~\mathrm{m}\) these become \(39~\mathrm{cm}\) and
+\(69~\mathrm{cm}\), respectively, over \(\approx 500~\mathrm{m}\) coverage; at
+\(5{,}000~\mathrm{m}\), FOVs of \(\approx 2.7~\mathrm{km}\) and
+\(\approx 2.5~\mathrm{km}\) with \(2\text{–}3.5~\mathrm{m}\) resolution.
+Their nearly identical geometry simplifies multispectral fusion and alignment.
+Moreover, their costs—\(\$541\) and \(\$777\) USD (sensor + lens)—fit
+comfortably under the \(\$1{,}500\) limit. These conclusions are supported by
+the \emph{linear-regression} trends shown in
+Figs.~\ref{fig:fov_vs_altitude}~and~\ref{fig:mtf_vs_altitude}.
 
 \subsection{Design-process conclusions}
 
@@ -771,8 +790,8 @@ candidate optical systems:
   \multicolumn{2}{c|}{\textbf{System 2}} \\ \hline
 \multicolumn{1}{|c|}{} &
   \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}\textbf{Name}} &
-  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} {\ul Alvium 1800 U-2040 | 20.4 MP Sony IMX541 CMOS sensor - Allied Vision}}} &
-  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} {\ul Alvium 1800 U-2050}}} \\
+  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} { Alvium 1800 U-2040 | 20.4 MP Sony IMX541 CMOS sensor - Allied Vision}}} &
+  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} { Alvium 1800 U-2050}}} \\
 \multicolumn{1}{|c|}{} &
   \multicolumn{2}{c|}{\textbf{Tipo}} &
   \multicolumn{2}{c|}{Sony IMX541} &
@@ -859,8 +878,8 @@ candidate optical systems:
   \multicolumn{2}{c|}{USB power: 3.2 W (typical) | Ext. power: 3.4 W (typical)} \\ \hline
 \multicolumn{1}{|c|}{} &
   \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}\textbf{Name}} &
-  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} {\ul 16mm f/16, HPr Series Fixed Focal Length Lens | Edmund Optics}}} &
-  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} {\ul 50mm f/2.8, HPr Series Fixed Focal Length Lens}}} \\
+  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} { 16mm f/16, HPr Series Fixed Focal Length Lens | Edmund Optics}}} &
+  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} { 50mm f/2.8, HPr Series Fixed Focal Length Lens}}} \\
 \multicolumn{1}{|c|}{} &
   \multicolumn{2}{c|}{\textbf{Focal distance {[}mm{]}}} &
   \multicolumn{2}{c|}{16} &
@@ -990,8 +1009,8 @@ candidate optical systems:
   \multicolumn{2}{c|}{\textbf{System 4}} \\ \hline
 \multicolumn{1}{|c|}{} &
   \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}\textbf{Name}} &
-  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} {\ul Alvium 1800 U-2040 | 20.4 MP Sony IMX541 CMOS sensor - Allied Vision}}} &
-  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} {\ul Alvium 1800 U-2040 | 20.4 MP Sony IMX541 CMOS sensor - Allied Vision}}} \\
+  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} { Alvium 1800 U-2040 | 20.4 MP Sony IMX541 CMOS sensor - Allied Vision}}} &
+  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} { Alvium 1800 U-2040 | 20.4 MP Sony IMX541 CMOS sensor - Allied Vision}}} \\
 \multicolumn{1}{|c|}{} &
   \multicolumn{2}{c|}{\textbf{Tipo}} &
   \multicolumn{2}{c|}{Sony IMX541} &
@@ -1078,8 +1097,8 @@ candidate optical systems:
   \multicolumn{2}{c|}{USB power: 3.9 W (typical) | Ext. power: 4.1 W (typical)} \\ \hline
 \multicolumn{1}{|c|}{} &
   \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}\textbf{Name}} &
-  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} {\ul 25mm f/1.8, HPr Series Fixed Focal Length Lens}}} &
-  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} {\ul 16mm f/1.8, HPr Series Fixed Focal Length Lens}}} \\
+  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} { 25mm f/1.8, HPr Series Fixed Focal Length Lens}}} &
+  \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}{\color[HTML]{0563C1} { 16mm f/1.8, HPr Series Fixed Focal Length Lens}}} \\
 \multicolumn{1}{|c|}{} &
   \multicolumn{2}{c|}{\textbf{Focal distance {[}mm{]}}} &
   \multicolumn{2}{c|}{25} &

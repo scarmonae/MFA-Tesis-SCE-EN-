@@ -1,265 +1,557 @@
-\chapter{Procura y construccion del dispositivo HuMath\textregistered  QBee de HuMath Space Systems}   
+% \chapter{Procura y construccion del dispositivo HuMath\textregistered  QBee de HuMath Space Systems}   
 
-\noindent En el marco del Proyecto C3, una colaboración interdisciplinaria entre la Universidad EAFIT (Colombia) y la Real Universidad de Tecnología de Estocolmo (KTH, Suecia), se planteó la necesidad de desarrollar un sistema de carga inteligente para un vehículo aéreo no tripulado (UAV) orientado al monitoreo ambiental de la biodiversidad y la salud de los ecosistemas en Colombia. Mientras KTH lideró el diseño estructural y aerodinámico de la plataforma UAV, el equipo de EAFIT asumió la responsabilidad de la procura y construcción de la carga, posteriormente denominada HuMath\textregistered QBee.\\
+% \noindent En el marco del Proyecto C3, una colaboración interdisciplinaria entre la Universidad EAFIT (Colombia) y la Real Universidad de Tecnología de Estocolmo (KTH, Suecia), se planteó la necesidad de desarrollar un sistema de carga inteligente para un vehículo aéreo no tripulado (UAV) orientado al monitoreo ambiental de la biodiversidad y la salud de los ecosistemas en Colombia. Mientras KTH lideró el diseño estructural y aerodinámico de la plataforma UAV, el equipo de EAFIT asumió la responsabilidad de la procura y construcción de la carga, posteriormente denominada HuMath\textregistered QBee.\\
 
-\noindent El proceso de procura comenzó con la identificación de proveedores de sensores ópticos y electrónica de adquisición de datos con características adecuadas para capturar imágenes multiespectrales en rangos visible y cercano al infrarrojo. El financiamiento para la adquisición de estos componentes fue gestionado a través del proyecto 4DAir, una iniciativa de Minciencias dirigida por la Profesora Elena Montilla Rosero, que permitió asegurar recursos para la compra de sensores, objetivos, filtros y hardware de control. Asimismo, Saab AB, proporcionó fondos para la fabricación de la estructura de la aeronave y supervisó la gestión administrativa y logística del proyecto.\\
+% \noindent El proceso de procura comenzó con la identificación de proveedores de sensores ópticos y electrónica de adquisición de datos con características adecuadas para capturar imágenes multiespectrales en rangos visible y cercano al infrarrojo. El financiamiento para la adquisición de estos componentes fue gestionado a través del proyecto 4DAir, una iniciativa de Minciencias dirigida por la Profesora Elena Montilla Rosero, que permitió asegurar recursos para la compra de sensores, objetivos, filtros y hardware de control. Asimismo, Saab AB, proporcionó fondos para la fabricación de la estructura de la aeronave y supervisó la gestión administrativa y logística del proyecto.\\
 
-\noindent Inicialmente, se había previsto subcontratar la manufactura de la plataforma a una empresa colombiana especializada; sin embargo, limitaciones tecnológicas y de capacidad obligaron a que el equipo de ingeniería de EAFIT, junto con voluntarios de los programas de Ingeniería Aeronáutica de la Universidad Pontificia Bolivariana y de Ingeniería de la Universidad EAFIT, asumiera la fabricación de la estructura del UAV. Este esfuerzo colaborativo garantizó la integración eficiente entre la plataforma aérea y el sistema de carga HuMath\textregistered QBee.\\
+% \noindent Inicialmente, se había previsto subcontratar la manufactura de la plataforma a una empresa colombiana especializada; sin embargo, limitaciones tecnológicas y de capacidad obligaron a que el equipo de ingeniería de EAFIT, junto con voluntarios de los programas de Ingeniería Aeronáutica de la Universidad Pontificia Bolivariana y de Ingeniería de la Universidad EAFIT, asumiera la fabricación de la estructura del UAV. Este esfuerzo colaborativo garantizó la integración eficiente entre la plataforma aérea y el sistema de carga HuMath\textregistered QBee.\\
 
-% \noindent La construcción del HuMath\textregistered QBee involucró etapas iterativas de ensamblaje mecánico, integración de sensores y desarrollo de software de control. Primero se diseñaron y fabricaron alojamientos impresos en resina para los sistemas ópticos NIR y VIS, asegurando alineación y modularidad. Posteriormente, se integraron los sensores Alvium 1800 U-501m y U-500c de Allied Vision, junto con sus objetivos y filtros, sobre un chasis impreso en PET-G. Paralelamente, se implementó un script en Python para la adquisición sincronizada de datos multiespectrales y georreferenciación en tiempo real.\\
+% % \noindent La construcción del HuMath\textregistered QBee involucró etapas iterativas de ensamblaje mecánico, integración de sensores y desarrollo de software de control. Primero se diseñaron y fabricaron alojamientos impresos en resina para los sistemas ópticos NIR y VIS, asegurando alineación y modularidad. Posteriormente, se integraron los sensores Alvium 1800 U-501m y U-500c de Allied Vision, junto con sus objetivos y filtros, sobre un chasis impreso en PET-G. Paralelamente, se implementó un script en Python para la adquisición sincronizada de datos multiespectrales y georreferenciación en tiempo real.\\
 
-\noindent Este capítulo describe de forma detallada cada una de las fases de procura y construcción del HuMath\textregistered QBee, destacando las decisiones técnicas, los criterios de selección de componentes y las estrategias de colaboración que hicieron posible la materialización de esta innovadora plataforma de monitoreo ambiental.\\
-
-
-
-\section{Construcción de los sistemas ópticos seleccionados para la HuMath\textregistered Bee}
-
-\noindent Los sistemas~6 (NIR) y~7 (VIS) comparten una arquitectura modular: cada uno integra sensor, objetivo y filtro en una única carcasa que actúa a la vez como soporte mecánico y protección (véase la Figura~\ref{fig:exploded_assembly}). Ambos emplean sensores de la familia \textit{Alvium 1800} con idéntico tamaño de imagen (2592 × 1944 px) y paso de píxel (2.2 µm). \\
-
-\noindent El modelo NIR, \textit{Alvium 1800 U-501m} (ON Semi AR0522) \cite{alliedvision_alvium1800U_501NIRm}. Se combina con un objetivo HEO Series de 8 mm f/2.5, montado en S-Mount, que ofrece un ángulo de campo de 29.9° y, con tan solo 4 g de masa, cumple el límite de carga útil y limita la transmisión de vibraciones. La montura impresa en resina aloja un filtro paso-banda centrado en 850 nm (FWHM 50 nm, diámetro 12.5 mm, Hard-Coated OD 4.0) que se asegura mediante un anillo roscado, garantizando la alineación sin sobresalir del perfil de la carcasa.\\
+% \noindent Este capítulo describe de forma detallada cada una de las fases de procura y construcción del HuMath\textregistered QBee, destacando las decisiones técnicas, los criterios de selección de componentes y las estrategias de colaboración que hicieron posible la materialización de esta innovadora plataforma de monitoreo ambiental.\\
 
 
-\noindent El sistema VIS utiliza el sensor \textit{Alvium 1800 U-500c} (ON Semi AR0521). Su óptica es un objetivo Cr Series de 8.5 mm f/1.3, reforzado por el fabricante (ruggedized) para resistir impactos y vibraciones. El filtrado espectral se confía a un UV/IR-Cut roscado (M25.5 × 0.50) que bloquea 200–370 nm y 750–1100 nm, transmitiendo únicamente el rango visible (370–750 nm) y atornillándose directamente al objetivo.\\
 
-\noindent Ambos módulos se conectan a la \textit{Raspberry Pi 4} mediante cables micro-USB B, lo que simplifica la alimentación y el flujo de datos (Figura~\ref{fig:sistemas_opticos_componentes}).
+% \section{Construcción de los sistemas ópticos seleccionados para la HuMath\textregistered Bee}
+
+% \noindent Los sistemas~6 (NIR) y~7 (VIS) comparten una arquitectura modular: cada uno integra sensor, objetivo y filtro en una única carcasa que actúa a la vez como soporte mecánico y protección (véase la Figura~\ref{fig:exploded_assembly}). Ambos emplean sensores de la familia \textit{Alvium 1800} con idéntico tamaño de imagen (2592 × 1944 px) y paso de píxel (2.2 µm). \\
+
+% \noindent El modelo NIR, \textit{Alvium 1800 U-501m} (ON Semi AR0522) \cite{alliedvision_alvium1800U_501NIRm}. Se combina con un objetivo HEO Series de 8 mm f/2.5, montado en S-Mount, que ofrece un ángulo de campo de 29.9° y, con tan solo 4 g de masa, cumple el límite de carga útil y limita la transmisión de vibraciones. La montura impresa en resina aloja un filtro paso-banda centrado en 850 nm (FWHM 50 nm, diámetro 12.5 mm, Hard-Coated OD 4.0) que se asegura mediante un anillo roscado, garantizando la alineación sin sobresalir del perfil de la carcasa.\\
 
 
-\begin{figure}[h]
+% \noindent El sistema VIS utiliza el sensor \textit{Alvium 1800 U-500c} (ON Semi AR0521). Su óptica es un objetivo Cr Series de 8.5 mm f/1.3, reforzado por el fabricante (ruggedized) para resistir impactos y vibraciones. El filtrado espectral se confía a un UV/IR-Cut roscado (M25.5 × 0.50) que bloquea 200–370 nm y 750–1100 nm, transmitiendo únicamente el rango visible (370–750 nm) y atornillándose directamente al objetivo.\\
+
+% \noindent Ambos módulos se conectan a la \textit{Raspberry Pi 4} mediante cables micro-USB B, lo que simplifica la alimentación y el flujo de datos (Figura~\ref{fig:sistemas_opticos_componentes}).
+
+
+% \begin{figure}[h]
+%     \centering
+%     \begin{subfigure}[b]{0.48\linewidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{Figures/C4/NIR1.pdf}
+%         \caption{Sistema 6 (NIR): montaje del objetivo y filtro. El soporte evita desalineamientos y asegura la óptica en su eje.}
+%         \label{fig:lens_filter_mount_nir}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.47\linewidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{Figures/C4/VIS1.pdf}
+%         \caption{Sistema 7 (VIS): conector micro USB‑B para alimentación y datos.}
+%         \label{fig:micro_usb_vis}
+%     \end{subfigure}
+%     \caption{Componentes destacados de los sistemas ópticos seleccionados para el prototipo: NIR (izquierda) y VIS (derecha).}
+%     \label{fig:sistemas_opticos_componentes}
+% \end{figure}
+
+
+%   % \subsection{Integración con la plataforma UAV}
+%   %   % → Describir interfaz mecánica, centro de masas, cableado
+%   %   %   y sistema de amortiguación de vibraciones.
+
+%   % \subsection{Validaciones funcionales de taller}
+%   %   % → Pruebas de alineamiento, sellado de luz parásita y peso final.
+%   %   %   Tabla de verificación contra los requisitos de la Sección 1.1.
+  
+
+%   \section{Construcción e integración del prototipo}
+%   \subsection{Modelo CAD y ensamblaje mecánico}
+%     % → FIGURA grande: render CAD explosionado del KBee con leyenda de partes.
+%     %   Tabla: materiales y masa de cada componente.
+
+%     El case del QBee está impreso en PET‑G (tereftalato de polietileno modificado con glicol), un polímero cuya densidad típica ronda 1,317 g/cm³, que combina buena resistencia al impacto (Charpy $\approx$ 4,03 kJ/m²) y alargamiento al rompimiento hasta 15\% en formulaciones estándar. Su módulo de tracción (~4015 MPa) y de flexión (~2987 MPa) aseguran rigidez, mientras que su temperatura de transición vítrea ($\approx$ 76 °C) y rango de fusión (220–260 °C) lo hacen estable en el calor generado por electrónica cercana. Además, presenta excelente durabilidad química y mínima tendencia al \emph{warping}, ideal para piezas de geometría compleja. El peso total del disposito es de 1.810 gramos, cumpliendo así con el requisito de peso impuesto.\\
+
+%     \noindent La dimensión externa del case se diseñó para encajar en el bay interno del UAV C3, sin requerir hermeticidad, ya que este estária protegido de las condiciones exteriores. El cierre se logra con tornillos M3 que unen la tapa inferior y el divisor de compartimentos a la carcasa principal. En el interior, cada sistema óptico (6/NIR y 7/VIS) se ancla directamente al sensor mediante cuatro tornillos M3 en sus laterales, asegurando alineación con el eje de vuelo. El sistema 6 (NIR) monta el Alvium 1800 U‑501m (AR0522) + objetivo 8 mm f/2.5 + filtro 850 nm en montura S, todo encapsulado en una montura de resina 3D. El sistema 7 (VIS) agrupa el Alvium 1800 U-500c (AR0521) + objetivo 8.5 mm f/1.3 ruggedized + filtro VIS UV/IR Cut en rosca M25.5, manteniendo rigidez frente a vibraciones.\\
+    
+%     \noindent La unidad de cómputo y almacenamiento es una Raspberry Pi 4, colocada en un bloque intermedio y alimentada por una powerbank de 20.000 mAh. Este sistema tiene acoplado un hat de GPS, que suministra al sistema de metadatos de fecha, hora UTC, latitud, longitud, altitud y ángulo de elevación, esenciales para la georreferenciación y ortorrestitución de imágenes. Finalmente, el módulo in situ de sensado de contaminantes comparte alimentación de 5 V de la misma batería y ocupa el compartimento trasero de la carcasa, completando la funcionalidad del QBee.\\
+    
+    
+
+%     \begin{figure}[h]
+%         \centering
+%         \includegraphics[width=1\linewidth]{Figures/C4/QBee.pdf}
+%         \caption{Vista explosionada del ensamble completo del QBee, mostrando la carcasa impresa en PET‑G y la disposición de los sistemas 6 (NIR, 8 mm f/2.5) y 7 (VIS, 8.5 mm f/1.8). Este diseño y construcción fue concebido con el apoyo del equipo de manufactura del pryecto C3.}
+%         \label{fig:exploded_assembly}
+%     \end{figure}
+
+
+% \section{Sistema de adquisición y control de datos}
+%   \label{sec:script_control_adquisicion}
+  
+%   Con el propósito de automatizar el proceso de captura, procesamiento y almacenamiento de imágenes multiespectrales durante los vuelos o pruebas en banco, se desarrolló un script en lenguaje Python que permite la adquisición simultánea de imágenes en el espectro visible (VIS) y cercano al infrarrojo (NIR), integrando además datos de posicionamiento global (GPS) en tiempo real.
+  
+%   \noindent Este script constituye una adaptación del código de ejemplo provisto por la biblioteca \texttt{vmbpy}, correspondiente al SDK de \textit{Allied Vision}, y fue modificado sustancialmente para incluir manejo multihilo, escritura condicional de video, superposición de información telemétrica, y control por teclado durante la ejecución.
+  
+%   \subsection{Estructura general del script}
+  
+%   El flujo lógico del código se presenta en la Figura~\ref{fig:diagrama_script}, donde se destacan tres etapas fundamentales: (i) la inicialización del entorno y detección de cámaras, (ii) la adquisición concurrente de tramas mediante hilos productores, y (iii) el procesamiento y visualización de las imágenes mediante un hilo consumidor.
+  
+%   \begin{figure}[!h]
+%       \centering
+%       \includegraphics[trim = 0 0 0 1cm, clip, width=1\textwidth]{Figures/C4/OSU_main.pdf}
+%       \caption{Flujo lógico del script de adquisición y visualización de la QBee. Se integran múltiples cámaras, adquisición en paralelo y procesamiento en tiempo real.}
+%       \label{fig:diagrama_script}
+%   \end{figure}
+  
+%   \subsection{Inicialización y adquisición}
+  
+%   Durante la fase de inicialización, se establece una conexión con el servidor local de GPS (\texttt{gpsd}) utilizando la librería homónima. Paralelamente, se instancia la clase \texttt{MainThread}, responsable de detectar automáticamente todas las cámaras conectadas a través del sistema \texttt{VmbSystem}.\\
+  
+%    Cada cámara detectada es asignada a un hilo independiente de la clase \texttt{FrameProducer}, la cual configura parámetros críticos como la resolución de adquisición, formato de pixel (\texttt{Mono8} o \texttt{Bgr8}), y el modo automático de exposición. Estos hilos se encargan de capturar tramas en tiempo real, estimar la tasa de cuadros por segundo (FPS) y encolar las imágenes en una estructura tipo FIFO (\texttt{queue.Queue}) para su posterior procesamiento.
+  
+%   \subsection{Procesamiento, visualización y almacenamiento}
+  
+%   La etapa central del sistema está contenida en la clase \texttt{FrameConsumer}, la cual opera como hilo consumidor. Esta clase realiza múltiples tareas en paralelo: (i) extrae tramas de la cola compartida, (ii) redimensiona las imágenes si la resolución de adquisición no coincide con la esperada (\SI[parse-numbers = false]{2592 \times 1944}{px}), (iii) convierte los formatos de imagen a RGB si es necesario, y (iv) concatena las imágenes capturadas por múltiples cámaras en un único mosaico horizontal.\\
+  
+%   Sobre esta imagen compuesta se genera una barra de información (\textit{overlay}) que incluye los datos georreferenciados en tiempo real (latitud, longitud, altitud, velocidad, ángulo de rumbo y timestamp), además de la tasa de cuadros por segundo estimada para cada cámara. Esta superposición se construye como una matriz adicional que se apila verticalmente a la imagen original.\\
+  
+%   El sistema también permite una interacción directa con el operador mediante teclas específicas:
+%   \begin{itemize}
+%       \item \textbf{\texttt{s}}: captura la imagen actual y la guarda en formato \texttt{JPEG}.
+%       \item \textbf{\texttt{v}}: inicia o detiene la grabación de video en formato \texttt{AVI}, con compresión \texttt{XVID}, a una frecuencia de 20 FPS.
+%       \item \textbf{\texttt{Enter}}: finaliza la ejecución del script y cierra todas las ventanas.
+%   \end{itemize}
+  
+%   \subsection{Ejecución automática como servicio de sistema}
+  
+%   Con el fin de garantizar un funcionamiento autónomo y minimizar la intervención del usuario, se diseñó un servicio de sistema en Linux (utilizando \texttt{systemd}) que permite la ejecución automática del script tan pronto como el dispositivo inicia. Este servicio fue instalado y habilitado en el sistema operativo de una Raspberry Pi 4 modelo B equipada con 8 GB de memoria RAM.
+  
+%   Gracias a esta configuración, el sistema conocido como \texttt{QBee} se activa automáticamente al conectar la batería externa a la Raspberry Pi, sin requerir intervención adicional ni acceso al entorno gráfico. Inmediatamente después del arranque, el script inicia la captura de imágenes y comienza a almacenarlas en la memoria interna, lo que resulta particularmente útil para operaciones en campo, donde no es viable iniciar el sistema manualmente.
+  
+%   \subsection{Robustez y tolerancia a fallos}
+  
+%   Durante la ejecución, el sistema cuenta con mecanismos de tolerancia a errores. Por ejemplo, si el buffer de imágenes se encuentra lleno, los hilos productores omiten la encolación de nuevas tramas para evitar bloqueos. Asimismo, si no se detecta ninguna cámara activa, se genera una imagen dummy con un mensaje de advertencia.\\
+  
+%   Las tramas obtenidas se almacenan temporalmente en memoria, lo que permite minimizar la latencia entre adquisición y visualización. La sincronización entre hilos se realiza mediante eventos y bloqueos controlados, garantizando la integridad de los datos entre productores y consumidores.
+  
+%   \subsection{Dependencias y entorno de ejecución}
+  
+%   El script fue ejecutado sobre el sistema operativo Raspberry Pi OS (basado en Debian) en una Raspberry Pi 4 modelo B. Se utilizó Python 3.8 y las siguientes dependencias: \texttt{vmbpy}, \texttt{opencv-python}, \texttt{gpsd-py3}, \texttt{numpy}, \texttt{threading}, \texttt{queue} y \texttt{keyboard}. La visualización se realizó mediante la salida HDMI de la Raspberry, y se requirió establecer la variable de entorno \texttt{DISPLAY=":0"} para habilitar la salida gráfica de OpenCV.
+
+%   \subsection{Control remoto del dispositivo \texttt{QBee}}
+
+%   Además de su capacidad de operación autónoma en campo, el sistema \texttt{QBee} fue diseñado con funcionalidad de control remoto, permitiendo su supervisión y operación desde dispositivos externos como computadores personales, tabletas o teléfonos móviles. Esta característica extiende significativamente la versatilidad del sistema, facilitando tanto pruebas en laboratorio como operaciones a distancia en entornos de difícil acceso.\\
+  
+%   Existen dos métodos principales para acceder de forma remota a la interfaz gráfica del sistema:
+  
+%   \paragraph{1. Conexión local mediante VNC}
+  
+%   El primer método consiste en conectarse directamente a la Raspberry Pi 4 que ejecuta el sistema \texttt{QBee} mediante el protocolo VNC (\textit{Virtual Network Computing}). Para ello, es necesario que la Raspberry esté conectada a una red Wi-Fi previamente configurada para su conexión automática. Asimismo, el dispositivo de control (computador o móvil) debe encontrarse dentro de la misma red local.\\
+  
+%   Una vez cumplida esta condición, el usuario puede acceder a la interfaz gráfica de la Raspberry Pi introduciendo su dirección IP o una dirección local estática configurada mediante el sistema operativo Raspberry Pi OS. Para completar el acceso, se requiere conocer las credenciales de autenticación (nombre de usuario y contraseña) establecidas previamente en el sistema.
+  
+%   \paragraph{2. Acceso global mediante Raspberry Pi Connect}
+  
+%   El segundo método se basa en el uso de \textit{Raspberry Pi Connect}, un servicio gratuito proporcionado por la fundación Raspberry Pi. Este permite acceder a la interfaz gráfica del sistema desde cualquier lugar con conexión a Internet, sin necesidad de estar dentro de la misma red local.\\
+  
+%   Para habilitar esta funcionalidad, la Raspberry Pi debe estar vinculada a una cuenta en el servicio \textit{Raspberry Pi Connect} y tener acceso a Internet mediante una red Wi-Fi registrada previamente. Una vez registrado el dispositivo, el usuario puede iniciar sesión en el portal de Raspberry Pi y conectarse directamente a su interfaz gráfica a través del navegador.  \\
+  
+  
+%   En ambos métodos, el usuario obtiene acceso completo al entorno de escritorio de la Raspberry Pi. Como se ha descrito en las secciones anteriores, el script de adquisición de \texttt{QBee} se ejecuta automáticamente al iniciar el sistema, lo que da lugar a la apertura de una ventana de visualización en tiempo real de las imágenes capturadas.\\
+  
+%   Desde esta interfaz remota, el usuario puede interactuar directamente con el sistema utilizando un teclado virtual o físico para ejecutar acciones de control. Entre las funcionalidades disponibles se encuentran:
+%   \begin{itemize}
+%       \item Presionar la tecla \texttt{s} para capturar y guardar una imagen.
+%       \item Presionar la tecla \texttt{v} para iniciar o detener la grabación de video.
+%       \item Presionar la tecla \texttt{Enter} para finalizar la ejecución del script.
+%   \end{itemize}
+  
+%   Esta capacidad de control remoto permite verificar el correcto funcionamiento del sistema en tiempo real, supervisar condiciones de operación, y capturar eventos relevantes sin necesidad de intervención física directa sobre el dispositivo.\\
+  
+  
+%   Adicionalmente, el sistema \texttt{QBee} fue configurado para permitir actualizaciones remotas del código fuente del script mediante el sistema de control de versiones \texttt{Git}. El script está vinculado a un repositorio privado alojado en la plataforma \texttt{GitHub}, lo que permite a los usuarios autenticados realizar \textit{pull} de actualizaciones desde cualquier ubicación con acceso remoto al dispositivo. Esta funcionalidad permite una mejora continua del sistema, facilitando la depuración, implementación de nuevas funcionalidades y adaptaciones específicas sin necesidad de acceso físico al hardware.
+  
+
+% \section{Pruebas de operación}
+  
+  
+%   \subsection{Escenarios de prueba}
+%     Los escenarios de prueba definidos para validar el correcto funcionamiento del sistema \textit{QBee} se clasifican en dos grupos principales: (i) pruebas terrestres en condiciones controladas, y (ii) pruebas en vuelo.
+
+%     \subsubsection{Pruebas terrestres}
+    
+%         Antes de cualquier despliegue aéreo, es indispensable realizar pruebas en tierra que permitan validar el sistema en condiciones controladas, sin desplazamiento y sin exposición a ambientes extremos. En este contexto, se define como ambiente extremo cualquier entorno cuya temperatura supere los valores comunes encontrados en las principales ciudades colombianas (\SI{\leq 40}{\celsius}), o que implique lluvia, alta humedad o condiciones de iluminación nocturna.
+        
+%         \noindent Dado que el sistema \textit{QBee} no cuenta con una fuente de iluminación activa, las pruebas se realizan exclusivamente durante el día, aprovechando la luz solar como fuente principal para la adquisición de imágenes multiespectrales.
+        
+%         \noindent El objetivo de estas pruebas es verificar el comportamiento general del sistema en condiciones operativas normales. En particular, se evalúa:
+        
+%         \begin{itemize}
+%         \item La correcta inicialización automática del script de adquisición al encender el dispositivo.
+%         \item La funcionalidad de captura de imágenes al presionar la tecla \texttt{s}.
+%         \item La grabación de video y su detención mediante la tecla \texttt{v}.
+%         \item La estabilidad del dispositivo al operar durante largos periodos de tiempo.
+%         \end{itemize}
+        
+%         \noindent Las pruebas se realizaron utilizando dos formas de alimentación:
+%         \begin{itemize}
+%         \item \textbf{Fuente directa:} mediante un adaptador USB-C conectado a una toma de corriente convencional.
+%         \item \textbf{Fuente interna:} a partir de la bater'ia recargable integrada en la carcasa del \textit{QBee}.
+%         \end{itemize}
+        
+%         \noindent Una de las pruebas más relevantes consisti'o en la captura de una imagen utilizando la tecla \texttt{s}, ya fuera desde un teclado conectado directamente a la Raspberry Pi 4 o mediante acceso remoto. En la Figura~\ref{fig:captura_prueba_remota} se presenta un ejemplo de imagen capturada en estas condiciones, utilizando un tel'efono inteligente para el control remoto del sistema. La prueba confirma el correcto funcionamiento de ambos canales (VIS y NIR), evidenciando que la captura simult'anea se realiza de manera sincronizada, y que el sistema responde adecuadamente a la orden de captura en tiempo real.
+        
+%         \begin{figure}[h]
+%         \centering
+%         \includegraphics[width=1\textwidth]{Figures/C4/captured_image_20240201_174102.jpg}
+%         \caption{Captura de imagen realizada durante prueba terrestre mediante control remoto desde un tel'efono inteligente. La imagen muestra la composici'on de ambos canales VIS y NIR, confirmando la funcionalidad del sistema \textit{QBee} en condiciones operativas reales.}
+%         \label{fig:captura_prueba_remota}
+%         \end{figure}
+        
+%         \noindent En complemento, en la Figura~\ref{fig:gps_overlay_visual} se presenta un ejemplo de visualización del sistema de coordenadas geográficas en tiempo real. En la parte superior de la imagen se observa la superposición del texto con la latitud, longitud, altitud, velocidad y rumbo extraídos del módulo GPS integrado en la \textit{QBee}. Esta funcionalidad es crítica para asegurar la trazabilidad espacial de las imágenes adquiridas y para su posterior georreferenciación.
+
+%         \begin{figure}[h]
+%             \centering
+%             \includegraphics[width=0.9\textwidth]{Figures/C4/captured_image_20250217_113221.jpg}
+%             \caption{Visualización del sistema de coordenadas geográficas (GPS) en tiempo real sobre la imagen capturada. Se muestran latitud, longitud, altitud, velocidad y rumbo, extraídos automáticamente del módulo GPS durante las pruebas.}
+%             \label{fig:gps_overlay_visual}
+%         \end{figure}
+
+
+
+%     \subsubsection{Pruebas en superficie en condiciones extremas}
+
+%     Durante la VII Campa~na A'erea y XI Expedici'on Cient'ifica a la Ant'artida organizada por la Fuerza A'erea Colombiana, el sistema \textit{QBee} fue sometido a una prueba de funcionamiento en condiciones clim'aticas extremas. En este escenario, se enfrent'o a temperaturas diurnas promedio cercanas a los \SI{0}{\celsius}, significativamente inferiores a las condiciones habituales en las cuales opera el sistema.
+    
+%     \noindent El objetivo principal de esta prueba fue evaluar la capacidad del dispositivo para operar de manera confiable en ambientes fr'ios. Se identific'o que, bajo estas condiciones, el sistema present'o fallas intermitentes en su funcionamiento: en algunas ocasiones la \textit{QBee} no inici'o correctamente, o no fue capaz de realizar la grabaci'on de video como lo hace regularmente. Estas fallas pueden estar asociadas a una inicializaci'on deficiente del sistema de procesamiento (Raspberry Pi 4), o a alteraciones en el comportamiento de los sensores VIS y NIR debido a la baja temperatura.
+    
+%     \noindent No obstante, tambi'en se registraron casos exitosos de captura de video, lo cual demuestra que el sistema \textit{QBee} puede llegar a operar de forma funcional en condiciones de fr'io extremo. Estos resultados parciales abren la posibilidad de implementar ajustes de hardware y software para robustecer el funcionamiento del sistema en ambientes m'as hostiles. Queda como trabajo futuro el estudio detallado de las causas espec'ificas de las fallas observadas, as'i como la exploraci'on de soluciones que permitan una operaci'on m'as confiable en entornos como la Ant'artida.
+    
+%     \noindent A pesar de los resultados mixtos, se concluye que el sistema actual no est'a dise~nado para misiones operativas regulares en la Ant'artida u otras regiones con condiciones ambientales similares, sin modificaciones adicionales en aislamiento t'ermico, tolerancia de componentes y procedimientos de inicializaci'on.
+    
+%     \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=1\textwidth]{Figures/C4/pinguinos.png}
+%     \caption{Captura de video realizada exitosamente durante la expedición científica en la Antártida. La imagen confirma que, a pesar de las condiciones extremas, el sistema \textit{QBee} En la imagen se aprecia que la cámara visible no se encuentra correctamente enfocada, lo que puede deberse a un mal ajuste de la distancia entre el objetivo y el sensor. Sin embargo, este tipo de desajuste es corregible mediante ajuste mecánico y no afecta el funcionamiento general del sistema \textit{QBee}. fue capaz de operar y registrar datos multiespectrales de forma puntual.}
+%     \label{fig:prueba_antartida}
+%     \end{figure}
+
+%     \subsubsection{Pruebas en vuelo}
+
+%     Las pruebas en vuelo del sistema \textit{QBee} fueron posibles gracias a la colaboraci'on con la Fuerza A'erea Colombiana, la cual facilit'o el montaje del dispositivo en distintas aeronaves de su flota. En una primera prueba, la unidad \textit{QBee} fue instalada a bordo de una aeronave Cessna 208 Caravan, realizando un vuelo a una altitud aproximada de 5000 pies.
+    
+%     \noindent El vuelo se desarroll'o en condiciones ideales, con un rumbo y comportamiento t'ipico de una ruta comercial y sin presencia de perturbaciones atmosf'ericas significativas. Durante toda la duraci'on del trayecto, el sistema oper'o de forma estable y sin presentar inconvenientes.
+    
+%     \noindent Como parte de esta prueba, se verific'o la capacidad de monitoreo remoto del sistema utilizando una red Wi-Fi habilitada dentro de la aeronave, mediante la cual se accedi'o al entorno gr'afico de la Raspberry Pi utilizando el protocolo VNC. Esta conexi'on permiti'o observar en tiempo real la adquisici'on de datos por parte del sistema, confirmando la funcionalidad completa del script y la respuesta de los sensores.
+    
+%     \begin{figure}[!h]
+%     \centering
+%     \includegraphics[width=1\textwidth]{Figures/C4/vuelo_caravan.png}
+%     \caption{Captura tomada durante el vuelo de prueba en la aeronave Cessna 208 Caravan. Se observ'o un comportamiento estable del sistema y transmisi'on remota exitosa mediante protocolo VNC.}
+%     \label{fig:prueba_vuelo}
+%     \end{figure}
+
+%     \noindent En una segunda prueba, la unidad \textit{QBee} fue montada a bordo de una aeronave de combate Tucano T-27, con el fin de validar su desempeño bajo condiciones de vuelo más exigentes. En este caso, no se contó con un sistema de monitoreo en tiempo real debido a las restricciones propias de la aeronave. Sin embargo, el sistema operó de forma autónoma durante la misión, registrando exitosamente la captura de video.
+
+%     \noindent A diferencia del vuelo en la Cessna Caravan, esta prueba presentó una complejidad adicional, ya que durante la operación se ejecutaron maniobras que alcanzaron aceleraciones de hasta 4g. A pesar de estas condiciones dinámicas, la \textit{QBee} logró completar su función de adquisición sin incidentes, lo cual representa un resultado relevante sobre la robustez mecánica y operativa del sistema.
+    
+%     \begin{figure}[!h]
+%     \centering
+%     \includegraphics[width=0.9\textwidth]{Figures/C4/t2.png}
+%     \caption{Captura de video realizada durante prueba a bordo del avión de combate T-27 Tucano. A pesar de las maniobras con aceleraciones de hasta 4g, el sistema \textit{QBee} logró registrar imágenes de forma autónoma y estable. Las condiciones de iluminación ambiental no erán las más adecuadas debido a la hora del día (proximadamente las 6 pm).}
+%     \label{fig:prueba_tucano}
+%     \end{figure}
+
+%     \section{Conclusiones y lecciones aprendidas}
+
+%     \noindent El proceso de procura y construcción del HuMath\textregistered~QBee logró materializar una carga multiespectral ligera, robusta y completamente funcional dentro de los márgenes de masa (1,810 g) y volumen impuestos por la plataforma UAV C3, demostrando que la fabricación en PET-G y la integración modular de sensores VIS y NIR pueden satisfacer requisitos aeroespaciales universitarios sin recurrir a proveedores externos. La arquitectura mecánica, eléctrica y de control desarrollada permitió operar el sistema de forma autónoma y remota, garantizando la sincronización de imágenes y metadatos a una tasa de cuadros por segundo de hasta 20 FPS.\\
+
+%     \noindent Las campañas experimentales evidenciaron que la temperatura ambiente es el factor operativo más crítico: entre 10~\si{\celsius} y 40~\si{\celsius} el dispositivo funcionó sin incidencias, mientras que a 0~\si{\celsius} en la Antártida aparecieron fallos intermitentes de inicialización, subexpresión del sensor VIS y problemas de saturación electrónica en la Raspberry Pi. Estas anomalías sugieren que deben incorporarse elementos de aislamiento térmico pasivo y estrategias de pre-calentamiento del hardware para misiones en climas fríos. En contraste, bajo radiación solar intensa en tierra se alcanzaron niveles cercanos al 90\,\% de saturación del sensor NIR, por lo que se recomienda añadir control automático de ganancia y filtros ND intercambiables para preservar el rango dinámico.\\
+
+% %   \noindent El análisis de velocidad angular y lineal obtenido de los registros GPS y de las grabaciones en los vuelos a bordo del T-27 Tucano confirmó que el montaje mecánico soporta vibraciones y aceleraciones moderadas sin pérdida de alineación ni cortes en la adquisición. El vídeo completo de estas pruebas, junto con las capturas representativas, se encuentra archivado en el repositorio institucional (links permanentes figuran en el Anexo B), lo que asegura la trazabilidad de los resultados y facilita futuras auditorías científicas.\\
+
+%     \noindent A nivel de software, el script multihilo basado en la biblioteca \texttt{vmbpy} demostró ser estable durante más de 30 horas continuas de operación, pero las pruebas en ambientes extremos revelaron cuellos de botella cuando el búfer alcanzó la saturación de memoria. Como acciones de mejora se recomienda migrar a una arquitectura productora--consumidora basada en \texttt{asyncio} para reducir la latencia, implementar un \textit{watchdog} que reinicie servicios congelados y habilitar compresión de vídeo por hardware para disminuir la carga en la CPU de la Raspberry Pi~4.\\
+
+%     \noindent Finalmente, la colaboración con la Fuerza Aérea Colombiana y la participación de estudiantes voluntarios de varias universidades puso de relieve el valor de los acuerdos interinstitucionales. Las lecciones aprendidas aquí---aislamiento térmico, control de saturación, gestión de velocidad de adquisición y documentación exhaustiva de código y datos---sientan las bases para desarrollar versiones de la HuMath\textregistered~QBee capaces de operar de manera confiable en escenarios climáticos aún más desafiantes y ampliar su alcance en programas de monitoreo ambiental nacional e internacional.\\
+
+
+
+\chapter{Procurement and construction of the HuMath\textregistered\ QBee Device}
+
+\noindent Within the framework of the C3 Project, an interdisciplinary collaboration between Universidad EAFIT (Colombia) and the Royal Institute of Technology in Stockholm (KTH, Sweden), the need arose to develop an intelligent payload system for an unmanned aerial vehicle (UAV) aimed at environmental monitoring of biodiversity and ecosystem health in Colombia. While KTH led the structural and aerodynamic design of the UAV platform, the EAFIT team took responsibility for the procurement and construction of the payload, later named HuMath\textregistered\ QBee.\\
+
+\noindent The procurement process began with the identification of suppliers of optical sensors and data acquisition electronics with characteristics suitable for capturing multispectral images in the visible and near-infrared ranges. Funding for the acquisition of these components was managed through the 4DAir project, a Minciencias initiative led by Professor Elena Montilla Rosero, which made it possible to secure resources for the purchase of sensors, lenses, filters, and control hardware. Likewise, Saab AB provided funds for the manufacture of the aircraft structure and oversaw the project’s administrative and logistical management.\\
+
+\noindent Initially, subcontracting the manufacture of the platform to a specialized Colombian company had been planned; however, technological and capacity limitations meant that EAFIT’s engineering team, together with volunteers from the Aeronautical Engineering program at the Pontifical Bolivarian University and from the Engineering program at Universidad EAFIT, undertook fabrication of the UAV structure. This collaborative effort ensured efficient integration between the aerial platform and the HuMath\textregistered\ QBee payload system.\\
+
+% \noindent The construction of the HuMath\textregistered\ QBee involved iterative stages of mechanical assembly, sensor integration, and control software development. First, resin-printed housings were designed and manufactured for the NIR and VIS optical systems, ensuring alignment and modularity. Subsequently, Allied Vision’s Alvium 1800 U-501m and U-500c sensors, along with their lenses and filters, were integrated on a PET-G printed chassis. In parallel, a Python script was implemented for synchronized acquisition of multispectral data and real-time georeferencing.\\
+
+\noindent This chapter describes in detail each of the phases of procurement and construction of the HuMath\textregistered\ QBee, highlighting the technical decisions, component selection criteria, and collaboration strategies that enabled the materialization of this innovative environmental monitoring platform.\\
+
+
+
+\section{Construction of the optical systems selected for the HuMath\textregistered\ Bee}
+
+\noindent Systems~6 (NIR) and~7 (VIS) share a modular architecture: each integrates sensor, lens, and filter into a single housing that simultaneously serves as mechanical support and protection (see Figure~\ref{fig:exploded_assembly}). Both employ sensors from the \textit{Alvium 1800} family with identical image size (2592 × 1944 px) and pixel pitch (2.2 µm). \\
+
+\noindent The NIR model, \textit{Alvium 1800 U-501m} (ON Semi AR0522) \cite{alliedvision_alvium1800U_501NIRm}, is combined with an 8 mm f/2.5 HEO Series lens, S-Mount, which offers a 29.9° field of view and, at only 4 g of mass, meets the payload limit and reduces transmission of vibrations. The resin-printed mount houses a band-pass filter centered at 850 nm (FWHM 50 nm, diameter 12.5 mm, Hard-Coated OD 4.0) that is secured by a threaded ring, ensuring alignment without protruding from the housing profile.\\
+
+\noindent The VIS system uses the \textit{Alvium 1800 U-500c} sensor (ON Semi AR0521). Its optics are an 8.5 mm f/1.3 Cr Series lens, ruggedized by the manufacturer to withstand impacts and vibrations. Spectral filtering is handled by a threaded UV/IR-Cut (M25.5 × 0.50) that blocks 200–370 nm and 750–1100 nm, transmitting only the visible range (370–750 nm), and screws directly onto the lens.\\
+
+\noindent Both modules connect to the \textit{Raspberry Pi 4} via micro-USB-B cables, which simplifies power supply and data flow (Figure~\ref{fig:sistemas_opticos_componentes}).
+
+
+\begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.48\linewidth}
         \centering
         \includegraphics[width=\linewidth]{Figures/C4/NIR1.pdf}
-        \caption{Sistema 6 (NIR): montaje del objetivo y filtro. El soporte evita desalineamientos y asegura la óptica en su eje.}
+        \caption{System 6 (NIR): lens and filter mounting. The bracket prevents misalignment and secures the optics along its axis.}
         \label{fig:lens_filter_mount_nir}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.47\linewidth}
         \centering
         \includegraphics[width=\linewidth]{Figures/C4/VIS1.pdf}
-        \caption{Sistema 7 (VIS): conector micro USB‑B para alimentación y datos.}
+        \caption{System 7 (VIS): micro USB-B connector for power and data.}
         \label{fig:micro_usb_vis}
     \end{subfigure}
-    \caption{Componentes destacados de los sistemas ópticos seleccionados para el prototipo: NIR (izquierda) y VIS (derecha).}
+    \caption{Highlighted components of the optical systems selected for the prototype: NIR (left) and VIS (right).}
     \label{fig:sistemas_opticos_componentes}
 \end{figure}
 
 
-  % \subsection{Integración con la plataforma UAV}
-  %   % → Describir interfaz mecánica, centro de masas, cableado
-  %   %   y sistema de amortiguación de vibraciones.
+  % \subsection{Integration with the UAV platform}
+  %   % → Describe mechanical interface, center of mass, cabling,
+  %   %   and vibration isolation system.
 
-  % \subsection{Validaciones funcionales de taller}
-  %   % → Pruebas de alineamiento, sellado de luz parásita y peso final.
-  %   %   Tabla de verificación contra los requisitos de la Sección 1.1.
+  % \subsection{Workshop functional validations}
+  %   % → Alignment tests, stray-light sealing, and final weight.
+  %   %   Verification table against the requirements in Section 1.1.
   
 
-  \section{Construcción e integración del prototipo}
-  \subsection{Modelo CAD y ensamblaje mecánico}
-    % → FIGURA grande: render CAD explosionado del KBee con leyenda de partes.
-    %   Tabla: materiales y masa de cada componente.
+\section{Construction and integration of the prototype}
+\subsection{CAD model and mechanical assembly}
+    % → Large FIGURE: exploded CAD render of the KBee with parts legend.
+    %   Table: materials and mass of each component.
 
-    El case del QBee está impreso en PET‑G (tereftalato de polietileno modificado con glicol), un polímero cuya densidad típica ronda 1,317 g/cm³, que combina buena resistencia al impacto (Charpy $\approx$ 4,03 kJ/m²) y alargamiento al rompimiento hasta 15\% en formulaciones estándar. Su módulo de tracción (~4015 MPa) y de flexión (~2987 MPa) aseguran rigidez, mientras que su temperatura de transición vítrea ($\approx$ 76 °C) y rango de fusión (220–260 °C) lo hacen estable en el calor generado por electrónica cercana. Además, presenta excelente durabilidad química y mínima tendencia al \emph{warping}, ideal para piezas de geometría compleja. El peso total del disposito es de 1.810 gramos, cumpliendo así con el requisito de peso impuesto.\\
+The QBee case\footnote{A substantial portion of the CAD design was carried out by the C3 project manufacturing team, led by Valeria Solorzano Araque and Lisseth Milena Cruz Ruiz. I gratefully acknowledge their work and dedication.} is printed in PET-G (polyethylene terephthalate modified with glycol), a polymer with a typical density around 1,317 g/cm³ that combines good impact resistance (Charpy $\approx$ 4,03 kJ/m²) and elongation at break up to 15\% in standard formulations. Its tensile modulus (~4015 MPa) and flexural modulus (~2987 MPa) ensure stiffness, while its glass transition temperature ($\approx$ 76 °C) and melting range (220–260 °C) make it stable under the heat generated by nearby electronics. In addition, it exhibits excellent chemical durability and minimal tendency to \emph{warping}, making it ideal for parts of complex geometry. The total weight of the device is 1,810 grams, thus meeting the imposed weight requirement.\\
 
-    \noindent La dimensión externa del case se diseñó para encajar en el bay interno del UAV C3, sin requerir hermeticidad, ya que este estária protegido de las condiciones exteriores. El cierre se logra con tornillos M3 que unen la tapa inferior y el divisor de compartimentos a la carcasa principal. En el interior, cada sistema óptico (6/NIR y 7/VIS) se ancla directamente al sensor mediante cuatro tornillos M3 en sus laterales, asegurando alineación con el eje de vuelo. El sistema 6 (NIR) monta el Alvium 1800 U‑501m (AR0522) + objetivo 8 mm f/2.5 + filtro 850 nm en montura S, todo encapsulado en una montura de resina 3D. El sistema 7 (VIS) agrupa el Alvium 1800 U-500c (AR0521) + objetivo 8.5 mm f/1.3 ruggedized + filtro VIS UV/IR Cut en rosca M25.5, manteniendo rigidez frente a vibraciones.\\
-    
-    \noindent La unidad de cómputo y almacenamiento es una Raspberry Pi 4, colocada en un bloque intermedio y alimentada por una powerbank de 20.000 mAh. Este sistema tiene acoplado un hat de GPS, que suministra al sistema de metadatos de fecha, hora UTC, latitud, longitud, altitud y ángulo de elevación, esenciales para la georreferenciación y ortorrestitución de imágenes. Finalmente, el módulo in situ de sensado de contaminantes comparte alimentación de 5 V de la misma batería y ocupa el compartimento trasero de la carcasa, completando la funcionalidad del QBee.\\
-    
-    
+\noindent The external dimensions of the case were designed to fit into the internal bay of the C3 UAV (see Figure~\ref{fig:qbee_dims} for the detailed envelope and mounting pattern), without requiring hermetic sealing, since it would be protected from external conditions. Closure is achieved with M3 screws that join the lower cover and the compartment divider to the main housing. Inside, each optical system (6/NIR and 7/VIS) is anchored directly to the sensor using four M3 screws on its sides, ensuring alignment with the flight axis. System 6 (NIR) mounts the Alvium 1800 U-501m (AR0522) + 8 mm f/2.5 lens + 850 nm filter in S-mount, all encapsulated in a 3D resin mount. System 7 (VIS) groups the Alvium 1800 U-500c (AR0521) + 8.5 mm f/1.3 ruggedized lens + VIS UV/IR-Cut filter with M25.5 thread, maintaining rigidity against vibrations.\\
 
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=1\linewidth]{Figures/C4/QBee.pdf}
-        \caption{Vista explosionada del ensamble completo del QBee, mostrando la carcasa impresa en PET‑G y la disposición de los sistemas 6 (NIR, 8 mm f/2.5) y 7 (VIS, 8.5 mm f/1.8). Este diseño y construcción fue concebido con el apoyo del equipo de manufactura del pryecto C3.}
-        \label{fig:exploded_assembly}
-    \end{figure}
+\noindent The computing and storage unit is a Raspberry Pi 4, placed in an intermediate block and powered by a 20{,}000 mAh power bank. This system is coupled to a GPS HAT, which supplies the system with metadata such as date, UTC time, latitude, longitude, altitude, and elevation angle, essential for georeferencing and orthorectification of images. Finally, the in-situ pollutant sensing module shares a 5 V supply from the same battery and occupies the rear compartment of the housing, completing the QBee’s functionality.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim = 3cm 6cm 3cm 2cm, clip, width=0.9\linewidth]{Figures/C4/Global Drawing QBee.pdf}
+    \caption{Overall dimensions and mounting hole pattern of the QBee enclosure. Dimensions in millimeters unless otherwise noted.}
+    \label{fig:qbee_dims}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures/C4/QBee.pdf}
+    \caption{Exploded view of the complete QBee assembly, showing the PET-G printed housing and the layout of systems 6 (NIR, 8 mm f/2.5) and 7 (VIS, 8.5 mm f/1.8). This design and construction was conceived with the support of the C3 project manufacturing team.}
+    \label{fig:exploded_assembly}
+\end{figure}
 
 
-\section{Sistema de adquisición y control de datos}
-  \label{sec:script_control_adquisicion}
-  
-  Con el propósito de automatizar el proceso de captura, procesamiento y almacenamiento de imágenes multiespectrales durante los vuelos o pruebas en banco, se desarrolló un script en lenguaje Python que permite la adquisición simultánea de imágenes en el espectro visible (VIS) y cercano al infrarrojo (NIR), integrando además datos de posicionamiento global (GPS) en tiempo real.
-  
-  \noindent Este script constituye una adaptación del código de ejemplo provisto por la biblioteca \texttt{vmbpy}, correspondiente al SDK de \textit{Allied Vision}, y fue modificado sustancialmente para incluir manejo multihilo, escritura condicional de video, superposición de información telemétrica, y control por teclado durante la ejecución.
-  
-  \subsection{Estructura general del script}
-  
-  El flujo lógico del código se presenta en la Figura~\ref{fig:diagrama_script}, donde se destacan tres etapas fundamentales: (i) la inicialización del entorno y detección de cámaras, (ii) la adquisición concurrente de tramas mediante hilos productores, y (iii) el procesamiento y visualización de las imágenes mediante un hilo consumidor.
-  
-  \begin{figure}[!h]
-      \centering
-      \includegraphics[trim = 0 0 0 1cm, clip, width=1\textwidth]{Figures/C4/OSU_main.pdf}
-      \caption{Flujo lógico del script de adquisición y visualización de la QBee. Se integran múltiples cámaras, adquisición en paralelo y procesamiento en tiempo real.}
-      \label{fig:diagrama_script}
-  \end{figure}
-  
-  \subsection{Inicialización y adquisición}
-  
-  Durante la fase de inicialización, se establece una conexión con el servidor local de GPS (\texttt{gpsd}) utilizando la librería homónima. Paralelamente, se instancia la clase \texttt{MainThread}, responsable de detectar automáticamente todas las cámaras conectadas a través del sistema \texttt{VmbSystem}.\\
-  
-   Cada cámara detectada es asignada a un hilo independiente de la clase \texttt{FrameProducer}, la cual configura parámetros críticos como la resolución de adquisición, formato de pixel (\texttt{Mono8} o \texttt{Bgr8}), y el modo automático de exposición. Estos hilos se encargan de capturar tramas en tiempo real, estimar la tasa de cuadros por segundo (FPS) y encolar las imágenes en una estructura tipo FIFO (\texttt{queue.Queue}) para su posterior procesamiento.
-  
-  \subsection{Procesamiento, visualización y almacenamiento}
-  
-  La etapa central del sistema está contenida en la clase \texttt{FrameConsumer}, la cual opera como hilo consumidor. Esta clase realiza múltiples tareas en paralelo: (i) extrae tramas de la cola compartida, (ii) redimensiona las imágenes si la resolución de adquisición no coincide con la esperada (\SI[parse-numbers = false]{2592 \times 1944}{px}), (iii) convierte los formatos de imagen a RGB si es necesario, y (iv) concatena las imágenes capturadas por múltiples cámaras en un único mosaico horizontal.\\
-  
-  Sobre esta imagen compuesta se genera una barra de información (\textit{overlay}) que incluye los datos georreferenciados en tiempo real (latitud, longitud, altitud, velocidad, ángulo de rumbo y timestamp), además de la tasa de cuadros por segundo estimada para cada cámara. Esta superposición se construye como una matriz adicional que se apila verticalmente a la imagen original.\\
-  
-  El sistema también permite una interacción directa con el operador mediante teclas específicas:
+
+\section{Data Acquisition and Control System}
+\label{sec:script_control_adquisicion}
+
+\noindent With the aim of automating the process of capturing, processing, and storing multispectral images during flights or bench tests, a script was developed in Python that enables simultaneous acquisition of images in the visible (VIS) and near-infrared (NIR) spectra, also integrating real-time global positioning (GPS) data.\\
+
+\noindent This script is an adaptation of the example code provided by the \texttt{vmbpy} library, corresponding to the \textit{Allied Vision} SDK, and was substantially modified to include multithreading, conditional video writing, telemetry overlay, and keyboard control during execution. In addition, two system services were incorporated to (i) initialize and harden the GNSS/GPS configuration at boot, and (ii) synchronize the acquired videos to cloud storage automatically and \emph{post hoc}.\\
+
+\subsection{General structure of the Script}
+
+\noindent The logical flow of the code is presented in Figure~\ref{fig:diagrama_script}, highlighting three fundamental stages: (i) environment initialization and camera detection, (ii) concurrent frame acquisition via producer threads, and (iii) image processing and visualization via a consumer thread.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim = 0 0 0 1cm, clip, width=1\textwidth]{Figures/C4/OSU_main.pdf}
+    \caption{Logical flow of the QBee acquisition and visualization script. Multiple cameras, parallel acquisition, and real-time processing are integrated.}
+    \label{fig:diagrama_script}
+\end{figure}
+
+
+\noindent During the initialization phase, a connection is established with the local GPS server (\texttt{gpsd}) using the library of the same name. In parallel, the \texttt{MainThread} class is instantiated, responsible for automatically detecting all cameras connected through the \texttt{VmbSystem}. Each detected camera is assigned to an independent thread of the \texttt{FrameProducer} class, which configures critical parameters such as acquisition resolution, pixel format (\texttt{Mono8} or \texttt{Bgr8}), and automatic exposure mode. These threads are responsible for capturing frames in real time, estimating frames per second (FPS), and enqueuing images into a FIFO structure (\texttt{queue.Queue}) for subsequent processing.\\
+
+
+\noindent The core stage of the system is contained in the \texttt{FrameConsumer} class, which operates as the consumer thread. This class performs multiple tasks in parallel: (i) extracts frames from the shared queue, (ii) resizes images if the acquisition resolution does not match the expected \SI[parse-numbers = false]{2592 \times 1944}{px}, (iii) converts image formats to RGB if necessary, and (iv) concatenates images captured by multiple cameras into a single horizontal mosaic. On this composite image, an information bar (\textit{overlay}) is generated that includes real-time georeferenced data (latitude, longitude, altitude, speed, heading angle, and timestamp. See Figure \ref{fig:gps_overlay_visual}), in addition to the estimated frames per second for each camera. This overlay is constructed as an additional matrix that is stacked vertically onto the original image.\\
+
+\noindent The system also allows direct interaction with the operator via specific keys to execution of the following commands:
+\begin{itemize}
+    \item \textbf{\texttt{s}}: captures the current image and saves it in \texttt{JPEG} format.
+    \item \textbf{\texttt{v}}: starts or stops video recording in \texttt{AVI} format, with \texttt{XVID} compression, at a frequency of 24 FPS.
+    \item \textbf{\texttt{Enter}}: ends script execution and closes all windows.
+\end{itemize}
+
+\noindent To ensure autonomous operation and minimize user intervention, a Linux system service (\texttt{systemd}) executes the acquisition script automatically at boot on a Raspberry~Pi~4~Model~B (8\,GB RAM). Thanks to this configuration, the \texttt{QBee} system is activated as soon as the external battery is connected, without requiring a desktop session. Immediately after boot, the script starts image capture and begins storing images and videos in local storage.\\
+
+\subsection{Deterministic GNSS configuration}
+\label{subsec:gps_boot_service}
+
+\noindent Every time the GPS loses power completely, its configuration is reset. To address this, a Linux service was developed to configure the GPS each time the system starts. This service ensures a deterministic and interference-resilient GNSS configuration at each boot, initializing the receiver and launching \texttt{gpsd} with the required serial and timing parameters. The service performs the following high-level sequence (see Figure~\ref{fig:gps_service_flow}). The service performs the following high-level sequence (see Figure~\ref{fig:gps_service_flow}):
+
+\begin{enumerate}
+  \item \textbf{Liberate the serial port:} stop any existing \texttt{gpsd} socket/service and kill stray processes; ensure \texttt{/dev/serial0} is not busy.
+  \item \textbf{Factory-rate handshake:} set \texttt{/dev/serial0} to \SI{9600}{bps} (raw, 8N1) and open the port to speak to the GNSS at its factory baud.
+  \item \textbf{Re-rate and configure:} switch the receiver UART to \SI{57600}{bps} and apply persistent runtime settings:
   \begin{itemize}
-      \item \textbf{\texttt{s}}: captura la imagen actual y la guarda en formato \texttt{JPEG}.
-      \item \textbf{\texttt{v}}: inicia o detiene la grabación de video en formato \texttt{AVI}, con compresión \texttt{XVID}, a una frecuencia de 20 FPS.
-      \item \textbf{\texttt{Enter}}: finaliza la ejecución del script y cierra todas las ventanas.
+    \item \textit{Constellations:} enable GPS, GLONASS, Galileo and BeiDou search.
+    \item \textit{SBAS:} enable WAAS/EGNOS-class augmentation.
+    \item \textit{AIC:} enable Active Interference Cancellation for narrow-band RFI.
+    \item \textit{NMEA output:} restrict to RMC, GGA, GST, ZDA and channel-status, at an update period of \SI{200}{ms} (5\,Hz).
+    \item \textit{Fix timing:} align fix/update control to the chosen period and disable UART saturation modes that could induce backlog at high rates.
   \end{itemize}
-  
-  \subsection{Ejecución automática como servicio de sistema}
-  
-  Con el fin de garantizar un funcionamiento autónomo y minimizar la intervención del usuario, se diseñó un servicio de sistema en Linux (utilizando \texttt{systemd}) que permite la ejecución automática del script tan pronto como el dispositivo inicia. Este servicio fue instalado y habilitado en el sistema operativo de una Raspberry Pi 4 modelo B equipada con 8 GB de memoria RAM.
-  
-  Gracias a esta configuración, el sistema conocido como \texttt{QBee} se activa automáticamente al conectar la batería externa a la Raspberry Pi, sin requerir intervención adicional ni acceso al entorno gráfico. Inmediatamente después del arranque, el script inicia la captura de imágenes y comienza a almacenarlas en la memoria interna, lo que resulta particularmente útil para operaciones en campo, donde no es viable iniciar el sistema manualmente.
-  
-  \subsection{Robustez y tolerancia a fallos}
-  
-  Durante la ejecución, el sistema cuenta con mecanismos de tolerancia a errores. Por ejemplo, si el buffer de imágenes se encuentra lleno, los hilos productores omiten la encolación de nuevas tramas para evitar bloqueos. Asimismo, si no se detecta ninguna cámara activa, se genera una imagen dummy con un mensaje de advertencia.\\
-  
-  Las tramas obtenidas se almacenan temporalmente en memoria, lo que permite minimizar la latencia entre adquisición y visualización. La sincronización entre hilos se realiza mediante eventos y bloqueos controlados, garantizando la integridad de los datos entre productores y consumidores.
-  
-  \subsection{Dependencias y entorno de ejecución}
-  
-  El script fue ejecutado sobre el sistema operativo Raspberry Pi OS (basado en Debian) en una Raspberry Pi 4 modelo B. Se utilizó Python 3.8 y las siguientes dependencias: \texttt{vmbpy}, \texttt{opencv-python}, \texttt{gpsd-py3}, \texttt{numpy}, \texttt{threading}, \texttt{queue} y \texttt{keyboard}. La visualización se realizó mediante la salida HDMI de la Raspberry, y se requirió establecer la variable de entorno \texttt{DISPLAY=":0"} para habilitar la salida gráfica de OpenCV.
-
-  \subsection{Control remoto del dispositivo \texttt{QBee}}
-
-  Además de su capacidad de operación autónoma en campo, el sistema \texttt{QBee} fue diseñado con funcionalidad de control remoto, permitiendo su supervisión y operación desde dispositivos externos como computadores personales, tabletas o teléfonos móviles. Esta característica extiende significativamente la versatilidad del sistema, facilitando tanto pruebas en laboratorio como operaciones a distancia en entornos de difícil acceso.\\
-  
-  Existen dos métodos principales para acceder de forma remota a la interfaz gráfica del sistema:
-  
-  \paragraph{1. Conexión local mediante VNC}
-  
-  El primer método consiste en conectarse directamente a la Raspberry Pi 4 que ejecuta el sistema \texttt{QBee} mediante el protocolo VNC (\textit{Virtual Network Computing}). Para ello, es necesario que la Raspberry esté conectada a una red Wi-Fi previamente configurada para su conexión automática. Asimismo, el dispositivo de control (computador o móvil) debe encontrarse dentro de la misma red local.\\
-  
-  Una vez cumplida esta condición, el usuario puede acceder a la interfaz gráfica de la Raspberry Pi introduciendo su dirección IP o una dirección local estática configurada mediante el sistema operativo Raspberry Pi OS. Para completar el acceso, se requiere conocer las credenciales de autenticación (nombre de usuario y contraseña) establecidas previamente en el sistema.
-  
-  \paragraph{2. Acceso global mediante Raspberry Pi Connect}
-  
-  El segundo método se basa en el uso de \textit{Raspberry Pi Connect}, un servicio gratuito proporcionado por la fundación Raspberry Pi. Este permite acceder a la interfaz gráfica del sistema desde cualquier lugar con conexión a Internet, sin necesidad de estar dentro de la misma red local.\\
-  
-  Para habilitar esta funcionalidad, la Raspberry Pi debe estar vinculada a una cuenta en el servicio \textit{Raspberry Pi Connect} y tener acceso a Internet mediante una red Wi-Fi registrada previamente. Una vez registrado el dispositivo, el usuario puede iniciar sesión en el portal de Raspberry Pi y conectarse directamente a su interfaz gráfica a través del navegador.  \\
-  
-  
-  En ambos métodos, el usuario obtiene acceso completo al entorno de escritorio de la Raspberry Pi. Como se ha descrito en las secciones anteriores, el script de adquisición de \texttt{QBee} se ejecuta automáticamente al iniciar el sistema, lo que da lugar a la apertura de una ventana de visualización en tiempo real de las imágenes capturadas.\\
-  
-  Desde esta interfaz remota, el usuario puede interactuar directamente con el sistema utilizando un teclado virtual o físico para ejecutar acciones de control. Entre las funcionalidades disponibles se encuentran:
-  \begin{itemize}
-      \item Presionar la tecla \texttt{s} para capturar y guardar una imagen.
-      \item Presionar la tecla \texttt{v} para iniciar o detener la grabación de video.
-      \item Presionar la tecla \texttt{Enter} para finalizar la ejecución del script.
-  \end{itemize}
-  
-  Esta capacidad de control remoto permite verificar el correcto funcionamiento del sistema en tiempo real, supervisar condiciones de operación, y capturar eventos relevantes sin necesidad de intervención física directa sobre el dispositivo.\\
-  
-  
-  Adicionalmente, el sistema \texttt{QBee} fue configurado para permitir actualizaciones remotas del código fuente del script mediante el sistema de control de versiones \texttt{Git}. El script está vinculado a un repositorio privado alojado en la plataforma \texttt{GitHub}, lo que permite a los usuarios autenticados realizar \textit{pull} de actualizaciones desde cualquier ubicación con acceso remoto al dispositivo. Esta funcionalidad permite una mejora continua del sistema, facilitando la depuración, implementación de nuevas funcionalidades y adaptaciones específicas sin necesidad de acceso físico al hardware.
-  
-
-\section{Pruebas de operación}
-  
-  
-  \subsection{Escenarios de prueba}
-    Los escenarios de prueba definidos para validar el correcto funcionamiento del sistema \textit{QBee} se clasifican en dos grupos principales: (i) pruebas terrestres en condiciones controladas, y (ii) pruebas en vuelo.
-
-    \subsubsection{Pruebas terrestres}
-    
-        Antes de cualquier despliegue aéreo, es indispensable realizar pruebas en tierra que permitan validar el sistema en condiciones controladas, sin desplazamiento y sin exposición a ambientes extremos. En este contexto, se define como ambiente extremo cualquier entorno cuya temperatura supere los valores comunes encontrados en las principales ciudades colombianas (\SI{\leq 40}{\celsius}), o que implique lluvia, alta humedad o condiciones de iluminación nocturna.
-        
-        \noindent Dado que el sistema \textit{QBee} no cuenta con una fuente de iluminación activa, las pruebas se realizan exclusivamente durante el día, aprovechando la luz solar como fuente principal para la adquisición de imágenes multiespectrales.
-        
-        \noindent El objetivo de estas pruebas es verificar el comportamiento general del sistema en condiciones operativas normales. En particular, se evalúa:
-        
-        \begin{itemize}
-        \item La correcta inicialización automática del script de adquisición al encender el dispositivo.
-        \item La funcionalidad de captura de imágenes al presionar la tecla \texttt{s}.
-        \item La grabación de video y su detención mediante la tecla \texttt{v}.
-        \item La estabilidad del dispositivo al operar durante largos periodos de tiempo.
-        \end{itemize}
-        
-        \noindent Las pruebas se realizaron utilizando dos formas de alimentación:
-        \begin{itemize}
-        \item \textbf{Fuente directa:} mediante un adaptador USB-C conectado a una toma de corriente convencional.
-        \item \textbf{Fuente interna:} a partir de la bater'ia recargable integrada en la carcasa del \textit{QBee}.
-        \end{itemize}
-        
-        \noindent Una de las pruebas más relevantes consisti'o en la captura de una imagen utilizando la tecla \texttt{s}, ya fuera desde un teclado conectado directamente a la Raspberry Pi 4 o mediante acceso remoto. En la Figura~\ref{fig:captura_prueba_remota} se presenta un ejemplo de imagen capturada en estas condiciones, utilizando un tel'efono inteligente para el control remoto del sistema. La prueba confirma el correcto funcionamiento de ambos canales (VIS y NIR), evidenciando que la captura simult'anea se realiza de manera sincronizada, y que el sistema responde adecuadamente a la orden de captura en tiempo real.
-        
-        \begin{figure}[h]
-        \centering
-        \includegraphics[width=1\textwidth]{Figures/C4/captured_image_20240201_174102.jpg}
-        \caption{Captura de imagen realizada durante prueba terrestre mediante control remoto desde un tel'efono inteligente. La imagen muestra la composici'on de ambos canales VIS y NIR, confirmando la funcionalidad del sistema \textit{QBee} en condiciones operativas reales.}
-        \label{fig:captura_prueba_remota}
-        \end{figure}
-        
-        \noindent En complemento, en la Figura~\ref{fig:gps_overlay_visual} se presenta un ejemplo de visualización del sistema de coordenadas geográficas en tiempo real. En la parte superior de la imagen se observa la superposición del texto con la latitud, longitud, altitud, velocidad y rumbo extraídos del módulo GPS integrado en la \textit{QBee}. Esta funcionalidad es crítica para asegurar la trazabilidad espacial de las imágenes adquiridas y para su posterior georreferenciación.
-
-        \begin{figure}[h]
-            \centering
-            \includegraphics[width=0.9\textwidth]{Figures/C4/captured_image_20250217_113221.jpg}
-            \caption{Visualización del sistema de coordenadas geográficas (GPS) en tiempo real sobre la imagen capturada. Se muestran latitud, longitud, altitud, velocidad y rumbo, extraídos automáticamente del módulo GPS durante las pruebas.}
-            \label{fig:gps_overlay_visual}
-        \end{figure}
+  \item \textbf{Re-arm the local TTY:} reconfigure \texttt{/dev/serial0} to \SI{57600}{bps} (raw, 8N1) for the new link speed.
+  \item \textbf{PPS permissions and start:} ensure PPS device access, then launch \texttt{gpsd} in foreground with \texttt{-n} and \texttt{-s 57600} bound to \texttt{/dev/serial0}.
+\end{enumerate}
 
 
+\noindent The figure \ref{fig:gps_service_flow} presents a sequence diagram illustrating the interactions between the service, the GNSS receiver, and the operating system during initialization.
 
-    \subsubsection{Pruebas en superficie en condiciones extremas}
-
-    Durante la VII Campa~na A'erea y XI Expedici'on Cient'ifica a la Ant'artida organizada por la Fuerza A'erea Colombiana, el sistema \textit{QBee} fue sometido a una prueba de funcionamiento en condiciones clim'aticas extremas. En este escenario, se enfrent'o a temperaturas diurnas promedio cercanas a los \SI{0}{\celsius}, significativamente inferiores a las condiciones habituales en las cuales opera el sistema.
-    
-    \noindent El objetivo principal de esta prueba fue evaluar la capacidad del dispositivo para operar de manera confiable en ambientes fr'ios. Se identific'o que, bajo estas condiciones, el sistema present'o fallas intermitentes en su funcionamiento: en algunas ocasiones la \textit{QBee} no inici'o correctamente, o no fue capaz de realizar la grabaci'on de video como lo hace regularmente. Estas fallas pueden estar asociadas a una inicializaci'on deficiente del sistema de procesamiento (Raspberry Pi 4), o a alteraciones en el comportamiento de los sensores VIS y NIR debido a la baja temperatura.
-    
-    \noindent No obstante, tambi'en se registraron casos exitosos de captura de video, lo cual demuestra que el sistema \textit{QBee} puede llegar a operar de forma funcional en condiciones de fr'io extremo. Estos resultados parciales abren la posibilidad de implementar ajustes de hardware y software para robustecer el funcionamiento del sistema en ambientes m'as hostiles. Queda como trabajo futuro el estudio detallado de las causas espec'ificas de las fallas observadas, as'i como la exploraci'on de soluciones que permitan una operaci'on m'as confiable en entornos como la Ant'artida.
-    
-    \noindent A pesar de los resultados mixtos, se concluye que el sistema actual no est'a dise~nado para misiones operativas regulares en la Ant'artida u otras regiones con condiciones ambientales similares, sin modificaciones adicionales en aislamiento t'ermico, tolerancia de componentes y procedimientos de inicializaci'on.
-    
-    \begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Figures/C4/pinguinos.png}
-    \caption{Captura de video realizada exitosamente durante la expedición científica en la Antártida. La imagen confirma que, a pesar de las condiciones extremas, el sistema \textit{QBee} En la imagen se aprecia que la cámara visible no se encuentra correctamente enfocada, lo que puede deberse a un mal ajuste de la distancia entre el objetivo y el sensor. Sin embargo, este tipo de desajuste es corregible mediante ajuste mecánico y no afecta el funcionamiento general del sistema \textit{QBee}. fue capaz de operar y registrar datos multiespectrales de forma puntual.}
-    \label{fig:prueba_antartida}
-    \end{figure}
+    \includegraphics[width=\linewidth]{Figures/C4/gps_config.pdf}
+    \caption{Boot-time GNSS service: sequence diagram. The unit frees the TTY, negotiates \SI{57600}{bps}, applies GNSS/NMEA profile (5\,Hz; RMC/GGA/GST/ZDA/CHN; SBAS; AIC; multi-constellation), and launches \texttt{gpsd}.}
+    \label{fig:gps_service_flow}
+\end{figure}
 
-    \subsubsection{Pruebas en vuelo}
+\noindent This design eliminates race conditions between the OS and the receiver at power-up, prevents stale baud settings, and reduces NMEA traffic to only the sentences consumed by the acquisition software. The 5\,Hz profile balances latency and CPU load on the Raspberry~Pi while preserving timing fidelity for georeferencing and overlay rendering.
 
-    Las pruebas en vuelo del sistema \textit{QBee} fueron posibles gracias a la colaboraci'on con la Fuerza A'erea Colombiana, la cual facilit'o el montaje del dispositivo en distintas aeronaves de su flota. En una primera prueba, la unidad \textit{QBee} fue instalada a bordo de una aeronave Cessna 208 Caravan, realizando un vuelo a una altitud aproximada de 5000 pies.
-    
-    \noindent El vuelo se desarroll'o en condiciones ideales, con un rumbo y comportamiento t'ipico de una ruta comercial y sin presencia de perturbaciones atmosf'ericas significativas. Durante toda la duraci'on del trayecto, el sistema oper'o de forma estable y sin presentar inconvenientes.
-    
-    \noindent Como parte de esta prueba, se verific'o la capacidad de monitoreo remoto del sistema utilizando una red Wi-Fi habilitada dentro de la aeronave, mediante la cual se accedi'o al entorno gr'afico de la Raspberry Pi utilizando el protocolo VNC. Esta conexi'on permiti'o observar en tiempo real la adquisici'on de datos por parte del sistema, confirmando la funcionalidad completa del script y la respuesta de los sensores.
-    
-    \begin{figure}[!h]
+\subsection{Automatic video upload}
+\label{subsec:cloud_sync}
+
+To ensure that data are preserved and available for downstream processing without manual intervention, a pair of \texttt{systemd} units implements a robust, network-aware synchronization workflow to cloud storage. Specifically, an Azure Blob Storage account was configured, with infrastructure dedicated exclusively to synchronizing the images captured by the HuMath QBee devices (see Figure~\ref{fig:video_sync_arch}):
+
+
+\begin{enumerate}
+  \item \textbf{Bulk sync at boot (\texttt{oneshot}):} after \texttt{network-online.target}, a sync job scans the local \texttt{videos/} directory, enumerates all \texttt{*.avi} assets, and uploads only the files absent from the remote container. A local manifest (\texttt{.uploaded\_manifest.txt}) caches the known remote inventory to avoid re-listing on subsequent runs.
+  \item \textbf{Event-driven uploads (\texttt{.path} + templated \texttt{@.service}):} a file-system watcher observes modifications in \texttt{videos/}. Each new or closed file triggers a one-shot upload of that specific asset. This avoids delays between acquisition and offloading and reduces bandwidth spikes compared to monolithic pushes.
+  \item \textbf{Addressing and idempotency:} destination object keys follow a canonical scheme
+        \[
+        \texttt{YYYY/MM/DD/raw/qbee/\textit{filename}.avi}
+        \]
+        derived from the timestamp embedded in the filename (e.g.\\ \texttt{video\_20250217\_113221.avi}). Before each upload, the client checks the manifest (or, for single-file mode, queries the container) to ensure idempotent behavior.
+  \item \textbf{Credentialing and isolation:} credentials and parameters (account, key, container, local directory) are injected via an \texttt{EnvironmentFile} (\texttt{.env}); the sync client runs in a dedicated virtual environment to pin dependencies.
+\end{enumerate}
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Figures/C4/vuelo_caravan.png}
-    \caption{Captura tomada durante el vuelo de prueba en la aeronave Cessna 208 Caravan. Se observ'o un comportamiento estable del sistema y transmisi'on remota exitosa mediante protocolo VNC.}
-    \label{fig:prueba_vuelo}
-    \end{figure}
+    \includegraphics[width=\linewidth]{Figures/C4/sync.pdf}
+    \caption{Video synchronization pipeline. Left: boot-time bulk sync with local manifest;
+    right: per-file uploads triggered by a \texttt{.path} watcher. The client computes canonical
+    object keys, checks idempotency, and updates the manifest on success.}
+    \label{fig:video_sync_arch} % 
+\end{figure}
 
-    \noindent En una segunda prueba, la unidad \textit{QBee} fue montada a bordo de una aeronave de combate Tucano T-27, con el fin de validar su desempeño bajo condiciones de vuelo más exigentes. En este caso, no se contó con un sistema de monitoreo en tiempo real debido a las restricciones propias de la aeronave. Sin embargo, el sistema operó de forma autónoma durante la misión, registrando exitosamente la captura de video.
 
-    \noindent A diferencia del vuelo en la Cessna Caravan, esta prueba presentó una complejidad adicional, ya que durante la operación se ejecutaron maniobras que alcanzaron aceleraciones de hasta 4g. A pesar de estas condiciones dinámicas, la \textit{QBee} logró completar su función de adquisición sin incidentes, lo cual representa un resultado relevante sobre la robustez mecánica y operativa del sistema.
+\subsection{Dependencies and Execution Environment}
+
+The system operates on a Raspberry Pi 4 Model B running Raspberry Pi OS (Debian-based), with the software developed in Python 3.8. The core functionality, image acquisition, is designed to be robust and independent of other services, relying on the \texttt{vmbpy}, \texttt{opencv-python}, \texttt{numpy}, \texttt{threading}, \texttt{queue}, and \texttt{keyboard} libraries. Two secondary services, geolocation and cloud synchronization, have their own dependencies (\texttt{gpsd-py3} and \texttt{azure-storage-blob}, \texttt{python-dotenv}, respectively). The image acquisition process continues to run unaffected if the GPS module fails to get a fix or if the internet connection is unavailable. However, for these secondary services to function correctly, certain conditions must be met. Cloud synchronization requires a stable internet connection. Correct georeferencing of the images is contingent on the GPS module obtaining a "fix," which is subject to a variety of external factors, including atmospheric conditions and satellite visibility, and is not solely dependent on the module's configuration. Visualization is performed through the Raspberry’s HDMI output, and the environment variable \texttt{DISPLAY=":0"} must be set to enable OpenCV’s GUI output.
+
+\subsection{Remote Operation of the \texttt{QBee} Device}
+
+In addition to its autonomous operational capabilities in the field, the \texttt{QBee} system is equipped with functionalities for remote control. This allows for the monitoring and operation of the device from external platforms such as personal computers, tablets, or smartphones, facilitating both laboratory testing and in-field operational adjustments. The system supports two primary methods for accessing the graphical user interface of the HuMath\textregistered\ QBee:
+
+\begin{enumerate}
+    \item \textbf{Local Area Network (LAN) Access via VNC:} This method requires establishing a Virtual Network Computing (VNC) connection to the Raspberry~Pi~4 that powers the \texttt{QBee} device. The Raspberry Pi is configured to automatically join a designated Wi-Fi network. For a successful connection, the control device must reside on the same LAN. Access is granted using the device's IP address or a pre-configured static hostname, secured with user credentials.
+
+    \item \textbf{Global Internet Access via Raspberry Pi Connect:} This method utilizes Raspberry Pi Connect, a service that enables secure, browser-based access to the device's graphical interface from any location with an internet connection. To enable this functionality, the device must be registered to a Raspberry~Pi account and have access to a known Wi-Fi network.
+\end{enumerate}
+
+
+\noindent This remote-control capability enables real-time supervision and the capture of specific events without requiring physical interaction with the device. Furthermore, the \texttt{QBee} system is designed to receive remote code updates. New features, bug fixes, and other software improvements can be deployed via \texttt{git} from a private GitHub repository, ensuring a continuous cycle of development and enhancement.
+
+
+\section{Operational Tests}
+  
+The test scenarios defined to validate the proper functioning of the \textit{QBee} system are classified into two main groups: (i) ground tests under controlled conditions, and (ii) flight tests.
+
+\subsection{Ground tests}
     
-    \begin{figure}[!h]
+Before any aerial deployment, it is essential to perform ground tests that allow the system to be validated under controlled conditions, without displacement and without exposure to extreme environments. In this context, an extreme environment is defined as any setting with conditions that fall outside the typical ranges for Colombia's diverse main cities. This includes temperatures significantly exceeding the 17--31~\si{\celsius} range common in most populous areas, relative humidity persistently above 85\%, the presence of rain, or challenging nighttime lighting conditions \cite{weatherspark_colombia_climate}.\\
+
+        
+\noindent Since the \textit{QBee} system does not have an active illumination source, tests are carried out exclusively during the day, taking advantage of sunlight as the main source for acquiring multispectral images. The objective of these tests is to verify the system's general behavior under normal operating conditions. In particular, the following are evaluated:
+        
+\begin{itemize}
+\item The correct automatic initialization of the acquisition script when the device is powered on.
+\item The image capture functionality when pressing the \texttt{s} key.
+\item Video recording and its stoppage using the \texttt{v} key.
+\item The device’s stability when operating for long periods of time.
+\end{itemize}
+        
+\noindent The tests were conducted using two forms of power supply: a \textbf{direct source} via a USB-C adapter connected to a conventional power outlet, and an \textbf{internal source} using the rechargeable battery integrated into the \textit{QBee} housing.\\
+        
+\noindent One of the most relevant tests consisted of capturing an image using the \texttt{s} key, either from a keyboard connected directly to the Raspberry Pi 4 or via remote access. Figure~\ref{fig:captura_prueba_remota} shows an example of an image captured under these conditions, using a smartphone for remote system control. The test confirms the correct operation of both channels (VIS and NIR), showing that simultaneous capture is performed synchronously, and that the system responds properly to the capture command in real time.\\
+        
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Figures/C4/captured_image_20240201_174102.jpg}
+\caption{Image capture performed during a ground test via remote control from a smartphone. The image shows the composition of both VIS and NIR channels, confirming the functionality of the \textit{QBee} system under real operating conditions.}
+\label{fig:captura_prueba_remota}
+\end{figure}
+        
+\noindent In addition, Figure~\ref{fig:gps_overlay_visual} presents an example of real-time visualization of the geographic coordinate system. At the top of the image, the text overlay with latitude, longitude, altitude, speed, and heading extracted from the GPS module integrated into the \textit{QBee} can be seen. This functionality is critical to ensure the spatial traceability of the acquired images and for their subsequent georeferencing.
+
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.9\textwidth]{Figures/C4/t2.png}
-    \caption{Captura de video realizada durante prueba a bordo del avión de combate T-27 Tucano. A pesar de las maniobras con aceleraciones de hasta 4g, el sistema \textit{QBee} logró registrar imágenes de forma autónoma y estable. Las condiciones de iluminación ambiental no erán las más adecuadas debido a la hora del día (proximadamente las 6 pm).}
-    \label{fig:prueba_tucano}
-    \end{figure}
+    \includegraphics[width=0.9\textwidth]{Figures/C4/captured_image_20250217_113221.jpg}
+    \caption{Real-time visualization of the geographic coordinate system (GPS) over the captured image. Latitude, longitude, altitude, speed, and heading are shown, automatically extracted from the GPS module during the tests.}
+    \label{fig:gps_overlay_visual}
+\end{figure}
 
-    \section{Conclusiones y lecciones aprendidas}
 
-    \noindent El proceso de procura y construcción del HuMath\textregistered~QBee logró materializar una carga multiespectral ligera, robusta y completamente funcional dentro de los márgenes de masa (1,810 g) y volumen impuestos por la plataforma UAV C3, demostrando que la fabricación en PET-G y la integración modular de sensores VIS y NIR pueden satisfacer requisitos aeroespaciales universitarios sin recurrir a proveedores externos. La arquitectura mecánica, eléctrica y de control desarrollada permitió operar el sistema de forma autónoma y remota, garantizando la sincronización de imágenes y metadatos a una tasa de cuadros por segundo de hasta 20 FPS.\\
 
-    \noindent Las campañas experimentales evidenciaron que la temperatura ambiente es el factor operativo más crítico: entre 10~\si{\celsius} y 40~\si{\celsius} el dispositivo funcionó sin incidencias, mientras que a 0~\si{\celsius} en la Antártida aparecieron fallos intermitentes de inicialización, subexpresión del sensor VIS y problemas de saturación electrónica en la Raspberry Pi. Estas anomalías sugieren que deben incorporarse elementos de aislamiento térmico pasivo y estrategias de pre-calentamiento del hardware para misiones en climas fríos. En contraste, bajo radiación solar intensa en tierra se alcanzaron niveles cercanos al 90\,\% de saturación del sensor NIR, por lo que se recomienda añadir control automático de ganancia y filtros ND intercambiables para preservar el rango dinámico.\\
+\subsection{Surface tests under extreme conditions}
 
-%   \noindent El análisis de velocidad angular y lineal obtenido de los registros GPS y de las grabaciones en los vuelos a bordo del T-27 Tucano confirmó que el montaje mecánico soporta vibraciones y aceleraciones moderadas sin pérdida de alineación ni cortes en la adquisición. El vídeo completo de estas pruebas, junto con las capturas representativas, se encuentra archivado en el repositorio institucional (links permanentes figuran en el Anexo B), lo que asegura la trazabilidad de los resultados y facilita futuras auditorías científicas.\\
+The 7\textsuperscript{th} Air Campaign and 11\textsuperscript{th} Scientific Expedition to Antarctica, organized by the Colombian Air Force \cite{FAC_Antartida_2025}, took place between December 2024 and March 2025 on the Antarctic Peninsula. The expedition operated from various international scientific bases, including those of Chile, Argentina, and Peru. This campaign provided a unique opportunity to subject the QBee system to the extreme and highly variable climatic conditions of the austral summer in Antarctica. Operating at average daytime temperatures that, although mild for the continent, fluctuated between \SI{-6}{\celsius} and \SI{2}{\celsius}, and with near-constant daylight of 18 to 24 hours \cite{SeasonsYear_Antarctica}, the system's performance was evaluated to determine its reliability in cold environments.\\
 
-    \noindent A nivel de software, el script multihilo basado en la biblioteca \texttt{vmbpy} demostró ser estable durante más de 30 horas continuas de operación, pero las pruebas en ambientes extremos revelaron cuellos de botella cuando el búfer alcanzó la saturación de memoria. Como acciones de mejora se recomienda migrar a una arquitectura productora--consumidora basada en \texttt{asyncio} para reducir la latencia, implementar un \textit{watchdog} que reinicie servicios congelados y habilitar compresión de vídeo por hardware para disminuir la carga en la CPU de la Raspberry Pi~4.\\
+\noindent The system exhibited intermittent operational failures under these conditions. The most common issues were startup failures and an inability to initiate video recording. These malfunctions are likely attributable to two main factors: inadequate initialization of the Raspberry Pi 4 processing system at low temperatures, and temperature-induced performance degradation of the VIS and NIR sensors.\\
 
-    \noindent Finalmente, la colaboración con la Fuerza Aérea Colombiana y la participación de estudiantes voluntarios de varias universidades puso de relieve el valor de los acuerdos interinstitucionales. Las lecciones aprendidas aquí---aislamiento térmico, control de saturación, gestión de velocidad de adquisición y documentación exhaustiva de código y datos---sientan las bases para desarrollar versiones de la HuMath\textregistered~QBee capaces de operar de manera confiable en escenarios climáticos aún más desafiantes y ampliar su alcance en programas de monitoreo ambiental nacional e internacional.\\
+\noindent Despite these challenges, successful video captures were recorded, demonstrating the system's potential to function in extreme cold. These partial successes suggest that with targeted hardware and software adjustments, the QBee's performance in hostile environments can be significantly improved. Future work should focus on a detailed root cause analysis of the observed failures. Key areas of investigation should include the thermal tolerance of the electronic components and the development of robust initialization routines for cold-weather operations.\\
 
+\noindent While the current prototype is not suitable for regular operational missions in Antarctica, this expedition yielded invaluable data. The findings underscore the need for specific design modifications, such as improved thermal insulation, the selection of components with wider operating temperature ranges, and the implementation of pre-heating or temperature-aware initialization procedures. These lessons are critical for the development of future iterations of the QBee system, enabling its deployment in a wider range of challenging environmental monitoring scenarios.\\
+    
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Figures/C4/pinguinos.png}
+\caption{Video capture successfully carried out during the scientific expedition in Antarctica. The image confirms that, despite the extreme conditions, the \textit{QBee} system was able to operate and record multispectral data on a punctual basis. In the image, it can be seen that the visible camera is not correctly focused, which may be due to an improper adjustment of the distance between the lens and the sensor. However, this kind of misadjustment is correctable by mechanical adjustment and does not affect the overall operation of the \textit{QBee} system.}
+\label{fig:prueba_antartida}
+\end{figure}
+
+\subsection{Flight tests}
+
+The flight tests of the \textit{QBee} system were made possible thanks to collaboration with the Colombian Air Force, which facilitated installation of the device on different aircraft in its fleet. In a first test, the \textit{QBee} unit was installed aboard a Cessna 208 Caravan aircraft, performing a flight at an altitude of approximately 5{,}000 feet. The flight took place under ideal conditions, with a heading and behavior typical of a commercial route and without significant atmospheric disturbances. Throughout the journey, the system operated stably and without issues.\\
+
+\noindent As part of this test, the system’s remote monitoring capability was verified using a Wi-Fi network enabled inside the aircraft, through which the Raspberry Pi’s graphical environment was accessed using the VNC protocol. This connection made it possible to observe the system’s data acquisition in real time, confirming full script functionality and sensor responsiveness. In Figure \ref{fig:prueba_vuelo}, the result of the device's operation is shown.\\
+
+    
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{Figures/C4/vuelo_caravan.png}
+\caption{Frame captured during the test flight on the Cessna 208 Caravan aircraft. Stable system behavior and successful remote transmission via the VNC protocol were observed.}
+\label{fig:prueba_vuelo}
+\end{figure}
+
+\noindent In a second test, the \textit{QBee} unit was mounted aboard a T-27 Tucano combat aircraft, in order to validate its performance under more demanding flight conditions. In this case, no real-time monitoring system was available due to the aircraft’s own restrictions. However, the system operated autonomously during the mission, successfully recording video capture.\\
+
+\noindent Unlike the flight in the Cessna Caravan, this test presented additional complexity, since maneuvers reaching accelerations of up to 4g were performed during the operation. Despite these dynamic conditions, the \textit{QBee} completed its acquisition function without incident, which represents a relevant result regarding the system’s mechanical and operational robustness.\\
+    
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/C4/t2.png}
+\caption{Video capture performed during testing aboard the T-27 Tucano combat aircraft. Despite maneuvers with accelerations of up to 4g, the \textit{QBee} system managed to record images autonomously and stably. Ambient lighting conditions were not the most suitable due to the time of day (approximately 6 pm).}
+\label{fig:prueba_tucano}
+\end{figure}
+
+\noindent The analysis of angular and linear velocity obtained from GPS logs and recordings during flights aboard the T-27 Tucano confirmed that the mechanical mount withstands moderate vibrations and accelerations of up to 4g without loss of alignment or acquisition dropouts.
+
+\noindent The operational test results reveal that the system is highly dependent on ambient lighting conditions, as expected. The test on the T-27 Tucano was conducted between 17:30 and 18:45, where the lighting conditions are particularly complex, as is evident from the captured frames. Similarly, it is observable that the results for the NIR channel were superior to those for the VIS channel. This phenomenon is attributed to the atmospheric scattering effects prevalent at sunset, which lead to a greater availability of illumination in the NIR spectrum compared to the VIS spectrum as evening progresses.\\
+
+\noindent In both flight tests, the system behaved adequately, demonstrating that the services and software developed for image capture function correctly. It must be clarified that in both tests, the optical systems were not properly focused, resulting in blurry acquired images. The optical system in question will be analyzed in a subsequent chapter.\\
+\section{Conclusions and Lessons Learned}
+
+\noindent The procurement and construction process of the HuMath\textregistered~QBee successfully materialized a lightweight, robust, and fully functional multispectral payload within the mass (1,810 g) and volume margins imposed by the C3 UAV platform, demonstrating that PET-G manufacturing and modular integration of VIS and NIR sensors can meet university aerospace requirements without resorting to external suppliers. The developed mechanical, electrical, and control architecture enabled autonomous and remote operation of the system, ensuring synchronization of images and metadata at a frame rate of up to 24 FPS.\\
+
+
+\noindent The experimental campaigns showed that ambient temperature is the most critical operational factor: between 10~\si{\celsius} and 40~\si{\celsius} the device operated without incidents, whereas at 0~\si{\celsius} in Antarctica intermittent initialization failures, underexposure of the VIS sensor, and electronic saturation problems in the Raspberry Pi were observed. These anomalies suggest that passive thermal insulation elements and hardware pre-heating strategies should be incorporated for missions in cold climates. In contrast, under intense solar radiation on the ground, levels close to 90\,\% saturation were reached in the NIR sensor; therefore, it is recommended to add automatic gain control and interchangeable ND filters to preserve dynamic range.\\
+
+%   \noindent The analysis of angular and linear velocity obtained from GPS logs and recordings during flights aboard the T-27 Tucano confirmed that the mechanical mount withstands moderate vibrations and accelerations without loss of alignment or acquisition dropouts. The complete video of these tests, along with representative frames, is archived in the institutional repository (permanent links appear in Annex B), which ensures the traceability of results and facilitates future scientific audits.\\
+
+\noindent At the software level, the multithreaded script based on the \texttt{vmbpy} library proved stable for more than 30 continuous hours of operation, but tests in extreme environments revealed bottlenecks when the buffer reached memory saturation. As improvement actions, it is recommended to migrate to a producer–consumer architecture based on \texttt{asyncio} to reduce latency, implement a \textit{watchdog} to restart frozen services, and enable hardware video compression to reduce the load on the Raspberry Pi 4 CPU.\\
+
+\noindent Finally, collaboration with the Colombian Air Force and the participation of volunteer students from various universities highlighted the value of inter-institutional agreements. The lessons learned here—thermal insulation, saturation control, optical focusing, acquisition-rate management, and thorough documentation of code and data—lay the groundwork for developing HuMath\textregistered~QBee versions capable of operating reliably in even more challenging climatic scenarios and expanding their reach in national and international environmental monitoring programs.\\
