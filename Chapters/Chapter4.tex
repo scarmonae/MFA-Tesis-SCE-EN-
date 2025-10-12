@@ -1,8 +1,6 @@
 \chapter{Optical Characterization}
 
-\noindent This chapter details the materials and methods used for the development of this work. Initially, the materials employed are described, including specific equipment, light sources, calibration patterns, and software used for data acquisition, processing, and analysis.\\
-
-\noindent Subsequently, the experimental methods are presented, organized according to the type of measurement performed: geometric and spectral measurements. For each method, the experimental procedure is clearly described, justifying the choice of technique and specifying the conditions under which the experiments were conducted, including details of instrument configuration and protocols followed.\\
+\noindent This chapter details the materials and methods used for the development of this work. Initially, the materials employed are described, including specific equipment, light sources, calibration patterns, and software used for data acquisition, processing, and analysis. Subsequently, the experimental methods are presented, organized according to the type of measurement performed: geometric and spectral measurements. For each method, the experimental procedure is clearly described, justifying the choice of technique and specifying the conditions under which the experiments were conducted, including details of instrument configuration and protocols followed.\\
 
 
 % Finalmente, se incluye una breve descripción de los resultados esperados tras la ejecución de los métodos mencionados, acompañada del cronograma previsto para las actividades y el presupuesto estimado requerido para la implementación del estudio. Esta información busca proporcionar claridad y facilitar la replicabilidad del estudio, así como sustentar la factibilidad y pertinencia metodológica del proyecto.
@@ -41,25 +39,29 @@
 
 \section{Geometric Characterization}
 
+
+
 \subsection{Determination of Field of View (FOV) and Angular Field of View (AFOV)}
 \label{sec:fov}
 
+\noindent In optical systems, transverse magnification provides the fundamental link between an object's physical dimensions and the size of its projection onto an image sensor. Also known as lateral or linear magnification ($m$), it is formally defined as the ratio of the image height ($h_i$) to the object height ($h_o$), with both measured perpendicularly to the optical axis:
 
-\noindent The Field of View (FOV) of the optical system is determined in order to assess the maximum ground area that can be observed by the system, depending on the distance between the optical system and the surface. For this, an optical setup is conducted in a laboratory to measure the FOV as the distance varies. The optical setup is shown in Figure~\ref{fig:MTF_FOV_montage}. First, a test chart is placed on a stable base located on an optical bench, preferably using a clamp that allows proper orientation with respect to the optical axis of the system. In this case, the test chart used is an ISO-12233 spatial frequency response test chart (see Figure \ref{fig:iso12233_test_chart}) that comes with multiple sensor format sizes, including an option for a 4:3 sensor aspect ratio. The reason for selecting this pattern is that it contains multiple elements whose length and distance between them can be measured, which allows and facilitates varying the working distance between the optical system being characterized and the chart, such that the edges of the captured image align with a pair of elements in the pattern. It is essential that the chart is properly positioned, centered, and perpendicular to the system's optical axis to minimize errors caused by tilts or misalignments. Next, the optical system is positioned on its corresponding base on the optical bench, ensuring it is centered and properly aligned with the test film.\\ 
+\begin{equation}
+    m = \frac{h_i}{h_o}
+\end{equation}
 
-\noindent Once the initial setup is established, images of the film are captured at different working distances. During image acquisition, an effort is made to precisely align the visible edges of the image with a known edge on the test film. Measurements are taken strictly in the vertical or horizontal direction, explicitly measuring the distance between objects located at opposite edges of the image. This procedure is carried out for both the horizontal and vertical FOV, as they may differ depending on the format of the optical sensor. In this case, The sensor used in this setup captures images with a 4:3 aspect ratio, which is typical for many scientific and industrial cameras. 
+\noindent This dimensionless factor indicates how much larger or smaller the image is compared to the object. If $|m| > 1$, the image is magnified; if $|m| < 1$, the image is reduced. A negative sign in $m$ indicates that the image is inverted with respect to the object, which is common in many imaging systems.
+
+\noindent The transverse magnification can also be expressed in terms of the distances from the lens to the image ($d_i$) and from the lens to the object ($d_o$):
+
+\begin{equation}
+    m = -\frac{d_i}{d_o}
+\end{equation}
+
+\noindent This relationship, derived from the thin lens equation, is crucial for designing optical systems, as it directly links the position and size of the object with the position and size of the image formed on the sensor. Understanding magnification is, therefore, the first step in determining the system's field of view (FOV), as the FOV depends on the size of the sensor (image space) and how it projects onto the object space through the system's optics.\\
 
 
-\begin{figure}[H]
-        \centering
-        \includegraphics[width=0.98\linewidth]{Figures/C3/MTF_montaje.pdf}
-        \caption{Optical setup developed. The test chart used is an ISO-12233 spatial frequency response test chart printed in mate paper with a size of 69 $\times$ 42 cm. In this case, the use of barriers to prevent capture of unwanted light directly from the illumination source was not necessary, as the source is located behind the optical system under test. The illumination source is a tungsten halogen lamp coupled with a fiber optic cable and a diffuser.}
-        \label{fig:MTF_FOV_montage}
-\end{figure}
-
-
-\noindent
-Before analysing the experimental data it is useful to establish the theoretical dependence of FOV on distance. In an ideal image-forming optical system, the linear relationship between the field of view (FOV) and the working distance arises from basic geometric optics. Under the pinhole camera model, the scene geometry is projected through a central projection point (the pinhole), forming a similar triangle between the object field and the sensor plane \cite{Hecht2002Optics,StanfordPinhole}. If the sensor has width $H$ and the lens has focal length $f$, the angular field of view (AFOV) is defined as:
+\noindent Before analysing the experimental data it is useful to establish the theoretical dependence of FOV on distance. In an ideal image-forming optical system, the linear relationship between the field of view (FOV) and the working distance arises from basic geometric optics. Under the pinhole camera model, the scene geometry is projected through a central projection point (the pinhole), forming a similar triangle between the object field and the sensor plane \cite{Hecht2002Optics,StanfordPinhole}. If the sensor has width $H$ and the lens has focal length $f$, the angular field of view (AFOV) is defined as:
 
 \begin{equation}
 \text{AFOV} = 2 \cdot \arctan\left(\frac{H}{2f}\right).
@@ -96,6 +98,19 @@ Thus, the rate of change of the FOV with respect to the working distance is cons
 
 \noindent
 which is the linear magnification per unit distance. This linear approximation remains valid for small to moderate AFOV values, and forms the theoretical basis for modeling the FOV as a linear function of working distance in this study \cite{Hecht2002Optics}.\\
+
+
+\noindent For this work, the Field of View (FOV) of the optical system is determined in order to assess the maximum ground area that can be observed by the system, depending on the distance between the optical system and the surface. For this, an optical setup is conducted in a laboratory to measure the FOV as the distance varies. The optical setup is shown in Figure~\ref{fig:MTF_FOV_montage}. First, a test chart is placed on a stable base located on an optical bench, preferably using a clamp that allows proper orientation with respect to the optical axis of the system. In this case, the test chart used is an ISO-12233 spatial frequency response test chart (see Figure \ref{fig:iso12233_test_chart}) that comes with multiple sensor format sizes, including an option for a 4:3 sensor aspect ratio. The reason for selecting this pattern is that it contains multiple elements whose length and distance between them can be measured, which allows and facilitates varying the working distance between the optical system being characterized and the chart, such that the edges of the captured image align with a pair of elements in the pattern. It is essential that the chart is properly positioned, centered, and perpendicular to the system's optical axis to minimize errors caused by tilts or misalignments. Next, the optical system is positioned on its corresponding base on the optical bench, ensuring it is centered and properly aligned with the test film.\\ 
+
+\noindent Once the initial setup is established, images of the film are captured at different working distances. During image acquisition, an effort is made to precisely align the visible edges of the image with a known edge on the test film. Measurements are taken strictly in the vertical or horizontal direction, explicitly measuring the distance between objects located at opposite edges of the image. This procedure is carried out for both the horizontal and vertical FOV, as they may differ depending on the format of the optical sensor. In this case, The sensor used in this setup captures images with a 4:3 aspect ratio, which is typical for many scientific and industrial cameras. 
+
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.98\linewidth]{Figures/C3/MTF_montaje.pdf}
+        \caption{Optical setup developed. The test chart used is an ISO-12233 spatial frequency response test chart printed in mate paper with a size of 69 $\times$ 42 cm. In this case, the use of barriers to prevent capture of unwanted light directly from the illumination source was not necessary, as the source is located behind the optical system under test. The illumination source is a tungsten halogen lamp coupled with a fiber optic cable and a diffuser.}
+        \label{fig:MTF_FOV_montage}
+\end{figure}
 
 
 \noindent Since FOV measurements have inherent uncertainties due to the measuring instrument and other experimental sources, a statistical analysis using weighted linear regression is implemented to properly model the functional relationship between the measured FOV and the working distance. This method explicitly considers errors in both the dependent and independent variables, allowing for consistent and less biased estimates of the model parameters. This statistical analysis is needed in order to extrapolate the FOV at a working distances much greater than the used in the measurements, to account for errors in the model and how these propagate along the working distance. The weighted linear regression is fitted using total least squares (Deming regression), which simultaneously minimizes deviations in both variables:
@@ -164,16 +179,108 @@ which is the linear magnification per unit distance. This linear approximation r
 
 \subsection{Modulation Transfer Function (MTF) Characterization}
 \label{sec:mtf_char}
-\noindent The Modulation Transfer Function (MTF) enables an objective evaluation of the optical system’s ability to reproduce detail and contrast at different spatial frequencies. In this work, the slanted-edge method is used, as established by the international standard ISO 12233. Because the MTF encodes the ultimate resolving capability of the lens–sensor pair, it naturally leads to the \emph{ground-resolved distance} (GRD), i.e.\ the smallest linear feature that can be distinguished on the ground at a given altitude.  Establishing a transparent link between laboratory MTF and mission-level GRD therefore allows direct verification of the resolution requirement.\\
 
-%----------------------------------------------------------------\\
+Image formation in optical systems can be mathematically described as a convolution operation between the spatial irradiance distribution of the object and the impulse response of the optical system. This operation captures how an object is transformed into the final image generated by the system. Formally, the image $g(x,y)$ is obtained by:
 
-% \noindent The procedure begins by placing the ISO 12233 standard spatial resolution chart (see Figure~\ref{fig:iso12233_test_chart}) on a stable base, implementing the same setup as the mentioned in the Figure \ref{fig:MTF_FOV_montage} for the FOV characterization    . Uniform illumination over the chart’s surface is ensured, guaranteeing that the light intensity at any point does not vary more than $\pm 10\%$ from the center value.
+\begin{equation} g(x,y) = f(x,y) * h(x,y), \end{equation}
+
+\noindent where $f(x,y)$ is the spatial irradiance of the ideal object and $h(x,y)$ is the impulse response of the optical system, which characterizes the combined effects of physical phenomena such as diffraction and aberrations on the final image.\\
+
+\noindent In an ideal optical system, the impulse response is a delta function ($\delta(x,y)$), resulting in an exact replica of the object. However, in real systems, the impulse response has a finite spatial distribution due to diffraction and aberration effects, causing even point sources to appear as blurred spots in the image, known as blur spots \cite{Boreman2001ModulationTT52}. This actual distribution, known as the Point Spread Function (PSF), defines the smallest detail that can be resolved by the optical system.\\
+
+\noindent The convolution process requires the system to meet the properties of linearity and spatial invariance (LSI), implying that the functional form of h(x,y) does not change with position in the image plane. Although these conditions are only approximated in real systems due to field-angle-dependent aberrations, the convolutional analysis remains valid within isoplanatic regions, where the PSF stays approximately constant \cite{Boreman2001ModulationTT52}. This implies that a robust characterization of the system's performance requires measuring the PSF in multiple image regions (e.g., center, edges, and corners), rather than relying on a single on-axis measurement.\\
+
+\noindent The Dirac delta function is a distribution that is zero everywhere except at the origin, where it is infinitely large, yet its integral over its entire domain is equal to one. The sifting property states that when a function is multiplied by a shifted Dirac delta and integrated, the result is the value of the function at the point of the shift. This is formally expressed as:
+
+\begin{equation}
+f(x',y') = \iint f(x_{\text{obj}},y_{\text{obj}}) \delta(x'-x_{\text{obj}}, y'-y_{\text{obj}})\,dx_{\text{obj}}dy_{\text{obj}}.
+\end{equation}
+
+\noindent In this equation, $f(x_{\text{obj}}, y_{\text{obj}})$ represents the continuous radiance distribution of the scene in the object plane. The integral, operating over the object coordinates, effectively "samples" the continuous function $f(x_{\text{obj}}, y_{\text{obj}})$ at the specific location $(x', y')$ defined by the Dirac delta function. The result, $f(x',y')$, is the value of the scene's radiance at that precise point in the image plane. This equation forms the theoretical basis for understanding how a continuous optical image is converted into a set of discrete pixel values by an image sensor.\\
+
+\noindent The convolution with the impulse response $h(x',y')$ of the optical system can be interpreted as follows: each point of the object $(x',y')$ acts as a point source whose contribution in the image plane is a shifted copy of the function $h(x,y)$, centered at the corresponding location. The intensity of this copy is weighted by the object irradiance at that point $f(x',y')$. The final image is then obtained by summing (integrating) all these individual contributions \cite{Boreman2001ModulationTT52}. Mathematically, this process is expressed as the convolution:
+
+\begin{equation}
+g(x,y) = \iint h(x-x',\,y-y')\, f(x',y') \, dx'\,dy',
+\end{equation}
+
+where $g(x,y)$ is the irradiance distribution in the image plane, $f(x',y')$ is the irradiance distribution of the object, and $h(x,y)$ is the point spread function (PSF) of the system.
+
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=\linewidth]{Figures/C4/image_formation.png}
+    \caption{The convolution of the object with the impulse response to generate the image. Taken from \cite{Boreman2001ModulationTT52}.}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent The Modulation Transfer Function (MTF) enables an objective evaluation of the optical system’s ability to reproduce detail and contrast at different spatial frequencies. Contrast is a key parameter in evaluating image quality, as it directly influences an optical system’s ability to reproduce details faithfully. Its impact on visual perception and optical system design is significant, especially in applications where resolution and sharpness are essential. Generally, contrast determines the differentiation between regions of different luminance in an image, affecting the perception of fine details and the visual quality in optical and electro-optical systems.\\
+
+\noindent Contrast is generally expressed in terms of \textit{modulation depth}, defined as:
+
+\begin{equation}
+M = \frac{A_{\max} - A_{\min}}{A_{\max} + A_{\min}}
+\label{eq:contraste}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $A_{\max}$ is the maximum intensity in the image.
+    \item $A_{\min}$ is the minimum intensity in the image.
+\end{itemize}
+
+When $A_{\min} = 0$, the contrast is maximum $(M = 1)$. Conversely, if $A_{\max} = A_{\min}$, the modulation is null $(M = 0)$, implying that the image lacks intensity variations and, therefore, visual detail.\\
+
+\noindent Contrast in an optical system is directly related to the \textit{Modulation Transfer Function} (MTF), which measures how modulation is preserved in the image across different spatial frequencies. The MTF is defined as:
+
+\begin{equation}
+\text{MTF}(f) = \frac{M_{\text{image}}(f)}{M_{\text{object}}(f)}
+\label{mtf}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $M_{\text{image}}(f)$ is the measured modulation in the image for a spatial frequency $f$.
+    \item $M_{\text{object}}(f)$ is the modulation of the object at the same frequency.
+\end{itemize}
+
+\noindent To analyze the system's performance in terms of spatial frequency, we use the Optical Transfer Function (OTF). The OTF is a crucial tool in imaging science as it provides a comprehensive description of how an optical system transfers the spatial frequency content of an object to the image. It is defined as the Fourier transform of the Point Spread Function (PSF):
+
+\begin{equation}
+\text{OTF}(u,v) = \mathcal{F} \{ \text{PSF}(x,y) \}.
+\end{equation}
+
+
+\noindent The Line Spread Function (LSF) is a function derived from the PSF and describes the response of the optical system when the excitation is a thin line instead of a point. It is obtained by integrating the PSF along one of its dimensions:
+
+\begin{equation}
+\text{LSF}(x) = \int_{-\infty}^{\infty} \text{PSF}(x,y) \, dy.
+\end{equation}
+
+\noindent The \textit{Edge Spread Function} (ESF) models the system's response to an abrupt edge transition. This function is particularly useful in the experimental measurement of the MTF, as it can be easily obtained from images of high-contrast edges. The ESF is related to the LSF through the derivative:
+
+\begin{equation}
+\text{LSF}(x) = \frac{d}{dx} \text{ESF}(x).
+\end{equation}
+
+\noindent The \textit{Modulation Transfer Function} (MTF) characterizes the ability of an optical system to transfer contrast of different spatial frequencies from the object to the image. It is obtained from the Fourier transform of the LSF:
+
+\begin{equation}
+\text{MTF}(u) = \left| \mathcal{F} \{ \text{LSF}(x) \} \right|.
+\end{equation}
+
+\noindent The OTF is a complex-valued function that operates in the frequency domain, where $(u,v)$ represent the spatial frequencies in the x and y directions, respectively. It fully characterizes the linear, space-invariant behavior of the optical system. The OTF can be separated into its magnitude and phase components:
+
+\begin{equation} \text{OTF}(u,v) = \text{MTF}(u,v) \cdot e^{i\phi(u,v)}, \end{equation}
+
+where: Modulation Transfer Function (MTF), $|\text{OTF}(u,v)|$, is the magnitude of the OTF. It describes the attenuation of contrast for each spatial frequency as it passes through the optical system. An MTF of 1 indicates perfect contrast transfer, while an MTF of 0 means the contrast at that frequency is completely lost. Phase Transfer Function (PTF), $\phi(u,v)$, is the phase of the OTF. It represents the phase shift (or spatial displacement) of each spatial frequency component. For an ideal, aberration-free optical system, the PSF is symmetric, and the PTF is zero for all frequencies. Non-zero PTF values are indicative of asymmetric aberrations in the optical system, which cause geometric distortions in the image.\\
+
+\noindent In this work, the slanted-edge method is used, as established by the international standard ISO 12233. Because the MTF encodes the ultimate resolving capability of the lens–sensor pair, it naturally leads to the \emph{ground-resolved distance} (GRD), i.e. the smallest linear feature that can be distinguished on the ground at a given altitude.  Establishing a transparent link between laboratory MTF and mission-level GRD therefore allows direct verification of the resolution requirement.\\
 
 
 \subsubsection{Experimental Setup}
 
-\noindent The procedure begins by placing the ISO 12233 standard spatial resolution chart (see Figure~\ref{fig:iso12233_test_chart}) on a stable base, implementing the same setup as the mentioned in the Figure \ref{fig:MTF_FOV_montage} for the FOV characterization    . Uniform illumination over the chart’s surface is ensured, guaranteeing that the light intensity at any point does not vary more than $\pm 10\%$ from the center value.\\
+\noindent The procedure begins by placing the ISO 12233 standard spatial resolution chart (see Figure~\ref{fig:iso12233_test_chart}) on a stable base, implementing the same setup as the mentioned in the Figure \ref{fig:MTF_FOV_montage} for the FOV characterization. Uniform illumination over the chart’s surface is ensured, guaranteeing that the light intensity at any point does not vary more than $\pm 10\%$ from the center value.\\
 
 \begin{figure}[H]
     \centering
@@ -182,7 +289,7 @@ which is the linear magnification per unit distance. This linear approximation r
     \label{fig:iso12233_test_chart}
 \end{figure}
 
-\noindent The illumination is configured as shown in Figure~\ref{fig:srf_motaje}. Ambient lighting must be reduced to a minimum. If necessary, a diffuser should be used to ensure the illumination is as homogeneous as possible and to avoid unwanted intensity patterns from the light source.\\ 
+\noindent The illumination setup was based on the recommendations of the ISO 12233 standard, illustrated in Figure~\ref{fig:srf_motaje}. However, due to laboratory equipment limitations—specifically the absence of an additional light source or a fiber optic with a beam splitter—the lighting could only be positioned on one side of the optical axis, rather than on both sides as the standard suggests for achieving homogeneous illumination. Despite this necessary adaptation, measures were taken to make the illumination as uniform as possible. Ambient lighting was minimized, and a diffuser was employed to prevent unwanted intensity patterns from the light source.\\
 
 
 
@@ -204,7 +311,7 @@ which is the linear magnification per unit distance. This linear approximation r
     \label{fig:illumination_distribution}
 \end{figure}
 
-\noindent Since the optical system under analysis does not have autofocus and instead requires manual adjustment, a Python script was implemented to display the camera or sensor image in real time, along with a window showing the central horizontal intensity profile and another window showing its derivative. To determine optimal focus, the method seeks to maximize the magnitude of the extreme values—peaks and valleys—of the derivative of the central profile, since a higher derivative corresponds to better edge resolution. This indicates that the focus point has been reached where high spatial frequency details are best reproduced. This method is the same as described in Section~\ref{sec:fov}.\\
+\noindent Since the optical system under analysis does not have autofocus and instead requires manual adjustment, a Python script was implemented to display the camera or sensor image in real time, along with a window showing the central horizontal intensity profile and another window showing its derivative. To determine optimal focus, the method seeks to maximize the magnitude of the extreme values—peaks and valleys—of the derivative of the central profile, since a higher derivative corresponds to better edge resolution. This indicates that the focus point has been reached where high spatial frequency details are best reproduced. This method is the same as described in Section \ref{sec:fov}.\\
 
 
 \noindent The optical system is positioned to properly frame the test chart. Vertical arrows help adjust magnification, while horizontal arrows assist in centering the image. The tips of the central black arrows should be fully visible, while the white arrows should be completely hidden. The horizontal edge of the chart should be aligned approximately parallel to the sensor’s horizontal lines. The approximate distance between the camera and the test chart is recorded for later analysis. Figure~\ref{fig:iso12233_test_chart_encuadre} shows the arrows used for alignment.\\
@@ -222,64 +329,7 @@ The dark frames, which contain only the sensor’s baseline signal (dark current
 This master dark frame is then subtracted from every illuminated frame prior to further processing, as detailed in Section~\ref{subsub:corriente_oscura_espectrometro}. A specific analysis region is selected within the corrected image, where the slanted edge is clearly distinguishable.\\
 
 
-% \noindent The MTF measurement is carried out following the steps outlined below:
-
-% \begin{enumerate}
-%     \item The illumination is configured as shown in Figure~\ref{fig:srf_motaje}. Ambient lighting must be reduced to a minimum. If necessary, a diffuser should be used to ensure the illumination is as homogeneous as possible and to avoid unwanted intensity patterns from the light source.
-    
-%     % \begin{figure}[H]
-%     %     \centering
-%     %     \includegraphics[trim=20mm 50mm 20mm 0mm, clip, width=0.7\linewidth]{Figures/C3/iso 12233 montaje.png}
-%     %     \caption{Optical setup recommended by ISO 12233:2024 for accurate MTF measurement. (1) matte black background, (2) test chart, (3) white illumination, (4) optical system under test, (5) barriers to prevent direct illumination of the optical system, (6) adjustable working distance.}
-%     %     \label{fig:srf_motaje}
-%     % \end{figure}
-
-%     \item The illumination is arranged such that the signal distribution delivered by the optical system is as homogeneous as possible. This implies that the captured image should show two well-defined peaks: one for the dark areas and another for the bright areas of the test pattern. Ideally, these peaks would be delta functions, indicating sharp transitions between intensity regions. In practice, secondary peaks should be minimized and the main peaks should be as narrow as possible. A homogeneous distribution ensures the optical system’s response is measured under controlled conditions and the MTF analysis is not affected by unwanted illumination variations. Figure~\ref{fig:illumination_distribution} shows the distribution achieved for the region of interest shown in Figure~\ref{fig:enfoque}. Additionally, this distribution confirms that signal saturation is minimal in the region of interest.
-
-%     % \begin{figure}[H]
-%     %     \centering
-%     %     \includegraphics[width=1\linewidth]{Figures/C3/Histogram_MTF.pdf}
-%     %     \caption{Signal distribution delivered by the optical system under the configured experimental illumination. Two main peaks are observed: one in the dark zone and another in the bright zone, with attenuated secondary peaks.}
-%     %     \label{fig:illumination_distribution}
-%     % \end{figure}
-
-%     \item The optical system is positioned to properly frame the test chart. Vertical arrows help adjust magnification, while horizontal arrows assist in centering the image. The tips of the central black arrows should be fully visible, while the white arrows should be completely hidden. The horizontal edge of the chart should be aligned approximately parallel to the sensor’s horizontal lines. The approximate distance between the camera and the test chart is recorded for later analysis. Figure~\ref{fig:iso12233_test_chart_encuadre} shows the arrows used for alignment. 
-
-%     \begin{figure}[H]
-%         \centering
-%         \includegraphics[width=0.8\linewidth]{Figures/C3/ISO_12233-reschart_arrows.png}
-%         \caption{Standard chart used to measure the spatial frequency response of the optical system. The arrows used for framing and camera alignment are highlighted.}
-%         \label{fig:iso12233_test_chart_encuadre}
-%     \end{figure}
-
-%     \item The chart is carefully rotated at an angle between $2^\circ$ and $10^\circ$ relative to the sensor’s pixel rows or columns to ensure accuracy in the MTF determination. The chart shown in Figure~\ref{fig:iso12233_test_chart} includes slanted edge patterns that meet this angular requirement, so it is not required to be rotated.
-
-%     \item 50 images of the slanted edge are captured and averaged to reduce temporal noise and improve statistical quality.
-
-%     \item 50 dark images are also captured and averaged for sensor non-uniformity correction. This correction is detailed in Section~\ref{subsub:corriente_oscura_espectrometro}.
-
-%     \item The slanted edge image is corrected using the previously obtained average dark image.
-
-%     \item A specific analysis region is selected within the corrected image, where the slanted edge is clearly distinguishable.
-
-%     \item The Edge Spread Function (ESF) is obtained by analyzing pixel intensity values across multiple rows or columns crossing the slanted edge.
-
-%     \item To enhance method precision, oversampling is performed by combining multiple rows or columns (at least four) to generate a single, more accurate spatial function.
-
-%     \item The ESF is numerically differentiated to generate the Line Spread Function (LSF).
-
-%     \item Finally, the Fast Fourier Transform (FFT) is applied to the LSF to obtain the MTF:
-
-%     \begin{equation}
-%         \text{MTF}(f) = \left|\mathcal{F}\{\text{LSF}(x)\}(f)\right|,
-%     \end{equation}
-
-%     where $\mathcal{F}$ denotes the Fourier transform operation and $f$ is the spatial frequency.
-
-%     \item The resulting MTF curve is normalized to its maximum value at low frequencies and plotted against spatial frequency for analysis.
-% \end{enumerate}
-
-\noindent MTF processing is performed using the \href{https://imagej.net/ij/plugins/se-mtf/index.html}{SE\_MTF} plugin from \href{https://imagej.net/ij/index.html}{ImageJ}. In this procedure, the image scale is configured in physical units (e.g., lp/mm) based on the actual sensor size and number of photodetectors. Once parameters are configured, the plugin extracts the Edge Spread Function (ESF) from the image edge and, through numerical differentiation, generates the Line Spread Function (LSF). Then, a Fast Fourier Transform (FFT) is applied to the LSF to obtain the Modulation Transfer Function (MTF). Figure~\ref{fig:plugin_config1} shows the interface for configuring parameters. Based on the Region of Interest (ROI) and pixel size, it is possible to compute the required parameters for plugin configuration.\\
+\noindent MTF processing is performed using the \href{https://imagej.net/ij/plugins/se-mtf/index.html}{SE\_MTF} plugin from \href{https://imagej.net/ij/index.html}{ImageJ} software. In this procedure, the image scale is configured in physical units (e.g., lp/mm) based on the actual sensor size and number of photodetectors. Once parameters are configured, the plugin extracts the Edge Spread Function (ESF) from the image edge and, through numerical differentiation, generates the Line Spread Function (LSF). Then, a Fast Fourier Transform (FFT) is applied to the LSF to obtain the Modulation Transfer Function (MTF). Figure~\ref{fig:plugin_config1} shows the interface for configuring parameters. Based on the Region of Interest (ROI) and pixel size, it is possible to compute the required parameters for plugin configuration.\\
 
 \begin{figure}[H]
     \centering
@@ -305,7 +355,7 @@ $f_{\text{im}}$ (in line-pairs per millimetre, lp/mm) at which the modulation fa
 %
 \begin{equation}
     \text{MTF}\!\left(f_{\text{im}}\right)=0.30.
-    \label{eq:mtf_cutoff}
+    \label{mtf_cutoff}
 \end{equation}
 
 \noindent
@@ -452,15 +502,23 @@ The accuracy of resolution and MTF measurements largely depends on the optical s
 \noindent These settings are defined to ensure maximum signal without saturation and to avoid clipping in bright and dark areas, guaranteeing that the slanted-edge image is captured under controlled conditions. These parameters are recorded to allow for study replication and for detailed analysis of the optical system response under both low- and high-intensity conditions.
 
 \section{Spectral characterization of multispectral cameras}
+\label{sec:spectral_characterization}
 
-% \noindent Spectral characterization is an essential step for calibrating the colour response and determining the effective spectral sensitivity of a multispectral camera. In this work, the characterization was performed end-to-end: lens, filters, and sensor were evaluated together to obtain the combined spectral response of the complete imaging chain. Although individual component tests are possible, they were not required here because the mission demands depend on the net response of the integrated system. The resulting system-level curves provide the accuracy needed for applications in remote sensing, precision agriculture, and environmental monitoring, where reliable discrimination between wavelength bands is critical to data quality.
+\noindent The radiometric performance of an imaging system is determined by its capacity to convert the spectral radiance originating from a target scene into a measurable energy flux at the detector plane. For an extended, spatially uniform source—such as a calibration panel or a large, homogeneous ground area—the incident radiation is quantified by its \textit{spectral radiance}, \(L(\lambda)\). This fundamental quantity represents the optical power per unit source area, per unit solid angle, and per unit wavelength.\\
 
-% \noindent
-% Spectral calibration quantifies the optical system’s impulse response as a function of wavelength, yielding the end-to-end sensitivity curve $S(\lambda)$.  By exciting the complete imaging chain—lens, filter stack, and detector—with narrowband reference signals and recording the resulting digital output, one obtains a precise transfer function that links scene radiance at each $\lambda$ to sensor counts.  Knowledge of $S(\lambda)$ is indispensable for radiometric correction, band-to-band registration, and the retrieval of biophysical variables in remote sensing, precision agriculture, and environmental monitoring.  Calibrating the integrated system rather than its isolated components ensures that cumulative effects such as lens transmission, filter leakage, stray light, and detector quantum efficiency are captured, providing the spectral ground truth required to convert raw data into physically meaningful reflectance values.
+\noindent The transformation of this scene radiance into energy per unit area, \(Q_{\mathrm d}\), at the image plane is described by the camera equation. For an optical system operating under narrowband conditions around a central wavelength \(\lambda\), the radiant exposure accumulated over a time \(\tau\) at a field angle \(\theta\) is given by \cite{joseph2015building-ebook}:
 
-% \noindent
-% Spectral characterization establishes the end-to-end impulse response of the imaging chain, $S(\lambda)$, by illuminating the lens–filter–sensor assembly with narrow-band reference beams and mapping the resulting sensor counts to wavelength. The derived transfer function supports radiometric correction, band co-registration, and the retrieval of biophysical variables in remote-sensing, precision-agriculture, and environmental-monitoring applications, where accurate inter-band discrimination is essential. In this study $S(\lambda)$ is expressed in arbitrary units—conveying only \emph{relative} reflectance—because assigning an absolute scale would require an independently calibrated spectroradiometer and optical power meter traceable to radiometric standards, which lies beyond the scope of the present campaign.
+\begin{equation}
+    Q_{\mathrm d}(\theta,\lambda)
+    \;=\;
+    \frac{\pi}{4\,(F/\#)^{2}}\; O_{\mathrm e}(\lambda)\;\Delta \lambda\,L(\lambda)\;\tau\;\cos^{4}\!\theta
+    \qquad\big[\mathrm{J\,m^{-2}}\big].
+    \label{eq:Qd_narrow_thesis}
+\end{equation}
 
+\noindent An analysis of the terms in Equation~\eqref{eq:Qd_narrow_thesis} reveals the principal factors governing the collected energy. The term \(Q_{\mathrm d}(\theta,\lambda)\) is the \textit{radiant energy} at the detector \cite{joseph2015building-ebook}, defined as the time integral of the image irradiance (\(Q_{\mathrm d}=E_{\mathrm d}\,\tau\)). The system's light-gathering ability is inversely proportional to the square of the F-number (\(F/\#\)), which is the ratio of the focal length to the aperture diameter. Consequently, optically faster systems (those with a lower \(F/\#\)) deliver more energy. The collected signal is also linearly proportional to the total Optical Efficiency (\(O_{\mathrm e}(\lambda)\)), which accounts for transmissive and reflective losses within the optical path; the spectral radiance of the scene (\(L(\lambda)\)); the effective spectral bandwidth (\(\Delta\lambda\)); and the exposure time (\(\tau\)).\\
+
+\noindent The operational significance of this radiometric model is substantial. It establishes a quantitative link between the physical properties of the target scene and the expected signal at the sensor. Since detector responsivity is typically specified as a voltage or current output per unit of incident energy density (e.g., in V/\(\mu\mathrm{J}\,\mathrm{cm}^{-2}\)), Equation~\eqref{eq:Qd_narrow_thesis} facilitates the direct prediction of signal levels. This, in turn, allows for robust estimation of the signal-to-noise ratio (SNR), making the model an essential tool for system design, mission planning, and data analysis. Furthermore, for extended targets that completely fill the sensor's instantaneous field of view (IFOV), the radiant flux at the detector becomes effectively independent of the sensor's altitude, a principle that greatly simplifies radiometric modeling for applications at varying operational heights.\\
 
 \noindent Spectral characterization of a multispectral imaging system consists in determining its relative spectral response, $S(\lambda)$, which encapsulates the combined effects of lenses, filter stack and detector in a single transfer function. Experimentally, $S(\lambda)$ is retrieved by measuring the digital output $C$ produced by the system when illuminated with a source of known spectral radiance $L(\lambda)$ and fitting the continuous model
 
@@ -470,6 +528,52 @@ The accuracy of resolution and MTF measurements largely depends on the optical s
 \end{equation}
 
 \noindent using suitable regression techniques \cite{Uttner2006SpectralCameras}. By condensing all optical losses and spectral crosstalk into $S(\lambda)$, this function becomes essential for performing accurate radiometric corrections, ensuring precise inter-band registration, and enabling the quantitative retrieval of biophysical variables, all of which depend on sub-percent differences between spectral channels. In this thesis, the resulting $S(\lambda)$ curves are presented in arbitrary units (relative reflectance), since assigning an absolute scale would require a spectroradiometer and optical power meter calibrated against nationally traceable standards, which is beyond the scope of the present work.  
+
+
+\subsection{Spectral Response of RGB Color Cameras}
+
+\noindent
+In digital RGB cameras, each channel (red, green, and blue) responds to incoming radiation according to its own \emph{spectral sensitivity} curve. Depending on the sensor design and the in-camera signal processing, this response can often be treated as linear, but manufacturers may also introduce static nonlinear mappings for tonal rendering and dynamic-range compression \cite{Vora1997DigitalModels,Cheung2004AccurateCameras,Uttner2006SpectralCameras}.\\
+
+
+\noindent
+Let \(K\) denote the number of channels (typically \(K=3\) for \(R\), \(G\), and \(B\)). For a given channel \(i\), the recorded signal \(r_i\) is modeled as the time-integrated projection of the incident spectrum onto the channel’s spectral sensitivity \(s_i(\lambda)\):
+
+\begin{equation}
+r_{i} \;=\; t_{\mathrm{integ}} \int_{\lambda_{\min}}^{\lambda_{\max}} s_{i}(\lambda)\,I(\lambda)\,\mathrm{d}\lambda \;+\; n_{i},
+\label{eq:linear_response}
+\end{equation}
+
+\noindent
+where \(I(\lambda)\) represents the spectral power incident on the sensor for the pixel under consideration (i.e., the illuminant shaped by the object's reflectance and the imaging geometry), \(t_{\mathrm{integ}}\) is the exposure (integration) time, and \(n_i\) aggregates additive terms such as dark offset and read noise. When the sensor chain is linear and no nonlinear firmware processing is applied, Equation~\eqref{eq:linear_response} captures the dominant behavior: the digital value grows proportionally with incident energy so long as the measurement remains below saturation and the noise is approximately stationary \cite{Vora1997DigitalModels}.\\
+
+\noindent
+Many cameras apply a \emph{gamma} or similar static nonlinearity to the internal linear signal for perceptual rendering or range compression. In that case the observable response is written as a monotone mapping \(F(\cdot)\) of the linear signal,
+\begin{equation}
+r_{i} \;=\; F\!\Bigl(\,t_{\mathrm{integ}}\!\!\int_{\lambda_{\min}}^{\lambda_{\max}} s_{i}(\lambda)\,I(\lambda)\,\mathrm{d}\lambda \;+\; n_{i}\Bigr).
+\label{eq:nonlinear_response}
+\end{equation}
+
+\noindent
+A practical approximation is a power law, \(r_i = \rho_i^{\,\gamma_i}\), where \(\rho_i\) denotes the internal linear signal and \(\gamma_i\) is the channel’s encoding exponent. Linearization then proceeds by applying the inverse, \(\rho_i = r_i^{\,1/\gamma_i}\). Recovering \(\rho_i\) is essential for radiometric tasks such as calibration, white balancing, and the estimation of spectral sensitivity, since these require proportionality between measured values and incident energy \cite{Cheung2004AccurateCameras,Uttner2006SpectralCameras}.\\
+
+% \subsubsection{Spectral Sensitivity Characterization}
+
+% \noindent
+% The spectral sensitivity \(s_i(\lambda)\) quantifies the efficiency with which channel \(i\) detects radiation at wavelength \(\lambda\). Direct determination with a monochromator is the most accurate approach but is often impractical in laboratory settings. Indirect methods therefore estimate \(s_i(\lambda)\) using measurements collected under known spectral stimuli (e.g., filter stacks or color patches) and a measured illuminant. In compact matrix form, this can be written as
+% \begin{equation}
+% R \;=\; t_{\mathrm{integ}}\, S^{\mathsf T}\, C \;+\; N,
+% \label{eq:matrix_equation}
+% \end{equation}
+% where \(R \in \mathbb{R}^{K \times M}\) stacks the per-channel responses to \(M\) spectral stimuli, \(S \in \mathbb{R}^{N_\lambda \times K}\) collects the unknown sensitivity curves as columns \(\{s_i(\lambda)\}\) sampled on \(N_\lambda\) wavelengths, and \(C \in \mathbb{R}^{N_\lambda \times M}\) contains, column-wise, the spectral power distributions incident on the sensor for each stimulus. The matrix \(C\) is frequently ill-conditioned because practical filters exhibit broad, overlapping passbands; stable recovery of \(S\) thus relies on regularized inversion or constrained optimization (e.g., non-negativity and smoothness), and it presupposes that the measured \(R\) has been linearized to undo any static nonlinearity \cite{Uttner2006SpectralCameras,Cheung2004AccurateCameras}. Taken together, Equations~\eqref{eq:linear_response}–\eqref{eq:matrix_equation} provide the forward model and the estimation framework used throughout this work.
+
+
+\noindent
+Luminance is the photometric analogue of radiance and describes the luminous intensity per unit projected area in a given direction. Using luminous (photometric) quantities, it is defined as
+\begin{equation}
+L \;=\; \frac{\mathrm{d}^{2}\Phi}{\mathrm{d}A\,\cos\theta\,\mathrm{d}\Omega},
+\end{equation}
+where \(\Phi\) is the luminous flux, \(A\) is the source area, \(\Omega\) is the solid angle, and \(\theta\) is the angle between the surface normal and the line of sight. In imaging applications, luminance connects scene brightness to perceived contrast and exposure settings, but it also highlights an important distinction: photometric measures weight power by the human visual sensitivity function, whereas the camera models above are radiometric. Accurate, reproducible camera-based luminance measurements therefore require prior radiometric calibration, careful control of exposure and spectral response, and, where needed, a traceable conversion from radiometric to photometric units \cite{Wuller2007TheMeters}.\\
 
 
 \subsection{Laboratory Procedure}
@@ -764,7 +868,7 @@ After defining the optimal combinations, the actual transmission spectra are mea
     \]
 \end{enumerate}
 
-\noindent Figure~\ref{fig:bandwidth_central} shows the central wavelength and FWHM of the selected filters, obtained through the described procedure. These parameters are key to assessing the system’s ability to discriminate spectral bands and for configuring the power meter accurately.
+\noindent Figure \ref{fig:bandwidth_central} shows the central wavelength and FWHM of the selected filters, obtained through the described procedure. These parameters are key to assessing the system’s ability to discriminate spectral bands and for configuring the power meter accurately.
 
 \begin{figure}[H]
     \centering
@@ -835,44 +939,6 @@ The highest throughput corresponds to the \textit{5~$\times$~Purple} stack, whic
 \subsubsection{Mesaurement of the optical system response}
 \label{subsub:captura_sistemas_opticos}
 
-% Once the filter combinations are defined and the optical power is adjusted at the reference value, the characterization of the target optical systems (e.g., an RGB system and/or a monochannel NIR system) is performed. The procedure is as follows:
-
-% \begin{enumerate}
-%     \item \textbf{Sensor configuration:}
-%     \begin{itemize}
-%         \item Gain: Set to $1$ for all measurements to avoid scaling differences between captures.
-%         \item Gamma: Set to $1$ (linear) to suppress any internal nonlinearity curves.
-%         \item White balance: In RGB cameras, the red and blue coefficients are set to $1$ (the green channel is set as 1 by default). This ensures that the camera does not apply color corrections.
-%     \end{itemize}
-    
-%     \item \textbf{Use of neutral density filters (optional):} If the power exceeds the reference level, a neutral density filter is inserted into the lens tube after collimation. This ensures the same final power for all combinations.
-    
-%     \item \textbf{Exposure time adjustment:} The exposure time is set to avoid image saturation. This value is recorded, since the system's response is linearly proportional to the integration time (see Equation~\ref{eq:linear_response}).
-    
-%     \item \textbf{Data capture:}
-%     \begin{itemize}
-%         \item For each selected filter combination, $50$ consecutive images are acquired and saved in an uncompressed or minimally processed format. In this case, the format used is .npy.
-%         \item Additionally, $50$ dark current images are taken by completely covering the objective.
-%     \end{itemize}
-    
-%     \item \textbf{Noise correction and averaging:}
-%     \begin{itemize}
-%         \item The average of the 50 dark current images is calculated, resulting in an image \(\mathbf{D}_{\text{prom}}\) that represents the system’s electronic offset.
-%         \item Each of the 50 illuminated captures is corrected by subtracting \(\mathbf{D}_{\text{prom}}\), thereby eliminating the dark current contribution.
-%         \item The 50 corrected images are then averaged, generating a single image \(\mathbf{I}_{\text{filt}}\) for each filter combination (see section \ref{subsub:corriente_oscura_espectrometro}).
-%     \end{itemize}
-    
-%     \item \textbf{Spectral response calculation:}
-%     \begin{itemize}
-%         \item For each averaged image (\(\mathbf{I}_{\text{filt}}\)), a \emph{response} metric is defined as the sum of all pixel values within the region of interest. In the case of an RGB camera, this sum can be calculated per channel (R, G, or B), or by converting the image to grayscale.
-%         \item In a monochromatic or NIR camera, the single available channel is used.
-%         \item The resulting value represents the system’s total response to the corresponding filter combination, associated with the calculated \(\lambda_0\).
-%     \end{itemize}
-% \end{enumerate}
-
-% \noindent
-% This process is repeated for each selected filter/sheet combination, generating a discrete spectral response map of the optical system, which relates the central wavelength to the response (as grayscale level sum or per channel).
-
 
 \noindent
 After selecting the filter combinations and setting the irradiance to the reference value, each camera under test—an RGB unit and a monochannel NIR sensor—was characterised sequentially.  
@@ -907,490 +973,676 @@ Repeating this workflow across all filters produced a discrete map of the optica
 Here \(R(\lambda_{0})\) is the scalar response associated with the filter’s centre wavelength \(\lambda_{0}\); the summation extends over every pixel \((x,y)\) inside the image, where $W$ and $H$ are the image width and height in pixels, and \(I_{\text{filt}}(x,y;\lambda_{0})\) denotes the dark-corrected, noise-averaged image obtained with that filter. For the RGB camera the same expression is applied independently to each colour plane \(k\in\{R,G,B\}\) by replacing \(I_{\text{filt}}\rightarrow I_{\text{filt},k}\); in the NIR system it is evaluated once on the single monochromatic channel.
 
 
+
 \section{Main contributions}
 %---------------------------------------------------------------
-     %===============================================================
-     \subsection{Resultados de la caracterización del campo de visión (FOV)}
-     \label{sec:fov_resultados}
-     %===============================================================
-     
-     Para validar el campo de visión de los sistemas ópticos seleccionados (Sistema 7 VIS y Sistema 6 NIR), se realizaron mediciones de FOV horizontal (H) y vertical (V) a tres distancias de trabajo (\(\mathrm{WD}\)) empleando la carta de prueba ISO 12233. A continuación se presentan los resultados obtenidos.\\
-     
-     La Figura \ref{fig:fov_montage} muestra las 12 capturas originales (3 filas × 4 columnas) utilizadas para determinar experimentalmente el FOV. Cada fila corresponde a una distancia de trabajo distinta; las dos primeras columnas son las mediciones H y V de VIS (Sistema 7) y las dos últimas, las de NIR (Sistema 6).
-     
-     \begin{figure}[H]
-       \centering
-       \setlength{\tabcolsep}{2pt}
-       \renewcommand{\arraystretch}{0}
-       \begin{tabular}{cccc}
-         \multicolumn{2}{c}{\small NIR – Sistema 6} &
-         \multicolumn{2}{c}{\small VIS – Sistema 7} \\
-         H & V & H & V \\ 
- 
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/7_1.png} &
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/V/8_7.png} &
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/9_2.png} &
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/10_7.png} \\
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/33_1.png} &
-         \includegraphics[trim= 6cm 6cm 6cm 6cm, clip, width=.22\linewidth]{Figures/C4/FOV/NIR/V/65.png} & % TOCLIP
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/37_8.png} &
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/30_3.png} \\
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/63.png} &
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/V/65.png} &
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/69_4.png} &
-         \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/70.png} \\
-       \end{tabular}
-       \caption{Imágenes originales para la medición del FOV horizontal (H)
-                y vertical (V) en tres distancias de trabajo.}
-       \label{fig:fov_montage}
-     \end{figure}
-     
-     Las mediciones, convertidas a metros, se resumen en la Tabla \ref{tab:fov_raw_wd}, donde cada FOV se acompaña de una incertidumbre instrumental \(\sigma=1\) mm.
-     
-     \begin{table}[H]
-       \centering
-       \caption{WD y FOV medidos para cada sistema óptico y orientación}
-       \label{tab:fov_raw_wd}
-       \small
-       \setlength{\tabcolsep}{4pt} % Espaciado más compacto entre columnas
-       \renewcommand{\arraystretch}{1.2} % Espaciado entre filas
-       \begin{tabularx}{\textwidth}{|c|>{\centering\arraybackslash}X
-                                         >{\centering\arraybackslash}X
-                                         >{\centering\arraybackslash}X
-                                         >{\centering\arraybackslash}X|
-                                         >{\centering\arraybackslash}X
-                                         >{\centering\arraybackslash}X
-                                         >{\centering\arraybackslash}X
-                                         >{\centering\arraybackslash}X|}
-         \hline
-         \rowcolor[HTML]{EFEFEF}
-         & \multicolumn{4}{c|}{\textbf{NIR (Sis.~6)}} 
-         & \multicolumn{4}{c|}{\textbf{VIS (Sis.~7)}} \\ \cline{2-9}
-         \rowcolor[HTML]{EFEFEF}
-         \textbf{Prueba} 
-           & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] 
-           & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] \\ 
-         \hline
-         1 & 0.071 & 0.0350 & 0.087 & 0.0350 & 0.092 & 0.0350 & 0.107 & 0.0350 \\
-         2 & 0.331 & 0.231  & 0.350 & 0.180  & 0.379 & 0.239  & 0.303 & 0.138  \\
-         3 & 0.650 & 0.468  & 0.650 & 0.349  & 0.694 & 0.458  & 0.700 & 0.342  \\ 
-         \hline
-       \end{tabularx}
-     \end{table}
- 
-     
-     
-     Aplicando regresión lineal ponderada (Deming) con pesos \(w=1/\sigma\), los ajustes óptimos fueron:
-     
-     \[
-     \begin{aligned}
-     \text{VIS:}\;&\mathrm{FOV_H}=(0.7025\pm0.0045)\,\mathrm{WD}-(0.0288\pm0.0021),\\
-     \text{VIS:}\;&\mathrm{FOV_V}=(0.5171\pm0.0029)\,\mathrm{WD}-(0.0197\pm0.0013),\\
-     \text{NIR:}\;&\mathrm{FOV_H}=(0.7477\pm0.0031)\,\mathrm{WD}-(0.0175\pm0.0013),\\
-     \text{NIR:}\;&\mathrm{FOV_V}=(0.5579\pm0.0034)\,\mathrm{WD}-(0.0141\pm0.0015).
-     \end{aligned}
-     \]
-     
-     La Figura \ref{fig:fov_reg_combined} ilustra los ajustes con sus bandas de confianza \(1\sigma\).
-     
-     \begin{figure}[H]
-     \centering
-       \includegraphics[width=1\linewidth]{Figures/C4/FOV.png}
-       \caption{Ajuste lineal ponderado de FOV vs.\ WD para los cuatro casos: VIS–H, VIS–V, NIR–H y NIR–V .}
-       \label{fig:fov_reg_combined}
-     \end{figure}
-     
- 
-     
-     La Tabla \ref{tab:fov_pred_vs_theory_HV} compara el FOV horizontal predicho
-     por los ajustes empíricos con los valores teóricos calculados en
-     la Sección \ref{sec:cad_sim} para alturas de 50 m, 1000 m y 5000 m.
-     
- 
-     
-     \begin{table}[H]
-      \label{tab:fov_pred_vs_theory_HV}
-       \centering
-       \caption{Comparativa empírico vs. teórico para FOV horizontal (H) y vertical (V).}
-       \small
-       \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}|
-           c|
-           rrrr|
-           rrrr|
-         }
-         \toprule
-          & \multicolumn{4}{c|}{\shortstack{\textbf{VIS}\\(Sis.~7)}} 
-            & \multicolumn{4}{c|}{\shortstack{\textbf{NIR}\\(Sis.~6)}} \\
-         \midrule
-         \textbf{Altura}
-           & \shortstack{Pred H\\(m)} 
-           & \shortstack{Teo H\\(m)} 
-           & \shortstack{Pred V\\(m)} 
-           & \shortstack{Teo V\\(m)} 
-           & \shortstack{Pred H\\(m)} 
-           & \shortstack{Teo H\\(m)} 
-           & \shortstack{Pred V\\(m)} 
-           & \shortstack{Teo V\\(m)} \\
-         \midrule
-         50\,m   
-           &  35.10  &  33.54   &  25.84  &  25.16 
-           &  37.37  &  35.64   &  27.88  &  26.73  \\
-         1000\,m 
-           & 702.50  & 670.87   & 517.08  & 503.15  
-           & 747.70  & 712.8    & 557.90  & 534.6   \\
-         5000\,m 
-           & 3512.00 & 3354.35  & 2585.48 & 2515.76 
-           & 3737.00 & 3564     & 2788.89 & 2673    \\
-         \bottomrule
-       \end{tabular*}
-     \end{table}
- 
-     
- 
-     Con estos resultados, se puedes definir las discrepancias como:
-     \[
-       \Delta_{\mathrm{abs}} = FOV_{\mathrm{pred}} - FOV_{\mathrm{teo}},
-       \qquad
-       \Delta_{\mathrm{rel}} = \frac{\Delta_{\mathrm{abs}}}{FOV_{\mathrm{teo}}}\times100\%.
-     \]
-     A continuación se presentan los resultados para cada altura y sistema:
-     
-     \begin{align*}
-     50\,\mathrm{m}:&\quad
-     \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 35.10 - 33.54 = 1.56\,\mathrm{m}, 
-     \quad
-     \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{1.56}{33.54}\times100\%\approx4.65\%,\\
-     &\quad
-     \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 37.37 - 35.64 = 1.73\,\mathrm{m}, 
-     \quad
-     \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{1.73}{35.64}\times100\%\approx4.85\%.\\[6pt]
-     1000\,\mathrm{m}:&\quad
-     \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 702.5 - 670.9 = 31.6\,\mathrm{m}, 
-     \quad
-     \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{31.6}{670.9}\times100\%\approx4.71\%,\\
-     &\quad
-     \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 747.7 - 712.8 = 34.9\,\mathrm{m}, 
-     \quad
-     \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{34.9}{712.8}\times100\%\approx4.90\%.\\[6pt]
-     5000\,\mathrm{m}:&\quad
-     \Delta_{\mathrm{abs}}^{\mathrm{VIS}} = 3512 - 3354 = 158\,\mathrm{m}, 
-     \quad
-     \Delta_{\mathrm{rel}}^{\mathrm{VIS}} = \frac{158}{3354}\times100\%\approx4.71\%,\\
-     &\quad
-     \Delta_{\mathrm{abs}}^{\mathrm{NIR}} = 3737 - 3564 = 173\,\mathrm{m}, 
-     \quad
-     \Delta_{\mathrm{rel}}^{\mathrm{NIR}} = \frac{173}{3564}\times100\%\approx4.86\%.
-     \end{align*}
- 
-     
-     Los resultados confirman que, en ambos sistemas, la discrepancia relativa se mantiene entre un 4.6–4.9 \% independientemente de la altura de operación. Este sesgo prácticamente constante refuerza la hipótesis de un error geométrico sistemático (distorsión radial y paralaje en la medida de WD) que debe corregirse antes de la generación de ortomosaicos. 
-     
-     
-     \subsection{Caracterización angular: AFOV vs.\ WD}
-     Las figuras \ref{fig:afov} presentan dos curvas para cada sistema: horizontal y vertical. En el caso VIS, el AFOV crece hacia el valor teórico sin sobrepasarlo; en NIR, el experimento supera ligeramente el teórico a medida que WD aumenta, sugiriendo un enfoque ligeramente desajustado. \\
- 
-     1\begin{figure}[H]
-       \centering
-       \begin{subfigure}[b]{.9\linewidth}
-         \includegraphics[width=\linewidth]{Figures/C4/afov_nir.png}
-         \caption{NIR – Sistema 6}
-       \end{subfigure}
-       \hfill
-       \begin{subfigure}[b]{0.9\linewidth}
-         \includegraphics[width=\linewidth]{Figures/C4/afov_vis.png}
-         \caption{VIS – Sistema 7}
-       \end{subfigure}
-       \caption{AFOV experimental vs.\ WD (flecha punteada: valor teórico).}
-       \label{fig:afov}
-     \end{figure}
-     
-     Para cuantificar la convergencia, en la Tabla~\ref{tab:afov_exp} se resumen los valores experimentales de AFOV en los tres WD medidos. A la mayor distancia, la discrepancia horizontal con el valor teórico ($37.1^\circ$ para VIS y $39.3^\circ$ para NIR) es:
-     \[
-     \begin{aligned}
-     \Delta_{\rm abs}^{\rm VIS\text{-}H} &=36.52^\circ - 37.10^\circ = -0.58^\circ\quad(\Delta_{\rm rel}\approx1.6\%),\\
-     \Delta_{\rm abs}^{\rm NIR\text{-}H} &=39.60^\circ - 39.30^\circ = +0.30^\circ\quad(\Delta_{\rm rel}\approx0.8\%).
-     \end{aligned}
-     \]
-     Verticalmente, comparando con el valor teórico de $28.24^\circ$, para WD máximo:
-     \[
-     \begin{aligned}
-     \Delta_{\rm abs}^{\rm VIS\text{-}V} &=27.46^\circ - 28.24^\circ = -0.78^\circ\quad(\Delta_{\rm rel}\approx2.8\%),\\
-     \Delta_{\rm abs}^{\rm NIR\text{-}V} &=30.05^\circ - 28.24^\circ = +1.81^\circ\quad(\Delta_{\rm rel}\approx6.4\%).
-     \end{aligned}
-     \]
-     
-     \begin{table}[H]
-       \centering
-       \caption{AFOV experimental para WD de 0.07–0.09 m, 0.30–0.38 m y 0.65–0.70 m.}
-       \label{tab:afov_exp}
-       \begin{tabular}{lccc}
-         \toprule
-         Sistema & WD [m] & AFOV$_H$ [°] & AFOV$_V$ [°] \\
-         \midrule
-         \textbf{VIS (Sistema 7)} 
-           & 0.09 & 21.54 & 18.58 \\
-           & 0.38 & 35.00 & 25.66 \\
-           & 0.69 & 36.52 & 27.46 \\
-         \midrule
-         \textbf{NIR (Sistema 6)} 
-           & 0.07 & 27.69 & 22.75 \\
-           & 0.33 & 38.47 & 28.84 \\
-           & 0.65 & 39.60 & 30.05 \\
-         \bottomrule
-       \end{tabular}
-     \end{table}
-    
-    %---------------------------------------------------------------
-    \subsection{Magnificación primaria (PMAG) de los sistemas 6 (NIR) y 7 (VIS)}
-    \label{sec:pmag}
-    %---------------------------------------------------------------
+%===============================================================
+\subsection{Field of View (FOV) Characterization Results}
+\label{sec:fov_results}
+%===============================================================
 
-    Por otro lado, a partir de la ecuación \ref{eq:pmag}, se obtuvó la magnificación primara para ambos sistemas NIR y VIS para cada valor de altitud, como se muestra en la Tabla \ref{tab:pmag_sys67}.
+\noindent To validate the field of view of the selected optical systems (System 7 VIS and System 6 NIR), horizontal (H) and vertical (V) FOV measurements were performed at three working distances ($\mathrm{WD}$) using the ISO 12233 test chart. The results obtained are presented below.\\
 
-    \begin{table}[h]
-      \centering
-      \caption{Magnificación primaria (\textit{PMAG}) de los sistemas VIS (Sis.~7) y NIR (Sis.~6) a distintas alturas.}
-      \label{tab:pmag}
-      \begin{tabular}{|c|c|c|}
-          \hline
-          \rowcolor[HTML]{EFEFEF}
-          \textbf{Altura [m]} & \textbf{PMAG VIS (Sis.~7)} & \textbf{PMAG NIR (Sis.~6)} \\
-          \hline
-          50   & $1.62\times10^{-4}$ & $1.53\times10^{-4}$ \\
-          1000 & $8.12\times10^{-6}$ & $7.63\times10^{-6}$ \\
-          5000 & $1.62\times10^{-6}$ & $1.53\times10^{-6}$ \\
-          \hline
-      \end{tabular}
-    \end{table}
-  
-    Para el rango operacional propuesto (50–5000 m) las diferencias
-    entre ambos sistemas son $<\,6\,\%$, consecuencia de que comparten el mismo
-    tamaño de sensor y distancias focales muy próximas
-    (8.0 mm – NIR, 8.5 mm – VIS).  
+\noindent Figure \ref{fig:fov_montage} shows the 12 original captures (3 rows x 4 columns) used to experimentally determine the FOV. Each row corresponds to a different working distance; the first two columns are the H and V measurements for VIS (System 7) and the last two are for NIR (System 6).\\
 
-     \subsection{Modulation Transfer Function (MTF) Measurements}
-      \label{sec:mtf_results}
-      Aunque el montaje experimental para la caracterización de la MTF se describió en la metodología (véase la Figura~\ref{fig:srf_motaje}), durante las primeras pruebas se constató que el contraste entre las zonas claras y oscuras resultaba insuficiente para aplicar con fiabilidad el método ISO 12233. Según este estándar, el test chart debe presentar un contraste mínimo de 4:1 y una distribución de irradiancia lo más uniforme posible en ambas regiones, de modo que el histograma de intensidad exhiba dos picos nítidos (uno correspondiente a las zonas claras y otro a las zonas oscuras). Sin embargo, al analizar la carta de prueba impresa en papel mate —una reprografía de bajo costo— se observó una continuidad de valores intermedios y múltiples picos espurios que comprometían la extracción precisa de la Edge Spread Function (ESF). Esta carta de ruebas puede ser adquirida por proveedores de isntrumentos ópticos, pero su costo es elevado.\\
+\begin{figure}[H]
+\centering
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{0}
+\begin{tabular}{cccc}
+    \multicolumn{2}{c}{\small NIR – System 6} &
+    \multicolumn{2}{c}{\small VIS – System 7} \\
+    H & V & H & V \\ 
 
-      \begin{figure}[h]
-          \centering
-          \includegraphics[width=0.7\linewidth]{Figures/C4/MTF_chart_hist.png}
-          \caption{Histograma de la carta de prueba ISO 12233 impresa en papel mate. Se aprecian tres picos en la región oscura y dos picos muy anchos en la región clara, reflejo de una alta desviación estándar y de un contraste inferior al requerido por la norma.}
-          \label{fig:histogram_iso12233}
-      \end{figure}
-      
-      El origen de esta dispersión radica en dos factores principales. Primero, la calidad de impresión (impreso en una impresora de un proveedor local no especializado en cartas para pruebas ópticas de laboratorio) del test chart no garantizaba bordes suficientemente definidos ni un nvel de negros que proporsionaran el suficiente contraste ni precisión en la impresión de lineas. Segundo, el esquema de iluminación no siguió estrictamente la recomendación de emplear dos fuentes homogéneas (véase la Figura~\ref{fig:srf_motaje}), lo cual impidió alcanzar una irradiancia uniforme sobre la carta y acentuó las zonas de sombra y reflejo. Ante ello, se optó por un patrón de prueba empírico, el cual consistía en una hoja de papel inlcinada y un fondo oscuro, y por limitar la región de interés a un área de 104 $\times$ 104 píxeles, de forma que la iluminación pudiera controlarse de manera más rigurosa.\\
-      
-      La imagen finalmente utilizada para la determinación de la MTF —mostrada en la Figura~\ref{fig:enfoque}— fue corregida previamente, en primer lugar, de la corriente oscura según se describe en la Sección~\ref{subsub:corriente_oscura_espectrometro}, y, en segundo lugar, de los errores aleatorios mediante el promediado de múltiples capturas (tal como se detalló en la metodología de MTF). Sobre estas imágenes corregidas se generaron histogramas de intensidad para cada sistema, a fin de verificar que ahora sí se obtenía una distribución bimodal aceptable.
-      
-      \begin{figure}[h]
-          \centering
-          \begin{subfigure}[b]{\linewidth}
-              \centering
-              \includegraphics[width=\linewidth]{Figures/C4/hist_vis_MTF.png}
-              \caption{Sistema VIS: histogramas de los canales R, G y B después de correcciones.}
-              \label{fig:histogram_vis}
-          \end{subfigure}
-          \hfill
-          \begin{subfigure}[b]{\linewidth}
-              \centering
-              \includegraphics[width=\linewidth]{Figures/C4/hist_nir_MTF.png}
-              \caption{Sistema NIR: histograma de su único canal tras correcciones.}
-              \label{fig:histogram_nir}
-          \end{subfigure}
-          \caption{Distribución de valores de intensidad en imágenes corregidas (corriente oscura y ruido aleatorio) para los sistemas VIS y NIR, empleadas en la extracción de la MTF.}
-          \label{fig:histogram_vis_nir}
-      \end{figure}
-      
-      Con estas condiciones mejoradas se pudo proceder a extraer la ESF y, posteriormente, la Line Spread Function (LSF) y su transformada de Fourier para obtener las curvas de MTF de ambos sistemas. Este rigor en la corrección y control de iluminación garantiza que las mediciones resultantes reflejen fielmente la capacidad de resolución de los ópticos evaluados.      % Breve recordatorio de cómo se obtuvieron las curvas MTF (ISO 12233, número de imágenes, condiciones de enfoque, aperturas, exposición, etc.) 
-      
-    %---------------------------------------------------------------
-    \subsubsection{MTF Curves for VIS and NIR Systems}
-    \label{subsub:mtf_curves}
-    %---------------------------------------------------------------
-    Las curvas MTF se obtuvieron con el \textit{plugin} \texttt{SE\_MTF} de \textit{ImageJ} siguiendo el procedimiento descrito en la sección~\ref{sec:mtf_char}.  
-    Para el sistema VIS (Sistema 7) se procesaron independientemente los tres canales \(R\), \(G\) y \(B\) y, adicionalmente, la imagen promedio (\textit{Mono}).  
-    Para el sistema NIR (Sistema 6) únicamente se dispone de un canal monocromático.
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/7_1.png} &
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/V/8_7.png} &
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/9_2.png} &
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/10_7.png} \\
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/33_1.png} &
+    \includegraphics[trim= 6cm 6cm 6cm 6cm, clip, width=.22\linewidth]{Figures/C4/FOV/NIR/V/65.png} & % TOCLIP
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/37_8.png} &
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/30_3.png} \\
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/H/63.png} &
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/NIR/V/65.png} &
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/H/69_4.png} &
+    \includegraphics[width=.22\linewidth]{Figures/C4/FOV/VIS/V/70.png} \\
+\end{tabular}
+\caption{Original images for the measurement of horizontal (H) and vertical (V) FOV at three working distances.}
+\label{fig:fov_montage}
+\end{figure}
 
-    \begin{figure}[H]
+\noindent The measurements, converted to meters, are summarized in Table \ref{tab:fov_raw_wd}, where each FOV is accompanied by an instrumental uncertainty of $\sigma=1$ mm.\\
+
+\begin{table}[H]
+\centering
+\caption{Measured working distance WD and FOV for each optical system and orientation.}
+\label{tab:fov_raw_wd}
+\small
+\setlength{\tabcolsep}{4pt} % More compact column spacing
+\renewcommand{\arraystretch}{1.2} % Row spacing
+\begin{tabularx}{\textwidth}{|c|>{\centering\arraybackslash}X
+                                    >{\centering\arraybackslash}X
+                                    >{\centering\arraybackslash}X
+                                    >{\centering\arraybackslash}X|
+                                    >{\centering\arraybackslash}X
+                                    >{\centering\arraybackslash}X
+                                    >{\centering\arraybackslash}X
+                                    >{\centering\arraybackslash}X|}
+    \hline
+    \rowcolor[HTML]{EFEFEF}
+    & \multicolumn{4}{c|}{\textbf{NIR (Sys.~6)}} 
+    & \multicolumn{4}{c|}{\textbf{VIS (Sys.~7)}} \\ \cline{2-9}
+    \rowcolor[HTML]{EFEFEF}
+    \textbf{Test} 
+    & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] 
+    & WD$_H$ [m] & FOV$_H$ [m] & WD$_V$ [m] & FOV$_V$ [m] \\ 
+    \hline
+    1 & 0.071 & 0.0350 & 0.087 & 0.0350 & 0.092 & 0.0350 & 0.107 & 0.0350 \\
+    2 & 0.331 & 0.231  & 0.350 & 0.180  & 0.379 & 0.239  & 0.303 & 0.138  \\
+    3 & 0.650 & 0.468  & 0.650 & 0.349  & 0.694 & 0.458  & 0.700 & 0.342  \\ 
+    \hline
+\end{tabularx}
+\end{table}
+
+\noindent Applying weighted linear regression (Deming) with weights $w=1/\sigma$, the optimal fits were:\\
+
+\begin{equation}
+\begin{aligned}
+\text{VIS:}\;&\mathrm{FOV_H}=(0.7025\pm0.0045)\,\mathrm{WD}-(0.0288\pm0.0021),\\
+\text{VIS:}\;&\mathrm{FOV_V}=(0.5171\pm0.0029)\,\mathrm{WD}-(0.0197\pm0.0013),\\
+\text{NIR:}\;&\mathrm{FOV_H}=(0.7477\pm0.0031)\,\mathrm{WD}-(0.0175\pm0.0013),\\
+\text{NIR:}\;&\mathrm{FOV_V}=(0.5579\pm0.0034)\,\mathrm{WD}-(0.0141\pm0.0015).
+\end{aligned}
+\end{equation}
+
+\noindent Figure \ref{fig:fov_reg_combined} illustrates the fits with their $1\sigma$ confidence bands.\\
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Figures/C4/FOV.png}
+\caption{Weighted linear fit of FOV vs. WD for the four cases: VIS–H, VIS–V, NIR–H, and NIR–V.}
+\label{fig:fov_reg_combined}
+\end{figure}
+
+\noindent To quantify the deviation between the empirical models and the theoretical predictions, Table \ref{tab:fov_pred_vs_theory_HV} compares the FOV values at key operational altitudes.\\
+
+\begin{table}[H]
+\centering
+\caption{Comparison of empirical vs. theoretical for horizontal (H) and vertical (V) FOV.}
+\label{tab:fov_pred_vs_theory_HV}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\columnwidth}{|c| *{8}{>{\centering\arraybackslash}X|}}
+\toprule
+& \multicolumn{4}{c|}{\textbf{VIS} (Sys.~7)} 
+& \multicolumn{4}{c|}{\textbf{NIR} (Sys.~6)} \\
+\midrule
+\textbf{Altitude}
+& \shortstack{Pred H\\(m)} 
+& \shortstack{Theo H\\(m)} 
+& \shortstack{Pred V\\(m)} 
+& \shortstack{Theo V\\(m)} 
+& \shortstack{Pred H\\(m)} 
+& \shortstack{Theo H\\(m)} 
+& \shortstack{Pred V\\(m)} 
+& \shortstack{Theo V\\(m)} \\
+\midrule
+50\,m    
+& 35.10 & 33.54 & 25.84 & 25.16 
+& 37.37 & 35.64 & 27.88 & 26.73 \\
+1000\,m 
+& 702.50 & 670.87 & 517.08 & 503.15 
+& 747.70 & 712.80 & 557.90 & 534.60 \\
+5000\,m 
+& 3512.00 & 3354.35 & 2585.48 & 2515.76 
+& 3737.00 & 3564.00 & 2788.89 & 2673.00 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+\noindent The absolute discrepancy ($\Delta_abs$) and relative discrepancy ($\Delta_rel$) between the predicted ($FOV_pred$) and theoretical ($FOV_teo$) values are defined as:
+
+\begin{equation}
+\Delta_{\mathrm{abs}} = FOV_{\mathrm{pred}} - FOV_{\mathrm{theo}}, 
+\qquad
+\Delta_{\mathrm{rel}} = \frac{\Delta_{\mathrm{abs}}}{FOV_{\mathrm{teo}}} \times 100\%.
+\end{equation}
+
+\noindent Figure~\ref{fig:discrepancies_vs_alt}\subref{fig:abs_error_vs_alt} shows the absolute discrepancy for horizontal and vertical FOVs at the three working altitudes, whereas Figure~\ref{fig:discrepancies_vs_alt}\subref{fig:rel_error_vs_alt} presents the corresponding relative discrepancy. In each panel, four curves are plotted (VIS–H, VIS–V, NIR–H, NIR–V). The results indicate that, while the absolute discrepancy grows approximately linearly with altitude, the relative discrepancy remains nearly constant with altitude—about \(4.6\text{–}4.9\,\%\) in the horizontal direction and \(2.7\text{–}2.8\,\%\) (VIS–V) or \(4.3\text{–}4.9\,\%\) (NIR–V) in the vertical direction. This altitude-independent bias is consistent with a small, systematic geometric effect (e.g., residual lens distortion or parallax in the working-distance measurement) that should be corrected prior to orthomosaic generation.
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{Figures/C4/absolute_error_plot_fov.png}
+\caption{Absolute discrepancy $\Delta_{\mathrm{abs}}$ versus altitude.
+The absolute error increases with altitude because the difference between the predicted and theoretical FOV grows.}
+\label{fig:abs_error_vs_alt}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{Figures/C4/relative_error_plot_fov.png}
+\caption{Relative discrepancy $\Delta_{\mathrm{rel}}$ versus altitude.
+Despite increasing absolute errors, the relative error remains essentially constant with altitude, indicating a fixed geometric bias.}
+\label{fig:rel_error_vs_alt}
+\end{subfigure}
+\caption{Comparison of the absolute and relative discrepancies between the predicted and theoretical FOVs for the VIS and NIR systems as a function of altitude.}
+\label{fig:discrepancies_vs_alt}
+\end{figure}
+
+
+\subsection{Angular Characterization: AFOV vs. WD}
+
+\noindent The experimental Angular Field of View (AFOV) was determined at three distinct working distances (WD) for both the VIS (System 7) and NIR (System 6) setups. The results are summarized in Table~\ref{tab:afov_exp}. Each AFOV value was calculated from the direct measurements of the linear Field of View (FOV) and the working distance (WD) using the fundamental trigonometric relationship:
+
+\begin{equation}
+\label{eq:afov_experimental}
+\mathrm{AFOV}_{\mathrm{exp}} = 2 \cdot \arctan\left(\frac{\mathrm{FOV}}{2 \cdot \mathrm{WD}}\right)
+\end{equation}
+
+\begin{table}[H]
+\centering
+\caption{Experimental AFOV for WD of 0.07–0.09 m, 0.30–0.38 m, and 0.65–0.70 m.}
+\label{tab:afov_exp}
+\begin{tabular}{lccc}
+    \toprule
+    System & WD [m] & AFOV$_H$ [°] & AFOV$_V$ [°] \\
+    \midrule
+    \textbf{VIS (System 7)} 
+    & 0.09 & 21.54 & 18.58 \\
+    & 0.38 & 35.00 & 25.66 \\
+    & 0.69 & 36.52 & 27.46 \\
+    \midrule
+    \textbf{NIR (System 6)} 
+    & 0.07 & 27.69 & 22.75 \\
+    & 0.33 & 38.47 & 28.84 \\
+    & 0.65 & 39.60 & 30.05 \\
+    \bottomrule
+\end{tabular}
+\end{table}
+
+\noindent To validate these measurements, the experimental AFOV at the maximum working distance was compared against the theoretical AFOV, which is derived from the system's design parameters (sensor size and focal length, $f$) and represents the ideal performance at an infinite working distance. Based on the system specifications, the theoretical values are: $37.1^\circ$ (VIS-H), $28.24^\circ$ (VIS-V), $39.3^\circ$ (NIR-H), and $29.93^\circ$ (NIR-V).\\
+
+\noindent The absolute ($\Delta_{\rm abs}$) and relative ($\Delta_{\rm rel}$) discrepancies were defined to quantify the deviation from the theoretical model:
+
+\begin{equation}
+\label{eq:discrepancy}
+\Delta_{\mathrm{abs}} = \mathrm{AFOV}_{\mathrm{exp}} - \mathrm{AFOV}_{\mathrm{theo}},
+\qquad
+\Delta_{\mathrm{rel}} = \frac{|\Delta_{\mathrm{abs}}|}{\mathrm{AFOV}_{\mathrm{theo}}} \times 100\%.
+\end{equation}
+
+\noindent The resulting discrepancies, calculated at the largest measured WD, were as follows:
+
+\begin{align*}
+\text{Horizontal:}\quad
+\Delta_{\rm abs}^{\rm VIS\text{-}H} &= 36.52^\circ - 37.10^\circ = -0.58^\circ\quad(\Delta_{\rm rel}\approx1.6\%) \\
+\Delta_{\rm abs}^{\rm NIR\text{-}H} &= 39.60^\circ - 39.30^\circ = +0.30^\circ\quad(\Delta_{\rm rel}\approx0.8\%) \\[6pt]
+\text{Vertical:}\quad
+\Delta_{\rm abs}^{\rm VIS\text{-}V} &= 27.46^\circ - 28.24^\circ = -0.78^\circ\quad(\Delta_{\rm rel}\approx2.8\%) \\
+\Delta_{\rm abs}^{\rm NIR\text{-}V} &= 30.05^\circ - 29.93^\circ = +0.12^\circ\quad(\Delta_{\rm rel}\approx0.4\%)
+\end{align*}
+
+\noindent The convergence of the experimental AFOV towards the theoretical limit as the working distance increases is illustrated graphically in Figure~\ref{fig:afov}. In the VIS case, the AFOV grows towards the theoretical value without exceeding it. Conversely, for the NIR system, the experimental value slightly surpasses the theoretical one, which may suggest a slightly misadjusted focus or other systematic effects.\\
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{.9\linewidth}
+    \includegraphics[width=\linewidth]{Figures/C4/afov_nir.png}
+    \caption{NIR – System 6}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.9\linewidth}
+    \includegraphics[width=\linewidth]{Figures/C4/afov_vis.png}
+    \caption{VIS – System 7}
+\end{subfigure}
+\caption{Experimental AFOV vs. WD (dotted line indicates the theoretical infinite focus value).}
+\label{fig:afov}
+\end{figure}
+
+\noindent The convergence behavior visible in the graphs is a key finding. Equation~\ref{eq:afov} defines the AFOV in an infinite focus regime, which is the expected operational condition for high-altitude imaging. The laboratory measurements demonstrate that as the working distance increases, the experimental AFOV rapidly approaches this theoretical limit. In fact, at the maximum distance measured in the lab (~0.7 m), the discrepancy is already minimal. This indicates that the system behaves predictably and that the theoretical model is a robust predictor for the mission's operational distances (e.g., 50 m or more), where the system will effectively operate under "infinite focus" conditions.\\
+
+\noindent The residual discrepancies, though small, are significant for high-precision applications and are primarily attributed to sources of systematic error. The most prominent of these is geometric lens distortion. The theoretical model assumes an ideal pinhole projection, but real lenses introduce distortions (typically barrel distortion in wide-angle lenses) that alter the magnification across the field of view. This causes the measured linear FOV to be slightly different from the ideal, directly affecting the calculated experimental AFOV. Other sources of error include the manufacturing tolerance of the focal length ($f$). The close agreement between the horizontal and vertical errors of the NIR system (0.8\% and 0.4\%, respectively) suggests that any residual sensor tilt is negligible.\\
+
+\noindent The experimental characterization successfully validates the angular performance of both optical systems, confirming that they approach their theoretical specifications under far-field conditions. However, it also reveals the presence of small, systematic errors consistent with the effects of lens distortion. To mitigate these effects and achieve the maximum geometric accuracy required for the generation of high-quality orthomosaics, performing a full geometric calibration is recommended. This procedure would allow for the creation of a distortion correction model and the refinement of the intrinsic camera parameters, ensuring greater fidelity in the final data products.\\
+%---------------------------------------------------------------
+
+\subsection{Primary Magnification (PMAG) of Systems 6 (NIR) and 7 (VIS)}
+\label{sec:pmag}
+%---------------------------------------------------------------
+
+\noindent On the other hand, from Equation \ref{eq:pmag}, the primary magnification was obtained for both NIR and VIS systems for each altitude value, as shown in Table \ref{tab:pmag_sys67}.\\
+
+\begin{table}[H]
+\centering
+\caption{Primary Magnification (\textit{PMAG}) of VIS (Sys.~7) and NIR (Sys.~6) systems at different altitudes.}
+\label{tab:pmag_sys67}
+\begin{tabular}{|c|c|c|}
+    \hline
+    \rowcolor[HTML]{EFEFEF}
+    \textbf{Altitude [m]} & \textbf{PMAG VIS (Sys.~7)} & \textbf{PMAG NIR (Sys.~6)} \\
+    \hline
+    50   & $1.62\times10^{-4}$ & $1.53\times10^{-4}$ \\
+    1000 & $8.12\times10^{-6}$ & $7.63\times10^{-6}$ \\
+    5000 & $1.62\times10^{-6}$ & $1.53\times10^{-6}$ \\
+    \hline
+\end{tabular}
+\end{table}
+
+\noindent For the proposed operational range (50–5000 m), the differences between both systems are $<\,6\,\%$, a consequence of them sharing the same sensor size and having very close focal lengths (8.0 mm – NIR, 8.5 mm – VIS).\\
+
+\subsection{Modulation Transfer Function (MTF) Measurements}
+\label{sec:mtf_results}
+
+\noindent Although the experimental setup for MTF characterization was described in the methodology (see Figure~\ref{fig:srf_motaje}), initial tests revealed that the contrast between the light and dark areas was insufficient to reliably apply the ISO 12233 method. According to this standard, the test chart must have a minimum contrast of 4:1 and as uniform an irradiance distribution as possible in both regions, so that the intensity histogram exhibits two sharp peaks (one corresponding to the light areas and another to the dark areas). However, upon analyzing the test chart printed on matte paper—a low-cost reproduction—a continuity of intermediate values and multiple spurious peaks were observed, compromising the accurate extraction of the Edge Spread Function (ESF). This test chart can be purchased from optical instrument suppliers, but its cost is high.\\
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Figures/C4/MTF_chart_hist.png}
+    \caption{Histogram of the ISO 12233 test chart printed on matte paper. Three peaks are visible in the dark region and two very wide peaks in the light region, reflecting a high standard deviation and contrast lower than required by the standard.}
+    \label{fig:histogram_iso12233}
+\end{figure}
+
+\noindent The origin of this dispersion lies in two main factors. First, the print quality (printed by a local supplier not specializing in charts for laboratory optical tests) of the test chart did not guarantee sufficiently defined edges or a black level that provided enough contrast or precision in the printing of lines. Second, the illumination scheme did not strictly follow the recommendation of using two homogeneous sources (see Figure~\ref{fig:srf_motaje}), which prevented achieving uniform irradiance on the chart and accentuated shadow and reflection areas. Given this, an empirical test pattern was chosen, consisting of an inclined sheet of paper and a dark background, and the region of interest was limited to an area of 104 $\times$ 104 pixels, so that the illumination could be controlled more rigorously.\\
+
+\noindent The test pattern finally used for the MTF determination—shown in Figure~\ref{fig:enfoque}—was previously corrected, first, for dark current as described in Section~\ref{subsub:corriente_oscura_espectrometro}, and second, for random errors by averaging multiple captures (as detailed in the MTF methodology \ref{sec:mtf_char}). Intensity histograms were generated for each system from these corrected images to verify that an acceptable bimodal distribution was now obtained.\\
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{\linewidth}
         \centering
-        %-----------------------------------------------------------
-        \begin{subfigure}[b]{0.95\linewidth}
-            \centering
-            \includegraphics[width=\linewidth]{Figures/C4/mtf_vis.png}
-            \caption{Sistema VIS: MTF de los canales \(R\), \(G\), \(B\) y promedio (\textit{Mono}).}
-            \label{fig:mtf_vis}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[b]{0.95\linewidth}
-            \centering
-            \includegraphics[width=\linewidth]{Figures/C4/mtf_nir.png}
-            \caption{Sistema NIR: MTF del canal monocromático.}
-            \label{fig:mtf_nir}
-        \end{subfigure}
-        %-----------------------------------------------------------
-        \caption{Curvas MTF obtenidas con \textit{ImageJ}.  
-                La configuración del \textit{plugin} se muestra en la Fig.~\ref{fig:plugin_config1}. Esta medida fue tomada con una distancia de trabajo de 925 mm.}
-        \label{fig:mtf_curves}
-    \end{figure}
-
-    Los puntos donde la modulación cae al \(30\,\%\) proporcionan la frecuencia de corte \(f_{\text{im}}\).  
-    La Tabla~\ref{tab:cutoff_meas} resume estos valores y los compara con las especificaciones teóricas (Tabla~\ref{tab:sys_tables}).
-
-    \begin{table}[H]
+        \includegraphics[width=\linewidth]{Figures/C4/hist_vis_MTF.png}
+        \caption{VIS System: histograms of the R, G, and B channels after corrections.}
+        \label{fig:histogram_vis}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{\linewidth}
         \centering
-        \caption{Frecuencia de corte a \(30\,\%\) de contraste: mediciones frente a especificación.}
-        \label{tab:cutoff_meas}
-        \begin{tabular}{|c|c|c|c|}
-            \hline
-            \rowcolor[HTML]{EFEFEF}
-            \textbf{Sistema / Canal} &
-            \(\mathbf{f_{\text{im,\,meas}}}\) [lp mm\(^{-1}\)] &
-            \(\mathbf{f_{\text{im,\,theo}}}\) [lp mm\(^{-1}\)] &
-            \(\mathbf{\Delta\,[\%]}\) \\ \hline
-            VIS – \(R\)     &  57.72 & 85  & \(-32.1\) \\ \hline
-            VIS – \(G\)     &  79.36 & 85  &  \(-6.6\) \\ \hline
-            VIS – \(B\)     &  72.15 & 85  & \(-15.1\) \\ \hline
-            VIS – Mono      &  72.15 & 85  & \(-15.1\) \\ \hline
-            NIR – Mono      &  79.36 & 120 & \(-33.9\) \\ \hline
-        \end{tabular}
-    \end{table}
+        \includegraphics[width=\linewidth]{Figures/C4/hist_nir_MTF.png}
+        \caption{NIR System: histogram of its single channel after corrections.}
+        \label{fig:histogram_nir}
+    \end{subfigure}
+    \caption{Distribution of intensity values in corrected images (dark current and random noise) for the VIS and NIR systems, used for MTF extraction.}
+    \label{fig:histogram_vis_nir}
+\end{figure}
 
-    %---------------------------------------------------------------
-    \subsubsection{Cut-off Frequency and Ground Resolution Calculation}
-    \label{subsub:grd_calc}
-    %---------------------------------------------------------------
-    La resolución en tierra (\(\Delta_{\text{ground}}\)) se obtuvo aplicando los pasos 1–3 de la sección~\ref{subsub:grd_from_mtf}.  
-    Para cada canal se parte del \(f_{\text{im,\,meas}}\) de la Tabla~\ref{tab:cutoff_meas}; se calcula la frecuencia en el objeto
-    $f_{\text{obj}}$ y, posteriormente,
-    $\Delta_{\text{ground}}$.  
-    Los parámetros geométricos (PMAG y FOV) provienen de la Tabla~\ref{tab:grd_fov_clean}; las distancias focales son
-    \(f_{\text{VIS}} = 8.5\,\mathrm{mm}\) y \(f_{\text{NIR}} = 8.0\,\mathrm{mm}\).
+\noindent With these improved conditions, it was possible to proceed with extracting the ESF and, subsequently, the Line Spread Function (LSF) and its Fourier transform to obtain the MTF curves for both systems. This rigor in correction and illumination control ensures that the resulting measurements faithfully reflect the resolution capability of the evaluated optics.\\
 
-    %--------------------------------------------------------------
-    \begin{table}[H]
-        \centering
-        \caption{Resolución en tierra \(\Delta_{\text{ground}}\) – Sistema VIS (Sis.~7)}
-        \label{tab:grd_vis_corrected}
-        \begin{tabular}{|c|c|c|c|c|}
-            \hline
-            \rowcolor[HTML]{EFEFEF}
-            \textbf{Canal} &
-            \multicolumn{3}{c|}{\(\mathbf{\Delta_{\text{ground}}\,[\text{cm}]}\)} &
-            \(\mathbf{\Delta_{\text{ground}}\,[\text{m}]}\) \\ \cline{2-4}
-            \rowcolor[HTML]{EFEFEF}
-            & 50 m & 1000 m & 5000 m & 5000 m \\ \hline
-            \(R\)   & 5.35 & 106.68 & 534.72 & 5.35 \\ \hline
-            \(G\)   & 3.89 &  77.59 & 388.91 & 3.89 \\ \hline
-            \(B\)   & 4.28 &  85.34 & 427.78 & 4.28 \\ \hline
-            Mono    & 4.28 &  85.34 & 427.78 & 4.28 \\ \hline
-        \end{tabular}
-    \end{table}
+%---------------------------------------------------------------
+\subsubsection{MTF Curves for VIS and NIR Systems}
+\label{subsub:mtf_curves}
+%---------------------------------------------------------------
+\noindent The MTF curves were obtained with the \texttt{SE\_MTF} plugin in \textit{ImageJ} following the procedure described in section~\ref{sec:mtf_char}. For the VIS system (System 7), the three channels $R$, $G$, and $B$ were processed independently, as well as the average image (\textit{Mono}). For the NIR system (System 6), only a single monochromatic channel is available.
 
-    \begin{table}[H]
-        \centering
-        \caption{Resolución en tierra \(\Delta_{\text{ground}}\) – Sistema NIR (Sis.~6)}
-        \label{tab:grd_nir_corrected}
-        \begin{tabular}{|c|c|c|c|c|}
-            \hline
-            \rowcolor[HTML]{EFEFEF}
-            \textbf{Canal} &
-            \multicolumn{3}{c|}{\(\mathbf{\Delta_{\text{ground}}\,[\text{cm}]}\)} &
-            \(\mathbf{\Delta_{\text{ground}}\,[\text{m}]}\) \\ \cline{2-4}
-            \rowcolor[HTML]{EFEFEF}
-            & 50 m & 1000 m & 5000 m & 5000 m \\ \hline
-            Mono  & 4.12 & 82.57 & 411.79 & 4.12 \\ \hline
-        \end{tabular}
-    \end{table}
-    %--------------------------------------------------------------
+\begin{figure}[H]
+\centering
+%-----------------------------------------------------------
+\begin{subfigure}[b]{0.95\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{Figures/C4/mtf_vis.png}
+    \caption{VIS System: MTF of the $R$, $G$, $B$, and average (\textit{Mono}) channels.}
+    \label{fig:mtf_vis}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.95\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{Figures/C4/mtf_nir.png}
+    \caption{NIR System: MTF of the monochromatic channel.}
+    \label{fig:mtf_nir}
+\end{subfigure}
+%-----------------------------------------------------------
+\caption{MTF curves obtained with \textit{ImageJ}. The plugin configuration is shown in Fig.~\ref{fig:plugin_config1}. This measurement was taken with a working distance of 925 mm.}
+\label{fig:mtf_curves}
+\end{figure}
 
-    %---------------------------------------------------------------
-    \subsubsection{Comparison with Theoretical Resolution}
-    \label{subsub:grd_comp}
-    %---------------------------------------------------------------
-    La Figura~\ref{fig:grd_comp} contrasta la resolución teórica
-    (\(\Delta_{\text{ground,\,theo}}\), Tabla~\ref{tab:grd_fov_clean})
-    con la experimental para los cortes a \(30\,\%\).
-    Los valores experimentales del canal \(G\) (VIS) y del canal único (NIR) son los
-    que más se aproximan a la especificación, con desviaciones absolutas
-    inferiores a \(6\,\mathrm{mm}\) a \(50\,\mathrm{m}\)
-    y relativas menores del \(7\,\%\) en todas las altitudes.
+\noindent An analysis of the VIS system's MTF curves (Figure~\ref{fig:mtf_vis}) reveals a slightly difference in performance across the spectral channels. The green channel outperforms the blue and red channels, possessing the largest area under the MTF curve (MTFA)—a metric for overall image sharpness. This indicates that the system resolves high spatial frequencies most effectively in the green spectrum, maintaining better contrast, while its performance is weakest for red light. This behavior is a classic symptom of longitudinal chromatic aberration. The system's lens, with its very large f/1.3 aperture, has an extremely shallow depth of field, causing different wavelengths of light to focus at slightly different distances along the optical axis. During the manual focusing process, it is highly likely that the green wavelengths—to which human vision is most sensitive—were brought into optimal focus. Consequently, the blue and, more significantly, the red wavelengths were left slightly out of focus, leading to the reduction in their measured MTF. While the large aperture was chosen to maximize light throughput, it simultaneously exacerbates this chromatic aberration in a broadband system. In contrast, the monochromatic MTF curve for the NIR system (Figure~\ref{fig:mtf_nir}) shows a single curve, with performance comparable to the green channel of the VIS system, indicating good resolution in the near-infrared region.\\
 
-    % \begin{figure}[H]
-    %     \centering
-    %     \includegraphics[width=0.75\linewidth]{Figures/C4/grd_comparison.pdf}
-    %     \caption{Comparación entre la resolución en tierra teórica y la medida.}
-    %     \label{fig:grd_comp}
-    % \end{figure}
+\begin{equation}
+\mathrm{MTFA} \;=\; \int_{0}^{f_c} \mathrm{MTF}(f)\,\mathrm{d}f
+\label{eq:mtfa_def}
+\end{equation}
 
-    %---------------------------------------------------------------
-    \subsubsection{Error Sources and Discrepancy Analysis}
-    \label{subsub:grd_errors}
-    %---------------------------------------------------------------
-    Las diferencias observadas entre la especificación y la medición se asocian a:
+\noindent The calculated MTFA values for each channel, integrated up to their measured cut-off frequency ($f_c$), are summarized in Table~\ref{tab:mtfa_results}.
 
-    \begin{description}
-      \item[Distorsión radial]  
-            El modelo de tamaño de imagen supone proyección pinhole sin distorsión.
-            Una distorsión barril del \(1\%\) desplaza la frecuencia de corte
-            hasta un \(3\,\%\).
-      \item[Paralaje en la medida de WD]  
-            Un error sistemático de \(\pm1\,\mathrm{cm}\) en la distancia
-            de trabajo introduce una incertidumbre del \(2.4\,\%\) en PMAG
-            y, por tanto, en \(f_{\text{obj}}\).
-      \item[Enfoque imperfecto]  
-            Una desviación de solo \(10\,\mu\mathrm{m}\) en la posición
-            del plano focal puede reducir la MTF de alta frecuencia
-            entre \(5\) y \(8\,\%\).
-      \item[Ruido y cuantización]  
-            Aunque se promediaron 50 imágenes y se corrigió la corriente
-            oscura (Sección~\ref{subsub:corriente_oscura_espectrometro}),
-            el SNR limita la estimación de la ESF, añadiendo
-            \(\approx2\,\%\) de dispersión a \(f_{\text{im}}\).
-    \end{description}
+\begin{table}[H]
+    \centering
+    \caption{Area under the MTF curve (MTFA) for each channel.}
+    \label{tab:mtfa_results}
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \rowcolor[HTML]{EFEFEF}
+    \textbf{System / Channel} & $\mathbf{f_c}$ [lp mm$^{-1}$] & \textbf{MTFA} [lp mm$^{-1}$] \\
+    \hline
+    VIS -- $R$     & 57.72 & 34.45 \\
+    VIS -- $G$     & 79.36 & 49.58 \\
+    VIS -- $B$     & 72.15 & 47.25 \\
+    VIS -- Mono    & 72.15 & 45.05 \\
+    NIR -- Mono    & 79.36 & 46.48 \\
+    \hline
+    \end{tabular}
+\end{table}
 
-    Una calibración geométrica por cámara-patrón y la
-    compensación de distorsión de lente deberían reducir el sesgo relativo
-    por debajo del \(3\,\%\).
+\noindent The MTFA results confirm the visual assessment: the green channel exhibits the highest MTFA (49.58 lp mm$^{-1}$), indicating it preserves contrast most effectively. This performance gap is a classic symptom of \textbf{longitudinal chromatic aberration}. The system's f/1.3 lens has an extremely shallow depth of field, causing different wavelengths to focus at slightly different planes. During manual focusing, the green wavelengths were likely optimized, leaving the blue and red channels slightly out of focus and thus reducing their MTF. The NIR system, being monochromatic, is immune to this effect but shows an MTFA (46.48 lp mm$^{-1}$) that is still below the VIS green channel, suggesting the presence of other monochromatic aberrations (e.g., spherical aberration) common in large-aperture designs.\\
 
-    %---------------------------------------------------------------
-    \subsubsection{Summary of MTF Findings}
-    \label{subsub:grd_summary}
-    %---------------------------------------------------------------
-    \emph{En síntesis}:
-
-    \begin{enumerate}
-        \item El sistema VIS cumple el requisito de \(f_{\text{im}}\ge40\;\text{lp mm}^{-1}\)  
-              en los tres canales; el canal \(G\) ofrece el mejor desempeño
-              con \(79.4\;\text{lp mm}^{-1}\).
-        \item El sistema NIR alcanza \(79.4\;\text{lp mm}^{-1}\), un \(34\,\%\)
-              por debajo de la especificación, pero mantiene una
-              resolución en tierra \(<3\,\text{cm}\) a \(50\,\text{m}\),
-              suficiente para la misión.
-        \item Las discrepancias con la teoría se deben, principalmente,
-              a distorsión geométrica y a tolerancias de enfoque; ambas
-              pueden mitigarse mediante calibración adicional.
-        \item Para mejorar la concordancia,
-              se propone añadir una etapa de rectificación geométrica
-              antes de la extracción de la ESF y repetir la medición
-              con iluminación de mayor contraste (4:1 según ISO 12233).
-      \end{enumerate}
+\noindent While MTFA describes overall performance, the system's ultimate resolving power is typically defined by the cut-off frequency ($f_{\text{im}}$) where modulation drops to a specific threshold, in this case, 30\%. Table~\ref{tab:cutoff_meas} lists these values.\\
 
 
-  \subsection{Respuesta espectral}
-    \subsubsection{Curvas de sensibilidad}
-      % → FIGURA: sensibilidad R, G, B y NIR normalizadas.
-    \subsubsection{Linealidad y repetibilidad}
-      % → Tabla: coeficiente $r$ entre repeticiones, desviación estadística.
+\noindent In contrast, the NIR system (Figure~\ref{fig:mtf_nir}) operates over a much narrower spectral bandwidth of approximately 50 nm, compared to the ~400 nm range of the VIS system. Consequently, while it is not entirely immune to chromatic aberration, the effects are substantially reduced. Its performance, which also falls short of the theoretical limit, is therefore likely limited by a combination of this mild chromatic aberration and other monochromatic aberrations (such as spherical aberration or coma), which are common in large-aperture optical designs, as well as potential limitations from manufacturing and assembly tolerances.\\
 
-\section{Síntesis y comparación con los requisitos}
-  % → Resumen cruzado: requisito ↔ resultado ↔ % de cumplimiento.
-  %   Discute los márgenes de mejora identificados.
+\noindent To improve the performance of the VIS system, a practical approach would be to reduce the lens aperture (i.e., use a larger f-number). This would increase the system's depth of field, making the focus less sensitive to wavelength variations and thereby mitigating the effects of chromatic aberration. It is important to clarify a key optical trade-off: a smaller aperture (e.g., f/2.8) actually \textit{lowers} the theoretical diffraction-limited MTF cut-off. However, in an aberration-dominated system like this one, reducing the aperture significantly cuts down on aberrations, often leading to a \textit{better overall real-world MTF}. % An objective with an f/2.8 aperture could represent a promising compromise, potentially yielding a sharper image across all color channels.\\
 
-\section{Lecciones aprendidas y trabajo futuro}
-  % → Reflexiones sobre diseño, montaje, guiones de adquisición
-  %   y posibles optimizaciones (p.ej. filtros más estrechos,
-  %   firmware de cámara, compensación de vibraciones, IA en bordo).
+\noindent The points where the modulation drops to $30\,\%$ provide the cut-off frequency $f_{\text{im}}$. Table~\ref{tab:cutoff_meas} summarizes these values and compares them with the theoretical specifications (Table~\ref{tab:sys_tables}).\\
 
-% Opcional: anexos con listados de código, tablas de datos completos,
-%           hojas de especificaciones de componentes ópticos, etc.
+\begin{table}[H]
+\centering
+\caption{Cut-off frequency at $30\,\%$ contrast: measurements vs. specification.}
+\label{tab:cutoff_meas}
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    \rowcolor[HTML]{EFEFEF}
+    \textbf{System / Channel} &
+    $\mathbf{f_{\text{im,\,meas}}}$ [lp mm$^{-1}$] &
+    $\mathbf{f_{\text{im,\,theo}}}$ [lp mm$^{-1}$] &
+    $\mathbf{\Delta\,[\%]}$ \\ \hline
+    VIS – $R$     &   57.72 & 85  & $-32.1$ \\ \hline
+    VIS – $G$     &   79.36 & 85  & $-6.6$ \\ \hline
+    VIS – $B$     &   72.15 & 85  & $-15.1$ \\ \hline
+    VIS – Mono      &   72.15 & 85  & $-15.1$ \\ \hline
+    NIR – Mono      &   79.36 & 120 & $-33.9$ \\ \hline
+\end{tabular}
+\end{table}
+%---------------------------------------------------------------
+\subsubsection{Cut-off Frequency and Ground Resolution Calculation}
+\label{subsub:grd_calc}
+%---------------------------------------------------------------
+\noindent The ground-resolved distance ($\Delta_{\text{ground}}$) was obtained by applying steps 1–3 from section~\ref{subsub:grd_from_mtf}. For each channel, starting from the $f_{\text{im,\,meas}}$ in Table~\ref{tab:cutoff_meas}, the object frequency $f_{\text{obj}}$ is calculated, and subsequently, $\Delta_{\text{ground}}$. The geometric parameters (PMAG and FOV) come from Table~\ref{tab:grd_fov_clean}; the focal lengths are $f_{\text{VIS}} = 8.5\,\mathrm{mm}$ and $f_{\text{NIR}} = 8.0\,\mathrm{mm}$.\\
+
+%--------------------------------------------------------------
+\begin{table}[H]
+\centering
+\caption{Ground-resolved distance $\Delta_{\text{ground}}$ for VIS (Sys.~7) and NIR (Sys.~6) Systems.}
+\label{tab:grd_combined}
+\begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    \rowcolor[HTML]{EFEFEF}
+    \textbf{System} & \textbf{Channel} & \multicolumn{3}{c|}{$\mathbf{\Delta_{\text{ground}}\,[\text{cm}]}$} & $\mathbf{\Delta_{\text{ground}}\,[\text{m}]}$ \\ \cline{3-5}
+    \rowcolor[HTML]{EFEFEF}
+    & & 50 m & 1000 m & 5000 m & 5000 m \\ \hline
+    \multirow{4}{*}{\textbf{VIS (Sys.~7)}} & $R$   & 5.35 & 106.68 & 534.72 & 5.35 \\ \cline{2-6}
+                                         & $G$   & 3.89 &  77.59 & 388.91 & 3.89 \\ \cline{2-6}
+                                         & $B$   & 4.28 &  85.34 & 427.78 & 4.28 \\ \cline{2-6}
+                                         & Mono  & 4.28 &  85.34 & 427.78 & 4.28 \\ \hline
+    \textbf{NIR (Sys.~6)} & Mono & 4.12 & 82.57 & 411.79 & 4.12 \\ \hline
+\end{tabular}
+\end{table}
+%--------------------------------------------------------------
+
+%---------------------------------------------------------------
+\subsubsection{Comparison of Experimental and Theoretical Ground Resolution}
+\label{subsub:grd_analysis_summary}
+
+\noindent To validate the system's real-world performance, the experimentally derived Ground-Resolved Distance (GRD) was compared against the theoretical resolution ($\Delta_\text{MTF}$) from the system's design specifications (Table~\ref{tab:grd_fov_clean}). Table~\ref{tab:grd_comparison_mono} consolidates this comparison for the monochromatic channel of each system and quantifies the discrepancy.
+
+\begin{table}[H]
+\centering
+\caption{Comparison of theoretical vs. experimental ground resolution for monochromatic channels.}
+\label{tab:grd_comparison_mono}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \rowcolor[HTML]{EFEFEF}
+    \textbf{\shortstack{System /\\ Channel}} &
+    \textbf{\shortstack{Altitude\\ \mbox{[m]}}} &
+    \textbf{\shortstack{Theoretical\\ GRD \mbox{[cm]}}} &
+    \textbf{\shortstack{Experimental\\ GRD \mbox{[cm]}}} &
+    \textbf{\shortstack{Discrepancy\\ \mbox{[\%]}}} \\ \hline
+
+    \multirow{3}{*}{\shortstack{\textbf{VIS /}\\ \textbf{Mono}}} & 50   & 3.40   & 4.28   & +25.9\%  \\ \cline{2-5}
+                                                                 & 1000 & 69.20  & 85.34  & +23.3\%  \\ \cline{2-5}
+                                                                 & 5000 & 346.00 & 427.78 & +23.6\%  \\ \hline
+    \multirow{3}{*}{\shortstack{\textbf{NIR /}\\ \textbf{Mono}}} & 50   & 1.90   & 4.12   & +116.8\% \\ \cline{2-5}
+                                                                 & 1000 & 39.10  & 82.57  & +111.2\% \\ \cline{2-5}
+                                                                 & 5000 & 195.30 & 411.79 & +110.8\% \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+\noindent 
+The comparison reveals two distinct outcomes. The VIS system's monochromatic channel shows a consistent discrepancy of approximately 23-26\%. This deviation is expected and can be attributed to a combination of real-world factors not accounted for in the ideal theoretical model, such as imperfect focus, the averaging of performance across all three color channels (where red underperforms), residual optical aberrations, and minor uncertainties introduced by noise during the ESF estimation.\\
+
+\noindent In stark contrast, the NIR system exhibits an anomalously large discrepancy of over 100\%. Rather than indicating a catastrophic failure of the lens, the evidence suggests this is primarily due to an unrealistic or erroneous theoretical specification provided by the manufacturer. Several factors support this hypothesis. First, the VIS system's lens (f/1.3) has a significantly larger aperture than the NIR lens (f/2.5), which would theoretically give it a higher diffraction-limited resolution potential. It is therefore counter-intuitive that the NIR lens's theoretical cut-off (120 lp mm$^{-1}$) is rated so much higher than the VIS lens's (85 lp mm$^{-1}$).\\
+
+\noindent Furthermore, since the exact same methodology was used for focusing and measuring both systems, a major procedural error is unlikely. The most compelling evidence is the similarity in the final results: the measured ground resolution for the VIS Mono (4.3 cm) and NIR Mono (4.1 cm) systems are nearly identical. This strongly implies that the actual real-world performance of both lenses is comparable, and the massive discrepancy stems from a flawed theoretical baseline for the NIR system.\\
+
+\noindent Another contributing factor to the final system performance is the MTF of the sensor itself, whose response is convolved with that of the lens. While the sensor's full MTF curve is unknown, its theoretical resolution limit is defined by the Nyquist criterion, $f_{\text{Nyquist}} = 1/(2s)$, where $s$ is the pixel size (2.2~µm). This yields a theoretical cut-off frequency for the sensor of:
+\[ f_{\text{Nyquist}} = \frac{1}{2 \cdot (2.2 \times 10^{-3}~\text{mm})} \approx 227~\text{lp mm}^{-1} \]
+Although this value is well above the measured system performance, the sensor's MTF will still degrade the signal at lower frequencies, contributing to the overall system response. However, it does not sufficiently explain the 100\%+ discrepancy observed in the NIR system.\\
+
+\noindent 
+In summary, the MTF characterization confirms that the VIS system performs within an expected tolerance of its theoretical limits, delivering a practical resolution of 4.3 cm at 50 m altitude. Crucially, the NIR system achieves a very similar and usable resolution of 4.1 cm at 50 m. The significant discrepancy noted in the results is not interpreted as poor performance but rather as evidence that the manufacturer's theoretical specification for the NIR lens is overly optimistic and likely incorrect. This investigation concludes that both systems have comparable and robust real-world resolving capabilities. While a full geometric calibration is still recommended to compensate for distortion, the primary finding is the re-contextualization of the NIR system's performance as being on par with the VIS system, rather than drastically underperforming against an unrealistic benchmark.\\
+
+\subsection{Spectral Response}
+\label{sec:spectral_response}
+
+This section presents the experimental results for the VIS (RGB) and NIR systems, from dark-current characterization to the relative spectral response. All results were obtained with the illumination and filtering configurations described previously (see section \ref{sec:spectral_characterization}).
+
+\subsubsection*{Per-sample acquisition scheme (VIS and NIR)}
+
+\noindent
+To ensure traceability of the spectral measurements, the acquisition settings used for each filter stack are documented below. Within each system (VIS or NIR), most parameters were kept fixed to avoid confounding factors; only the exposure time was adjusted per sample to maximize signal without saturation. Table~\ref{tab:sr_common_settings} reports the system-wide common settings, while Table~\ref{tab:sr_perfilter_combined} lists the per-filter exposure times.\\
+
+\begin{table}[H]
+    \centering
+    \caption{Common acquisition settings for VIS (RGB) and NIR (mono) systems.}
+    \label{tab:sr_common_settings}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}\textbf{Parameter} & \textbf{VIS} & \textbf{NIR} \\ \hline
+        Gain               & 0.0       & 0.0 \\ \hline
+        Gamma              & 1.0       & 1.0 \\ \hline
+        Hue                & 0.0       & --  \\ \hline
+        Height [px]        & 714       & 600 \\ \hline
+        Width  [px]        & 760       & 600 \\ \hline
+        OffsetX [px]       & 900       & 1026 \\ \hline
+        OffsetY [px]       & 600       & 650 \\ \hline
+        BalanceRatio\_Red  & 0.9990234 & -- \\ \hline
+        BalanceRatio\_Blue & 0.9990234 & -- \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Exposure time per filter label for VIS and NIR systems.}
+    \label{tab:sr_perfilter_combined}
+    \begin{tabular}{|c|l|c|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}\textbf{System} & \textbf{Filter label} & \textbf{ExposureTime [ms]} \\ \hline
+        \multirow{8}{*}{VIS} 
+            & 1$\ast$Purple$\ast$Red        & 2859.217 \\ \cline{2-3}
+            & 2$\ast$3$\ast$Yellow          & 2916.174 \\ \cline{2-3}
+            & 3$\ast$4$\ast$Purple          & 11.391 \\ \cline{2-3}
+            & 4$\ast$Dark Blue              & 3998.348 \\ \cline{2-3}
+            & 4$\ast$Orange                 & 888.522 \\ \cline{2-3}
+            & 5$\ast$6$\ast$Dark Green      & 5661.478 \\ \cline{2-3}
+            & 5$\ast$Purple                 & 47000.520 \\ \cline{2-3}
+            & 5$\ast$Green                  & 2870.609 \\ \hline
+        \multirow{3}{*}{NIR} 
+            & 4$\ast$Red                    & 29.372 \\ \cline{2-3}
+            & 3$\ast$4$\ast$Purple          & 36.715 \\ \cline{2-3}
+            & 2$\ast$5                      & 29.372 \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent
+For parameters not listed in the per-filter tables, the values remained equal to the common settings defined for each system. The exposure time was tuned to prevent clipping while targeting high signal-to-noise under a constant irradiance reference (see Section~\ref{subsub:longitud_onda_central_potencia}). In the VIS camera, the red and blue white-balance coefficients were held at unity (within rounding) to suppress any firmware color scaling during acquisition. \\
+
+\noindent
+Consistent with the laboratory methodology described in Section~\ref{subsub:longitud_onda_central_potencia}, the illumination for each filter combination was adjusted so that the optical power incident on the detector equalled the reference irradiance of \(P_{\mathrm{ref}} = 0.42~\mathrm{mW}\), corresponding to the 532\,nm filter. Under these constant-irradiance conditions, the exposure time was the only acquisition parameter modified between measurements, ensuring that no image reached sensor saturation while maintaining linearity of response across all spectral bands. These constraints guaranteed that the measured variations in digital counts arise solely from the spectral sensitivity of the imaging system rather than from changes in illumination power.
+
+
+
+\subsubsection*{Dark current and frame averaging}
+
+For each filter configuration an auxiliary series of dark frames was acquired with identical camera settings. All dark frames were averaged to produce a master dark image per system. Figure~\ref{fig:sr_dark_examples} shows an example of dark images for VIS and NIR, and Figure~\ref{fig:sr_dark_hist} shows the corresponding pixel histograms computed over a central region of interest. These histograms are unimodal and narrow, which indicates stable electronics and provides a baseline for dark subtraction.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+        \includegraphics[trim = 0 0 0 25, clip, width=\linewidth]{Figures/C4/dc_examplevis.png}
+        \caption{VIS example dark current. Filter 1 $\ast$ Purple $\ast$ Red. Time of exposure = 2859.272 ms.}
+    \end{subfigure}\hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[trim = 0 0 0 25, clip, width=\linewidth]{Figures/C4/dc_examplenir.png}
+        \caption{NIR example dark current. Filter 3 $\ast$ 4 $\ast$ Purple. Time of exposure = 36.715 ms.}
+    \end{subfigure}
+    \caption{Example of dark images captured for dark-current correction.}
+    \label{fig:sr_dark_examples}
+\end{figure}
+
+\noindent
+From visual inspection of the master dark frames in Fig.~\ref{fig:sr_dark_examples}, the recorded signal remains close to zero across the field for both systems, as expected for acquisitions performed in complete darkness. Nevertheless, isolated pixels and small clusters exhibit nonzero values associated with electronic noise sources such as dark current, read noise, and fixed-pattern components (e.g., hot and warm pixels). Contrary to initial expectations, the VIS system exhibits a slightly higher mean dark signal and broader histogram than the NIR system, suggesting a marginally stronger contribution of dark current or offset noise in the visible channel under identical acquisition conditions. This behavior implies that, although both systems exhibit comparable overall stability, the VIS detector presents a higher baseline dark level.\\
+
+\noindent
+To quantify these observations, an exploratory analysis of dark-signal histograms was performed for every acquisition, grouped by filter configuration and exposure time. Although this procedure was carried out for all filter and exposure combinations, Figures~\ref{fig:sr_dark_examples} and~\ref{fig:sr_dark_hist} present only representative examples corresponding to one VIS and one NIR case. These examples illustrate the general behaviour observed across the dataset.\\
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+        \includegraphics[trim=0 0 0 20, clip, width=\linewidth]{Figures/C4/dc_hist_vis.png}
+        \caption{VIS dark histogram. 1 $\ast$ Pruple $\ast$ Red.}
+    \end{subfigure}\hfill
+    \begin{subfigure}[b]{0.48\linewidth}
+        \includegraphics[width=\linewidth]{Figures/C4/dc_hist_nir.png}
+        \caption{NIR dark histogram. 2 $\ast$ 5.}
+    \end{subfigure}
+    \caption{Pixel-value histograms examples of dark images.}
+    \label{fig:sr_dark_hist}
+\end{figure}
+
+\noindent
+Figure \ref{fig:vis_dark_triptych} and Table \ref{tab:dark_stats_nir} consolidates, for every acquisition and channel, the mean, variance and maximum of the dark-signal distribution.\\
+
+\begin{figure}[H]
+    \centering
+    % Update the filename below to match where you saved the PNG from Python:
+    \includegraphics[width=\linewidth]{Figures/C4/VIS_triptych.png}
+    \caption{VIS dark-signal heatmaps by filter (rows) and channel (columns). Panels show, from left to right, the mean, variance, and maximum of the pixel-value distribution for each acquisition.}
+    \label{fig:vis_dark_triptych}
+\end{figure}
+
+% --- New compact table: NIR only (keep numbers as in your original table) ---
+\begin{table}[H]
+    \centering
+    \caption{NIR dark-signal summary statistics per sample (mono channel).}
+    \label{tab:dark_stats_nir}
+    \setlength{\tabcolsep}{8pt}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \rowcolor[HTML]{EFEFEF}
+        \textbf{Sample} & \textbf{Mean} & \textbf{Variance} & \textbf{Max} \\
+        \hline
+        \texttt{2$\ast$5}          & 0.0005 & 0.0005 & 1 \\ \hline
+        \texttt{3$\ast$4$\ast$Purple}  & 0.0007 & 0.0007 & 1 \\ \hline
+        \texttt{4$\ast$Red}       & 0.0008 & 0.0008 & 1 \\ \hline
+    \end{tabular}
+\end{table}
+
+
+\noindent
+The central tendency remains below one count for the VIS system across more than four orders of magnitude in integration time. However, the case corresponding to the longest VIS exposure in the dataset (\(\tau\!=\!47.0\)~s for 5$\ast$Purple) exhibits the highest variance and maximum pixel value among all configurations. This behaviour suggests that, although the average dark signal remains low (\(0.34\)–\(0.75\)~counts), longer integration times lead to a measurable increase in dark-current accumulation and pixel-to-pixel dispersion. The observed growth in variance with exposure time is consistent with thermally generated charge carriers contributing more significantly to the total dark signal as \(\tau\) increases, reinforcing the expected dependence of dark current on integration time and sensor temperature.\\
+
+\noindent
+In contrast, the maxima exhibit a clear exposure-time sensitivity and sample dependence. For short exposures (\(\tau\approx 11\)~ms, 3$\ast$4$\ast$Purple), the maxima are only \(2\) counts in all VIS channels. At intermediate exposures near the multi-second regime (\(\tau\approx 2.9\)–\(4.0\)~s; e.g., 1$\ast$Purple$\ast$Red, 2$\ast$3$\ast$Yellow, 4$\ast$Dark$\ast$Blue, 5$\ast$Green) the maxima rise to the \(4\)–\(8\)-count range, reflecting a small population of warm pixels that integrate charge measurably with time. The longest-exposure VIS case (5$\ast$Purple, \(47.0\)~s) shows markedly larger outliers (up to \(43\) counts in \(B\), \(32\) in \(R\), \(28\) in \(G\)), which is consistent with hot-pixel behaviour whose dark signal grows roughly proportionally with \(\tau\). For the NIR system, all acquisitions were performed at short exposures (\(\tau\approx 29\)–\(37\)~ms) and the maxima remain at a single LSB, while the mean and variance are of the same order (\(\sim 7\times10^{-4}\)~counts), which is the signature of rare one-count excursions over a field that otherwise sits at zero.\\
+
+\noindent
+Taken together, these results support the following operational picture. Within the exposure range used for spectral characterization, the bulk statistics of the dark signal (mean and variance) are effectively stationary and independent of the filter-dependent integration time; radiometric performance is thus limited by read noise and digitization at the dark baseline. The exposure-time dependence appears primarily in the distribution tails, where a small set of hot or warm pixels accumulate charge linearly with \(\tau\) and inflate the maxima.
+
+
+\subsubsection*{Dark-corrected images per filter stack}
+
+For each filter or filter combination, 50 illuminated frames were acquired and dark–corrected by subtracting the corresponding master dark. The corrected frames were averaged to form a single image per filter stack. Figure~\ref{fig:sr_mosaic_vis} shows a mosaic of the averaged VIS images organized by filter label, and Figure~\ref{fig:sr_mosaic_nir} shows the NIR mosaic. The mosaics provide a compact view of the spatial uniformity achieved and of the expected signal increase in the passbands.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/C4/vis_spec_res_mosaic.png}
+    \caption{VIS system. Mosaic of dark–corrected, averaged images for all filter stacks used (one tile per filter label).}
+    \label{fig:sr_mosaic_vis}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/C4/nir_spec_res_mosaic.png}
+    \caption{NIR system. Mosaic of dark-corrected, averaged images for all filter stacks used.}
+    \label{fig:sr_mosaic_nir}
+\end{figure}
+
+
+\noindent To validate that no image was overexposed, instead of relying solely on histograms we computed and summarized the pixel-value quantiles for every dark–corrected, averaged image. Figures~\ref{fig:sr_qheatmap_vis} and \ref{fig:sr_qheatmap_nir} display quantile heatmaps (e.g., $q_{10}$, $q_{50}$, $q_{90}$, $q_{99.9}$) per filter. In all cases, the distributions remain well below the upper limit of the dynamic range, and no clipping was observed within the regions of interest used for the response measurement. As expected, narrowband filters yield more concentrated distributions, while wideband stacks exhibit higher upper quantiles and broader spread.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/C4/vis_quartiles_final.png}
+    \caption{VIS system. Quantile heatmaps by filter (rows) and representative quantiles (columns, e.g., $q_{10}$, $q_{50}$, $q_{90}$, $q_{99.9}$). Each panel corresponds to a channel (B, G, R), and all panels share a single colorbar to enable direct comparison on a common intensity scale.}
+    \label{fig:sr_qheatmap_vis}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/C4/nir_quantiles.png}
+    \caption{NIR system. Quantile heatmaps by filter and representative quantiles (e.g., $q_{10}$, $q_{50}$, $q_{90}$, $q_{99.9}$). Panels share the same color scale, showing that none of the conditions approaches the saturation limit, thus confirming the absence of clipping.}
+    \label{fig:sr_qheatmap_nir}
+\end{figure}
+
+\noindent The quantile analysis confirms that none of the dark–corrected, averaged images approaches saturation for the exposure times used. Since both cameras deliver 8-bit data, the admissible range is $[0,255]$~DN; across all VIS channels and NIR frames the high-end quantile $q_{99.9}$ remains comfortably below this ceiling. In the VIS dataset, the largest observed upper quantiles occur for the expected channel–filter pairings (e.g., blue-weighted stacks in $B$, orange/red stacks in $G$ and $R$), yet even in these cases $q_{99.9}\!\ll\!255$~DN, indicating a clear headroom to the clipping threshold. The NIR results follow the same trend: $q_{99.9}$ lies $\sim\!220$–$230$~DN for the tested stacks, again leaving a safe margin within the 8-bit dynamic range.\\
+
+% \noindent The middle quantiles ($q_{50}$) and the separation between $q_{90}$ and $q_{10}$ describe the spread of the pixel-value distributions and are consistent with the spectral selectivity of the stimuli. Narrowband or quasi-monochromatic conditions (e.g., interferential filters such as 532\,nm and 633\,nm, or tightly matched VIS stacks) concentrate the distributions: $q_{10}$ and $q_{90}$ are relatively close and the medians sit well below saturation, which is compatible with the ridgeline ECDFs and the narrow histograms reported previously. In contrast, broader pass-bands or composite stacks designed to increase throughput shift the upper quantiles upward and widen the interquantile span, as expected from their higher photon flux and wider spectral support, yet still without encroaching on the upper limit.\\
+
+\noindent The channel-wise VIS behavior is physically meaningful. Blue-leaning stacks (e.g., \textit{5~$\times$~Purple}) raise the blue-channel quantiles relative to green and red, whereas orange/red-rich combinations (e.g., \textit{4~$\times$~Orange} or \textit{1~$\times$~Purple~$\times$~Red}) elevate $G$ and especially $R$. Conversely, combinations with very low in-band transmittance for a given channel yield depressed medians and compressed spreads (e.g., \textit{3~$\times$~4~$\times$~Purple} in VIS shows near-zero $q_{50}$ across channels), which reflects low signal rather than clipping. These regimes will demand longer exposures or higher irradiance if one seeks to maximize signal-to-noise while preserving headroom.\\
+
+\noindent In the NIR system, the single-channel quantiles mirror the nominal band placement of the stacks centered near 820–840\,nm: $q_{50}$ values fall in the tens to low hundreds of DN, while $q_{90}$–$q_{99.9}$ approach but do not exceed $\sim\!230$~DN. This confirms that the exposure settings chosen for each combination were conservative enough to prevent highlight loss while still capturing the relative differences in throughput among stacks.\\
+
+\noindent Taken together, the quantile heatmaps and line plots provide a compact, exposure-agnostic validation of the acquisition protocol. The joint observation of (i) $q_{99.9}$ consistently below 255~DN, (ii) physically coherent channel ranking per stack, and (iii) distribution widths that follow the intended pass-band design, demonstrates that the dataset is free of saturation artefacts within the regions of interest used for response estimation and is therefore suitable for reliable spectral-response calibration.\\
+
+
+
+
+\subsubsection*{Relative spectral response}
+
+For each filter label and system, the mean signal was computed over a fixed central region of interest in the dark–corrected, averaged image. The resulting per–filter signals were normalized by the corresponding exposure time and by the spectral energy admitted by each filter stack. The central wavelengths used for plotting correspond to the measured centers of the selected stacks. The final curves are shown in Figure~\ref{fig:sr_relative_curves}. The VIS response exhibits the expected band structure with a blue, a green and a red lobe. The green channel peaks near the middle of the visible range and shows the highest relative sensitivity, followed by blue and then red. The NIR response presents a single lobe centered in the near–infrared region defined by the stacks around the 820–840~nm band.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.98\linewidth}
+        % \includegraphics[width=\linewidth]{Figures/C4/SR/vis_relative_sensitivity.pdf}
+        \caption{VIS system. Relative spectral sensitivity for R, G and B channels.}
+    \end{subfigure}
+    \vspace{1ex}
+    \begin{subfigure}[b]{0.98\linewidth}
+        % \includegraphics[width=\linewidth]{Figures/C4/SR/nir_relative_sensitivity.pdf}
+        \caption{NIR system. Relative spectral sensitivity (mono).}
+    \end{subfigure}
+    \caption{Relative spectral response curves obtained from the per–filter measurements after normalization. Error bands indicate the standard error across repeated acquisitions.}
+    \label{fig:sr_relative_curves}
+\end{figure}
+
+\subsubsection*{Summary of observations}
+
+The dark–current statistics are stable and low compared to the illuminated signal. The averaged, dark–corrected images present spatial uniformity adequate for deriving a scalar response over the central region. The manual exposure selection avoided saturation in all cases, as confirmed by the histogram grids. The relative spectral response curves are consistent with the expected spectral sensitivity of an RGB camera and a NIR monochannel sensor using the selected filter sets, and they provide a practical basis for subsequent radiometric normalization in the downstream analyses.
+
+
+\section{Synthesis and Comparison with Requirements}
+  % → Cross-summary: requirement ↔ result ↔ % of compliance.
+  %   Discusses identified margins for improvement.
+
+\section{Lessons Learned and Future Work}
+  % → Reflections on design, setup, acquisition scripts
+  %   and possible optimizations (e.g., narrower filters,
+  %   camera firmware, vibration compensation, on-board AI).
+
+% Optional: appendices with code listings, full data tables,
+%           specification sheets for optical components, etc.
