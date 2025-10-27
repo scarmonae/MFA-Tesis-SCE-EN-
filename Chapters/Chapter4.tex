@@ -1,4 +1,4 @@
-\chapter{Optical Characterization}
+﻿\chapter{Optical Characterization}
 
 \noindent This chapter details the materials and methods used for the development of this work. Initially, the materials employed are described, including specific equipment, light sources, calibration patterns, and software used for data acquisition, processing, and analysis. Subsequently, the experimental methods are presented, organized according to the type of measurement performed: geometric and spectral measurements. For each method, the experimental procedure is clearly described, justifying the choice of technique and specifying the conditions under which the experiments were conducted, including details of instrument configuration and protocols followed.\\
 
@@ -1598,51 +1598,100 @@ For each filter or filter combination, 50 illuminated frames were acquired and d
     \label{fig:sr_qheatmap_nir}
 \end{figure}
 
-\noindent The quantile analysis confirms that none of the dark–corrected, averaged images approaches saturation for the exposure times used. Since both cameras deliver 8-bit data, the admissible range is $[0,255]$~DN; across all VIS channels and NIR frames the high-end quantile $q_{99.9}$ remains comfortably below this ceiling. In the VIS dataset, the largest observed upper quantiles occur for the expected channel–filter pairings (e.g., blue-weighted stacks in $B$, orange/red stacks in $G$ and $R$), yet even in these cases $q_{99.9}\!\ll\!255$~DN, indicating a clear headroom to the clipping threshold. The NIR results follow the same trend: $q_{99.9}$ lies $\sim\!220$–$230$~DN for the tested stacks, again leaving a safe margin within the 8-bit dynamic range.\\
+\noindent The quantile analysis confirms that none of the dark–corrected, averaged images approaches saturation for the exposure times used. Since both cameras deliver 8-bit data, the admissible range is $[0,255]$ in pixel value; across all VIS channels and NIR frames the high-end quantile $q_{99.9}$ remains comfortably below this ceiling. In the VIS dataset, the largest observed upper quantiles occur for the expected channel–filter pairings (e.g., blue-weighted stacks in $B$, orange/red stacks in $G$ and $R$), yet even in these cases $q_{99.9}\!\ll\!255$ in pixel value, indicating a clear headroom to the clipping threshold. The NIR results follow the same trend: $q_{99.9}$ lies around $220$–$230$ in pixel value for the tested stacks, again leaving a safe margin within the 8-bit dynamic range.
 
-% \noindent The middle quantiles ($q_{50}$) and the separation between $q_{90}$ and $q_{10}$ describe the spread of the pixel-value distributions and are consistent with the spectral selectivity of the stimuli. Narrowband or quasi-monochromatic conditions (e.g., interferential filters such as 532\,nm and 633\,nm, or tightly matched VIS stacks) concentrate the distributions: $q_{10}$ and $q_{90}$ are relatively close and the medians sit well below saturation, which is compatible with the ridgeline ECDFs and the narrow histograms reported previously. In contrast, broader pass-bands or composite stacks designed to increase throughput shift the upper quantiles upward and widen the interquantile span, as expected from their higher photon flux and wider spectral support, yet still without encroaching on the upper limit.\\
+\noindent The channel-wise VIS behavior is physically meaningful. Blue-leaning stacks (e.g., \textit{5~$\times$~Purple}) raise the blue-channel quantiles relative to green and red, whereas orange/red-rich combinations (e.g., \textit{4~$\times$~Orange} or \textit{1~$\times$~Purple~$\times$~Red}) elevate $G$ and especially $R$. Conversely, combinations with very low in-band transmittance for a given channel yield depressed medians and compressed spreads (e.g., \textit{3~$\times$~4~$\times$~Purple} in VIS shows near-zero $q_{50}$ across channels), which reflects low signal rather than clipping. These regimes will demand longer exposures or higher irradiance if one seeks to maximize signal-to-noise while preserving headroom.
 
-\noindent The channel-wise VIS behavior is physically meaningful. Blue-leaning stacks (e.g., \textit{5~$\times$~Purple}) raise the blue-channel quantiles relative to green and red, whereas orange/red-rich combinations (e.g., \textit{4~$\times$~Orange} or \textit{1~$\times$~Purple~$\times$~Red}) elevate $G$ and especially $R$. Conversely, combinations with very low in-band transmittance for a given channel yield depressed medians and compressed spreads (e.g., \textit{3~$\times$~4~$\times$~Purple} in VIS shows near-zero $q_{50}$ across channels), which reflects low signal rather than clipping. These regimes will demand longer exposures or higher irradiance if one seeks to maximize signal-to-noise while preserving headroom.\\
+\noindent In the NIR system, the single-channel quantiles mirror the nominal band placement of the stacks centered near 820–840\,nm: $q_{50}$ values fall in the tens to low hundreds of pixel value, while $q_{90}$–$q_{99.9}$ approach but do not exceed $\sim\!230$ in pixel value. This confirms that the exposure settings chosen for each combination were conservative enough to prevent highlight loss while still capturing the relative differences in throughput among stacks.
 
-\noindent In the NIR system, the single-channel quantiles mirror the nominal band placement of the stacks centered near 820–840\,nm: $q_{50}$ values fall in the tens to low hundreds of DN, while $q_{90}$–$q_{99.9}$ approach but do not exceed $\sim\!230$~DN. This confirms that the exposure settings chosen for each combination were conservative enough to prevent highlight loss while still capturing the relative differences in throughput among stacks.\\
-
-\noindent Taken together, the quantile heatmaps and line plots provide a compact, exposure-agnostic validation of the acquisition protocol. The joint observation of (i) $q_{99.9}$ consistently below 255~DN, (ii) physically coherent channel ranking per stack, and (iii) distribution widths that follow the intended pass-band design, demonstrates that the dataset is free of saturation artefacts within the regions of interest used for response estimation and is therefore suitable for reliable spectral-response calibration.\\
+\noindent Taken together, the quantile heatmaps and line plots provide a compact, exposure-agnostic validation of the acquisition protocol. The joint observation of (i) $q_{99.9}$ consistently below 255 in pixel value, (ii) physically coherent channel ranking per stack, and (iii) distribution widths that follow the intended pass-band design, demonstrates that the dataset is free of saturation artefacts within the regions of interest used for response estimation and is therefore suitable for reliable spectral-response calibration.
 
 
 
 
 \subsubsection*{Relative spectral response}
+\label{subsub:relative_spectral_response}
 
-For each filter label and system, the mean signal was computed over a fixed central region of interest in the dark–corrected, averaged image. The resulting per–filter signals were normalized by the corresponding exposure time and by the spectral energy admitted by each filter stack. The central wavelengths used for plotting correspond to the measured centers of the selected stacks. The final curves are shown in Figure~\ref{fig:sr_relative_curves}. The VIS response exhibits the expected band structure with a blue, a green and a red lobe. The green channel peaks near the middle of the visible range and shows the highest relative sensitivity, followed by blue and then red. The NIR response presents a single lobe centered in the near–infrared region defined by the stacks around the 820–840~nm band.
+\noindent
+The relative spectral response was approximated by computing, for each filter stack, the \emph{total} pixel value in the corresponding dark–corrected, averaged image. No spatial cropping was applied (the sum integrates the full frame), and no additional normalization by exposure time or by filter bandwidth was performed. Each scalar was paired with the experimentally measured centre wavelength of its filter stack, yielding a discrete sampling of the response curves for the VIS and NIR systems.\\
 
+\noindent
+The VIS camera exhibits the expected three-lobe structure associated with a Bayer–type mosaic \cite{Bayer1976ColorArray,Gunturk2005Demosaicking} (see Figure~\ref{fig:sr_relative_curves_vis}). The blue channel rises in the short–wavelength region and decays toward the green–red bands; the green channel peaks near the middle of the visible spectrum and attains the highest overall response; and the red channel dominates at the long–wavelength end of the VIS range. This envelope agrees with manufacturer–style quantum–efficiency (QE) plots \cite{AlliedVision_Alvium1800U500_DataSheet} and with published databases of measured camera sensitivities, which indicates that our relative characterization is a good shape–level proxy for the sensor’s QE per channel. A salient feature in the VIS data is that the narrowband, interferential filters at 532\,nm and 633\,nm yield lower response levels than adjacent, broader stacks. This behaviour is physically consistent with the band–integrated measurement implied by Eq.~\eqref{eq:spectral_transfer}. In our setup, the illuminant term \(L(\lambda)\) already includes the action of the filter stack—i.e., \(L(\lambda)=L_{0}(\lambda)\,\beta(\lambda)\)—so the recorded signal reflects the integral of \(S(\lambda)\) against a \emph{filtered} spectrum rather than a delta function at the centre wavelength. Wider pass–bands (larger FWHM) pool energy over a broader spectral interval and yield larger total responses, whereas narrow interferential bands (e.g., 532 and 633\,nm) integrate over a much smaller slice and therefore appear lower than adjacent, broader stacks. Mapping each band–integrated measurement to a single centre wavelength thus introduces an attribution uncertainty that increases with pass–band width and with departures of \(\beta(\lambda)\) from an ideal, homogeneous (e.g., Gaussian) shape.\\
+
+\noindent
+For a fixed wattage, longer wavelengths carry more photons per unit power; in addition, the exact passband shape of each stack (true width, tails, asymmetries) redistributes those photons relative to the sensor’s sensitivity peaks and flanks. Two stacks with the same total power can therefore yield different totals if one concentrates energy squarely where the channel is most sensitive while the other spreads it over regions where sensitivity is weaker.\\
+
+
+
+\noindent It should also be noted that the measured transmission bands are not delta functions and, in several cases, their maxima do not coincide with the nominal center wavelength. Consequently, mapping each measurement to a single reported center introduces attribution uncertainty. A more faithful descriptor for the acquisition chain is the photon-weighted effective center; when this metric is considered, bands labeled as 532\,nm or 633\,nm may in fact lie a few nanometers short of those values in the effective sense relevant to the camera’s response. This observation helps explain local departures from the expected envelope and underscores the importance of characterizing the spectral shape of each band, not only its nominal center.\\
+
+% --- VIS: figure on its own ---
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.98\linewidth}
-        % \includegraphics[width=\linewidth]{Figures/C4/SR/vis_relative_sensitivity.pdf}
-        \caption{VIS system. Relative spectral sensitivity for R, G and B channels.}
-    \end{subfigure}
-    \vspace{1ex}
-    \begin{subfigure}[b]{0.98\linewidth}
-        % \includegraphics[width=\linewidth]{Figures/C4/SR/nir_relative_sensitivity.pdf}
-        \caption{NIR system. Relative spectral sensitivity (mono).}
-    \end{subfigure}
-    \caption{Relative spectral response curves obtained from the per–filter measurements after normalization. Error bands indicate the standard error across repeated acquisitions.}
-    \label{fig:sr_relative_curves}
+    \includegraphics[width=\linewidth]{Figures/C4/vis_spec_res.png}
+    \caption{VIS system. Relative spectral sensitivity for the $R$, $G$, and $B$ channels. Curves are constructed from \emph{total} framewise pixel sums (no spatial cropping and no exposure–time normalization), mapped to the experimentally measured centre wavelength of each filter stack under constant–irradiance conditions. Shaded bands indicate the standard error across repeated acquisitions.}
+    \label{fig:sr_relative_curves_vis}
 \end{figure}
 
-\subsubsection*{Summary of observations}
 
-The dark–current statistics are stable and low compared to the illuminated signal. The averaged, dark–corrected images present spatial uniformity adequate for deriving a scalar response over the central region. The manual exposure selection avoided saturation in all cases, as confirmed by the histogram grids. The relative spectral response curves are consistent with the expected spectral sensitivity of an RGB camera and a NIR monochannel sensor using the selected filter sets, and they provide a practical basis for subsequent radiometric normalization in the downstream analyses.
+\noindent
+For the NIR system (Figure~\ref{fig:sr_relative_curves_nir}), the single–channel response forms a smooth, unimodal lobe within the 820–840\,nm window sampled by the selected stacks. The three NIR combinations used here are spectrally compact and relatively uniform in bandwidth (FWHM $\approx$ 17–20\,nm) and were chosen to stay within the theoretical pass–band of the sensor (825–875\,nm). Under these conditions, the measured totals are relatively homogeneous, as expected when the illumination is maintained at constant irradiance and the sampling window does not venture outside the sensor’s high–sensitivity region. Small discrepancies between the three points can be attributed to a combination of pass–band width effects, differences in the detailed spectral shape $\beta(\lambda)$ of each stack, spatial non–uniformities in the illumination after filtering, or residual non–linearities in the acquisition chain. A compact measure of relative dispersion across the three NIR responses is the coefficient of variation $\mathrm{CV}=\sigma/\mu$, computed from the total sums $\{3.25\times10^{7},\,2.86\times10^{7},\,3.18\times10^{7}\}$: we obtain $\mu\!=\!3.095\times10^{7}$, $\sigma\!=\!1.71\times10^{6}$, hence $\mathrm{CV}\!\approx\!5.5\%$ and a relative variance $\sigma^{2}/\mu^{2}\!\approx\!3.0\times10^{-3}$. These figures corroborate that the NIR measurements are mutually consistent within a few percent under the present protocol.\\
+
+% --- NIR: figure on its own ---
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/C4/nir_spec_res.png}
+    \caption{NIR system (mono). Relative spectral sensitivity estimated from \emph{total} framewise pixel sums (no spatial cropping and no exposure–time normalization), referenced to the measured centre wavelength of each stack under constant irradiance. The response exhibits a single lobe centred over the 820–840\,nm window. Shaded band: standard error across repeats.}
+    \label{fig:sr_relative_curves_nir}
+\end{figure}
+
+
+\noindent
+The foregoing considerations highlight the principal limitation of the current approach: because each point represents a band-integrated measurement, the uncertainty with which it can be ascribed to its centre wavelength scales with the pass-band width and with shape heterogeneity across stacks. To reduce this attribution uncertainty and recover curves that more closely reflect the underlying, pointwise spectral sensitivity $S(\lambda)$, future measurements should employ stacks with homogeneous, narrow pass-bands—ideally quasi-Gaussian and as close as practical to each other in FWHM—or, preferably, a monochromator to realise $\beta(\lambda)$ as a tunable, $\sim$1-5\,nm band. A finer sampling of the VIS and NIR ranges with such narrowband stimuli would allow us to validate whether local depressions (e.g., near 532\,nm and 633\,nm) are genuine features of $S(\lambda)$ or artefacts of bandwidth pooling and spectral–shape variability.\\
+
+\noindent
+Two caveats are worth noting. First, the spectral sampling is inherently coarse because it is limited by the number and bandwidth of the available stacks; as a result, the reported curves represent band–integrated sensitivities rather than pointwise responses. Second, the absolute scale is arbitrary: although all measurements were acquired under a single, constant irradiance (equalised to the 532\,nm reference), this amounts to a \emph{relative} normalisation at one operating point rather than a full spectroradiometric calibration. A true spectroradiometric calibration would require traceable absolute measurements of incident spectral power across wavelengths and, critically, verification of radiometric \emph{linearity} by sweeping the optical power. If the camera chain is linear and free of hidden tone–mapping, the exposure–normalised response versus irradiance should be affine (ideally proportional), and the inferred spectral shape \(S(\lambda)\) should remain invariant with input level. Establishing that proportionality—e.g., by repeating the protocol at several irradiance levels per band using neutral–density attenuation or a monochromator/narrowband filters—would convert the present relative curves into a calibrated, intensity–independent characterisation.\\
+
+\noindent
+In summary, the relative spectral responses obtained for both systems are congruent with physical expectations and with the design of the sensors: the VIS camera exhibits the canonical three–lobe behaviour of a Bayer array, and the NIR unit shows a single, well–defined lobe within the 820–840\,nm window. The acquisition protocol avoided saturation and delivered internally consistent trends across filter stacks, supporting the validity of the derived shapes. At the same time, the present study was scoped to a relative, constant–irradiance characterisation; a full radiometric calibration—traceable in absolute units and including linearity checks versus irradiance—remains as future work. That follow–up will require narrower, more homogeneous pass–bands (or a monochromator), multi–level power sweeps, and reference instrumentation to convert these relative curves into an absolute, intensity–independent characterisation.
 
 
 \section{Synthesis and Comparison with Requirements}
-  % → Cross-summary: requirement ↔ result ↔ % of compliance.
-  %   Discusses identified margins for improvement.
+\label{sec:synthesis_requirements}
+
+\noindent
+Overall, the VIS/NIR system behaves in line with physical expectations for a Bayer–mosaic RGB camera and a mono–NIR sensor: the visible channels show the canonical three–lobe envelope and the NIR channel exhibits a smooth, single lobe within the targeted 820–840\,nm window. From a practical standpoint, the protocol avoided saturation, maintained constant irradiance at the detector, and produced internally consistent trends across filter stacks, which meets the baseline requirement of delivering a repeatable, relative spectral characterization suitable for downstream normalization and algorithm development.\\
+
+\noindent
+It should be noted, however, that this study did not include a performance comparison against typical Earth–surface reflectance spectra. Such a comparison matters for remote–sensing usage where the scene spectrum is the product of solar illumination and surface reflectance. Reference libraries (e.g., USGS/ECOSTRESS/ASTER) report well–known spectral signatures: healthy vegetation with low reflectance in the visible, a sharp rise across the red–edge near 700–750\,nm, and high reflectance in the NIR; soils with gradually increasing reflectance from blue to NIR and diagnostic features in the SWIR; water with very low reflectance in the visible/NIR except for glint; and bright snow with high visible reflectance that decreases with grain size and impurity content \cite{USGS_SpecLib_v7,ASTER_Baldridge2009,Seager2005RedEdge,Knipling1970,USGS_Landsat_SR}. Incorporating these spectra in a requirement–to–result trace would allow quantifying expected bandwise signal levels for canonical targets (vegetation, bare soil, water, snow/asphalt), thereby turning the relative sensitivity curves into scene–level detectability predictions.\\
+
+\noindent
+Likewise, the present work did not perform an absolute radiometric characterization. Establishing radiometric gain and linearity as a function of irradiance is essential to predict behavior under varying illumination: from near–noon conditions, where downwelling solar irradiance is close to the AM1.5 global reference and reflected radiance is maximal for Lambertian bright targets, to low–sun or twilight regimes with significantly reduced flux \cite{NREL_AM15,Myers2011_ASTMG173}. Such a calibration would enable answering requirement–level questions like: What is the minimum scene irradiance at which the sensor maintains a target SNR for vegetation or water? How much exposure time or analog gain is admissible before SNR gains are offset by read noise, dark current growth, or motion blur? And, under which conditions does the tone mapping (if any) risk compressing contrast for low–reflectance targets?\\
+
+\noindent
+These radiometric considerations directly inform system design trade–offs. Sensor choice (pixel size, full–well capacity, read noise) must be balanced against geometric requirements (ground sampling distance and field of view). Larger pixels generally increase spectral/radiometric sensitivity but, for a fixed optical format, reduce spatial resolution; conversely, smaller pixels improve spatial detail but demand more photons per pixel to reach a given SNR. For any given mission profile (solar zenith angles, target types, flight altitude), defining requirement envelopes that couple spectral/radiometric sensitivity with geometric constraints would clarify whether the current sensor/optics are adequate or whether a different pixel pitch, lens $F/\#$, or exposure strategy is required.\\
+
+\noindent
+In summary, the system satisfies the immediate requirement of delivering stable, relative spectral response curves. To close the loop with application–level requirements, two additions are recommended: (i) incorporate typical surface reflectance spectra to translate relative sensitivity into expected scene signals, and (ii) perform an absolute radiometric calibration (gain, linearity, noise vs.\ irradiance) to map those scene signals onto SNR and dynamic–range margins across illumination conditions.\\
 
 \section{Lessons Learned and Future Work}
-  % → Reflections on design, setup, acquisition scripts
-  %   and possible optimizations (e.g., narrower filters,
-  %   camera firmware, vibration compensation, on-board AI).
+\label{sec:lessons_future}
 
-% Optional: appendices with code listings, full data tables,
-%           specification sheets for optical components, etc.
+\noindent
+First, filter homogeneity matters. Although the correlation–guided selection produced useful passbands, bands varied in width and shape, and narrow interference filters proved angle–sensitive. For relative spectral response, a set of bands with similar shape and FWHM reduces attribution uncertainty when mapping each measurement to a center wavelength. A monochromator would be ideal: it enforces narrow, tunable, quasi–Gaussian bands across the VIS/NIR, delivers dense sampling, and markedly reduces uncertainty in attributing each point to wavelength.\\
+
+\noindent
+Second, photon accounting improves comparability. Equalizing incident \emph{power} removes first–order differences across stacks, but does not equalize \emph{photon flux}. Reporting both exposure–normalized totals and photon–normalized predictions—computed from measured band shapes—would make the power–versus–photon distinction explicit and help interpret narrow–band dips.\\
+
+\noindent
+Third, geometry and metrology must be treated jointly. Small cones of incidence blue–shift interference passbands; mild misalignment can change the effective center seen by the sensor. Future campaigns should include: (i) explicit control and logging of filter angle of incidence; (ii) a quick AOI sensitivity sweep on narrow bands; and (iii) a spectral–mismatch correction when equalizing power with a radiometer whose correction assumes a single center wavelength.\\
+
+\noindent
+Fourth, the NIR versus VIS sensitivity gap is consistent with sensor physics and the CFA penalty. The NIR sensor’s lower manufacturer–reported QE in the 800–900\,nm region can be offset by larger pixel area and by the absence of a color filter array, whereas the VIS camera effectively splits light among R/G/B subpixels. In practice, pixel size and CFA layout manifested as higher single–channel sensitivity in NIR relative to per–channel VIS totals under comparable irradiance. This observation supports using larger pixels (or binning) for low–light NIR missions while quantifying the spatial–resolution impact on the target FOV.\\
+
+\noindent
+Fifth, a radiometric calibration campaign is the most impactful next step. The plan should include: (i) absolute gain and linearity versus irradiance using neutral–density attenuation and monochromatic (or narrowband) illumination; (ii) noise breakdown (read, dark, PRNU) versus integration time and temperature; (iii) saturation headroom and dynamic range per channel; and (iv) SNR targets tied to scene classes (vegetation/soil/water/snow) under AM1.5 and low–sun cases. With these data, requirement compliance can be stated quantitatively as “SNR \(\geq\) target” for representative scenes and sun angles.\\
+
+\noindent
+Finally, translate findings into design knobs. If low–light SNR is marginal, consider faster optics (lower $F/\#$), modest pixel binning (VIS), exposure bracketing with robust de–ghosting, or a sensor with larger full–well at similar pitch. If spectral separability between adjacent bands is insufficient, prioritize narrower, shape–matched bands or monochromator sampling around known scene features (e.g., vegetation red–edge and water absorption features) to maximize information content for the intended application domains.\\
+
