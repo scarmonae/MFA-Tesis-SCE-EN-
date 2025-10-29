@@ -1,0 +1,41 @@
+﻿\chapter{Conclusions}
+\label{chap:conclusiones}
+
+\noindent The development of the HuMath\textregistered{} QBee addressed the challenge of delivering a lightweight, robust multispectral payload to the C3 aerial platform, capable of recording information relevant to ecosystem characterization in Colombia. Throughout the thesis, mission requirements, aircraft constraints, and environmental research needs were combined coherently to produce a VIS/NIR system that can be deployed readily on an unmanned aerial vehicle.\\
+
+\noindent The optical design workflow (Chapter~\ref{Chapter2}) established a replicable methodology for selecting lenses and sensors under stringent trade-offs between spatial resolution, field of view, mass, and cost. Requirement flow-down matrices were linked to parametric analyses of eight viable VIS/NIR configurations, documenting how MTF targets at 30\,\% contrast, sensor pixel pitch, and UAV payload limits shaped the design space. The comparative assessment confirmed that 8~mm and 8.5~mm lenses paired with Alvium~1800 sensors meet the specified MTF and GSD targets for altitudes between 50~m and 5~km, yielding $\Delta_{\mathrm{MTF}}$ values from 1.9~cm at tree-top surveys to roughly 3.5~m for high-altitude wide-area mapping while keeping total mass below 2~kg. This disciplined traceability prevented over-designed subsystems, clarified the cost/GSD/FOV compromises that justify prioritizing systems~6 and~7, and produced a configuration template that can be reused when the mission envelope or detector technology evolves.\\
+
+\noindent Procurement and construction (Chapter~\ref{Chapter3}) confirmed the feasibility of the selected solution. Integrating Alvium~1800 U-501m and U-500c sensors with PET-G printed housings, spectral filters, and ruggedized optics produced compact, well-aligned modules that kept the payload at 1\,810~g including harnesses and modular mounting hardware. Employing a Raspberry~Pi~4 as the acquisition core simplified data synchronization and power management, while collaboration with EAFIT fabrication teams and industrial partners ensured that the UAV structure and payload evolved in concert. Environmental and flight trials --- from 30-hour bench runs to 4g manoeuvres aboard the T-27 Tucano and cold-soak tests near 0~\si{\celsius} --- exposed the need for thermal insulation, neutral-density attenuation, and buffer watchdogs, but confirmed that the mechanical architecture and multithreaded acquisition service remain operationally robust. Together, these efforts delivered a maturity level that enables controlled-risk flight testing.\\
+
+\noindent Optical characterization (Chapter~\ref{Chapter4}) demonstrated that the response of both channels follows the expected behavior of Bayer VIS and mono NIR sensors: the visible system retains the characteristic RGB three-lobe profile, and the NIR channel exhibits a smooth band centered between 820--840~nm. The measurement protocol enforced constant irradiance at the detector, applied dark-frame subtraction, and produced repeatable pixel histograms that separate sensor noise from filter-induced attenuation, yielding relative responsivity curves adequate for normalization of field acquisitions. It also highlighted key gaps for radiometric certification, notably the need to calibrate absolute gain against AM1.5G reference spectra, sweep irradiance to map linearity and noise growth, and benchmark the filters against canonical target spectra (vegetation, soil, water) to translate laboratory counts into scene-level detectability.\\
+
+\noindent Collectively, the thesis provides an end-to-end pathway from requirement definition to preliminary experimental validation of a lightweight multispectral payload. It establishes selection, integration, and testing procedures that reduce the technical uncertainty of the C3 project, supply quantitative evidence for future requirement updates, and lay the groundwork for deploying the sensor in field campaigns with confidence in data quality, maintainability, and upgrade potential.\\
+
+\section{Future Work}
+
+\noindent The immediate priority is to conduct an absolute radiometric calibration campaign that yields gain factors, linearity curves, and noise budgets as functions of irradiance. This effort must rely on traceable reference sources, controlled attenuation, and comparison with the ASTM~G-173 spectra (AM1.5D/AM1.5G) to translate relative response into SNR and dynamic-range metrics applicable to real scenes.\\
+
+\noindent In parallel, the payload needs validation under operational conditions. This requires flight trials with accurate georeferencing, vibration assessment, verification of VIS/NIR channel synchrony, and the processing of orthomosaics and multispectral cubes to quantify registration errors and radiometric stability across vegetation, water, and bare-soil scenarios.\\
+
+\noindent Finally, the software infrastructure should be extended into a reproducible workflow that covers calibration, atmospheric correction, and the generation of biophysical products. Priorities include automating acquisition scripts, incorporating metadata from auxiliary sensors (IMU/GNSS), and exploring additional filters or short-wave infrared sensors to increase sensitivity to variables such as leaf water content or sediment concentration. In the long term, the team should also investigate a Space Bee variant suitable for orbital operation, redefining the thermal, radiation, and structural envelopes so the multispectral concept can transition from UAV campaigns to a small-satellite platform.\\
+
+\noindent These actions converge into a phased roadmap: (i) extend Chapter~\ref{Chapter4} into an absolute calibration program that anchors the relative spectral curves, (ii) harden the Chapter~\ref{Chapter3} integration by qualifying thermal protection, storage throughput, and watchdog services across mission-representative flights, and (iii) iterate on the Chapter~\ref{Chapter2} design trades using the new calibration data to evaluate alternative sensors, optics, and filter sets for emerging environmental targets.\\
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[x=1cm,y=1cm]
+        \tikzset{stage/.style={rounded rectangle, draw=black!60, thick, fill=blue!8, minimum width=5cm, minimum height=1.6cm, align=center, font=\small}}
+        \draw[->, thick, gray!70] (0,-1.2) -- (0,5.8) node[above, font=\small]{Time};
+        \node[stage] (phaseThree) at (3,4.2) {\textbf{Phase 3}\\Workflow automation \& upgrades\\(metadata fusion, new filters/sensors)};
+        \node[stage] (phaseTwo) at (3,2.1) {\textbf{Phase 2}\\Operational validation flights\\(thermal control, synchrony, georef)};
+        \node[stage] (phaseOne) at (3,0) {\textbf{Phase 1}\\Absolute radiometric calibration\\(traceable gains, linearity, noise)};
+        \draw[thick, gray!70] (0,4.2) -- (phaseThree.west);
+        \draw[thick, gray!70] (0,2.1) -- (phaseTwo.west);
+        \draw[thick, gray!70] (0,0) -- (phaseOne.west);
+        \node[font=\footnotesize, anchor=east] at (-0.3,4.2) {Long term};
+        \node[font=\footnotesize, anchor=east] at (-0.3,2.1) {Mid term};
+        \node[font=\footnotesize, anchor=east] at (-0.3,0) {Short term};
+    \end{tikzpicture}
+    \caption{Roadmap that organizes future work into calibration, operational validation, and workflow upgrade phases aligned with Chapters~\ref{Chapter4}, \ref{Chapter3}, and \ref{Chapter2}.}
+    \label{fig:roadmap_future_work}
+\end{figure}
