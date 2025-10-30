@@ -25,3 +25,4 @@ main-blx.bib
 **/*.pdf
 *.blg
 **/*.blg
+main.run.xml

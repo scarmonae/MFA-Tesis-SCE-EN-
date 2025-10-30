@@ -49,6 +49,8 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{multirow}
 \usepackage{colortbl}
 \usepackage{longtable}
+\usepackage{microtype} % si aún no está cargado
+\setlength{\emergencystretch}{2em}
 \usepackage{tikz}
 \usetikzlibrary{shapes.misc}
 \usepackage{amsmath,amssymb}
@@ -57,9 +59,9 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{makecell}
 \usepackage{soul}
 \usepackage[
-  backend=bibtex,       % o 'bibtex' si prefieres
-  style=authoryear,          % estilo similar a ieeetr
-  sorting=none         % orden de aparición, si lo deseas
+  backend=biber,       % motor recomendado para biblatex (UTF-8)
+  style=ieee,
+  sorting=none
 ]{biblatex}
 \usepackage{tabularx} 
 \newcolumntype{C}{>{\centering\arraybackslash}X}  % columna centrada y extensible
@@ -90,7 +92,7 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 
 \thesistitle{Design and Development of a Multispectral Imagery System for Land Cover and Land Use Monitoring in Colombia} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
-\supervisor{PhD. Olga Lucia \textsc{Quintero Montoya}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\supervisor{Prof. Dr. Eng. Olga Lucia \textsc{Quintero Montoya}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
 \degree{Master in Sciences} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
 \author{Sebastian \textsc{Carmona Estrada}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
@@ -124,7 +126,7 @@ headsepline, % Uncomment to get a line under the header
 
 \vspace*{.06\textheight}
 {\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
-\textsc{\Large Tésis de Maestría}\\[0.5cm] % Thesis type
+\textsc{\Large Master Thesis}\\[0.5cm] % Thesis type
 
 \HRule \\[0.4cm] % Horizontal line
 {\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
@@ -172,6 +174,7 @@ headsepline, % Uncomment to get a line under the header
 \item Where I have consulted the published work of others, this is always clearly attributed.
 \item Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
 \item I have acknowledged all main sources of help.
+\item I acknowledge that generative artificial intelligence tools were used solely to support language editing and clarity improvements in this thesis; they were not employed to conduct or interpret the research, and I have reviewed and approved all AI-assisted text.
 \item Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
 \end{itemize}
  
@@ -198,9 +201,17 @@ headsepline, % Uncomment to get a line under the header
 %	ABSTRACT PAGE
 %----------------------------------------------------------------------------------------
 
-\begin{abstract}
+\begin{abstract}[\vspace*{0pt}]
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
+\noindent This thesis tackles the lack of lightweight, calibrable multispectral payloads suited to Colombian land-cover and land-use monitoring. Chapter~\ref{ch:intro} frames the national technology gap, formulates the research hypothesis, and states the scientific and engineering objectives that embed the HuMath\textregistered{} QBee within the C3 mission.\\
+
+\noindent Chapter~\ref{Chapter2} develops a reproducible optical-design workflow that links requirement-traceability matrices with parametric analyses of eight lens-sensor pairings. Resolution (MTF $ \geq 40~\text{lp/mm}$ at 30\,\% contrast), field of view, mass, and cost were used to downselect VIS and NIR configurations built around 8~mm and 8.5~mm lenses coupled to Alvium~1800 sensors. The resulting payload stays below 2~kg while delivering ground-sample-distance values from 1.9~cm at 50~m AGL to 3.5~m at 5~km, balancing coverage and spatial detail for environmental missions.\\
+
+\noindent Chapter~\ref{Chapter3} documents procurement and integration. Modular 3D-printed housings, spectral filters, and a Raspberry~Pi~4 acquisition core were implemented, yielding a 1.81~kg payload. Verification campaigns exceeded 30~h of bench testing, included vibration trials up to 4g aboard a T-27 Tucano, and executed thermal runs near 0~\si{\celsius}, motivating upgrades in insulation, power management, and watchdog routines.\\
+
+\noindent Chapter~\ref{Chapter4} reports the geometric and spectral characterization of the VIS/NIR channels. Reproducible protocols were established to measure FOV, AFOV, and MTF using focus charts and Fourier analysis, while relative responsivity curves confirmed the expected RGB three-lobe profile and an NIR band centered between 820--840~nm. The assessment highlights the need for absolute radiometric calibration with traceable sources and controlled irradiance sweeps.\\
+
+\noindent Finally, Chapter~\ref{chap:conclusiones} synthesizes the findings, positioning the HuMath\textregistered{} QBee as a flight-ready payload and outlining a three-phase roadmap: (i) absolute calibration, (ii) operational validation with precise georeferencing, and (iii) automation of the processing workflow. Together, the chapters deliver an end-to-end guide from requirement definition to preliminary validation of a UAV multispectral system tailored to Colombia’s environmental monitoring needs.\\
 \end{abstract}
 
 %----------------------------------------------------------------------------------------
@@ -211,18 +222,7 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
 % The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
 \noindent
-Quiero agradecer a mi familia por su apoyo y cariño incondicional durante todos estos años;\\
-a mis amigos, por su compañía y escucha en los momentos difíciles, así como en los grandes instantes de diversión, música y aventura;\\
-a mi amiga, socia, compañera y directora académica \textbf{Olga Lucía Quintero Montolla}, por su confianza, su apoyo en este proyecto y sus valiosas lecciones de vida;\\
-a la \textit{Fuerza Aérea Colombiana}, por su disposición para probar las Abejas en sus aeronaves, especialmente al comandante del \textit{Comando Aéreo de Combate No.\,2}, \textbf{Alejandro Vélez Ospina};\\
-a mis compañeros de trabajo y amigos \textbf{Sara, Neyder, Fernando y Pablo}, por su soporte vital diario de cerveza, mambe y compañía;\\
-a \textbf{Valeria Solorzano Araque} y \textbf{Lisseth Milena Cruz Ruiz}, líderes del equipo de manufactura del proyecto~C3, por su liderazgo en el diseño CAD de la QBee, sus enseñanzas sobre el trabajo en equipo y su excelente labor durante el proyecto;\\
-a la \textbf{Dra.\ Elena Montilla Rosero}, por su ejemplo como investigadora y docente;\\
-a \textbf{Cristian Lopera}, cuyo grandísimo aporte y experiencia en el laboratorio de óptica fueron clave para el desarrollo de este trabajo;\\
-al \textbf{Dr.\ Andrés Yarce Botero} y al \textbf{Dr.\ Alejandro Madrid Sánchez}, por su guía durante el proceso de diseño de las Abejas;\\
-a mis docentes de la universidad, por su inagotable disposición y paciencia para enseñarme la metodología del laboratorio de óptica;\\
-y, finalmente, a la \textbf{Universidad EAFIT} por brindarme la oportunidad de formarme como \textit{magíster} en Física Aplicada.
-
+Quiero agradecer a mi familia por su apoyo y cariño incondicional durante todos estos años; a mis amigos, por su compañía y escucha en los momentos difíciles, así como en los grandes instantes de diversión, música y aventura; a mi amiga, socia, compañera y directora académica \textbf{Olga Lucia Quintero Montoya}, por su confianza, su apoyo en este proyecto y sus valiosas lecciones de vida; a la \textit{Fuerza Aérea Colombiana}, por su disposición para probar las Abejas en sus aeronaves, especialmente al comandante del \textit{Comando Aéreo de Combate No.\,2 y 5}, \textbf{Alejandro Vélez Ospina}; a mis compañeros de trabajo y amigos \textbf{Sara, Neyder, Fernando y Pablo}, por su soporte vital diario de cerveza, mambe y compañía; a \textbf{Valeria Solórzano Araque} y \textbf{Lisseth Milena Cruz Ruiz}, líderes del equipo de manufactura del proyecto~C3, por su liderazgo en el diseño CAD de la QBee, sus enseñanzas sobre el trabajo en equipo y su excelente labor durante el proyecto; a la \textbf{Dra.\ Elena Montilla Rosero}, por su ejemplo como investigadora y docente; a \textbf{Cristian Lopera Trujillo}, cuyo grandísimo aporte y experiencia en el laboratorio de óptica fueron clave para el desarrollo de este trabajo; al \textbf{Dr.\ Andrés Yarce Botero} y al \textbf{Dr.\ Alejandro Madrid Sánchez}, por su guía durante el proceso de diseño de las Abejas; a mis docentes de la universidad, por su inagotable disposición y paciencia para enseñarme la metodología del laboratorio de óptica; y, finalmente, a la \textbf{Universidad EAFIT} y a \textbf{Ricardo Mejía Gutiérrez} Dir. de Investigación por brindarme la oportunidad de formarme como \textit{magíster} en Física Aplicada.
 \end{acknowledgements}
 
 %----------------------------------------------------------------------------------------
@@ -251,11 +251,11 @@ y, finalmente, a la \textbf{Universidad EAFIT} por brindarme la oportunidad de f
 % Comprehensive Abbreviation List (English version)
 % ---------------------------------------------------------------
 \begin{abbreviations}{ll}
-\textbf{4DAir}      & \textbf{4 D}imensional \textbf{Air} project (Colombian Ministry of Science)\\
+\textbf{4DAir}      & Urban pollution estimation project using data assimilation (Minciencias)\\
 \textbf{AFOV}       & \textbf{A}ngular \textbf{F}ield \textbf{O}f \textbf{V}iew\\
 \textbf{AgroTIC}    & \textbf{Agro} \textbf{I}nformation and \textbf{C}ommunication \textbf{T}echnologies project\\
 \textbf{AVI}        & \textbf{A}udio–\textbf{V}ideo \textbf{I}nterleave (video format)\\
-\textbf{C3}         & Environmental monitoring project code \textbf{C3}\\
+\textbf{C3}         & \textbf{C}ombat \textbf{C}limate \textbf{C}hange project \textbf{C3}\\
 \textbf{CAD}        & \textbf{C}omputer-\textbf{A}ided \textbf{D}esign\\
 \textbf{CPU}        & \textbf{C}entral \textbf{P}rocessing \textbf{U}nit\\
 \textbf{DOF}        & \textbf{D}epth \textbf{O}f \textbf{F}ield\\
@@ -273,7 +273,6 @@ y, finalmente, a la \textbf{Universidad EAFIT} por brindarme la oportunidad de f
 \textbf{ISO}        & \textbf{I}nternational \textbf{O}rganization for \textbf{S}tandardization\\
 \textbf{JPEG}       & \textbf{J}oint \textbf{P}hotographic Experts \textbf{G}roup\\
 \textbf{KTH}        & Royal Institute of Technology (\textbf{K}ungliga \textbf{T}ekniska \textbf{H}ögskolan, Sweden)\\
-\textbf{lp/mm}      & \textbf{l}ine \textbf{p}airs per \textbf{m}illi\textbf{m}etre\\
 \textbf{LSI}        & \textbf{L}inear and \textbf{S}hift-\textbf{I}nvariant\\
 \textbf{MTF}        & \textbf{M}odulation \textbf{T}ransfer \textbf{F}unction\\
 \textbf{MTFA}       & \textbf{M}odulation \textbf{T}ransfer \textbf{F}unction \textbf{A}rea\\
@@ -374,7 +373,7 @@ $\tau$              & Exposure time & \si{\second} \\
 %	DEDICATION
 %----------------------------------------------------------------------------------------
 
-\dedicatory{Dedicated to my sister\ldots} 
+\dedicatory{Dedicated to my sister Laura\ldots} 
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
