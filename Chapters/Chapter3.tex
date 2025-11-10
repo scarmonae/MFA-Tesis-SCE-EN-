@@ -383,6 +383,11 @@ The QBee case\footnote{A substantial portion of the CAD design was carried out b
 \subsection{Deterministic GNSS configuration}
 \label{subsec:gps_boot_service}
 
+\noindent Global Navigation Satellite System (GNSS) is the umbrella term for satellite
+navigation constellations—such as GPS (USA), GLONASS (Russia), Galileo (EU), and
+BeiDou (China)—that broadcast signals enabling precise Positioning, Navigation
+and Timing (PNT) on or near Earth.\\
+
 \noindent Every time the GPS loses power completely, its configuration is reset. To address this, a Linux service was developed to configure the GPS each time the system starts. This service ensures a deterministic and interference-resilient GNSS configuration at each boot, initializing the receiver and launching \texttt{gpsd} with the required serial and timing parameters. The service performs the following high-level sequence (see Figure~\ref{fig:gps_service_flow}). The service performs the following high-level sequence (see Figure~\ref{fig:gps_service_flow}):
 
 \begin{enumerate}
