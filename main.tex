@@ -44,6 +44,7 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{mathpazo} % Use the Palatino font by default
 \usepackage{float}
 \usepackage{graphicx}
+\usepackage{draftwatermark} % watermark on all pages
 \usepackage{caption}
 \usepackage{subcaption} % para subfiguras
 \usepackage{multirow}
@@ -66,8 +67,12 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{tabularx} 
 \newcolumntype{C}{>{\centering\arraybackslash}X}  % columna centrada y extensible
 
+% Watermark configuration (applies to all pages)
+\SetWatermarkText{CONFIDENTIAL}
+\SetWatermarkScale{0.65}
+\SetWatermarkAngle{55}
+\SetWatermarkColor[gray]{0.98}
 
-% \usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
 \addbibresource{references.bib} % The filename of the bibliography
 

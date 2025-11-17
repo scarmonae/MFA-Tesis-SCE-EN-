@@ -17,18 +17,18 @@
 
 \noindent In parallel, the payload needs validation under operational conditions. This requires flight trials with accurate georeferencing, vibration assessment, verification of VIS/NIR channel synchrony, and the processing of orthomosaics and multispectral cubes to quantify registration errors and radiometric stability across vegetation, water, and bare-soil scenarios.\\
 
-\noindent Finally, the software infrastructure should be extended into a reproducible workflow that covers calibration, atmospheric correction, and the generation of biophysical products. Priorities include automating acquisition scripts, incorporating metadata from auxiliary sensors (IMU/GNSS), and exploring additional filters or short-wave infrared sensors to increase sensitivity to variables such as leaf water content or sediment concentration. In the long term, the team should also investigate a Space Bee variant suitable for orbital operation, redefining the thermal, radiation, and structural envelopes so the multispectral concept can transition from UAV campaigns to a small-satellite platform.\\
+\noindent Finally, the software infrastructure should be extended into a reproducible workflow that covers calibration, atmospheric correction, and the generation of biophysical products. Priorities include automating acquisition scripts, incorporating metadata from auxiliary sensors (IMU/GNSS), and exploring additional filters or short-wave infrared sensors to increase sensitivity to variables such as leaf water content or sediment concentration. In the long term, the team should also investigate a \textbf{HuMath Space Bee} \textregistered variant suitable for orbital operation, redefining the thermal, radiation, and structural envelopes so the multispectral concept can transition from UAV campaigns to a small-satellite platform.\\
 
 \noindent These actions converge into a phased roadmap: (i) extend Chapter~\ref{Chapter4} into an absolute calibration program that anchors the relative spectral curves, (ii) harden the Chapter~\ref{Chapter3} integration by qualifying thermal protection, storage throughput, and watchdog services across mission-representative flights, and (iii) iterate on the Chapter~\ref{Chapter2} design trades using the new calibration data to evaluate alternative sensors, optics, and filter sets for emerging environmental targets.\\
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[x=1cm,y=1cm]
-        \tikzset{stage/.style={rounded rectangle, draw=black!60, thick, fill=blue!8, minimum width=5cm, minimum height=1.6cm, align=center, font=\small}}
+        \tikzset{stage/.style={rounded rectangle, draw=black!60, thick, fill=blue!8, minimum width=5cm, minimum height=1.6cm, align=left, font=\small}}
         \draw[->, thick, gray!70] (0,-1.2) -- (0,5.8) node[above, font=\small]{Time};
-        \node[stage] (phaseThree) at (3,4.2) {\textbf{Phase 3}\\Workflow automation \& upgrades\\(metadata fusion, new filters/sensors)};
-        \node[stage] (phaseTwo) at (3,2.1) {\textbf{Phase 2}\\Operational validation flights\\(thermal control, synchrony, georef)};
-        \node[stage] (phaseOne) at (3,0) {\textbf{Phase 1}\\Absolute radiometric calibration\\(traceable gains, linearity, noise)};
+        \node[stage] (phaseThree) at (4.5,4.2) {\textbf{Phase 3}\\Workflow automation \& upgrades\\(metadata fusion, new filters/sensors \& \\HuMath Space Bee\textregistered)};
+        \node[stage] (phaseTwo) at (4,2.1) {\textbf{Phase 2}\\Operational validation flights\\(thermal control, synchrony, georef)};
+        \node[stage] (phaseOne) at (3.8,0) {\textbf{Phase 1}\\Absolute radiometric calibration\\(traceable gains, linearity, noise)};
         \draw[thick, gray!70] (0,4.2) -- (phaseThree.west);
         \draw[thick, gray!70] (0,2.1) -- (phaseTwo.west);
         \draw[thick, gray!70] (0,0) -- (phaseOne.west);

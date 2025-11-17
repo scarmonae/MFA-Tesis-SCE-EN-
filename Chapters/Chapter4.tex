@@ -1,7 +1,7 @@
 ﻿\chapter{Optical Characterization}
 \label{Chapter4} 
 
-\noindent This chapter details the materials and methods used for the development of this work. Initially, the materials employed are described, including specific equipment, light sources, calibration patterns, and software used for data acquisition, processing, and analysis. Subsequently, the experimental methods are presented, organized according to the type of measurement performed: geometric and spectral measurements. For each method, the experimental procedure is clearly described, justifying the choice of technique and specifying the conditions under which the experiments were conducted, including details of instrument configuration and protocols followed.\\
+\noindent This chapter details the materials and methods used for the development of this work. Initially, the materials employed are described, including specific equipment, light sources, calibration patterns, and software used for data acquisition, processing, and analysis. Subsequently, the experimental methods are presented, organized according to the type of measurement performed: geometric and spectral measurements. For each method, the experimental procedure is clearly described, justifying the choice of technique and specifying the conditions under which the experiments were conducted, including details of instrument configuration and protocols followed. In addition, acknowledgments are due to René Restrepo Gómez, coordinator of the Optics Group, for his advice on the design and characterization of the optical systems; Herica Yulied Montoya, head of the Physics Laboratories, for granting access to the teaching facilities where all optical experiments were conducted; Cristian Lopera Trujillo, fellow student in the Master's in Applied Physics, for his assistance during the laboratory setups and experiments; and Raúl Andrés Castañeda Quintero, Associate Professor at Universidad EAFIT, for his guidance and advice in the design of the optical experiments.\\
 
 
 % Finalmente, se incluye una breve descripción de los resultados esperados tras la ejecución de los métodos mencionados, acompañada del cronograma previsto para las actividades y el presupuesto estimado requerido para la implementación del estudio. Esta información busca proporcionar claridad y facilitar la replicabilidad del estudio, así como sustentar la factibilidad y pertinencia metodológica del proyecto.
@@ -14,7 +14,7 @@
 % \subsection{Sensibilidad Espectral del Sensor}
 % \begin{itemize}
 %     \item \textbf{Rango Espectral}: Define las longitudes de onda a las que el sensor es sensible. Para la mayoría de las aplicaciones en vegetación, es esencial cubrir desde el espectro visible (400-700 nm) hasta el infrarrojo cercano (700-1100 nm). Esta sensibilidad permite la detección precisa de la reflectancia de la vegetación, lo cual es crítico para índices como el NDVI \cite{Huang2021ASensing}.
-%     \item \textbf{Sensibilidad Relativa}: Mide la respuesta del sensor a diferentes longitudes de onda dentro del rango espectral. La sensibilidad relativa determina qué tan bien el sensor puede diferenciar entre diversas características de la vegetación basándose en sus firmas espectrales \cite{Dale2013HyperspectralReview, Klein2011MethodsCameras}.
+%     \item \textbf{Sensibilidad Relativa}: Mide la respuesta del sensor a diferentes longitudes de on  da dentro del rango espectral. La sensibilidad relativa determina qué tan bien el sensor puede diferenciar entre diversas características de la vegetación basándose en sus firmas espectrales \cite{Dale2013HyperspectralReview, Klein2011MethodsCameras}.
 % \end{itemize}
 
 % \subsection{Transmisión Espectral del Objetivo (Lente)}
@@ -99,7 +99,7 @@ Thus, the rate of change of the FOV with respect to the working distance is cons
 \end{equation}
 
 \noindent
-which is the linear magnification per unit distance. This linear approximation remains valid for small to moderate AFOV values, and forms the theoretical basis for modeling the FOV as a linear function of working distance in this study \cite{Hecht2002Optics}.\\
+which is the linear magnification per unit distance. This linear approximation remains valid for small to moderate AFOV values, and forms the theoretical basis for modeling the FOV as a linear function of working distance in this study \cite{Hecht2002Optics}. Crucially, this linear rate of change enables laboratory validation at manageable working distances while informing the design of optical systems intended to operate at kilometer-scale ranges, streamlining both design and validation.\\
 
 
 \noindent For this work, the Field of View (FOV) of the optical system is determined in order to assess the maximum ground area that can be observed by the system, depending on the distance between the optical system and the surface. For this, an optical setup is conducted in a laboratory to measure the FOV as the distance varies. The optical setup is shown in Figure~\ref{fig:MTF_FOV_montage}. First, a test chart is placed on a stable base located on an optical bench, preferably using a clamp that allows proper orientation with respect to the optical axis of the system. In this case, the test chart used is an ISO-12233 spatial frequency response test chart (see Figure \ref{fig:iso12233_test_chart}) that comes with multiple sensor format sizes, including an option for a 4:3 sensor aspect ratio. The reason for selecting this pattern is that it contains multiple elements whose length and distance between them can be measured, which allows and facilitates varying the working distance between the optical system being characterized and the chart, such that the edges of the captured image align with a pair of elements in the pattern. It is essential that the chart is properly positioned, centered, and perpendicular to the system's optical axis to minimize errors caused by tilts or misalignments. Next, the optical system is positioned on its corresponding base on the optical bench, ensuring it is centered and properly aligned with the test film.\\ 
@@ -143,6 +143,8 @@ which is the linear magnification per unit distance. This linear approximation r
 \noindent To minimize errors introduced by optical aberrations, such as spherical aberration, the measurements are preferably taken along the central horizontal and vertical axis of the image.\\
 
 \noindent Regarding the system's focusing, it is recommended to use an autofocus mechanism for proper image acquisition of the test chart. Since the optical systems used in this study have a fixed focal length, the focus must be manually adjusted to obtain a high-quality image for each working distance of each observation. To optimize this adjustment, a method is used based on capturing an image of a well-defined edge, from which the corresponding intensity profile is extracted and displayed in real-time, in this case along the central horizontal line. The derivative of this profile is then calculated and plotted to represent the intensity variation across the edge transition. Focus optimization is achieved by maximizing the prominence of the peak in the derivative, indicating a higher definition in the signal variation. This point of maximum variation is considered indicative of correct focus. Figure~\ref{fig:enfoque_conjunta} shows a representative example of optimal edge focusing.\\
+
+\noindent Figure~\ref{fig:enfoque_conjunta} illustrates the image set used for manual focusing. The first image shows the captured edge, with a low-intensity region on the left and a high-intensity region on the right; the sensor is set to zero gain and an exposure time that avoids saturation while maximizing the dynamic range between dark and bright areas. The second image presents the central horizontal profile, where the levels in both regions and their transition are observed. The third image corresponds to the profile derivative, which remains near zero in the dark and bright regions but exhibits a peak at the transition; the height of that peak is used as the focus metric.\\
 
 \begin{figure}[H]
     \centering
@@ -200,7 +202,7 @@ f(x',y') = \iint f(x_{\text{obj}},y_{\text{obj}}) \delta(x'-x_{\text{obj}}, y'-y
 
 \noindent In this equation, $f(x_{\text{obj}}, y_{\text{obj}})$ represents the continuous radiance distribution of the scene in the object plane. The integral, operating over the object coordinates, effectively "samples" the continuous function $f(x_{\text{obj}}, y_{\text{obj}})$ at the specific location $(x', y')$ defined by the Dirac delta function. The result, $f(x',y')$, is the value of the scene's radiance at that precise point in the image plane. This equation forms the theoretical basis for understanding how a continuous optical image is converted into a set of discrete pixel values by an image sensor.\\
 
-\noindent The convolution with the impulse response $h(x',y')$ of the optical system can be interpreted as follows: each point of the object $(x',y')$ acts as a point source whose contribution in the image plane is a shifted copy of the function $h(x,y)$, centered at the corresponding location. The intensity of this copy is weighted by the object irradiance at that point $f(x',y')$. The final image is then obtained by summing (integrating) all these individual contributions \cite{Boreman2001ModulationTT52}. Mathematically, this process is expressed as the convolution:
+\noindent The convolution with the impulse response $h(x',y')$ of the optical system can be interpreted as follows: each point of the object $(x',y')$ acts as a point source whose contribution in the image plane is a shifted copy of the function $h(x,y)$, centered at the corresponding location. The intensity of this copy is weighted by the object irradiance at that point $f(x',y')$. The final image is then obtained by integrating all these individual contributions \cite{Boreman2001ModulationTT52}. Mathematically, this process is expressed as the convolution:
 
 \begin{equation}
 g(x,y) = \iint h(x-x',\,y-y')\, f(x',y') \, dx'\,dy',
@@ -217,6 +219,8 @@ where $g(x,y)$ is the irradiance distribution in the image plane, $f(x',y')$ is 
 \end{figure}
 
 \noindent The Modulation Transfer Function (MTF) enables an objective evaluation of the optical system’s ability to reproduce detail and contrast at different spatial frequencies. Contrast is a key parameter in evaluating image quality, as it directly influences an optical system’s ability to reproduce details faithfully. Its impact on visual perception and optical system design is significant, especially in applications where resolution and sharpness are essential. Generally, contrast determines the differentiation between regions of different luminance in an image, affecting the perception of fine details and the visual quality in optical and electro-optical systems.\\
+
+\noindent Intuitively, the MTF tells how much contrast survives at each level of detail: high MTF values at high spatial frequencies mean the system preserves fine structure, while low values indicate it blurs those details. The highest spatial frequency where the MTF remains meaningfully above zero sets the practical resolution limit; translating that cut-off to object space yields the smallest feature that can be distinguished (e.g., the ground-resolved distance in remote-sensing applications).\\
 
 \noindent Contrast is generally expressed in terms of \textit{modulation depth}, defined as:
 
@@ -306,10 +310,11 @@ where: Modulation Transfer Function (MTF), $|\text{OTF}(u,v)|$, is the magnitude
 
 \noindent The exposure time of the optical system are carefully adjusted to obtain a maximum signal without saturation in the bright areas of the target. Signal clipping must be avoided in both bright and dark regions, including the transition zones of the slanted edge. As image compression can significantly affect resolution measurements, all system settings must be recorded and reported, including focal length, aperture, sensor resolution, and compression modes used. When using color cameras, proper white balance must be applied according to the light source, as specified in ISO 14525. White balance may be performed automatically if the software and optical system support it, or manually using the RGB channel histogram. The goal is to overlap the histogram peaks of the three channels as much as possible. For this work, white balance was performed manually, ensuring that the peaks corresponding to the bright zone overlap across the three RGB channels. This signal distribution can be seen in Figure~\ref{fig:illumination_distribution}.\\
 
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Figures/C3/Histogram_MTF.pdf}
-    \caption{Signal distribution delivered by the optical system under the configured experimental illumination. Two main peaks are observed: one in the dark zone and another in the bright zone, with attenuated secondary peaks.}
+    \caption{Signal distribution delivered by the optical system under the configured experimental illumination. Two main peaks are observed: one in the dark zone and another in the bright zone, with attenuated secondary peaks. The horizontal axis represents the 8-bit pixel value (0--255) and the vertical axis shows the counts, as in a histogram.}
     \label{fig:illumination_distribution}
 \end{figure}
 
@@ -1556,6 +1561,12 @@ Figure \ref{fig:vis_dark_triptych} and Table \ref{tab:dark_stats_nir} consolidat
 
 
 \noindent
+The variance reported in Table~\ref{tab:dark_stats_nir} was computed using all pixels in each dark frame, measuring the quadratic dispersion around the mean \(\bar{x}\) over \(N\) samples:
+\begin{equation}
+    \sigma^{2} = \frac{1}{N - 1}\sum_{i=1}^{N}\left(x_{i} - \bar{x}\right)^{2}.
+\end{equation}
+
+\noindent
 The central tendency remains below one count for the VIS system across more than four orders of magnitude in integration time. However, the case corresponding to the longest VIS exposure in the dataset (\(\tau\!=\!47.0\)~s for 5$\ast$Purple) exhibits the highest variance and maximum pixel value among all configurations. This behaviour suggests that, although the average dark signal remains low (\(0.34\)–\(0.75\)~counts), longer integration times lead to a measurable increase in dark-current accumulation and pixel-to-pixel dispersion. The observed growth in variance with exposure time is consistent with thermally generated charge carriers contributing more significantly to the total dark signal as \(\tau\) increases, reinforcing the expected dependence of dark current on integration time and sensor temperature.\\
 
 \noindent
@@ -1600,13 +1611,13 @@ For each filter or filter combination, 50 illuminated frames were acquired and d
     \label{fig:sr_qheatmap_nir}
 \end{figure}
 
-\noindent The quantile analysis confirms that none of the dark–corrected, averaged images approaches saturation for the exposure times used. Since both cameras deliver 8-bit data, the admissible range is $[0,255]$ in pixel value; across all VIS channels and NIR frames the high-end quantile $q_{99.9}$ remains comfortably below this ceiling. In the VIS dataset, the largest observed upper quantiles occur for the expected channel–filter pairings (e.g., blue-weighted stacks in $B$, orange/red stacks in $G$ and $R$), yet even in these cases $q_{99.9}\!\ll\!255$ in pixel value, indicating a clear headroom to the clipping threshold. The NIR results follow the same trend: $q_{99.9}$ lies around $220$–$230$ in pixel value for the tested stacks, again leaving a safe margin within the 8-bit dynamic range.
+\noindent The quantile analysis confirms that none of the dark–corrected, averaged images approaches saturation for the exposure times used. Since both cameras deliver 8-bit data, the admissible range is $[0,255]$ in pixel value; across all VIS channels and NIR frames the high-end quantile $q_{99.9}$ remains comfortably below this ceiling. In the VIS dataset, the largest observed upper quantiles occur for the expected channel–filter pairings (e.g., blue-weighted stacks in $B$, orange/red stacks in $G$ and $R$), yet even in these cases $q_{99.9}\!\ll\!255$ in pixel value, indicating a clear headroom to the clipping threshold. The NIR results follow the same trend: $q_{99.9}$ lies around $220$–$230$ in pixel value for the tested stacks, again leaving a safe margin within the 8-bit dynamic range.\\
 
-\noindent The channel-wise VIS behavior is physically meaningful. Blue-leaning stacks (e.g., \textit{5~$\times$~Purple}) raise the blue-channel quantiles relative to green and red, whereas orange/red-rich combinations (e.g., \textit{4~$\times$~Orange} or \textit{1~$\times$~Purple~$\times$~Red}) elevate $G$ and especially $R$. Conversely, combinations with very low in-band transmittance for a given channel yield depressed medians and compressed spreads (e.g., \textit{3~$\times$~4~$\times$~Purple} in VIS shows near-zero $q_{50}$ across channels), which reflects low signal rather than clipping. These regimes will demand longer exposures or higher irradiance if one seeks to maximize signal-to-noise while preserving headroom.
+\noindent The channel-wise VIS behavior is physically meaningful. Blue-leaning stacks (e.g., \textit{5~$\times$~Purple}) raise the blue-channel quantiles relative to green and red, whereas orange/red-rich combinations (e.g., \textit{4~$\times$~Orange} or \textit{1~$\times$~Purple~$\times$~Red}) elevate $G$ and especially $R$. Conversely, combinations with very low in-band transmittance for a given channel yield depressed medians and compressed spreads (e.g., \textit{3~$\times$~4~$\times$~Purple} in VIS shows near-zero $q_{50}$ across channels), which reflects low signal rather than clipping. These regimes will demand longer exposures or higher irradiance if one seeks to maximize signal-to-noise while preserving headroom.\\
 
-\noindent In the NIR system, the single-channel quantiles mirror the nominal band placement of the stacks centered near 820–840\,nm: $q_{50}$ values fall in the tens to low hundreds of pixel value, while $q_{90}$–$q_{99.9}$ approach but do not exceed $\sim\!230$ in pixel value. This confirms that the exposure settings chosen for each combination were conservative enough to prevent highlight loss while still capturing the relative differences in throughput among stacks.
+\noindent In the NIR system, the single-channel quantiles mirror the nominal band placement of the stacks centered near 820–840\,nm: $q_{50}$ values fall in the tens to low hundreds of pixel value, while $q_{90}$–$q_{99.9}$ approach but do not exceed $\sim\!230$ in pixel value. This confirms that the exposure settings chosen for each combination were conservative enough to prevent highlight loss while still capturing the relative differences in throughput among stacks.\\
 
-\noindent Taken together, the quantile heatmaps and line plots provide a compact, exposure-agnostic validation of the acquisition protocol. The joint observation of (i) $q_{99.9}$ consistently below 255 in pixel value, (ii) physically coherent channel ranking per stack, and (iii) distribution widths that follow the intended pass-band design, demonstrates that the dataset is free of saturation artefacts within the regions of interest used for response estimation and is therefore suitable for reliable spectral-response calibration.
+\noindent Taken together, the quantile heatmaps and line plots provide a compact, exposure-agnostic validation of the acquisition protocol. The joint observation of (i) $q_{99.9}$ consistently below 255 in pixel value, (ii) physically coherent channel ranking per stack, and (iii) distribution widths that follow the intended pass-band design, demonstrates that the dataset is free of saturation artefacts within the regions of interest used for response estimation and is therefore suitable for reliable spectral-response calibration.\\
 
 
 
@@ -1637,7 +1648,16 @@ For a fixed wattage, longer wavelengths carry more photons per unit power; in ad
 
 
 \noindent
-For the NIR system (Figure~\ref{fig:sr_relative_curves_nir}), the single–channel response forms a smooth, unimodal lobe within the 820–840\,nm window sampled by the selected stacks. The three NIR combinations used here are spectrally compact and relatively uniform in bandwidth (FWHM $\approx$ 17–20\,nm) and were chosen to stay within the theoretical pass–band of the sensor (825–875\,nm). Under these conditions, the measured totals are relatively homogeneous, as expected when the illumination is maintained at constant irradiance and the sampling window does not venture outside the sensor’s high–sensitivity region. Small discrepancies between the three points can be attributed to a combination of pass–band width effects, differences in the detailed spectral shape $\beta(\lambda)$ of each stack, spatial non–uniformities in the illumination after filtering, or residual non–linearities in the acquisition chain. A compact measure of relative dispersion across the three NIR responses is the coefficient of variation $\mathrm{CV}=\sigma/\mu$, computed from the total sums $\{3.25\times10^{7},\,2.86\times10^{7},\,3.18\times10^{7}\}$: we obtain $\mu\!=\!3.095\times10^{7}$, $\sigma\!=\!1.71\times10^{6}$, hence $\mathrm{CV}\!\approx\!5.5\%$ and a relative variance $\sigma^{2}/\mu^{2}\!\approx\!3.0\times10^{-3}$. These figures corroborate that the NIR measurements are mutually consistent within a few percent under the present protocol.\\
+For the NIR system (Figure~\ref{fig:sr_relative_curves_nir}), the single–channel response forms a smooth, unimodal lobe within the 820–840\,nm window sampled by the selected stacks. The three NIR combinations used here are spectrally compact and relatively uniform in bandwidth (FWHM $\approx$ 17–20\,nm) and were chosen to stay within the theoretical pass–band of the sensor (825–875\,nm).\\ 
+
+\noindent
+Under these conditions, the measured totals are relatively homogeneous, as expected when the illumination is maintained at constant irradiance and the sampling window does not venture outside the sensor’s high–sensitivity region.\\
+
+\noindent
+Small discrepancies between the three points can be attributed to a combination of pass–band width effects, differences in the detailed spectral shape $\beta(\lambda)$ of each stack, spatial non–uniformities in the illumination after filtering, or residual non–linearities in the acquisition chain. \\
+
+\noindent
+A compact measure of relative dispersion across the three NIR responses is the coefficient of variation $\mathrm{CV}=\sigma/\mu$, computed from the total sums $\{3.25\times10^{7},\,2.86\times10^{7},\,3.18\times10^{7}\}$: we obtain $\mu\!=\!3.095\times10^{7}$, $\sigma\!=\!1.71\times10^{6}$, hence $\mathrm{CV}\!\approx\!5.5\%$ and a relative variance $\sigma^{2}/\mu^{2}\!\approx\!3.0\times10^{-3}$. These figures corroborate that the NIR measurements are mutually consistent within a few percent under the present protocol.\\
 
 % --- NIR: figure on its own ---
 \begin{figure}[H]
