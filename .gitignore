@@ -26,3 +26,6 @@ main-blx.bib
 *.blg
 **/*.blg
 main.run.xml
+*.bcf
+**/*.bcf
+main.bbl-SAVE-ERROR
