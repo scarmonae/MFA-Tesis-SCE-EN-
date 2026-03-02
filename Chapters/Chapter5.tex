@@ -11,6 +11,35 @@
 
 \noindent Collectively, the thesis provides an end-to-end pathway from requirement definition to preliminary experimental validation of a lightweight multispectral payload. It establishes selection, integration, and testing procedures that reduce the technical uncertainty of the C3 project, supply quantitative evidence for future requirement updates, and lay the groundwork for deploying the sensor in field campaigns with confidence in data quality, maintainability, and upgrade potential.\\
 
+\section{Objective Compliance Matrix}
+
+\noindent Table~\ref{tab:objective_compliance} maps the objectives stated in the approved proposal to the results achieved in this thesis. The status scale used is: \textbf{Achieved}, \textbf{Partially achieved}, and \textbf{Not achieved}. In accordance with the jury request, the justification column explicitly explains fulfilment level and cites the corresponding chapter references.\\
+
+\begingroup
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{3pt}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\begin{longtable}{|p{0.05\textwidth}|p{0.20\textwidth}|p{0.10\textwidth}|p{0.22\textwidth}|p{0.35\textwidth}|}
+\caption{Objective-compliance matrix based on the approved thesis proposal.}
+\label{tab:objective_compliance}\\
+\hline
+\rowcolor[HTML]{EFEFEF}\textbf{ID} & \textbf{Objective} & \textbf{Status} & \textbf{How It Was Achieved} & \textbf{Justification (with reference)} \\ \hline
+\endfirsthead
+\hline
+\rowcolor[HTML]{EFEFEF}\textbf{ID} & \textbf{Objective} & \textbf{Status} & \textbf{How It Was Achieved} & \textbf{Justification (with reference)} \\ \hline
+\endhead
+OG & Develop a method for serial construction of low-cost multispectral optical systems for onboard aircraft use in land-use and land-cover assessment. & Achieved & A complete and replicable route was implemented: requirement definition, candidate-system matrix, requirement-driven down-selection, prototype integration, and experimental validation. & The method is formalized as a reusable design workflow in Chapter~\ref{Chapter2}, implemented in hardware/software in Chapter~\ref{Chapter3}, and closed with calibration/characterization plus synthesis in Chapter~\ref{Chapter4} and Chapter~\ref{chap:conclusiones}. \\ \hline
+OE1 & Design different optical configurations of a multispectral camera capturing VIS and NIR information, including the containing mechanical system. & Achieved & Eight VIS/NIR optical configurations were evaluated and the final pair was selected; the mechanical enclosure and mounting interfaces were designed and integrated. & Chapter~\ref{Chapter2} defines optical criteria and compares eight candidate systems before selecting systems 6 and 7; Chapter~\ref{Chapter3} documents PET-G enclosure design and mechanical integration compatible with aircraft constraints. \\ \hline
+OE2 & Execute procurement planning, selection, acquisition, tracking, and delivery of resources, ensuring compliance with quality, budget, and schedule constraints. & Achieved & Procurement planning, supplier selection, acquisition, and resource delivery were completed, including technical down-selection and coordinated logistics with project partners. & Chapter~\ref{Chapter3} documents the full procurement and construction process, including supplier identification, funding and acquisition management, and coordinated delivery/integration; Chapter~\ref{Chapter2} confirms that the selected systems satisfy the project budget constraints. Together, these results support fulfilment of the planned procurement scope for the thesis. \\ \hline
+OE3 & Build the sensing, acquisition, computing, storage, and mechanical-container system. & Achieved & The VIS/NIR sensing modules, acquisition/control software, computing hardware, geolocation integration, and mechanical container were built and integrated into a functioning payload. & Chapter~\ref{Chapter3} reports full subsystem implementation and integration, including autonomous services and payload closure at 1,810 g, confirming complete construction of the proposed architecture. \\ \hline
+OE4 & Test the system statically on the ground and onboard two non-pressurized aircraft in FAC-relevant environments. & Achieved & Ground tests, extreme-condition surface trials, and two flight campaigns were executed (Cessna 208 Caravan and T-27 Tucano, including 4g manoeuvres). & Chapter~\ref{Chapter3} presents controlled ground testing, Antarctic surface operation, and in-flight validation on two FAC aircraft, meeting the scope of static and airborne testing requested by the proposal. \\ \hline
+OE5 & Calibrate geometric and electronic parameters of the optical system. & Partially achieved & Geometric calibration/validation procedures (FOV/AFOV/MTF with ISO 12233 methodology) and electronic baseline corrections (dark-current treatment) were implemented. & Chapter~\ref{Chapter4} demonstrates geometric and electronic calibration steps. Nevertheless, it also indicates pending full geometric distortion-model closure and absolute gain/linearity calibration, which are explicitly planned in Chapter~\ref{chap:conclusiones}. \\ \hline
+OE6 & Characterize spectral, frequency-domain, and radiative parameters. & Partially achieved & Frequency-domain characterization (MTF and GRD), VIS/NIR relative spectral response, and controlled-irradiance radiometric analyses were completed. & Chapter~\ref{Chapter4} provides repeatable spectral and frequency characterization; however, it explicitly states that full absolute spectroradiometric characterization remains pending, and Chapter~\ref{chap:conclusiones} prioritizes this as immediate future work. \\ \hline
+\end{longtable}
+\endgroup
+
 \section{Future Work}
 
 \noindent The immediate priority is to conduct an absolute radiometric calibration campaign that yields gain factors, linearity curves, and noise budgets as functions of irradiance. This effort must rely on traceable reference sources, controlled attenuation, and comparison with the ASTM~G-173 spectra (AM1.5D/AM1.5G) to translate relative response into SNR and dynamic-range metrics applicable to real scenes.\\
